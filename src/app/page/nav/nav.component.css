@@ -1,0 +1,36 @@
+#menu .ant-menu-horizontal {
+    border: 0px;
+}
+
+#menu ul li {
+    font-size: 13px;
+    color: black;
+}
+
+#moreMenu {
+    margin-top: 10px;
+    margin-right: 10px;
+    font-size: 24px;
+    color: black;
+}
+
+@media (max-width: 768px) {
+    #menu {
+        display: none;
+    }
+
+    .logo {
+        margin-left: 10px;
+    }
+}
+
+@media (min-width: 769px) {
+    #menu_mobile {
+        display: none;
+    }
+}
+
+.logo {
+    float: left;
+    margin-top: 10px;
+}

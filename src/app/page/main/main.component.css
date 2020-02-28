@@ -1,0 +1,19 @@
+#carousel {
+    width: 100%;
+    background-image: url("../../../assets/images/main_carousel_01.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media (max-width: 768px) {
+    #carousel {
+        height: 150px;
+    }
+}
+
+@media (min-width: 769px) {
+    #carousel {
+        height: 250px;
+    }
+}

@@ -26,8 +26,8 @@
       nzSize="small">
       <thead>
         <tr>
-          <th>코드그룹ID</th>
-          <th>코드그룹명</th>
+          <th nzWidth="50%">코드그룹ID</th>
+          <th nzWidth="50%">코드그룹명</th>
         </tr>
       </thead>
       <tbody>
@@ -65,8 +65,11 @@
       nzSize="small">
       <thead>
         <tr>
-          <th>코드ID</th>
-          <th>코드명</th>
+          <th nzWidth="14%">코드ID</th>
+          <th nzWidth="13%">코드명</th>
+          <th nzWidth="13%">값1</th>
+          <th nzWidth="13%">값2</th>
+          <th nzWidth="13%">값3</th>
         </tr>
       </thead>
       <tbody>
@@ -80,6 +83,9 @@
           style="cursor: pointer;">
           <td>{{ data.code_id }}</td>
           <td>{{ data.code_nm }}</td>
+          <td>{{ data.value1 }}</td>
+          <td>{{ data.value2 }}</td>
+          <td>{{ data.value3 }}</td>
         </tr>
       </tbody>
     </nz-table>

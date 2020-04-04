@@ -2,6 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { MainComponent } from './main/main.component';
 import { PageUserComponent } from './page-user/page-user.component';
+import { PageCodeComponent } from './page-code/page-code.component';
 
 const routes: Routes = [{
   path: '',
@@ -12,6 +13,9 @@ const routes: Routes = [{
   },
   {
       path: 'user', component: PageUserComponent
+  },
+  {
+      path: 'code', component: PageCodeComponent
   }
 ]}];
 

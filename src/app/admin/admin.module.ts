@@ -6,7 +6,7 @@ import { MainComponent } from './main/main.component';
 import { NavComponent } from './nav/nav.component';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { PageUserModule } from './page-user/page-user.module';
-import { FormsModule } from '@angular/forms';
+import { PageCodeModule } from './page-code/page-code.module';
 
 @NgModule({
   imports: [
@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
     AdminRoutes,
     NgZorroAntdModule,
     PageUserModule,
-    FormsModule
+    PageCodeModule
   ],
   declarations: [
     AdminComponent,

@@ -6,3 +6,7 @@ body, html{
     margin: 0;    
     font-family: "Nanum Gothic";
 }
+
+#content div.ant-table {
+    font-size: 11px;
+}

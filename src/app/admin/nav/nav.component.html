@@ -1,8 +1,8 @@
-<div style="height: 40px; background-color: #001529;">
-  <div style="float:left; width: 100px; margin: 10px;">
+<div id="nav-warpper">
+  <div>
       <img routerLink="/admin" src="../../../assets/images/logo_fininsight_white.png" style="width:80px;">
   </div>
-  <div style="float:right;">
+  <div>
     <ul nz-menu nzMode="horizontal" nzTheme="dark">
       <li nz-submenu nzTitle="회원관리" nzIcon="user">
         <ul class="subment">
@@ -39,7 +39,11 @@
       <li nz-submenu nzTitle="통계" nzIcon="line-chart">
 
       </li>
-      <li nz-submenu nzTitle="설정" nzIcon="setting"></li>
+      <li nz-submenu nzTitle="설정" nzIcon="setting">
+        <ul class="subment">
+          <li routerLink="/admin/code" nz-menu-item>코드관리</li>
+        </ul>
+      </li>
       <!--
       <li nz-menu-item>
         <a href="https://ng.ant.design" target="_blank" rel="noopener noreferrer">Navigation Four - Link</a>

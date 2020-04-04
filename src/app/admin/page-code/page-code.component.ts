@@ -171,7 +171,7 @@ export class PageCodeComponent implements OnInit {
       nzOkType: 'danger',
       nzCancelText: '아니요',
       nzOnOk: () => {
-        this.codeService.deleteCode(this.selectedCode).subscribe(data => {
+        this.codeService.deleteCode(this.selectedCode.codegroup_id, this.selectedCode.code_id).subscribe(data => {
           this.getCode();
           this.message.create('success', '삭제가 완료되었습니다.');
         });

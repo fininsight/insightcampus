@@ -53,11 +53,8 @@ export class CodeService {
     );
   }
 
-  deleteCode(code: Code) {
-    return this.http.delete(this.baseUrl + 'code', {
-        headers: new HttpHeaders({'Content-Type': 'application/json'}),
-        body: code,
-      }).pipe(
+  deleteCode(codegroup_id: string, code_id: string) {
+    return this.http.delete(this.baseUrl + 'code/' + codegroup_id + '/' + code_id).pipe(
       retry(1),
       catchError(this.errorHandl)
     );

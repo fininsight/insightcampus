@@ -53,7 +53,7 @@ export class CodegroupService {
     );
   }
 
-  deleteCodegroup(codegroup_id: Codegroup) {
+  deleteCodegroup(codegroup_id: string) {
     return this.http.delete(this.baseUrl + 'codegroup/' + codegroup_id).pipe(
       retry(1),
       catchError(this.errorHandl)

@@ -1,0 +1,10 @@
+#class-content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#class-content div {
+    width: 800px;
+    border: 1px solid blue;
+}

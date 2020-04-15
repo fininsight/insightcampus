@@ -1,16 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ClassModule } from './class/class.module';
+import { NgZorroAntdModule } from 'ng-zorro-antd';
+
 import { PageComponent } from './page.component';
-import { PageRoutes } from './page.routing';
 import { NavComponent } from './nav/nav.component';
 import { MainComponent } from './main/main.component';
-import { NgZorroAntdModule } from 'ng-zorro-antd';
+
+import { PageRoutes } from './page.routing';
+
 
 @NgModule({
   imports: [
     CommonModule,
+    ClassModule,
+    NgZorroAntdModule,
     PageRoutes,
-    NgZorroAntdModule
   ],
   declarations: [
     PageComponent,

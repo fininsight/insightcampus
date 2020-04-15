@@ -1,22 +1,13 @@
 <div id="menu" style="height:48px;">
-  <div class="logo">
+  <div routerLink="/" class="logo">
     <img src="../../../assets/images/logo_insightcampus.png" style="width:140px;">
   </div>
   <div style="float:right;">
   <ul nz-menu nzMode="horizontal">
     <li nz-menu-item>인사이트캠퍼스</li>
-    <li nz-submenu nzTitle="오프라인">
-      <ul>
-          <li nz-menu-item>Option 1</li>
-          <li nz-menu-item>Option 2</li>
-      </ul>
-    </li>
-    <li nz-submenu nzTitle="온라인">
-      <ul>
-          <li nz-menu-item>Option 1</li>
-          <li nz-menu-item>Option 2</li>
-      </ul>
-    </li>
+    <li routerLink="/class/offline" nz-menu-item>오프라인</li>
+    <li routerLink="/class/online" nz-menu-item>온라인</li>
+    <li routerLink="/class/subscribe" nz-menu-item>구독</li>
     <li nz-menu-item>기업교육</li>
     <li nz-menu-item>커뮤니티</li>
     <li nz-menu-item>블로그</li>

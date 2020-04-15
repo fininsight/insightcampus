@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { DataTable } from '../models/datatable';
 import { map, retry, catchError } from 'rxjs/operators';
-import { Code } from '../models/Code';
+import { Code } from '../models/code';
 
 @Injectable({
   providedIn: 'root'

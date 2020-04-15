@@ -10,3 +10,15 @@ body, html{
 #content div.ant-table {
     font-size: 11px;
 }
+
+
+#class-content .class-info .title {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#class-content .title .title-line {
+    height: 5px;
+    background-color: orange;
+}

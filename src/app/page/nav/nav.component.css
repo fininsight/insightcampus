@@ -33,4 +33,5 @@
 .logo {
     float: left;
     margin-top: 10px;
+    cursor: pointer;
 }

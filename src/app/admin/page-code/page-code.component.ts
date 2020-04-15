@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CodegroupService } from '../core/services/codegroup.service';
 import { CodeService } from '../core/services/code.service';
 import { DataTable } from '../core/models/datatable';
-import { Code } from '../core/models/Code';
+import { Code } from '../core/models/code';
 import { Codegroup } from '../core/models/codegroup';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';

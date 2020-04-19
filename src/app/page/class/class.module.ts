@@ -1,8 +1,19 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Pipe, PipeTransform } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { CommonModule } from '@angular/common';
 import { ClassComponent } from './class.component';
+import { DetailComponent } from './detail/detail.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
+@Pipe({ name: 'safeHtml'})
+export class SafeHtmlPipe implements PipeTransform  {
+  constructor(private sanitized: DomSanitizer) {}
+  transform(value) {
+    return this.sanitized.bypassSecurityTrustHtml(value);
+  }
+}
 
 // Import all Froala Editor plugins.
 import 'froala-editor/js/plugins.pkgd.min.js';
@@ -24,8 +35,15 @@ import 'froala-editor/js/third_party/embedly.min';
     CKEditorModule,
     CommonModule,
     FroalaEditorModule.forRoot(),
-    FroalaViewModule.forRoot()
+    FroalaViewModule.forRoot(),
+    DragDropModule
   ],
-  declarations: [ClassComponent]
+  declarations: [
+    ClassComponent,
+    DetailComponent,
+    SafeHtmlPipe
+  ],
+  providers: [
+  ]
 })
 export class ClassModule { }

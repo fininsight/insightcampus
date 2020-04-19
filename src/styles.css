@@ -8,17 +8,25 @@ body, html{
 }
 
 #content div.ant-table {
-    font-size: 11px;
+    /* font-size: 11px; */
 }
 
 
-#class-content .class-info .title {
+.class-info {
+    margin-top: 30px;
+}
+
+.class-info .title {
     display: flex;
     align-items: center;
     flex-direction: column;
+    /* font-size: 30px; */
+    font-weight: 700;
+    color: black;
+    margin-bottom: 40px;
 }
 
-#class-content .title .title-line {
+.class-info .title .title-line {
     height: 5px;
     background-color: orange;
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import * as InlineEditor from '@ckeditor/ckeditor5-build-inline';
+import { ClassService } from '../core/services/class.service';
+import { DataTable } from '../core/models/datatable';
 
 @Component({
   selector: 'app-class',
@@ -10,60 +12,33 @@ import * as InlineEditor from '@ckeditor/ckeditor5-build-inline';
 export class ClassComponent implements OnInit, OnDestroy {
 
   // public Editor = InlineEditor;
-  private type: any;
-  public option =  {
-    toolbarInline: true,
-    charCounterCount: false,
-    toolbarVisibleWithoutSelection: true,
-     // Set the image upload parameter.
-     imageUploadParam: 'image_param',
-     // Set the image upload URL.
-     imageUploadURL: '/upload_image',
-     // Additional upload params.
-     imageUploadParams: {id: 'my_editor'},
-     // Set request type.
-     imageUploadMethod: 'POST',
-     // Set max image size to 5MB.
-     imageMaxSize: 5 * 1024 * 1024,
-     // Allow to upload PNG and JPG.
-     imageAllowedTypes: ['jpeg', 'jpg', 'png'],
-     events: {
-       'image.beforeUpload': function (images) {
-         // Return false if you want to stop the image upload.
-       },
-       'image.uploaded': function (response) {
-         // Image was uploaded to the server.
-       },
-       'image.inserted': function ($img, response) {
-         // Image was inserted in the editor.
-       },
-       'image.replaced': function ($img, response) {
-         // Image was replaced in the editor.
-       },
-       'image.error': function (error, response) {
-         // Response contains the original server response to the request if available.
-       }
-     }
-  };
+  public type: any;
+  classes = new DataTable();
 
-  constructor(route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private classService: ClassService) {
+
+    this.classes.pageNumber = 1;
+    this.classes.size = 20;
+
     route.params.subscribe(val => {
       this.type = val.type;
-      /*
-      InlineEditor.create(document.querySelector('#editor'))
-      .then(editor => {
-        console.log(editor);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-      */
-
     });
+
+    this.classService.getClasses(this.classes).subscribe(data => {
+      this.classes = data;
+    });
+
   }
 
   ngOnInit() {
 
+  }
+
+  gotoPage(class_seq) {
+    console.log(class_seq);
+    this.router.navigate(['/detail/' + class_seq]);
   }
 
   ngOnDestroy(): void {

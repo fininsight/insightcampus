@@ -1,0 +1,20 @@
+<div id="class-content">
+  <div id="admin-menu">
+    <button (click)="testAdd()" *ngIf="admin === true">추가</button>
+    <button (click)="testAdmin()" *ngIf="admin !== true">관리자권한</button>
+    <button (click)="testAdminDisable()" *ngIf="admin === true">관리자권한제거</button>
+    <button (click)="testSave()" *ngIf="admin === true">저장</button>
+  </div>
+  <ng-container *ngFor="let template of templates; index as i;">
+    <div #class [froalaEditor]="option" [innerHTML]="template | safeHtml" *ngIf="admin === true" >
+    </div>
+    <div [innerHTML]="template | safeHtml" *ngIf="admin === false">
+    </div>
+  </ng-container>
+</div>
+<div cdkDropList class="position-list" (cdkDropListDropped)="drop($event)"  *ngIf="admin === true">
+  <div class="position-item" *ngFor="let template of templates; index as i;" cdkDrag>
+    <div [innerHTML]="template | safeHtml">
+    </div>
+  </div>
+</div>

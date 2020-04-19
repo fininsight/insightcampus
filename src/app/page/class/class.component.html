@@ -1,28 +1,26 @@
 <div id="class-content">
-  <div [froalaEditor]="option" class="class-title">
-    <div class="title-image">
-      <img src="../../../assets/images/logo_fininsight.png"/>
-    </div>
-  </div>
-  <div [froalaEditor]="option" class="class-info">
-    <div class="title">
-      <div class="title-text">
-        <div>안녕하세요</div>
-        <div class="title-line"></div>
+  <div id="class-content-inner">
+    <div *ngFor="let class of classes.data" (click)="gotoPage(class.class_seq)">
+      <img src="../../../assets/images/none.png">
+      <div class="name">
+        {{ class.class_nm }}
       </div>
-    </div>
-    <div>
-      TEST 딥러닝은 머신러닝의 한 분야로 최근 많은 주목을 받고 있습니다. 과거의 방법으로는 한계가 있고 불가능하다고 여겨졌던 일들이 딥러닝을 이용하면서 높은 성과를 보이고 있기 때문입니다. 넷플릭스의 추천알고리즘, 자동차 자율주행 등 실생활에서도 딥러닝을 활용한 사례를 점점 더 많이 찾을 수 있습니다.
-      금융 분야도 딥러닝을 활용하여 예전에는 불가능했던 많은 혁신을 이루어 내고 있습니다. 금융 산업은 의료 산업에 이어 인공지능 기술 활용도가 두 번째로 높은 산업입니다. 머신러닝의 도입은 고객에게 양질의 금융서비스를 전달하고 기업의 생산성을 향상시키는 등 다양한 장점을 제공하여 금융 산업의 새로운 성장 동력으로 주목받고 있습니다. 금융 산업 분야 외에 다양한 분야에서 머신러닝 기술 도입을 시도하는 만큼 활용 가치가 증명되고 있으며, 앞으로도 꾸준히 도입 사례가 증가할 것으로 예상됩니다.
-      본 교육과정은 기계학습의 심화과정으로, 딥러닝에 대한 최근 동향을 전반적으로 리뷰 합니다. 또한 딥러닝을 금융에 어떻게 접목하는지에 대한 궁금점을 해결해 줍니다.
-      새로운 방법으로 주식투자 및 금융분석을 시도하고 싶은 분들, 금융 딥러닝 관련 연구 논문을 쓰고자 하는 대학원생, 제4차 산업혁명의 핵심인 인공지능 및 딥러닝의 흐름을 파악하고 싶은 모든 분들께 이 강의를 추천합니다!
-    </div>
-    <div class="title-image-two">
-      <div>
-        <img src="../../../assets/images/template/temp-1.jpg"/>
+      <div class="price">
+        <span *ngIf="class.price != class.real_price">{{ class.price | number:'.2' }}</span>
       </div>
-      <div>
-        <img src="../../../assets/images/template/temp-1.jpg"/>
+      <div class="real_price">
+        <span *ngIf="class.real_price !== 0">
+        {{ class.real_price | number:'.2' }}
+        </span>
+        <span *ngIf="class.real_price === 0">
+          무료
+        </span>
+      </div>
+      <div class="teacher">
+        강의선생님
+      </div>
+      <div class="duration">
+        {{ class.duration_nm }}
       </div>
     </div>
   </div>

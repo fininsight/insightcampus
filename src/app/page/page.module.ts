@@ -8,6 +8,7 @@ import { NavComponent } from './nav/nav.component';
 import { MainComponent } from './main/main.component';
 
 import { PageRoutes } from './page.routing';
+import { ClassService } from './core/services/class.service';
 
 
 @NgModule({
@@ -15,7 +16,10 @@ import { PageRoutes } from './page.routing';
     CommonModule,
     ClassModule,
     NgZorroAntdModule,
-    PageRoutes,
+    PageRoutes
+  ],
+  providers: [
+    ClassService
   ],
   declarations: [
     PageComponent,

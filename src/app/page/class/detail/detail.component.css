@@ -1,3 +1,42 @@
+#class-title {
+  margin-top: 30px;
+  font-weight: 600;
+  font-size: 30px;
+  color: black;
+}
+
+#class-curriculum, #class-curriculum ul {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  width: 800px;
+}
+
+#class-curriculum li > span:nth-child(1) {
+  width: 90%;
+  float: left;
+}
+
+#class-curriculum > li > span {
+  background-color: gray;
+}
+
+#class-curriculum {
+  margin-top: 50px;
+}
+
+#class-curriculum span {
+  display: block;
+  height: 40px;
+  line-height: 40px;
+}
+
+#class-curriculum ul li {
+  padding: 5px 0px 5px 5px;
+  margin-bottom: 5px;
+  font-size: 12px;
+}
+
 #class-content {
     display: flex;
     align-items: center;

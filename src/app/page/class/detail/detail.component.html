@@ -1,17 +1,68 @@
 <div id="class-content">
-  <div id="admin-menu">
-    <button (click)="testAdd()" *ngIf="admin === true">추가(강의소개)</button>
-    <button (click)="testAdd2()" *ngIf="admin === true">추가2(타이틀)</button>
-    <button (click)="testAdmin()" *ngIf="admin !== true">관리자권한</button>
-    <button (click)="testAdminDisable()" *ngIf="admin === true">관리자권한제거</button>
-    <button (click)="testSave()" *ngIf="admin === true">저장</button>
+  <div id="class-title">
+    {{ class_data.class_nm }}
   </div>
-  <ng-container *ngFor="let template of templates; index as i;">
-    <div #class [froalaEditor]="option" [innerHTML]="template | safeHtml" *ngIf="admin === true" >
+  <div>
+    <button (click)="changeTab(1)">강의소개</button>
+    <button (click)="changeTab(2)">교육과정</button>
+    <button (click)="changeTab(3)">강의후기</button>
+    <button (click)="changeTab(4)">질문답변</button>
+    <button (click)="changeTab(5)">공지사항</button>
+  </div>
+  <ng-container *ngIf="tab===1">
+    <div id="admin-menu">
+      <button (click)="testAdd()" *ngIf="admin === true">추가(강의소개)</button>
+      <button (click)="testAdd2()" *ngIf="admin === true">추가2(타이틀)</button>
+      <button (click)="testAdmin()" *ngIf="admin !== true">관리자권한</button>
+      <button (click)="testAdminDisable()" *ngIf="admin === true">관리자권한제거</button>
+      <button (click)="testSave()" *ngIf="admin === true">저장</button>
+      <select class="form-control" [(ngModel)]="selectLoadClass" *ngIf="admin === true">
+        <option *ngFor="let class of all_class.data; index as i;" [value]="i">{{ class.class_nm }}</option>
+      </select>
+      <button (click)="loadSave()" *ngIf="admin === true">불러오기</button>
     </div>
-    <div [innerHTML]="template | safeHtml" *ngIf="admin === false">
-    </div>
+    <ng-container *ngFor="let template of templates; index as i;">
+      <div #class [froalaEditor]="option" [innerHTML]="template | safeHtml" *ngIf="admin === true" >
+      </div>
+      <div [innerHTML]="template | safeHtml" *ngIf="admin === false">
+      </div>
+    </ng-container>
   </ng-container>
+  <ng-container *ngIf="tab===2">
+    <ul id="class-curriculum">
+      <li class="on">
+        <span>테스트</span>
+        <span>25:00</span>
+        <ul>
+          <li>
+            <span>강의1</span>
+            <span>10:00</span>
+          </li>
+          <li>
+            <span>강의2</span>
+            <span>15:00</span>
+          </li>
+        </ul>
+      </li>
+      <li class="off">
+        <span>테스트2</span>
+        <span>47:00</span>
+        <ul>
+          <li>
+            <span>강의1</span>
+            <span>23:00</span>
+          </li>
+          <li>
+            <span>강의2</span>
+            <span>24:00</span>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </ng-container>
+  <ng-container *ngIf="tab===3">강의후기</ng-container>
+  <ng-container *ngIf="tab===4">질문답변</ng-container>
+  <ng-container *ngIf="tab===5">공지사항</ng-container>
 </div>
 <div cdkDropList class="position-list" (cdkDropListDropped)="drop($event)"  *ngIf="admin === true">
   <div class="position-item" *ngFor="let template of templates; index as i;" cdkDrag>

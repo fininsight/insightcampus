@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ClassService } from '../../core/services/class.service';
 import { Class } from '../../core/models/class';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { DataTable } from '../../core/models/datatable';
 
 @Component({
   selector: 'app-detail',
@@ -12,9 +13,14 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 export class DetailComponent implements OnInit {
 
   public class_seq: any;
+  public class_data: Class;
   public admin = false;
   public condition = false;
   public templates = [];
+  public tab = 1;
+  public all_class = new DataTable();
+  public selectLoadClass;
+
   @ViewChildren('class') classes: QueryList<ElementRef>;
 
   public option =  {
@@ -109,9 +115,19 @@ export class DetailComponent implements OnInit {
     });
 
     this.classService.getClass(this.class_seq).subscribe(data => {
+      this.class_data = data;
       if (data.template !== null && data.template !== '') {
         this.templates = JSON.parse(data.template);
       }
+    });
+
+    const tempClass: DataTable = new DataTable();
+    tempClass.pageNumber = 1;
+    tempClass.size = 20;
+
+    this.classService.getClasses(tempClass).subscribe(data => {
+      console.log(data);
+      this.all_class = data;
     });
 
     // this.templates.push(this.testTemplage);
@@ -152,8 +168,18 @@ export class DetailComponent implements OnInit {
 
   }
 
+  loadSave() {
+    console.log(this.selectLoadClass);
+    console.log(this.all_class);
+    this.templates = JSON.parse(this.all_class.data[this.selectLoadClass].template);
+  }
+
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.templates, event.previousIndex, event.currentIndex);
+  }
+
+  changeTab(tab){
+    this.tab = tab;
   }
 
 }

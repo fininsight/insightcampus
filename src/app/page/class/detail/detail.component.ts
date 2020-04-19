@@ -89,6 +89,17 @@ export class DetailComponent implements OnInit {
     </div>
   `;
 
+  testTemplage2 = `
+    <div class="class-title">
+      <div class="image">
+        <img src="../../../../assets/images/template/template02-02.png"/>
+      </div>
+      <div class="title" style="font-size: 35px; color: white;">
+        제목
+      </div>
+    </div>
+  `;
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private classService: ClassService) {
@@ -110,8 +121,11 @@ export class DetailComponent implements OnInit {
   }
 
   testAdd() {
-    console.log('test');
     this.templates.push(this.testTemplage);
+  }
+
+  testAdd2() {
+    this.templates.push(this.testTemplage2);
   }
 
   testAdmin() {

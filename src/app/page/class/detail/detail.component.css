@@ -27,10 +27,6 @@
     background: white;
     overflow: hidden;
   }
-
-  .position-item > div {
-    
-  }
   
   .cdk-drag-preview {
     box-sizing: border-box;

@@ -30,3 +30,16 @@ body, html{
     height: 5px;
     background-color: orange;
 }
+
+.class-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 400px;
+    background: url('assets/images/template/template02-01.png') no-repeat center center;
+}
+
+.class-title .title {
+    margin-top: 5px;
+}

@@ -1,6 +1,7 @@
 <div id="class-content">
   <div id="admin-menu">
-    <button (click)="testAdd()" *ngIf="admin === true">추가</button>
+    <button (click)="testAdd()" *ngIf="admin === true">추가(강의소개)</button>
+    <button (click)="testAdd2()" *ngIf="admin === true">추가2(타이틀)</button>
     <button (click)="testAdmin()" *ngIf="admin !== true">관리자권한</button>
     <button (click)="testAdminDisable()" *ngIf="admin === true">관리자권한제거</button>
     <button (click)="testSave()" *ngIf="admin === true">저장</button>

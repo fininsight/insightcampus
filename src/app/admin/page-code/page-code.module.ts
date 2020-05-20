@@ -5,6 +5,7 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { CodegroupService } from '../core/services/codegroup.service';
 import { CodeService } from '../core/services/code.service';
 import { FormsModule } from '@angular/forms';
+import { CurriculumService } from '../core/services/curriculum.service';
 
 
 
@@ -16,7 +17,8 @@ import { FormsModule } from '@angular/forms';
   ],
   providers: [
     CodegroupService,
-    CodeService
+    CodeService, 
+    CurriculumService,
   ],
   declarations: [
     PageCodeComponent

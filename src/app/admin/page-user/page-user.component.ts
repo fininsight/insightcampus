@@ -63,7 +63,7 @@ export class PageUserComponent implements OnInit {
   isUserAdd = false;
   isUserUpdate = false;
   
-  userLoading = false;
+  userLoading = true;
 
   pageIndex = 1;
   pageSize = 20;
@@ -88,7 +88,7 @@ export class PageUserComponent implements OnInit {
               private message: NzMessageService) {
       
       this.users.pageNumber = 1;
-      this.users.size = 5;
+      this.users.size = 10;
 
       this.getUser();
     }

@@ -3,6 +3,7 @@ import { AdminComponent } from './admin.component';
 import { MainComponent } from './main/main.component';
 import { PageUserComponent } from './page-user/page-user.component';
 import { PageCodeComponent } from './page-code/page-code.component';
+import { PageClassComponent } from './page-class/page-class.component';
 
 const routes: Routes = [{
   path: '',
@@ -16,6 +17,9 @@ const routes: Routes = [{
   },
   {
       path: 'code', component: PageCodeComponent
+  },
+  {
+      path: 'class', component: PageClassComponent
   }
 ]}];
 

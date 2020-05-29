@@ -1,0 +1,113 @@
+<div id="header">
+  <div id="title">
+    <i nz-icon nzType="user" nzTheme="outline"></i>
+    강의관리
+  </div>
+  <div id="manage">
+    <button nz-button nzType="default" nzShape="circle" (click)="classAdd()"><i title="추가" nz-icon nzType="plus"></i></button>
+    <button nz-button nzType="default" nzShape="circle" (click)="classUpdate()" [disabled]="selectedClass.class_seq == undefined"><i title="수정" nz-icon nzType="edit"></i></button>
+    <button nz-button nzType="default" nzShape="circle" (click)="classDelete()" [disabled]="selectedClass.class_seq == undefined"><i title="삭제" nz-icon nzType="delete"></i></button>
+  </div>
+</div>
+<div id="content">
+  <div>
+    <nz-table
+    #testTable
+    nzShowSizeChanger
+    nzNoResult = "조회된 결과가 없습니다"
+    [nzFrontPagination]="false"
+    [nzData]="classes.data"
+    [nzLoading]="classLoading"
+    [nzTotal]="classes.totalElements"
+    [(nzPageIndex)]="classes.pageNumber"
+    [(nzPageSize)]="classes.size"
+    (nzPageIndexChange)="getClass()"
+    nzShowSizeChanger="false"
+    nzSize="small">
+    <thead (nzSortChange)="sort($event)" nzSingleSort>
+      <tr>
+        <th nzShowSort nzSortKey="class_nm">수업</th>
+        <th nzShowSort nzSortKey="teacher">강사</th>
+        <th nzShowSort nzSortKey="duration">기간</th>
+        <th nzShowSort nzSortKey="duration_nm">기간이름</th>
+        <th nzShowSort nzSortKey="price">가격</th>
+        <th nzShowSort nzSortKey="real_price"><span>실제가격</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of testTable.data"
+        (click)="selectClass(data)"
+        (dblclick)="classUpdate()"
+
+        [ngClass]="{
+          'on':this.selectedClass.class_seq === data.class_seq
+        }"
+        style="cursor: pointer;"
+      >
+        <td>{{ data.class_nm }}</td>
+        <td>{{ data.teacher }}</td>
+        <td>{{ data.duration }}</td>
+        <td>{{ data.duration_nm }}</td>
+        <td>{{ data.price }}</td>
+        <td>{{ data.real_price }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+  </div>
+</div>
+
+<nz-modal [(nzVisible)]="isClassAdd"
+          nzTitle="수업추가" 
+          (nzOnCancel)="popupCancel()"
+          (nzOnOk)="classAddOk()"
+          nzWidth="350">
+  <div class="popup-content">
+    <div>
+      <input nz-input type="text" placeholder="수업 이름" [(ngModel)]="popupClass.class_nm"/>
+    </div>
+    <div>
+      <input nz-input type="text" placeholder="기간" [(ngModel)]="popupClass.duration"/>
+    </div>
+    <div>
+      <input nz-input type="text" placeholder="기간이름" [(ngModel)]="popupClass.duration_nm"/>
+    </div>
+    <div>
+      <input nz-input type="text" placeholder="가격" [(ngModel)]="popupClass.price"/>
+    </div>
+    <div>
+      <input nz-input type="text" placeholder="실제가격" [(ngModel)]="popupClass.real_price"/>
+    </div>
+  </div>
+  <div *nzModalFooter>
+    <button nz-button nzType="default" (click)="popupCancel()">취소</button>
+    <button nz-button nzType="primary" (click)="classAddOk()">등록</button>
+  </div>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="isClassUpdate"
+          nzTitle="수업수정" 
+          (nzOnCancel)="popupCancel()"
+          (nzOnOk)="classUpdateOk()"
+          nzWidth="350">
+  <div class="popup-content">
+    <div>
+      <input nz-input type="text" placeholder="수업 이름" [(ngModel)]="popupClass.class_nm"/>
+    </div>
+    <div>
+      <input nz-input type="text" placeholder="기간" [(ngModel)]="popupClass.duration"/>
+    </div>
+    <div>
+      <input nz-input type="text" placeholder="기간이름" [(ngModel)]="popupClass.duration_nm"/>
+    </div>
+    <div>
+      <input nz-input type="text" placeholder="가격" [(ngModel)]="popupClass.price"/>
+    </div>
+    <div>
+      <input nz-input type="text" placeholder="실제가격" [(ngModel)]="popupClass.real_price"/>
+    </div>
+  </div>
+  <div *nzModalFooter>
+    <button nz-button nzType="default" (click)="popupCancel()">취소</button>
+    <button nz-button nzType="primary" (click)="classUpdateOk()">수정</button>
+  </div>
+</nz-modal>

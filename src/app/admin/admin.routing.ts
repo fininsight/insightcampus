@@ -4,6 +4,7 @@ import { MainComponent } from './main/main.component';
 import { PageUserComponent } from './page-user/page-user.component';
 import { PageCodeComponent } from './page-code/page-code.component';
 import { PageClassComponent } from './page-class/page-class.component';
+import { PageCurriculumComponent } from './page-curriculum/page-curriculum.component';
 
 const routes: Routes = [{
   path: '',
@@ -20,7 +21,11 @@ const routes: Routes = [{
   },
   {
       path: 'class', component: PageClassComponent
+  },
+  {
+      path: 'curriculum', component: PageCurriculumComponent
   }
+
 ]}];
 
 export const AdminRoutes = RouterModule.forChild(routes);

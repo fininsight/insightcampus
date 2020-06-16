@@ -7,6 +7,7 @@ import { NavComponent } from './nav/nav.component';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { PageUserModule } from './page-user/page-user.module';
 import { PageCodeModule } from './page-code/page-code.module';
+import { PageClassModule } from './page-class/page-class.module';
 import { PageCurriculumModule } from './page-curriculum/page-curriculum.module';
 
 @NgModule({
@@ -16,6 +17,7 @@ import { PageCurriculumModule } from './page-curriculum/page-curriculum.module';
     NgZorroAntdModule,
     PageUserModule,
     PageCodeModule,
+    PageClassModule,
     PageCurriculumModule,
   ],
   declarations: [

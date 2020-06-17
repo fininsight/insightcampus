@@ -23,6 +23,10 @@
   margin: 0 3px;
 }
 
+#content #main-table {
+  width: 1000px;
+}
+
 tr.on td {
   background-color: #e3f8ff;
 }

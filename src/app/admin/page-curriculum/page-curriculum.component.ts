@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CurriculumService } from '../core/services/curriculum.service';
+import { ClassService } from '../core/services/class.service';
 import { DataTable } from '../core/models/datatable';
 import { Curriculum } from '../core/models/curriculum';
+import { Class } from '../core/models/class';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
+
 
 @Component({
   selector: 'app-page-curriculum',
@@ -12,32 +15,60 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 })
 export class PageCurriculumComponent implements OnInit {
   curriculums = new DataTable();
+  classes = new DataTable();
+
   selectedCurriculum: Curriculum = new Curriculum();
+  selectedClass: Class = new Class();
+
   seqSelectedCurriculum: Curriculum = new Curriculum();
+  seqSelectedClass: Class = new Class();
+
   popupCurriculum: Curriculum = new Curriculum();
 
   isCurriculumAdd = false;
   isCurriculumUpdate = false;
+
   curriculumLoading = false;
+  classLoading = false;
   
   constructor(
     private curriculumService: CurriculumService,
+    private classService: ClassService,
     private message: NzMessageService,
-   
     private modal: NzModalService) {
+
       this.curriculums.pageNumber = 1;
       this.curriculums.size = 20;
+      this.classes.pageNumber = 1;
+      this.classes.size = 20;
 
-      this.getCurriculums();
+      this.getClass();
     }
 
   ngOnInit(): void {
   }
 
-  getCurriculums() {
-    this.curriculumService.getCurriculums(this.curriculums).subscribe(data => {
+  getClass() {
+    this.classService.getClasses(this.classes).subscribe(data => {
+      this.classes = data;
+      this.classLoading = false;
+      this.selectedClass = new Class();
+      this.curriculums = new DataTable();
+    });
+
+  }
+
+  selectClass(param) {
+    this.selectedClass = param;
+    this.classLoading = true;
+    this.getCurriculum();
+  }
+
+  getCurriculum() {
+    this.curriculumService.getCurriculum(this.curriculums, this.selectedClass.class_seq).subscribe(data => {
       this.curriculums = data;
       this.curriculumLoading = false;
+      this.classLoading = false;
       this.selectedCurriculum = new Curriculum();
     });
   }
@@ -56,7 +87,7 @@ export class PageCurriculumComponent implements OnInit {
 
   curriculumAddOk(): void {
     this.curriculumService.addCurriculum(this.popupCurriculum).subscribe(data => {
-      this.getCurriculums();
+      this.getCurriculum();
       this.selectedCurriculum = new Curriculum();
       this.isCurriculumAdd = false;
       this.message.create('success', '커리큘럼등록이 완료되었습니다.');
@@ -84,7 +115,7 @@ export class PageCurriculumComponent implements OnInit {
 
   curriculumUpdateOk(): void {
     this.curriculumService.updateCurriculum(this.popupCurriculum).subscribe(data => {
-      this.getCurriculums();
+      this.getCurriculum();
       this.isCurriculumUpdate = false;
       this.message.create('sucess', '커리큘럼수정이 완료되었습니다.');
     });
@@ -99,7 +130,7 @@ export class PageCurriculumComponent implements OnInit {
       nzCancelText: '아니요',
       nzOnOk: () => {
         this.curriculumService.deleteCurriculum(this.selectedCurriculum.curriculum_seq).subscribe(data => {
-          this.getCurriculums();
+          this.getCurriculum();
           this.message.create('success', '삭제가 완료되었습니다.');
         });
       }

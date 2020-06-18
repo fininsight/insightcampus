@@ -5,14 +5,47 @@
     </div>
 </div>
 <div id="content">
-  <div id="table">
+  <div id="left-table">
+   <nz-table
+      #classTable
+      nzShowSizeChanger
+      nzNoResult = "조회된 결과가 없습니다"
+      [nzFrontPagination]="false"
+      [nzData]="classes.data"
+      [nzLoading]="classLoading"
+      [nzTotal]="classes.totalPages * classes.size"
+      [(nzPageIndex)]="classes.pageNumber"
+      [(nzPageSize)]="classes.size"
+      (nzPageIndexChange)="getClass()"
+      nzShowSizeChanger="false"
+      nzSize="small">
+      <thead>
+        <tr>
+          <th nzWidth="50%">클래스seq</th>
+          <th nzWidth="50%">클래스nm</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of classTable.data"
+            (click)="selectClass(data)"
+            [ngClass]="{
+              'on':this.selectedClass.class_seq === data.class_seq
+            }"
+            style="cursor: pointer;">
+            <td>{{ data.class_seq }}</td>
+            <td>{{ data.class_nm }}</td>
+        </tr>
+      </tbody> 
+    </nz-table>
+  </div>
+  <div id="right-table">
     <div class="table-menu">
       <button nz-button nzType="default" nzShape="circle" (click)="curriculumAdd()"><i nz-icon nzType="plus"></i></button>
       <button nz-button nzType="default" nzShape="circle" (click)="curriculumUpdate()" [disabled]="selectedCurriculum.curriculum_seq == undefined"><i nz-icon nzType="edit"></i></button>
       <button nz-button nzType="default" nzShape="circle" (click)="curriculumDelete()" [disabled]="selectedCurriculum.curriculum_seq == undefined"><i nz-icon nzType="delete"></i></button>
     </div>
     <nz-table
-      #curriculumsTable
+      #curriculumTable
       nzShowSizeChanger
       nzNoResult = "조회된 결과가 없습니다"
       [nzFrontPagination]="false"
@@ -21,23 +54,23 @@
       [nzTotal]="curriculums.totalPages * curriculums.size"
       [(nzPageIndex)]="curriculums.pageNumber"
       [(nzPageSize)]="curriculums.size"
-      (nzPageIndexChange)="getCurriculums()"
+      (nzPageIndexChange)="getCurriculum()"
       nzShowSizeChanger="false"
       nzSize="small">
       <thead>
         <tr>
           <th nzWidth="12%">커리큘럼ID</th>
-          <th nzWidth="13%">커리큘럼번호</th>
-          <th nzWidth="13%">클래스순번</th>
-          <th nzWidth="13%">기간</th>
-          <th nzWidth="13%">레벨</th>
-          <th nzWidth="13%">order</th>
-          <th nzWidth="14%">비디오url</th>
-          <th nzWidth="14%">비디오type</th>
+          <th nzWidth="14%">커리큘럼번호</th>
+          <th nzWidth="12%">클래스순번</th>
+          <th nzWidth="12%">기간</th>
+          <th nzWidth="12%">레벨</th>
+          <th nzWidth="12%">order</th>
+          <th nzWidth="15%">비디오url</th>
+          <th nzWidth="15%">비디오type</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data of curriculumsTable.data"
+        <tr *ngFor="let data of curriculumTable.data"
             (click)="selectCurriculum(data)"
             (dblclick)="curriculumUpdate()"
             [ngClass]="{
@@ -67,16 +100,16 @@
       <input nz-input type="text" placeholder="커리큘럼번호" [(ngModel)]="popupCurriculum.curriculum_nm"/>
     </div>
     <div>
-      <nz-input-number [nzPlaceHolder]="'클래스순번'" [nzStep]="1" [(ngModel)]="popupCurriculum.class_seq" style="width:300px;"></nz-input-number>
+      <nz-input-number [nzPlaceHolder]="'클래스순번'" [nzStep]="1" [(ngModel)]="popupCurriculum.class_seq" style="margin-bottom: 5px;width:300px; "></nz-input-number>
     </div>
     <div>
-      <nz-input-number [nzPlaceHolder]="'기간'" [nzStep]="1" [(ngModel)]="popupCurriculum.duration" style="width:300px;"></nz-input-number>
+      <nz-input-number [nzPlaceHolder]="'기간'" [nzStep]="1" [(ngModel)]="popupCurriculum.duration" style="width:300px; margin-bottom: 5px;"></nz-input-number>
     </div>
     <div>
-      <nz-input-number [nzPlaceHolder]="'레벨'" [nzStep]="1" [(ngModel)]="popupCurriculum.level" style="width:300px;"></nz-input-number>
+      <nz-input-number [nzPlaceHolder]="'레벨'" [nzStep]="1" [(ngModel)]="popupCurriculum.level" style="width:300px; margin-bottom: 5px;"></nz-input-number>
     </div>
     <div>
-      <nz-input-number [nzPlaceHolder]="'order'" [nzStep]="1" [(ngModel)]="popupCurriculum.order" style="width:300px;"></nz-input-number>
+      <nz-input-number [nzPlaceHolder]="'order'" [nzStep]="1" [(ngModel)]="popupCurriculum.order" style="width:300px; margin-bottom: 5px;"></nz-input-number>
     </div>
     <div>
       <input nz-input type="text" placeholder="비디오url" [(ngModel)]="popupCurriculum.video_url"/>
@@ -102,22 +135,22 @@
           nzWidth="350">
   <div class="popup-content">
     <div>
-      <nz-input-number [nzPlaceHolder]="'커리큘럼ID'" [nzStep]="1" [(ngModel)]="popupCurriculum.curriculum_seq" style="width:300px;"></nz-input-number>
+      <nz-input-number [nzPlaceHolder]="'커리큘럼ID'" [nzStep]="1" [(ngModel)]="popupCurriculum.curriculum_seq" style="width:300px; margin-bottom: 5px;"></nz-input-number>
     </div>
     <div>
       <input nz-input type="text" placeholder="커리큘럼번호" [(ngModel)]="popupCurriculum.curriculum_nm"/>
     </div>
     <div>
-      <nz-input-number [nzPlaceHolder]="'클래스순번'" [nzStep]="1" [(ngModel)]="popupCurriculum.class_seq" style="width:300px;"></nz-input-number>
+      <nz-input-number [nzPlaceHolder]="'클래스순번'" [nzStep]="1" [(ngModel)]="popupCurriculum.class_seq" style="width:300px; margin-bottom: 5px;"></nz-input-number>
     </div>
     <div>
-      <nz-input-number [nzPlaceHolder]="'기간'" [nzStep]="1" [(ngModel)]="popupCurriculum.duration" style="width:300px;"></nz-input-number>
+      <nz-input-number [nzPlaceHolder]="'기간'" [nzStep]="1" [(ngModel)]="popupCurriculum.duration" style="width:300px; margin-bottom: 5px;"></nz-input-number>
     </div>
     <div>
-      <nz-input-number [nzPlaceHolder]="'레벨'" [nzStep]="1" [(ngModel)]="popupCurriculum.level" style="width:300px;"></nz-input-number>
+      <nz-input-number [nzPlaceHolder]="'레벨'" [nzStep]="1" [(ngModel)]="popupCurriculum.level" style="width:300px; margin-bottom: 5px;"></nz-input-number>
     </div>
     <div>
-      <nz-input-number [nzPlaceHolder]="'order'" [nzStep]="1" [(ngModel)]="popupCurriculum.order" style="width:300px;"></nz-input-number>
+      <nz-input-number [nzPlaceHolder]="'order'" [nzStep]="1" [(ngModel)]="popupCurriculum.order" style="width:300px; margin-bottom: 5px;"></nz-input-number>
     </div>
     <div>
       <input nz-input type="text" placeholder="비디오url" [(ngModel)]="popupCurriculum.video_url"/>

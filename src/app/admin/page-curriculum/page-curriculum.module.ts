@@ -4,6 +4,7 @@ import { PageCurriculumComponent } from './page-curriculum.component';
 import { CurriculumService } from '../core/services/curriculum.service';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { FormsModule } from '@angular/forms';
+import { ClassService } from '../core/services/class.service';
  
 
 @NgModule({
@@ -12,7 +13,11 @@ import { FormsModule } from '@angular/forms';
     NgZorroAntdModule,
     FormsModule
   ],
-
+  providers: [
+    ClassService,
+    CurriculumService,
+  ],
+  
   declarations: [
     PageCurriculumComponent
   ]

@@ -1,14 +1,15 @@
-import { Injectable } from "@angular/core";
-import { environment } from "src/environments/environment";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { DataTable } from '../models/datatable';
 import { map, retry, catchError } from 'rxjs/operators';
-import { Class } from '../models/class'
+import { Class } from '../models/class';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root'
 })
+
 export class ClassService {
 
   baseUrl = environment.apiUrl;
@@ -59,7 +60,6 @@ export class ClassService {
     );
   }
 
-  // Error handling
   errorHandl(error) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

@@ -21,7 +21,7 @@ export class CurriculumService {
 
   constructor(private http: HttpClient) { }
 
-  getCurriculums(dataTable: DataTable): Observable<DataTable> {
+  getCurriculum(dataTable: DataTable, classSeq: number): Observable<DataTable> {
     let searchText = '';
 
     if (dataTable.search != null) {
@@ -29,17 +29,8 @@ export class CurriculumService {
       searchText = encodeURI(searchText);
     }
 
-    return this.http.get<DataTable>(this.baseUrl + 'curriculum/' + 
+    return this.http.get<DataTable>(this.baseUrl + 'curriculum/' + classSeq + "/" +
                                     + dataTable.size + '/' + dataTable.pageNumber)
-    .pipe(
-      retry(1),
-      catchError(this.errorHandl)
-    );
-  }
-
-  getCurriculum(curriculumSeq: number) {
-    return this.http.get<DataTable>(this.baseUrl + 'curriculum/' + 
-                                    + curriculumSeq)
     .pipe(
       retry(1),
       catchError(this.errorHandl)

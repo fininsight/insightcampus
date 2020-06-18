@@ -8,7 +8,13 @@
 }
 
 
-#content #table {
+#content #left-table {
+    margin-top: 50px;
+    width: 200px;
+    margin-right: 10px;
+}
+
+#content #right-table {
     width: 800px;
 }
 
@@ -28,6 +34,11 @@ tr.on td {
 }
 
 .popup-content input{
+    width: 300px;
+    margin-bottom: 5px;
+}
+
+.popup-content input-number{
     width: 300px;
     margin-bottom: 5px;
 }

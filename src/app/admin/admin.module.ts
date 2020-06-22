@@ -8,6 +8,7 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { PageUserModule } from './page-user/page-user.module';
 import { PageCodeModule } from './page-code/page-code.module';
 import { PageClassModule } from './page-class/page-class.module';
+import { PageClassNoticeModule } from './page-class-notice/page-class-notice.module'
 import { PageCurriculumModule } from './page-curriculum/page-curriculum.module';
 
 @NgModule({
@@ -18,6 +19,7 @@ import { PageCurriculumModule } from './page-curriculum/page-curriculum.module';
     PageUserModule,
     PageCodeModule,
     PageClassModule,
+    PageClassNoticeModule,
     PageCurriculumModule,
   ],
   declarations: [

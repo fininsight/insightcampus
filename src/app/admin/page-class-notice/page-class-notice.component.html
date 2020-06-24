@@ -1,7 +1,7 @@
 <div id="header">
   <div id="title">
     <i nz-icon nzType="user" nzTheme="outline"></i>
-    강의관리
+    강의공지
   </div>
   <div id="manage">
     <button nz-button nzType="default" nzShape="circle" (click)="noticeAdd()"><i title="추가" nz-icon nzType="plus"></i></button>
@@ -34,7 +34,7 @@
     <tbody>
       <tr *ngFor="let data of testTable.data"
         (click)="selectNotice(data)"
-        (dblclick)="noticeUpdate()"
+        (dblclick)="noticeContent()"
 
         [ngClass]="{
           'on':this.selectedNotice.class_notice_seq === data.class_notice_seq
@@ -49,3 +49,19 @@
   </nz-table>
   </div>
 </div>
+
+<nz-modal [(nzVisible)]="isNoticeContent"
+          nzTitle="강의 공지" 
+          (nzOnCancel)="popupCancel()"
+          (nzOnOk)="noticeContentOk()"
+          nzWidth="550">
+  <div class="popup-content">
+    <div>
+      <!-- <input nz-input type="text" placeholder="수업 이름" [(ngModel)]="popupClass.class_nm"/> -->
+      {{ this.selectedNotice.content }}
+    </div>
+  </div>
+  <div *nzModalFooter>
+    <button nz-button nzType="default" (click)="popupCancel()">나가기</button>
+  </div>
+</nz-modal>

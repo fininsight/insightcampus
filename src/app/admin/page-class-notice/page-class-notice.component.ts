@@ -20,6 +20,7 @@ export class PageClassNoticeComponent implements OnInit {
 
   isNoticeAdd = false;
   isNoticeUpdate = false;
+  isNoticeContent = false;
 
   noticeLoading = true;
 
@@ -55,8 +56,17 @@ export class PageClassNoticeComponent implements OnInit {
     this.selectedNotice = param;
   }
 
-  noticeAdd() {
+  noticeContent() {
+    this.popupNotice = new ClassNotice();
+    this.isNoticeContent = true;
+  }
 
+  noticeContentOk() : void {
+    this.isNoticeContent = false;
+  }
+
+  noticeAdd() {
+    this.message.create('warning', '아직 기능이 구현되지 않았습니다.');
   }
 
   noticeAddOk() : void {
@@ -64,7 +74,7 @@ export class PageClassNoticeComponent implements OnInit {
   }
 
   noticeUpdate() {
-
+    this.message.create('warning', '아직 기능이 구현되지 않았습니다.');
   }
 
   noticeUpdateOk() : void {
@@ -72,12 +82,13 @@ export class PageClassNoticeComponent implements OnInit {
   }
 
   noticeDelete() {
-
+    this.message.create('warning', '아직 기능이 구현되지 않았습니다.');
   }
 
   popupCancel() : void {
     this.isNoticeAdd = false;
     this.isNoticeUpdate = false;
+    this.isNoticeContent = false;
   }
 
 }

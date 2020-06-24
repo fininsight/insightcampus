@@ -1,1 +1,51 @@
-<p>page-class-notice works!</p>
+<div id="header">
+  <div id="title">
+    <i nz-icon nzType="user" nzTheme="outline"></i>
+    강의관리
+  </div>
+  <div id="manage">
+    <button nz-button nzType="default" nzShape="circle" (click)="noticeAdd()"><i title="추가" nz-icon nzType="plus"></i></button>
+    <button nz-button nzType="default" nzShape="circle" (click)="noticeUpdate()" [disabled]="selectedNotice.class_notice_seq == undefined"><i title="수정" nz-icon nzType="edit"></i></button>
+    <button nz-button nzType="default" nzShape="circle" (click)="noticeDelete()" [disabled]="selectedNotice.class_notice_seq == undefined"><i title="삭제" nz-icon nzType="delete"></i></button>
+  </div>
+</div>
+<div id="content">
+  <div id="main-table">
+    <nz-table
+    #testTable
+    nzShowSizeChanger
+    nzNoResult = "조회된 결과가 없습니다"
+    [nzFrontPagination]="false"
+    [nzData]="notices.data"
+    [nzLoading]="noticeLoading"
+    [nzTotal]="notices.totalElements"
+    [(nzPageIndex)]="notices.pageNumber"
+    [(nzPageSize)]="notices.size"
+    (nzPageIndexChange)="getClassNotice()"
+    nzShowSizeChanger="false"
+    nzSize="small">
+    <thead (nzSortChange)="sort($event)" nzSingleSort>
+      <tr>
+        <th nzShowSort nzSortKey="title">제목</th>
+        <th nzShowSort nzSortKey="reg_user">작성자</th>
+        <th nzShowSort nzSortKey="reg_dt">작성일</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of testTable.data"
+        (click)="selectNotice(data)"
+        (dblclick)="noticeUpdate()"
+
+        [ngClass]="{
+          'on':this.selectedNotice.class_notice_seq === data.class_notice_seq
+        }"
+        style="cursor: pointer;"
+      >
+        <td>{{ data.title }}</td>
+        <td>{{ data.reg_user }}</td>
+        <td>{{ data.reg_dt }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+  </div>
+</div>

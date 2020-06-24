@@ -20,6 +20,23 @@ export class ClassNoticeService {
 
   constructor(private http: HttpClient) {}
 
+  getClassNotices(dataTable: DataTable): Observable<DataTable> {
+
+    let searchText = '';
+
+    if (dataTable.search != null) {
+      searchText = JSON.stringify(dataTable.search);
+      searchText = encodeURI(searchText);
+    }
+
+    return this.http.get<DataTable>(this.baseUrl + 'classnotice/' + dataTable.size + '/' + dataTable.pageNumber + '/' + searchText)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+
+  }
+
   // Error handling
   errorHandl(error) {
     let errorMessage = "";

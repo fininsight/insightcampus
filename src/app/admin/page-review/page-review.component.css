@@ -1,0 +1,27 @@
+#header {
+    margin: 20px 0 10px 0;
+}
+
+#content {
+    display: flex;
+    justify-content: center;
+}
+
+
+#content #left-table {
+    width: 200px;
+    margin-right: 10px;
+}
+
+#content #right-table {
+    width: 800px;
+}
+
+tr.on td {
+    background-color: #e3f8ff;
+}
+
+/* .popup-content div{
+    width: 300px;
+    margin-bottom: 5px;
+} */

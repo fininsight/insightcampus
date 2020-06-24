@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PageUserComponent } from './page-user.component';
+import { PageClassComponent } from './page-class.component';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
-import { UserService } from '../core/services/user.service';
+import { ClassService } from '../core/services/class.service';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -12,10 +12,10 @@ import { FormsModule } from '@angular/forms';
     FormsModule
   ],
   providers: [
-    UserService
+    ClassService
   ],
   declarations: [
-    PageUserComponent
+    PageClassComponent
   ]
 })
-export class PageUserModule { }
+export class PageClassModule { }

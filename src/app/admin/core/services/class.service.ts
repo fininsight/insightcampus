@@ -9,27 +9,58 @@ import { Class } from '../models/class';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ClassService {
+
   baseUrl = environment.apiUrl;
 
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
+      "Content-Type": "application/json",
+    }),
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getClasses(dataTable: DataTable): Observable<DataTable> {
-    return this.http.get<DataTable>(this.baseUrl + 'class/' + dataTable.size + '/' + dataTable.pageNumber)
+
+    let searchText = '';
+
+    if (dataTable.search != null) {
+      searchText = JSON.stringify(dataTable.search);
+      searchText = encodeURI(searchText);
+    }
+
+    return this.http.get<DataTable>(this.baseUrl + 'class/' + dataTable.size + '/' + dataTable.pageNumber + '/' + searchText)
     .pipe(
       retry(1),
       catchError(this.errorHandl)
     );
 
   }
-   // Error handling
-   errorHandl(error) {
+
+  addClass(classes: Class) {
+    return this.http.post(this.baseUrl + 'class', classes).pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
+
+  updateClass(classes: Class, class_seq: Number) {
+    return this.http.put(this.baseUrl + 'class/' + class_seq, classes).pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
+
+  deleteClass(class_seq: Number) {
+    return this.http.delete(this.baseUrl + 'class/' + class_seq).pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
+
+  errorHandl(error) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
       // Get client-side error

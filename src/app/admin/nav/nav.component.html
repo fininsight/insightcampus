@@ -19,6 +19,9 @@
           <li routerLink="/admin/class" nz-menu-item>강의관리</li>
         </ul>
         <ul class="subment">
+          <li routerLink="/admin/class-notice" nz-menu-item>강의공지</li>
+        </ul>
+        <ul class="subment">
           <li nz-menu-item>구독관리</li>
         </ul>
         <ul class="subment">
@@ -38,12 +41,8 @@
         <ul class="subment">
           <li routerLink="/admin/code" nz-menu-item>코드관리</li>
         </ul>
-      </li>
-      <!--
-      <li nz-menu-item>
-        <a href="https://ng.ant.design" target="_blank" rel="noopener noreferrer">Navigation Four - Link</a>
-      </li>
-      -->
+      </li>      
+      <li nz-menu-item nzIcon="setting" (click)="logout()">로그아웃</li>      
     </ul>
   </div>
 </div>

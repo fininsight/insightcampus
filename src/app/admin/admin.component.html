@@ -1,4 +1,22 @@
-<app-nav></app-nav>
-<div id="wrapper">
-    <router-outlet></router-outlet>
-</div>
+<ng-container *ngIf="!loggedIn()">
+    <div id="login-wrapper">
+        <div id="login">
+            <nz-input-group>
+                <input type="text" nz-input placeholder="아이디" [(ngModel)]="user.user_id"/>
+            </nz-input-group>        
+            <nz-input-group [nzSuffix]="suffixTemplate">
+                <input [type]="passwordVisible ? 'text' : 'password'" nz-input placeholder="패스워드" [(ngModel)]="user.user_pw"/>
+            </nz-input-group>
+            <ng-template #suffixTemplate>
+                <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
+            </ng-template>
+            <button nz-button nzType="default" (click)="login()">로그인</button>
+        </div>
+    </div>
+</ng-container>
+<ng-container *ngIf="loggedIn()">
+    <app-nav></app-nav>
+    <div id="wrapper">
+        <router-outlet></router-outlet>
+    </div>
+</ng-container>

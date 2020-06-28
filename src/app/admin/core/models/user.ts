@@ -1,8 +1,10 @@
 export class User {
-  user_seq: Number;
-  user_id: String;
-  user_pw: String;
-  email: String;
-  name: String;
-  status: Number;
+  user_seq: number;
+  user_id: string;
+  user_pw: string;
+  email: string;
+  name: string;
+  status: number;
+  result: boolean;
+  message: string;
 }

@@ -12,4 +12,11 @@ export class NavComponent implements OnInit {
   ngOnInit() {
   }
 
+  logout() {
+    if (localStorage.getItem('token') == null ) {
+    } else {
+    localStorage.removeItem('token');
+    }
+  }
+
 }

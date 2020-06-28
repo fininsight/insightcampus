@@ -9,16 +9,22 @@ import { PageUserModule } from './page-user/page-user.module';
 import { PageCodeModule } from './page-code/page-code.module';
 import { PageClassModule } from './page-class/page-class.module';
 import { PageCurriculumModule } from './page-curriculum/page-curriculum.module';
+import { AuthService } from './core/services/auth.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
-    CommonModule,
     AdminRoutes,
+    CommonModule,
     NgZorroAntdModule,
     PageUserModule,
     PageCodeModule,
     PageClassModule,
     PageCurriculumModule,
+    FormsModule
+  ],
+  providers: [
+    AuthService
   ],
   declarations: [
     AdminComponent,

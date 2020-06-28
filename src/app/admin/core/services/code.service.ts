@@ -12,10 +12,12 @@ import { Code } from '../models/code';
 export class CodeService {
 
   baseUrl = environment.apiUrl;
+  token = localStorage.getItem('token');
 
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.token
     })
   };
 
@@ -60,18 +62,18 @@ export class CodeService {
     );
   }
 
-    // Error handling
-    errorHandl(error) {
-      let errorMessage = '';
-      if (error.error instanceof ErrorEvent) {
-        // Get client-side error
-        errorMessage = error.error.message;
-      } else {
-        // Get server-side error
-        errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-      }
-      console.log(errorMessage);
-      return throwError(errorMessage);
+  // Error handling
+  errorHandl(error) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // Get client-side error
+      errorMessage = error.error.message;
+    } else {
+      // Get server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
+    console.log(errorMessage);
+    return throwError(errorMessage);
+  }
 
 }

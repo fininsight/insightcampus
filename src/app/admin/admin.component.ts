@@ -11,7 +11,7 @@ export class AdminComponent implements OnInit {
 
   passwordVisible = false;
 
-  user: User = {
+  user = {
     user_id: '',
     user_pw: ''
   };
@@ -26,8 +26,13 @@ export class AdminComponent implements OnInit {
     return this.authService.loggedIn();
   }
 
-  login() {
+  LoginKeyDown(event) {
+    if (event.key === 'Enter') {
+      this.login();
+    }
+  }
 
+  login() {
     this.authService.login(this.user).subscribe(data => {
       this.user.user_id = '';
       this.user.user_pw = '';

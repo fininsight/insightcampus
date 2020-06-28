@@ -2,10 +2,10 @@
     <div id="login-wrapper">
         <div id="login">
             <nz-input-group>
-                <input type="text" nz-input placeholder="아이디" [(ngModel)]="user.user_id"/>
+                <input type="text" nz-input placeholder="아이디" [(ngModel)]="user.user_id" (keydown)="LoginKeyDown($event)"/>
             </nz-input-group>        
             <nz-input-group [nzSuffix]="suffixTemplate">
-                <input [type]="passwordVisible ? 'text' : 'password'" nz-input placeholder="패스워드" [(ngModel)]="user.user_pw"/>
+                <input [type]="passwordVisible ? 'text' : 'password'" nz-input placeholder="패스워드" [(ngModel)]="user.user_pw" (keydown)="LoginKeyDown($event)"/>
             </nz-input-group>
             <ng-template #suffixTemplate>
                 <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>

@@ -4,6 +4,7 @@ import { MainComponent } from './main/main.component';
 import { PageUserComponent } from './page-user/page-user.component';
 import { PageCodeComponent } from './page-code/page-code.component';
 import { PageClassComponent } from './page-class/page-class.component';
+import { PageClassNoticeComponent } from './page-class-notice/page-class-notice.component'
 import { PageCurriculumComponent } from './page-curriculum/page-curriculum.component';
 
 const routes: Routes = [{
@@ -21,6 +22,9 @@ const routes: Routes = [{
   },
   {
       path: 'class', component: PageClassComponent
+  },
+  {
+      path: 'class-notice', component: PageClassNoticeComponent
   },
   {
       path: 'curriculum', component: PageCurriculumComponent

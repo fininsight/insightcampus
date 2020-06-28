@@ -10,6 +10,7 @@ import { PageCodeModule } from './page-code/page-code.module';
 import { PageClassModule } from './page-class/page-class.module';
 import { PageClassNoticeModule } from './page-class-notice/page-class-notice.module'
 import { PageCurriculumModule } from './page-curriculum/page-curriculum.module';
+import { PageReviewModule } from './page-review/page-review.module';
 import { AuthService } from './core/services/auth.service';
 import { FormsModule } from '@angular/forms';
 
@@ -23,6 +24,7 @@ import { FormsModule } from '@angular/forms';
     PageClassModule,
     PageClassNoticeModule,
     PageCurriculumModule,
+    PageReviewModule,
     FormsModule
   ],
   providers: [

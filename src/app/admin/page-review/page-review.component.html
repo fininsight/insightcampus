@@ -1,0 +1,104 @@
+<div id="header">
+    <div id="title">
+        <i nz-icon nzType="user" nzTheme="outline"></i>
+        클래스 리뷰
+    </div>
+</div>
+<div id="content">
+    <div id="left-table">
+     <nz-table
+        #classTable
+        nzShowSizeChanger
+        nzNoResult = "조회된 결과가 없습니다"
+        [nzFrontPagination]="false"
+        [nzData]="classes.data"
+        [nzLoading]="classLoading"
+        [nzTotal]="classes.totalPages * classes.size"
+        [(nzPageIndex)]="classes.pageNumber"
+        [(nzPageSize)]="classes.size"
+        (nzPageIndexChange)="getClass()"
+        nzShowSizeChanger="false"
+        nzSize="small">
+        <thead>
+            <tr>
+            <th nzWidth="50%">강의ID</th>
+            <th nzWidth="50%">강의명</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of classTable.data"
+                (click)="selectClass(data)"
+                [ngClass]="{
+                'on':this.selectedClass.class_seq === data.class_seq
+                }"
+                style="cursor: pointer;">
+                <td>{{ data.class_seq }}</td>
+                <td>{{ data.class_nm }}</td>
+            </tr>
+        </tbody> 
+     </nz-table>
+    </div>
+  <div id="right-table">
+    <nz-table
+      #classReviewTable
+      nzShowSizeChanger
+      nzNoResult = "조회된 결과가 없습니다"
+      [nzFrontPagination]="false"
+      [nzData]="classReviews.data"
+      [nzLoading]="classReviewLoading"
+      [nzTotal]="classReviews.totalPages * classReviews.size"
+      [(nzPageIndex)]="classReviews.pageNumber"
+      [(nzPageSize)]="classReviews.size"
+      (nzPageIndexChange)="getClassReview()"
+      nzShowSizeChanger="false"
+      nzSize="small">
+      <thead>
+        <tr>
+          <th nzWidth="12%">공지ID</th>
+          <th nzWidth="12%">강의명</th>
+          <th nzWidth="12%">제목</th>
+          <th nzWidth="12%">작성일</th>
+          <th nzWidth="12%">작성자</th>
+          <th nzWidth="12%">수정자</th>
+          <th nzWidth="12%">수정일</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of classReviewTable.data"
+            (click) = "selectClassReview(data)"
+            (dblclick)="popupSuccess()"
+            [ngClass]="{
+              'on':this.selectedClassReview.class_review_seq === data.class_review_seq
+            }"
+            style="cursor: pointer;">
+            <td>{{ data.class_review_seq }}</td>
+            <td>{{ selectedClass.class_nm }}</td>
+            <td>{{ data.title }}</td>
+            <td>{{ data.reg_user }}</td>
+            <td>{{ data.reg_dt }}</td>
+            <td>{{ data.upd_user }}</td>
+            <td>{{ data.upd_dt }}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+  
+    <nz-modal [(nzVisible)]="isClassReviewClick"
+            nzTitle="내용"
+            (nzOnCancel)="popupCancel()"
+            nzWidth="350">
+        <div class="popup-content">
+          <div>{{ popupClassReview.content }}</div>
+        </div>
+        <div *nzModalFooter>
+            <button nz-button nzType="default" (click)="popupCancel()">취소</button>
+        </div>
+    </nz-modal>
+</div>
+
+
+
+
+
+
+

@@ -7,6 +7,7 @@ import { PageClassComponent } from './page-class/page-class.component';
 import { PageClassNoticeComponent } from './page-class-notice/page-class-notice.component'
 import { PageCurriculumComponent } from './page-curriculum/page-curriculum.component';
 import { PageReviewComponent } from './page-review/page-review.component';
+import { PageIncamAddfareComponent } from './page-incam-addfare/page-incam-addfare.component';
 
 const routes: Routes = [{
   path: '',
@@ -32,6 +33,9 @@ const routes: Routes = [{
   },
   {
       path: 'review', component: PageReviewComponent
+  },
+  {
+      path: 'incam-addfare', component: PageIncamAddfareComponent
   }
 
 ]}];

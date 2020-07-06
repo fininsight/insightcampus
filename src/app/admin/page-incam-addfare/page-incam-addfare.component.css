@@ -1,0 +1,44 @@
+#header {
+    margin: 20px 0 10px 0;
+}
+
+#content {
+    display: flex;
+    justify-content: center;
+}
+
+
+#content #main-table {
+    margin-top: 50px;
+    width: 1000px;
+    margin-right: 10px;
+}
+
+#content #right-table {
+    width: 800px;
+}
+
+.table-menu {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 50px;
+}
+
+.table-menu button {
+    margin-left: 5px;
+}
+
+tr.on td {
+    background-color: #e3f8ff;
+}
+
+.popup-content input{
+    width: 300px;
+    margin-bottom: 5px;
+}
+
+.popup-content input-number{
+    width: 300px;
+    margin-bottom: 5px;
+}

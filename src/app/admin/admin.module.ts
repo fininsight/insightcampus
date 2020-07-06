@@ -13,6 +13,7 @@ import { PageCurriculumModule } from './page-curriculum/page-curriculum.module';
 import { PageReviewModule } from './page-review/page-review.module';
 import { AuthService } from './core/services/auth.service';
 import { FormsModule } from '@angular/forms';
+import { PageIncamAddfareModule } from './page-incam-addfare/page-incam-addfare.module';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { FormsModule } from '@angular/forms';
     PageClassNoticeModule,
     PageCurriculumModule,
     PageReviewModule,
-    FormsModule
+    FormsModule,
+    PageIncamAddfareModule,
   ],
   providers: [
     AuthService

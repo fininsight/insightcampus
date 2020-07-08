@@ -61,7 +61,31 @@
     </ul>
   </ng-container>
   <ng-container *ngIf="tab===3">강의후기</ng-container>
-  <ng-container *ngIf="tab===4">질문답변</ng-container>
+  <ng-container *ngIf="tab===4">
+    <div id="qna">
+      <div class="question-write">
+        <button nz-button nzType="primary">질문 작성</button>
+      </div>
+      <form class="search-box">
+        <input type="text" name="search" placeholder="질문을 검색해 보세요.">
+        <button>검색</button>
+      </form>
+      <div class="question-box" *ngFor="let data of qnaList">
+        <div class="icon-image">
+          <img src="#" alt="그림없음">
+        </div>
+        <div class="content">
+          <h1>{{data}}<span>7일전</span></h1>
+          <p>
+            영상에서는 ngOnchanges 메소드를 그냥 호출해서 쓰는데,
+            저는 지금 angular cli 버전이 9.x라서 7.x인 영상 당시와의 기준이 다른건가용 없네요...;
+            그래서 angular 사이트 가서 stable v9.1.11 기준으로 보니
+          </p>
+          <div class="reactions">댓글 / 하트</div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
   <ng-container *ngIf="tab===5">공지사항</ng-container>
 </div>
 <div cdkDropList class="position-list" (cdkDropListDropped)="drop($event)"  *ngIf="admin === true">

@@ -7,6 +7,7 @@ import { ClassComponent } from './class.component';
 import { DetailComponent } from './detail/detail.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormsModule } from '@angular/forms';
+import { NzButtonModule } from 'ng-zorro-antd';
 
 
 @Pipe({ name: 'safeHtml'})
@@ -39,7 +40,8 @@ import 'froala-editor/js/third_party/embedly.min';
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot(),
     DragDropModule,
-    FormsModule
+    FormsModule,
+    NzButtonModule
   ],
   declarations: [
     ClassComponent,

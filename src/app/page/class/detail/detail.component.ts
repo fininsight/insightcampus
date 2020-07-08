@@ -20,6 +20,7 @@ export class DetailComponent implements OnInit {
   public tab = 1;
   public all_class = new DataTable();
   public selectLoadClass;
+  public qnaList = ["제목1","제목2","제목3"];
 
   @ViewChildren('class') classes: QueryList<ElementRef>;
 

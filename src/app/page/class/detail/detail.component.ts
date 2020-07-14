@@ -15,9 +15,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 export class DetailComponent implements OnInit {
 
   public class_seq: any;
-  public class_data: Class = {
-    class_nm: ''
-  };
+  public class_data: Class = new Class();
   public admin = false;
   public condition = false;
   public templates = [];

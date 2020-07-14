@@ -7,6 +7,10 @@ import { ClassComponent } from './class.component';
 import { DetailComponent } from './detail/detail.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormsModule } from '@angular/forms';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzMessageModule } from 'ng-zorro-antd/message';
 
 
 @Pipe({ name: 'safeHtml'})
@@ -31,6 +35,7 @@ import 'froala-editor/js/third_party/font_awesome.min';
 import 'froala-editor/js/third_party/image_tui.min';
 import 'froala-editor/js/third_party/spell_checker.min';
 import 'froala-editor/js/third_party/embedly.min';
+import { importType } from '@angular/compiler/src/output/output_ast';
 
 @NgModule({
   imports: [
@@ -39,7 +44,11 @@ import 'froala-editor/js/third_party/embedly.min';
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot(),
     DragDropModule,
-    FormsModule
+    FormsModule,
+    NzButtonModule,
+    NzIconModule,
+    NzModalModule,
+    NzMessageModule
   ],
   declarations: [
     ClassComponent,

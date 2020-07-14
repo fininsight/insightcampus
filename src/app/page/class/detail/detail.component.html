@@ -9,26 +9,37 @@
     <button (click)="changeTab(4)">질문답변</button>
     <button (click)="changeTab(5)">공지사항</button>
   </div>
-  <ng-container *ngIf="tab===1">
+  <ng-container *ngIf="tab === 1">
     <div id="admin-menu">
       <button (click)="testAdd()" *ngIf="admin === true">추가(강의소개)</button>
       <button (click)="testAdd2()" *ngIf="admin === true">추가2(타이틀)</button>
       <button (click)="testAdmin()" *ngIf="admin !== true">관리자권한</button>
-      <button (click)="testAdminDisable()" *ngIf="admin === true">관리자권한제거</button>
+      <button (click)="testAdminDisable()" *ngIf="admin === true">
+        관리자권한제거
+      </button>
       <button (click)="testSave()" *ngIf="admin === true">저장</button>
-      <select class="form-control" [(ngModel)]="selectLoadClass" *ngIf="admin === true">
-        <option *ngFor="let class of all_class.data; index as i;" [value]="i">{{ class.class_nm }}</option>
+      <select
+        class="form-control"
+        [(ngModel)]="selectLoadClass"
+        *ngIf="admin === true"
+      >
+        <option *ngFor="let class of all_class.data; index as i" [value]="i">{{
+          class.class_nm
+        }}</option>
       </select>
       <button (click)="loadSave()" *ngIf="admin === true">불러오기</button>
     </div>
-    <ng-container *ngFor="let template of templates; index as i;">
-      <div #class [froalaEditor]="option" [innerHTML]="template | safeHtml" *ngIf="admin === true" >
-      </div>
-      <div [innerHTML]="template | safeHtml" *ngIf="admin === false">
-      </div>
+    <ng-container *ngFor="let template of templates; index as i">
+      <div
+        #class
+        [froalaEditor]="option"
+        [innerHTML]="template | safeHtml"
+        *ngIf="admin === true"
+      ></div>
+      <div [innerHTML]="template | safeHtml" *ngIf="admin === false"></div>
     </ng-container>
   </ng-container>
-  <ng-container *ngIf="tab===2">
+  <ng-container *ngIf="tab === 2">
     <ul id="class-curriculum">
       <li class="on">
         <span>테스트</span>
@@ -60,13 +71,83 @@
       </li>
     </ul>
   </ng-container>
-  <ng-container *ngIf="tab===3">강의후기</ng-container>
-  <ng-container *ngIf="tab===4">질문답변</ng-container>
-  <ng-container *ngIf="tab===5">공지사항</ng-container>
-</div>
-<div cdkDropList class="position-list" (cdkDropListDropped)="drop($event)"  *ngIf="admin === true">
-  <div class="position-item" *ngFor="let template of templates; index as i;" cdkDrag>
-    <div [innerHTML]="template | safeHtml">
+  <ng-container *ngIf="tab === 3">강의후기</ng-container>
+  <ng-container *ngIf="tab === 4">
+    <div id="qna">
+      <div class="question-write">
+        <button nz-button nzType="primary" (click)="createQuestionWrite(header ,body, footer)">
+          질문 작성
+        </button>
+      </div>
+      <form class="search-box">
+        <input type="text" name="search" placeholder="질문을 검색해 보세요." />
+        <button>검색</button>
+      </form>
+      <div class="question-box" *ngFor="let data of qnaList">
+        <div class="icon-image">
+          <img src="#" alt="그림없음" />
+        </div>
+        <div class="content">
+          <h1>{{ data.title }}<span>7일전</span></h1>
+          <p>
+            {{ data.content }}
+          </p>
+          <div class="reactions">
+            <span
+              ><i
+                nz-icon
+                nzType="heart"
+                nzTheme="outline"
+                style="color: indianred; font-size: 20px;"
+              ></i>
+              1</span
+            >
+            <span
+              ><i
+                nz-icon
+                nzType="message"
+                nzTheme="fill"
+                style="color: lightslategray; font-size: 20px;"
+              ></i>
+              10</span
+            >
+          </div>
+        </div>
+      </div>
     </div>
+  </ng-container>
+  <ng-container *ngIf="tab === 5">공지사항</ng-container>
+</div>
+<div
+  cdkDropList
+  class="position-list"
+  (cdkDropListDropped)="drop($event)"
+  *ngIf="admin === true"
+>
+  <div
+    class="position-item"
+    *ngFor="let template of templates; index as i"
+    cdkDrag
+  >
+    <div [innerHTML]="template | safeHtml"></div>
   </div>
 </div>
+
+<ng-template #header>
+  <div id="modal-header">
+    <form class="search-box">
+      <input type="text" name="search" placeholder="제목을 입력해 주세요." [(ngModel)]="popupQna.title">
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #body>
+  <div id="modal-body">
+    <textarea name="qna-write-text" [(ngModel)]="popupQna.content"></textarea>
+  </div>
+</ng-template>
+
+<ng-template #footer>
+  <button nz-button nzType="primary" (click)="writeOK()">글쓰기</button>
+  <button nz-button nzType="default" (click)="writeCancel()">나가기</button>
+</ng-template> 

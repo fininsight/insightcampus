@@ -145,7 +145,7 @@
       <input nz-input type="text" placeholder="이름" [(ngModel)]="popupIncamAddfare.name"/>
   </div>
   <div>
-      <nz-input-number [nzPlaceHolder]="'단가'" [nzStep]="1" [nzMin]="0" [(ngModel)]="popupIncamAddfare.price" style="width:300px; margin-bottom: 5px;"></nz-input-number>
+      <nz-input-number [nzPlaceHolder]="'단가'" [nzStep]="1" [nzMin]="0" [(ngModel)]="popupIncamAddfare.price"  [nzFormatter]="currencyFormatter" [nzParser]="currencyParser" style="width:300px; margin-bottom: 5px;"></nz-input-number>
       <!-- <input nz-input="" nz-tooltip="" nztooltiptrigger="focus" nztooltipplacement="topRight" nzoverlayclassname="numeric-input" placeholder="Input a number" style="width: 120px;"> -->
       <!-- <input #inputElement style="width: 120px" nz-input nzOverlayClassName="numeric-input" [ngModel]="popupIncamAddfare.price" placeholder="단가" (ngModelChange)="onChange($event)" (blur)="onBlur()" /> -->
       <!-- <input id="price" #inputElement style="width: 300px" nz-input nz-tooltip nzTooltipTrigger="focus" nzTooltipPlacement="topLeft" nzOverlayClassName="numeric-input" [ngModel]="popupIncamAddfare.price" [nzTooltipTitle]="title" placeholder="Input a number" (ngModelChange)="onChange($event)"/> -->

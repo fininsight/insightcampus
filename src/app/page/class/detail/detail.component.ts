@@ -1,12 +1,10 @@
 import { Component, OnInit, ViewChildren, QueryList, ElementRef, TemplateRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ClassService } from '../../core/services/class.service';
-import { ClassQnaService } from 'src/app/admin/core/services/class-qna.service';
 import { Class } from '../../core/models/class';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { ClassService } from '../../core/services/class.service';
 import { DataTable } from '../../core/models/datatable';
-import { ClassQna } from 'src/app/admin/core/models/class-qna';
-import { NzModalService, NzModalRef } from 'ng-zorro-antd/modal'
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { NzModalService, NzModalRef } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
@@ -17,16 +15,42 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 export class DetailComponent implements OnInit {
 
   public class_seq: any;
-  public class_data: Class;
+  public class_data: Class = {
+    class_nm: ''
+  };
   public admin = false;
   public condition = false;
   public templates = [];
   public tab = 1;
   public all_class = new DataTable();
   public selectLoadClass;
-  public qnaList = [];
 
   @ViewChildren('class') classes: QueryList<ElementRef>;
+
+  testTemplage = `
+  <div class="class-info">
+    <div class="title">
+      <div class="title-text">
+        <div style="font-size:30px">제목을 입력해 주세요</div>
+        <div class="title-line"></div>
+      </div>
+    </div>
+    <div style="font-size:14px; color:black;">
+      내용을 입력해 주세요
+    </div>
+  </div>
+`;
+
+testTemplage2 = `
+  <div class="class-title">
+    <div class="image">
+      <img src="../../../../assets/images/template/template02-02.png"/>
+    </div>
+    <div class="title" style="font-size: 35px; color: white;">
+      제목
+    </div>
+  </div>
+`;
 
   public option =  {
     toolbarInline: true,
@@ -86,41 +110,10 @@ export class DetailComponent implements OnInit {
     */
   };
 
-  testTemplage = `
-    <div class="class-info">
-      <div class="title">
-        <div class="title-text">
-          <div style="font-size:30px">제목을 입력해 주세요</div>
-          <div class="title-line"></div>
-        </div>
-      </div>
-      <div style="font-size:14px; color:black;">
-        내용을 입력해 주세요
-      </div>
-    </div>
-  `;
-
-  testTemplage2 = `
-    <div class="class-title">
-      <div class="image">
-        <img src="../../../../assets/images/template/template02-02.png"/>
-      </div>
-      <div class="title" style="font-size: 35px; color: white;">
-        제목
-      </div>
-    </div>
-  `;
-
-  qnaes: DataTable = new DataTable();
-  popupQna: ClassQna = new ClassQna();
-
-  tplmodal?: NzModalRef;
-
   constructor(private route: ActivatedRoute,
               private router: Router,
               private modal: NzModalService,
               private classService: ClassService,
-              private classQnaService: ClassQnaService,
               private message: NzMessageService) {
 
     route.params.subscribe(val => {
@@ -142,11 +135,6 @@ export class DetailComponent implements OnInit {
       console.log(data);
       this.all_class = data;
     });
-
-    this.qnaes.pageNumber = 1;
-    this.qnaes.size = 10;
-
-    this.getClassQnaes();
 
     // this.templates.push(this.testTemplage);
   }
@@ -200,34 +188,4 @@ export class DetailComponent implements OnInit {
     this.tab = tab;
   }
 
-  getClassQnaes() {
-    this.classQnaService.getClassQnaes(this.qnaes).subscribe(data => {
-      this.qnaes = data;
-      this.qnaList = this.qnaes.data.filter(x => x.class_seq === this.class_data.class_seq);
-    })
-  }
-
-  createQuestionWrite(header: TemplateRef<{}>, body: TemplateRef<{}>, footer: TemplateRef<{}>) {
-    this.popupQna = new ClassQna();
-    this.tplmodal = this.modal.create({
-      nzWidth: 920,
-      nzTitle: header,
-      nzContent: body,
-      nzFooter: footer,
-      nzClosable: false,
-    })
-  }
-
-  writeOK() {
-    this.popupQna.class_seq = this.class_data.class_seq;
-    this.classQnaService.addQna(this.popupQna).subscribe(data => {
-      this.getClassQnaes();
-      this.message.success('글쓰기가 완료되었습니다.');
-    });
-    this.tplmodal.destroy();
-  }
-
-  writeCancel() {
-    this.tplmodal.destroy();
-  }
 }

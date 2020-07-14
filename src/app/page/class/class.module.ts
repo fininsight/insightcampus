@@ -5,6 +5,7 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { CommonModule } from '@angular/common';
 import { ClassComponent } from './class.component';
 import { DetailComponent } from './detail/detail.component';
+import { DetailQnaComponent } from './detail/detail-qna/detail-qna.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormsModule } from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -53,6 +54,7 @@ import { importType } from '@angular/compiler/src/output/output_ast';
   declarations: [
     ClassComponent,
     DetailComponent,
+    DetailQnaComponent,
     SafeHtmlPipe
   ],
   providers: [

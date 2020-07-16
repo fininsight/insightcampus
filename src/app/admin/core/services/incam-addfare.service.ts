@@ -5,11 +5,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { DataTable } from '../models/datatable';
 import { map, retry, catchError } from 'rxjs/operators';
+import { Common } from './common';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class IncamAddfareService {
+export class IncamAddfareService extends Common{
 
   baseUrl = environment.apiUrl;
 
@@ -19,12 +21,14 @@ export class IncamAddfareService {
     })
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    super();
+  }
 
   getIncamAddfares(dataTable: DataTable): Observable<DataTable> {
 
     return this.http.get<DataTable>(this.baseUrl + 'incamaddfare/' +
-                                    + dataTable.size + '/' + dataTable.pageNumber)
+                                    + dataTable.size + '/' + dataTable.pageNumber, this.jwt())
     .pipe(
       retry(1),
       catchError(this.errorHandl)

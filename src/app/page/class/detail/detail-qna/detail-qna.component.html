@@ -8,7 +8,7 @@
     <input type="text" name="search" placeholder="질문을 검색해 보세요." />
     <button>검색</button>
   </form>
-  <div class="question-box" *ngFor="let data of qnaList">
+  <div class="question-box" *ngFor="let data of qnaes.data">
     <div class="icon-image">
       <img src="#" alt="그림없음" />
     </div>
@@ -38,6 +38,9 @@
         >
       </div>
     </div>
+  </div>
+  <div class="more-button-wrap">
+    <button nz-button nzType="primary" class="more-button" (click)="getMoreQnaes()" [nzLoading]="buttonLoading">더 보기</button>
   </div>
 </div>
 

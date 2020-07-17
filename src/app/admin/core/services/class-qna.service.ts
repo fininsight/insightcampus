@@ -18,7 +18,7 @@ export class ClassQnaService {
     }),
   };
 
-  getClassQnaes(dataTable: DataTable): Observable<DataTable> {
+  getClassQnaes(dataTable: DataTable, class_seq: number): Observable<DataTable> {
 
     let searchText = '';
 
@@ -27,7 +27,7 @@ export class ClassQnaService {
       searchText = encodeURI(searchText);
     }
 
-    return this.http.get<DataTable>(this.baseUrl + 'classqna/' + dataTable.size + '/' + dataTable.pageNumber + '/' + searchText)
+    return this.http.get<DataTable>(this.baseUrl + 'classqna/' + class_seq + '/' + dataTable.size + '/' + dataTable.pageNumber + '/' + searchText)
     .pipe(
       retry(1),
       catchError(this.errorHandl)

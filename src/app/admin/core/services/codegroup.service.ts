@@ -5,21 +5,17 @@ import { Observable, throwError } from 'rxjs';
 import { DataTable } from '../models/datatable';
 import { map, retry, catchError } from 'rxjs/operators';
 import { Codegroup } from '../models/codegroup';
+import { Common } from './common';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CodegroupService {
+export class CodegroupService extends Common {
 
   baseUrl = environment.apiUrl;
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  };
-
   constructor(private http: HttpClient) {
+    super();
   }
 
   getCodegroups(dataTable: DataTable): Observable<DataTable> {
@@ -31,7 +27,8 @@ export class CodegroupService {
       searchText = encodeURI(searchText);
     }
 
-    return this.http.get<DataTable>(this.baseUrl + 'codegroup/' + dataTable.size + '/' + dataTable.pageNumber + '/' + searchText)
+    return this.http.get<DataTable>(this.baseUrl + 'codegroup/' + dataTable.size + '/' + dataTable.pageNumber + '/' + searchText,
+              this.jwt())
     .pipe(
       retry(1),
       catchError(this.errorHandl)
@@ -40,38 +37,24 @@ export class CodegroupService {
   }
 
   addCodegroup(codeGroup: Codegroup) {
-    return this.http.post(this.baseUrl + 'codegroup', codeGroup).pipe(
+    return this.http.post(this.baseUrl + 'codegroup', codeGroup, this.jwt()).pipe(
       retry(1),
       catchError(this.errorHandl)
     );
   }
 
   updateCodegroup(codeGroup: Codegroup) {
-    return this.http.put(this.baseUrl + 'codegroup', codeGroup).pipe(
+    return this.http.put(this.baseUrl + 'codegroup', codeGroup, this.jwt()).pipe(
       retry(1),
       catchError(this.errorHandl)
     );
   }
 
   deleteCodegroup(codegroup_id: string) {
-    return this.http.delete(this.baseUrl + 'codegroup/' + codegroup_id).pipe(
+    return this.http.delete(this.baseUrl + 'codegroup/' + codegroup_id, this.jwt()).pipe(
       retry(1),
       catchError(this.errorHandl)
     );
-  }
-
-  // Error handling
-  errorHandl(error) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      // Get client-side error
-      errorMessage = error.error.message;
-    } else {
-      // Get server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    console.log(errorMessage);
-    return throwError(errorMessage);
   }
 
 }

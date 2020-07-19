@@ -1,9 +1,11 @@
-import { Component, OnInit, ViewChildren, QueryList, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, ElementRef, TemplateRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ClassService } from '../../core/services/class.service';
 import { Class } from '../../core/models/class';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { ClassService } from '../../core/services/class.service';
 import { DataTable } from '../../core/models/datatable';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { NzModalService, NzModalRef } from 'ng-zorro-antd/modal';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-detail',
@@ -13,7 +15,7 @@ import { DataTable } from '../../core/models/datatable';
 export class DetailComponent implements OnInit {
 
   public class_seq: any;
-  public class_data: Class;
+  public class_data: Class = new Class();
   public admin = false;
   public condition = false;
   public templates = [];
@@ -22,6 +24,31 @@ export class DetailComponent implements OnInit {
   public selectLoadClass;
 
   @ViewChildren('class') classes: QueryList<ElementRef>;
+
+  testTemplage = `
+  <div class="class-info">
+    <div class="title">
+      <div class="title-text">
+        <div style="font-size:30px">제목을 입력해 주세요</div>
+        <div class="title-line"></div>
+      </div>
+    </div>
+    <div style="font-size:14px; color:black;">
+      내용을 입력해 주세요
+    </div>
+  </div>
+`;
+
+testTemplage2 = `
+  <div class="class-title">
+    <div class="image">
+      <img src="../../../../assets/images/template/template02-02.png"/>
+    </div>
+    <div class="title" style="font-size: 35px; color: white;">
+      제목
+    </div>
+  </div>
+`;
 
   public option =  {
     toolbarInline: true,
@@ -81,34 +108,11 @@ export class DetailComponent implements OnInit {
     */
   };
 
-  testTemplage = `
-    <div class="class-info">
-      <div class="title">
-        <div class="title-text">
-          <div style="font-size:30px">제목을 입력해 주세요</div>
-          <div class="title-line"></div>
-        </div>
-      </div>
-      <div style="font-size:14px; color:black;">
-        내용을 입력해 주세요
-      </div>
-    </div>
-  `;
-
-  testTemplage2 = `
-    <div class="class-title">
-      <div class="image">
-        <img src="../../../../assets/images/template/template02-02.png"/>
-      </div>
-      <div class="title" style="font-size: 35px; color: white;">
-        제목
-      </div>
-    </div>
-  `;
-
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private classService: ClassService) {
+              private modal: NzModalService,
+              private classService: ClassService,
+              private message: NzMessageService) {
 
     route.params.subscribe(val => {
       this.class_seq = val.class_seq;

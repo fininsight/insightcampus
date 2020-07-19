@@ -3,9 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
 import { map, catchError } from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable, throwError } from 'rxjs';
-import { Router } from '@angular/router';
 import { User } from '../models/user';
 
 @Injectable({
@@ -17,11 +15,7 @@ export class AuthService {
   userToken: any;
 
   constructor(private http: HttpClient,
-              private jwtHelper: JwtHelperService,
-              private router: Router) {
-
-    // this.userInfoSubject = new BehaviorSubject<Object>(this.hasUserInfo());
-    // this.isLoginSubject = new BehaviorSubject<boolean>(this.hasToken());
+              private jwtHelper: JwtHelperService) {
   }
 
   loggedIn() {
@@ -29,12 +23,9 @@ export class AuthService {
     return !this.jwtHelper.isTokenExpired(token);
   }
 
-  login(login: User): Observable<User> {
+  login(login: any): Observable<User> {
     return this.http.post<User>(this.baseUrl + 'auth/login', login)
     .pipe(map((user: User) => {
-
-      console.log(user);
-
       if (user.result) {
         localStorage.setItem('token', user.message);
         this.userToken = user.message;

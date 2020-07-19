@@ -5,23 +5,17 @@ import { Observable, throwError } from 'rxjs';
 import { DataTable } from '../models/datatable';
 import { map, retry, catchError } from 'rxjs/operators';
 import { Code } from '../models/code';
+import { Common } from './common';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CodeService {
+export class CodeService extends Common {
 
   baseUrl = environment.apiUrl;
-  token = localStorage.getItem('token');
-
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.token
-    })
-  };
 
   constructor(private http: HttpClient) {
+    super();
   }
 
   getCode(dataTable: DataTable, codegroupId: string): Observable<DataTable> {
@@ -34,7 +28,8 @@ export class CodeService {
     }
 
     return this.http.get<DataTable>(this.baseUrl + 'code/' + codegroupId + '/'
-                                    + dataTable.size + '/' + dataTable.pageNumber + '/' + searchText)
+                                    + dataTable.size + '/' + dataTable.pageNumber + '/' + searchText,
+                                    this.jwt())
     .pipe(
       retry(1),
       catchError(this.errorHandl)
@@ -42,38 +37,24 @@ export class CodeService {
   }
 
   addCode(code: Code) {
-    return this.http.post(this.baseUrl + 'code', code).pipe(
+    return this.http.post(this.baseUrl + 'code', code, this.jwt()).pipe(
       retry(1),
       catchError(this.errorHandl)
     );
   }
 
   updateCode(code: Code) {
-    return this.http.put(this.baseUrl + 'code', code).pipe(
+    return this.http.put(this.baseUrl + 'code', code, this.jwt()).pipe(
       retry(1),
       catchError(this.errorHandl)
     );
   }
 
   deleteCode(codegroup_id: string, code_id: string) {
-    return this.http.delete(this.baseUrl + 'code/' + codegroup_id + '/' + code_id).pipe(
+    return this.http.delete(this.baseUrl + 'code/' + codegroup_id + '/' + code_id, this.jwt()).pipe(
       retry(1),
       catchError(this.errorHandl)
     );
-  }
-
-  // Error handling
-  errorHandl(error) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      // Get client-side error
-      errorMessage = error.error.message;
-    } else {
-      // Get server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    console.log(errorMessage);
-    return throwError(errorMessage);
   }
 
 }

@@ -5,9 +5,7 @@ import { IncamAddfareService } from '../core/services/incam-addfare.service';
 import { IncamAddfare } from '../core/models/incam-addfare';
 import { DataTable } from '../core/models/datatable';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { NgControl } from '@angular/forms';
-import { DecimalPipe } from '@angular/common';
-import { map } from 'rxjs/internal/operators/map';
+import en from '@angular/common/locales/en';
 
 @Component({
   selector: 'app-page-incam-addfare',
@@ -26,20 +24,32 @@ export class PageIncamAddfareComponent implements OnInit {
   isIncamAddfareUpdate = false;
 
   incamAddfareLoading = true;
-  
+
   private subscription: Subscription;
+
+  currencyParser = (value: string) => value.replace(/\$\s?|(,*)/g, '');
+  currencyFormatter = (value: string) => {
+    if (value === null) {
+      return null;
+    } else if (value === undefined) {
+      return undefined;
+    } else {
+      value = value + '';
+      return value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+  }
 
   constructor(private incamAddfareService: IncamAddfareService,
               private modal: NzModalService,
               private message: NzMessageService,
-              ) { 
+              ) {
                 this.incamAddfares.pageNumber = 1;
                 this.incamAddfares.size = 10;
                 this.getIncamAddfares();
               }
 
-  ngOnInit(){
-    
+  ngOnInit() {
+
   }
 
 

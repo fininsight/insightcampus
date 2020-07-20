@@ -13,7 +13,8 @@ import en from '@angular/common/locales/en';
   styleUrls: ['./page-incam-addfare.component.css']
 })
 export class PageIncamAddfareComponent implements OnInit {
-
+  gubun = [{'gubun_num':1, 'gubun_val': '강사'}, {'gubun_num':2, 'gubun_val': '멘토'}];
+  income_type = [{'income_type_num':1, 'income_type_val': '사업소득'}, {'income_type_num':2, 'income_type_val': '기타소득'}];
 
   incamAddfares = new DataTable();
 
@@ -103,6 +104,7 @@ export class PageIncamAddfareComponent implements OnInit {
     this.popupIncamAddfare.income_type = this.selectedIncamAddfare.income_type;
     this.popupIncamAddfare.remit = this.selectedIncamAddfare.remit;
     this.isIncamAddfareUpdate = true;
+    console.log(this.selectedIncamAddfare.gubun);
   }
 
   incamAddfareUpdateOk() : void {

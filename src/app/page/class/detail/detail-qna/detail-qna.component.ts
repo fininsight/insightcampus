@@ -13,11 +13,11 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 })
 export class DetailQnaComponent implements OnInit {
 
-  public qnaList = [];
   public class_seq: any;
 
   qnaes: DataTable = new DataTable();
   popupQna: ClassQna = new ClassQna();
+  buttonLoading: Boolean = false;
 
   tplmodal?: NzModalRef;
 
@@ -40,11 +40,34 @@ export class DetailQnaComponent implements OnInit {
   }
 
   getClassQnaes() {
-    this.classQnaService.getClassQnaes(this.qnaes).subscribe(data => {
-      console.log(data);
+    this.buttonLoading = true;
+    this.classQnaService.getClassQnaes(this.qnaes, this.class_seq).subscribe(data => {
       this.qnaes = data;
-      this.qnaList = this.qnaes.data.filter(x => x.class_seq == this.class_seq);
+      this.isEndOfPage();
+      this.buttonLoading = false;
     });
+  }
+
+  getMoreQnaes() {
+    this.buttonLoading = true;
+    if (this.qnaes.pageNumber < this.qnaes.totalPages) {
+      this.qnaes.pageNumber += 1;
+      this.classQnaService.getClassQnaes(this.qnaes, this.class_seq).subscribe(data => {
+        this.qnaes.data = this.qnaes.data.concat(data.data);
+        this.isEndOfPage();
+        this.buttonLoading = false;
+      })
+    } else {
+      throw new Error('Invalid page number!');
+    }
+  }
+
+  isEndOfPage() {
+    if (this.qnaes.pageNumber === this.qnaes.totalPages) {
+      const btn = document.querySelector('.more-button');
+      btn.setAttribute('disabled', '');
+      btn.querySelector('span').innerText = '끝';
+    }
   }
 
   createQuestionWrite(header: TemplateRef<{}>, body: TemplateRef<{}>, footer: TemplateRef<{}>) {
@@ -61,6 +84,7 @@ export class DetailQnaComponent implements OnInit {
   writeOK() {
     this.popupQna.class_seq = this.class_seq;
     this.classQnaService.addQna(this.popupQna).subscribe(data => {
+      this.qnaes.pageNumber = 1;
       this.getClassQnaes();
       this.message.success('글쓰기가 완료되었습니다.');
     });

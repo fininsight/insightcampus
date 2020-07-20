@@ -96,6 +96,11 @@
   #qna .question-box .content .reactions span {
     margin: 0 10px;
   }
+
+  #qna .more-button-wrap {
+    display: flex;
+    justify-content: center;
+  }
   
   #modal-header .search-box {
     margin: 10px 0;

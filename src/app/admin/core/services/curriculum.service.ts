@@ -5,11 +5,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { DataTable } from '../models/datatable';
 import { map, retry, catchError } from 'rxjs/operators';
+import { Common } from './common';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CurriculumService {
+export class CurriculumService extends Common {
 
   baseUrl = environment.apiUrl;
 
@@ -19,7 +20,9 @@ export class CurriculumService {
     })
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    super();
+   }
 
   getCurriculum(dataTable: DataTable, classSeq: number): Observable<DataTable> {
     let searchText = '';
@@ -30,7 +33,7 @@ export class CurriculumService {
     }
 
     return this.http.get<DataTable>(this.baseUrl + 'curriculum/' + classSeq + "/" +
-                                    + dataTable.size + '/' + dataTable.pageNumber)
+                                    + dataTable.size + '/' + dataTable.pageNumber, this.jwt())
     .pipe(
       retry(1),
       catchError(this.errorHandl)

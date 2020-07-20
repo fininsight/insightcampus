@@ -33,12 +33,7 @@ tr.on td {
     background-color: #e3f8ff;
 }
 
-.popup-content input{
-    width: 300px;
-    margin-bottom: 5px;
-}
-
-.popup-content input-number{
+.popup-content input, .popup-content nz-input-number, .popup-content nz-select{
     width: 300px;
     margin-bottom: 5px;
 }

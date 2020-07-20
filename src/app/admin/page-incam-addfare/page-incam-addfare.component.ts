@@ -13,7 +13,8 @@ import en from '@angular/common/locales/en';
   styleUrls: ['./page-incam-addfare.component.css']
 })
 export class PageIncamAddfareComponent implements OnInit {
-
+  gubun = [{'gubun_num':1, 'gubun_val': '강사'}, {'gubun_num':2, 'gubun_val': '멘토'}];
+  income_type = [{'income_type_num':1, 'income_type_val': '사업소득'}, {'income_type_num':2, 'income_type_val': '기타소득'}];
 
   incamAddfares = new DataTable();
 
@@ -103,6 +104,7 @@ export class PageIncamAddfareComponent implements OnInit {
     this.popupIncamAddfare.income_type = this.selectedIncamAddfare.income_type;
     this.popupIncamAddfare.remit = this.selectedIncamAddfare.remit;
     this.isIncamAddfareUpdate = true;
+    console.log(this.selectedIncamAddfare.gubun);
   }
 
   incamAddfareUpdateOk() : void {
@@ -133,53 +135,5 @@ export class PageIncamAddfareComponent implements OnInit {
       }
     });
   }
-
-  // value = '';
-  // title = 'Input a number';
-
-  // @ViewChild('inputElement', { static: false }) inputElement?: ElementRef;
-
-  // onChange(value: string): void {
-  //   this.updateValue(value);
-  // }
-
-  // // '.' at the end or only '-' in the input box.
-  // onBlur(): void {
-  //   if (this.value.charAt(this.value.length - 1) === '.' || this.value === '-') {
-  //     this.updateValue(this.value.slice(0, -1));
-  //   }
-  // }
-
-  // updateValue(value: string): void {
-  //   const reg = /^-?(0|[1-9][0-9]*)(\.[0-9]*)?$/;
-  //   if ((!isNaN(+value) && reg.test(value)) || value === '' || value === '-') {
-  //     this.value = value;
-  //   }
-  //   this.inputElement!.nativeElement.value = this.value;
-  //   this.updateTitle();
-  // }
-
-  // updateTitle(): void {
-  //   this.title = (this.value !== '-' ? this.formatNumber(this.value) : '-') || 'Input a number';
-  // }
-
-  // formatNumber(value: string): string {
-  //   const stringValue = `${value}`;
-  //   const list = stringValue.split('.');
-  //   const prefix = list[0].charAt(0) === '-' ? '-' : '';
-  //   let num = prefix ? list[0].slice(1) : list[0];
-  //   let result = '';
-  //   while (num.length > 3) {
-  //     result = `,${num.slice(-3)}${result}`;
-  //     num = num.slice(0, num.length - 3);
-  //   }
-  //   if (num) {
-  //     result = num + result;
-  //   }
-  //   return `${prefix}${result}${list[1] ? `.${list[1]}` : ''}`;
-  // }
-  
-
-
 
 }

@@ -3,6 +3,8 @@ import { PageComponent } from './page.component';
 import { MainComponent } from './main/main.component';
 import { ClassComponent } from './class/class.component';
 import { DetailComponent } from './class/detail/detail.component';
+import { LoginComponent } from './login/login.component';
+import { JoinComponent } from './join/join.component';
 
 const routes: Routes = [{
   path: '',
@@ -13,10 +15,15 @@ const routes: Routes = [{
     },
     {
         path: 'class/:type', component: ClassComponent
-    }
-    ,
+    },
     {
         path: 'detail/:class_seq', component: DetailComponent
+    },
+    {
+        path: 'login', component: LoginComponent
+    },
+    {
+        path: 'join', component: JoinComponent
     }
   ]
 }];

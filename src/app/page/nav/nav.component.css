@@ -1,5 +1,13 @@
+#menu {
+    height:55px;
+}
+
 #menu .ant-menu-horizontal {
     border: 0px;
+}
+
+#menu ul {
+    margin-top: 8px;
 }
 
 #menu ul li {
@@ -21,6 +29,7 @@
 
     .logo {
         margin-left: 10px;
+        margin-top: 10px;
     }
 }
 
@@ -28,10 +37,13 @@
     #menu_mobile {
         display: none;
     }
+
+    .logo {     
+        margin-top: 15px;
+    }
 }
 
 .logo {
-    float: left;
-    margin-top: 10px;
+    float: left;    
     cursor: pointer;
 }

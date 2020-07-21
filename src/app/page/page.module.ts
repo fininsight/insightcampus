@@ -6,6 +6,8 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { PageComponent } from './page.component';
 import { NavComponent } from './nav/nav.component';
 import { MainComponent } from './main/main.component';
+import { LoginComponent } from './login/login.component';
+import { JoinComponent } from './join/join.component';
 
 import { PageRoutes } from './page.routing';
 import { ClassService } from './core/services/class.service';
@@ -24,7 +26,9 @@ import { ClassService } from './core/services/class.service';
   declarations: [
     PageComponent,
     MainComponent,
-    NavComponent
+    NavComponent,
+    LoginComponent,
+    JoinComponent
   ]
 })
 export class PageModule { }

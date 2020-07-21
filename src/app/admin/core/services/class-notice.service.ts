@@ -5,11 +5,12 @@ import { Observable, throwError } from "rxjs";
 import { DataTable } from "../models/datatable";
 import { map, retry, catchError } from "rxjs/operators";
 import { ClassNotice } from "../models/class-notice";
+import { Common } from './common';
 
 @Injectable({
   providedIn: "root",
 })
-export class ClassNoticeService {
+export class ClassNoticeService extends Common {
   baseUrl = environment.apiUrl;
 
   httpOptions = {
@@ -18,7 +19,9 @@ export class ClassNoticeService {
     }),
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    super();
+  }
 
   getClassNotices(dataTable: DataTable): Observable<DataTable> {
 
@@ -29,7 +32,7 @@ export class ClassNoticeService {
       searchText = encodeURI(searchText);
     }
 
-    return this.http.get<DataTable>(this.baseUrl + 'classnotice/' + dataTable.size + '/' + dataTable.pageNumber + '/' + searchText)
+    return this.http.get<DataTable>(this.baseUrl + 'classnotice/' + dataTable.size + '/' + dataTable.pageNumber + '/' + searchText, this.jwt())
     .pipe(
       retry(1),
       catchError(this.errorHandl)

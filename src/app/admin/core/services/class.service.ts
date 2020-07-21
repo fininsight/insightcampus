@@ -5,12 +5,13 @@ import { Observable, throwError } from 'rxjs';
 import { DataTable } from '../models/datatable';
 import { map, retry, catchError } from 'rxjs/operators';
 import { Class } from '../models/class';
+import { Common } from './common';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class ClassService {
+export class ClassService extends Common {
 
   baseUrl = environment.apiUrl;
 
@@ -20,7 +21,9 @@ export class ClassService {
     }),
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    super();
+  }
 
   getClasses(dataTable: DataTable): Observable<DataTable> {
 
@@ -31,7 +34,7 @@ export class ClassService {
       searchText = encodeURI(searchText);
     }
 
-    return this.http.get<DataTable>(this.baseUrl + 'class/' + dataTable.size + '/' + dataTable.pageNumber + '/' + searchText)
+    return this.http.get<DataTable>(this.baseUrl + 'class/' + dataTable.size + '/' + dataTable.pageNumber + '/' + searchText, this.jwt())
     .pipe(
       retry(1),
       catchError(this.errorHandl)
@@ -40,21 +43,21 @@ export class ClassService {
   }
 
   addClass(classes: Class) {
-    return this.http.post(this.baseUrl + 'class', classes).pipe(
+    return this.http.post(this.baseUrl + 'class', classes, this.jwt()).pipe(
       retry(1),
       catchError(this.errorHandl)
     );
   }
 
   updateClass(classes: Class, class_seq: Number) {
-    return this.http.put(this.baseUrl + 'class/' + class_seq, classes).pipe(
+    return this.http.put(this.baseUrl + 'class/' + class_seq, classes, this.jwt()).pipe(
       retry(1),
       catchError(this.errorHandl)
     );
   }
 
   deleteClass(class_seq: Number) {
-    return this.http.delete(this.baseUrl + 'class/' + class_seq).pipe(
+    return this.http.delete(this.baseUrl + 'class/' + class_seq, this.jwt()).pipe(
       retry(1),
       catchError(this.errorHandl)
     );

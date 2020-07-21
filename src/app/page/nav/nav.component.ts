@@ -40,6 +40,10 @@ export class NavComponent implements OnInit {
     }
   }
 
+  change(event) {
+
+  }
+
   onMaskClick() {
     this.show = false;
   }

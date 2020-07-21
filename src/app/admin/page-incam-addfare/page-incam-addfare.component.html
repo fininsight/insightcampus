@@ -71,47 +71,47 @@
     <div class="popup-content">
         <div class="left">
           <div>
-              <nz-form-label nzRequired nzFor="addfare_date">정산일자</nz-form-label>
-              <nz-date-picker id="addfare_date" [nzPlaceHolder]="'정산일자'" [(ngModel)]="popupIncamAddfare.addfare_date" [nzShowToday]=false [nzStyle]="{'width': '300px'}" style="margin-bottom: 5px;"></nz-date-picker>          
+              <nz-form-label nzRequired>정산일자</nz-form-label>
+              <nz-date-picker [nzPlaceHolder]="'정산일자'" [(ngModel)]="popupIncamAddfare.addfare_date" [nzShowToday]=false [nzStyle]="{'width': '300px'}" style="margin-bottom: 5px;"></nz-date-picker>          
           </div>
           <div>
-            <nz-form-label nzRequired nzFor="teacher_seq">대상자</nz-form-label>
-            <input id="teacher_seq" nz-input type="text" placeholder="대상자" [(ngModel)]="popupIncamAddfare.teacher_seq"/>
+            <nz-form-label nzRequired>대상자</nz-form-label>
+            <input nz-input type="text" placeholder="대상자" [(ngModel)]="popupIncamAddfare.teacher_seq"/>
          </div>
           <div>
-            <nz-form-label nzRequired nzFor="original_company">원청사</nz-form-label>
-            <input id="original_company" nz-input type="text" placeholder="원청사" [(ngModel)]="popupIncamAddfare.original_company"/>
+            <nz-form-label nzRequired>원청사</nz-form-label>
+            <input nz-input type="text" placeholder="원청사" [(ngModel)]="popupIncamAddfare.original_company"/>
           </div>
           <div>
-            <nz-form-label nzRequired nzFor="popupIncamAddfare">분반</nz-form-label>
-              <input id="popupIncamAddfare" nz-input type="text" placeholder="분반" [(ngModel)]="popupIncamAddfare.class"/>
+            <nz-form-label nzRequired>분반</nz-form-label>
+              <input nz-input type="text" placeholder="분반" [(ngModel)]="popupIncamAddfare.class"/>
           </div>
           <div>
-              <nz-form-label nzRequired nzFor="gubun">구분</nz-form-label>
-              <nz-select id="gubun" [nzPlaceHolder]="'구분'" [(ngModel)]="popupIncamAddfare.gubun">  
+              <nz-form-label nzRequired>구분</nz-form-label>
+              <nz-select [nzPlaceHolder]="'구분'" [(ngModel)]="popupIncamAddfare.gubun">  
                 <nz-option nzValue="1" nzLabel="강사"></nz-option>
                 <nz-option nzValue="2" nzLabel="멘토"></nz-option>
               </nz-select>
           </div>          
           <div>
-              <nz-form-label nzRequired nzFor="price">단가</nz-form-label>
-              <nz-input-number id="price" [nzPlaceHolder]="'단가'" [nzStep]="1" [nzMin]="0" [(ngModel)]="popupIncamAddfare.price" ></nz-input-number>
+              <nz-form-label nzRequired>단가</nz-form-label>
+              <nz-input-number [nzPlaceHolder]="'단가'" [nzStep]="1" [nzMin]="0" [(ngModel)]="popupIncamAddfare.price" ></nz-input-number>
           </div>
           <div>
-              <nz-form-label nzRequired nzFor="hour">시수</nz-form-label>
-              <nz-input-number id="hour" [nzPlaceHolder]="'시수'" [nzStep]="1" [nzMin]="0" [(ngModel)]="popupIncamAddfare.hour"></nz-input-number>
+              <nz-form-label nzRequired>시수</nz-form-label>
+              <nz-input-number [nzPlaceHolder]="'시수'" [nzStep]="1" [nzMin]="0" [(ngModel)]="popupIncamAddfare.hour"></nz-input-number>
           </div>
           <div>
-            <nz-form-label nzRequired nzFor="hour_price">시간당강의료</nz-form-label>
-            <nz-input-number id="hour_price" [nzPlaceHolder]="'시간당강의료'" [nzStep]="1" [nzMin]="0" [(ngModel)]="popupIncamAddfare.hour_price"  [nzFormatter]="currencyFormatter" [nzParser]="currencyParser"></nz-input-number>
+            <nz-form-label nzRequired>시간당강의료</nz-form-label>
+            <nz-input-number [nzPlaceHolder]="'시간당강의료'" [nzStep]="1" [nzMin]="0" [(ngModel)]="popupIncamAddfare.hour_price"  [nzFormatter]="currencyFormatter" [nzParser]="currencyParser"></nz-input-number>
           </div>
           <div>
-              <nz-form-label nzRequired nzFor="tax">원천세율</nz-form-label>
-              <nz-input-number id="tax" [nzPlaceHolder]="'원천세율'" [nzStep]="0.01" [nzMin]="0.01" [nzMax]="1"[(ngModel)]="popupIncamAddfare.tax"></nz-input-number>
+              <nz-form-label nzRequired>원천세율</nz-form-label>
+              <nz-input-number [nzPlaceHolder]="'원천세율'" [nzStep]="0.01" [nzMin]="0.01" [nzMax]="1"[(ngModel)]="popupIncamAddfare.tax"></nz-input-number>
           </div>
           <div>
-              <nz-form-label nzRequired nzFor="income_type">소득타입</nz-form-label>
-              <nz-select id="income_type" [nzPlaceHolder]="'소득타입'"  [(ngModel)]="popupIncamAddfare.income_type">  
+              <nz-form-label nzRequired>소득타입</nz-form-label>
+              <nz-select [nzPlaceHolder]="'소득타입'"  [(ngModel)]="popupIncamAddfare.income_type">  
                 <nz-option nzValue="1" nzLabel="사업소득"></nz-option>
                 <nz-option nzValue="2" nzLabel="기타소득"></nz-option>
               </nz-select>
@@ -165,47 +165,47 @@
   <div class="popup-content">
     <div class="left">
       <div>
-        <nz-form-label nzRequired nzFor="addfare_date">정산일자</nz-form-label>
-        <nz-date-picker id="addfare_date" [nzPlaceHolder]="'정산일자'" [(ngModel)]="popupIncamAddfare.addfare_date" [nzShowToday]=false [nzStyle]="{'width': '300px'}" style="margin-bottom: 5px;"></nz-date-picker>          
+        <nz-form-label nzRequired>정산일자</nz-form-label>
+        <nz-date-picker [nzPlaceHolder]="'정산일자'" [(ngModel)]="popupIncamAddfare.addfare_date" [nzShowToday]=false [nzStyle]="{'width': '300px'}" style="margin-bottom: 5px;"></nz-date-picker>          
       </div>
       <div>
-        <nz-form-label nzRequired nzFor="teacher_seq">대상자</nz-form-label>
-        <input id="teacher_seq" nz-input type="text" placeholder="대상자" [(ngModel)]="popupIncamAddfare.teacher_seq"/>
+        <nz-form-label nzRequired>대상자</nz-form-label>
+        <input nz-input type="text" placeholder="대상자" [(ngModel)]="popupIncamAddfare.teacher_seq"/>
       </div>
       <div>
-        <nz-form-label nzRequired nzFor="original_company">원청사</nz-form-label>
-        <input id="original_company" nz-input type="text" placeholder="원청사" [(ngModel)]="popupIncamAddfare.original_company"/>
+        <nz-form-label nzRequired>원청사</nz-form-label>
+        <input nz-input type="text" placeholder="원청사" [(ngModel)]="popupIncamAddfare.original_company"/>
       </div>
       <div>
-          <nz-form-label nzRequired nzFor="class">분반</nz-form-label>
-          <input id="class" nz-input type="text" placeholder="분반" [(ngModel)]="popupIncamAddfare.class"/>
+          <nz-form-label nzRequired>분반</nz-form-label>
+          <input nz-input type="text" placeholder="분반" [(ngModel)]="popupIncamAddfare.class"/>
       </div>
       <div>
-          <nz-form-label nzRequired nzFor="popupGubun">구분</nz-form-label>
-          <nz-select id="popupGubun" [nzPlaceHolder]="'구분'" [(ngModel)]="popupGubun">  
+          <nz-form-label nzRequired>구분</nz-form-label>
+          <nz-select [nzPlaceHolder]="'구분'" [(ngModel)]="popupGubun">  
             <nz-option nzValue="1" nzLabel="강사"></nz-option>
             <nz-option nzValue="2" nzLabel="멘토"></nz-option>
           </nz-select>
       </div>      
       <div>
-          <nz-form-label nzRequired nzFor="price">단가</nz-form-label>
-          <nz-input-number id="price" [nzPlaceHolder]="'단가'" [nzStep]="1" [nzMin]="0" [(ngModel)]="popupIncamAddfare.price"  [nzFormatter]="currencyFormatter" [nzParser]="currencyParser"></nz-input-number>
+          <nz-form-label nzRequired>단가</nz-form-label>
+          <nz-input-number [nzPlaceHolder]="'단가'" [nzStep]="1" [nzMin]="0" [(ngModel)]="popupIncamAddfare.price"  [nzFormatter]="currencyFormatter" [nzParser]="currencyParser"></nz-input-number>
       </div>
       <div>
-          <nz-form-label nzRequired nzFor="hour">시수</nz-form-label>
-          <nz-input-number id="hour" [nzPlaceHolder]="'시수'" [nzStep]="1" [nzMin]="0" [(ngModel)]="popupIncamAddfare.hour"></nz-input-number>
+          <nz-form-label nzRequired>시수</nz-form-label>
+          <nz-input-number [nzPlaceHolder]="'시수'" [nzStep]="1" [nzMin]="0" [(ngModel)]="popupIncamAddfare.hour"></nz-input-number>
       </div>
       <div>
-        <nz-form-label nzRequired nzFor="hour_price">시간당강의료</nz-form-label>
-        <nz-input-number id="hour_price" [nzPlaceHolder]="'시간당강의료'" [nzStep]="1" [nzMin]="0" [(ngModel)]="popupIncamAddfare.hour_price"  [nzFormatter]="currencyFormatter" [nzParser]="currencyParser"></nz-input-number>
+        <nz-form-label nzRequired>시간당강의료</nz-form-label>
+        <nz-input-number [nzPlaceHolder]="'시간당강의료'" [nzStep]="1" [nzMin]="0" [(ngModel)]="popupIncamAddfare.hour_price"  [nzFormatter]="currencyFormatter" [nzParser]="currencyParser"></nz-input-number>
       </div>
       <div>
-          <nz-form-label nzRequired nzFor="tax">원천세율</nz-form-label>
-          <nz-input-number id="tax" [nzPlaceHolder]="'원천세율'" [nzStep]="0.01" [nzMin]="0.01" [nzMax]="1"[(ngModel)]="popupIncamAddfare.tax"></nz-input-number>
+          <nz-form-label nzRequired>원천세율</nz-form-label>
+          <nz-input-number [nzPlaceHolder]="'원천세율'" [nzStep]="0.01" [nzMin]="0.01" [nzMax]="1"[(ngModel)]="popupIncamAddfare.tax"></nz-input-number>
       </div>
       <div>
-          <nz-form-label nzRequired nzFor="popupIncomeType">소득타입</nz-form-label>
-          <nz-select id="popupIncomeType" [nzPlaceHolder]="'소득타입'"  [(ngModel)]="popupIncomeType">  
+          <nz-form-label nzRequired>소득타입</nz-form-label>
+          <nz-select [nzPlaceHolder]="'소득타입'"  [(ngModel)]="popupIncomeType">  
             <nz-option nzValue="1" nzLabel="사업소득"></nz-option>
             <nz-option nzValue="2" nzLabel="기타소득"></nz-option>
           </nz-select>

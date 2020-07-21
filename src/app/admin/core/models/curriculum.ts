@@ -8,4 +8,5 @@ export class Curriculum {
     order: number;
     video_url: string;
     video_type: string;
+    description: string;
 }

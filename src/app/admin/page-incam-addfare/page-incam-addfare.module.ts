@@ -6,9 +6,6 @@ import { NgZorroAntdModule, en_US } from 'ng-zorro-antd';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { FormsModule } from '@angular/forms';
-import { registerLocaleData } from '@angular/common'; 
-import zh from '@angular/common/locales/zh'; 
-registerLocaleData(zh);
  
 @NgModule({
   imports: [

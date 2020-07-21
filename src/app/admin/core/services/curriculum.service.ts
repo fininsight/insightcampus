@@ -41,21 +41,21 @@ export class CurriculumService extends Common {
   }
 
   addCurriculum(curriculum: Curriculum) {
-    return this.http.post(this.baseUrl + 'curriculum', curriculum).pipe(
+    return this.http.post(this.baseUrl + 'curriculum', curriculum, this.jwt()).pipe(
       retry(1),
       catchError(this.errorHandl)
     );
   }
 
   updateCurriculum(curriculum: Curriculum) {
-    return this.http.put(this.baseUrl + 'curriculum', curriculum).pipe(
+    return this.http.put(this.baseUrl + 'curriculum', curriculum, this.jwt()).pipe(
       retry(1),
       catchError(this.errorHandl)
     );
   }
 
   deleteCurriculum(curriculumSeq: number) {
-    return this.http.delete(this.baseUrl + 'curriculum/' + curriculumSeq).pipe(
+    return this.http.delete(this.baseUrl + 'curriculum/' + curriculumSeq, this.jwt()).pipe(
       retry(1),
       catchError(this.errorHandl)
     );

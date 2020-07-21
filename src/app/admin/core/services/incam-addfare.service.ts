@@ -37,7 +37,7 @@ export class IncamAddfareService extends Common{
 
   getIncamAddfare(dataTable: DataTable, addfareSeq: number) : Observable<DataTable> {
 
-    return this.http.get<DataTable>(this.baseUrl + 'incamaddfare/' + addfareSeq)
+    return this.http.get<DataTable>(this.baseUrl + 'incamaddfare/' + addfareSeq, this.jwt())
     .pipe(
       retry(1),
       catchError(this.errorHandl)
@@ -45,21 +45,21 @@ export class IncamAddfareService extends Common{
   }
 
   addIncamAddfare(incamaddfare: IncamAddfare) {
-    return this.http.post(this.baseUrl + 'incamaddfare', incamaddfare).pipe(
+    return this.http.post(this.baseUrl + 'incamaddfare', incamaddfare, this.jwt()).pipe(
       retry(1),
       catchError(this.errorHandl)
     );
   }
 
   updateIncamAddfare(incamaddfare: IncamAddfare) {
-    return this.http.put(this.baseUrl + 'incamaddfare', incamaddfare).pipe(
+    return this.http.put(this.baseUrl + 'incamaddfare', incamaddfare, this.jwt()).pipe(
       retry(1),
       catchError(this.errorHandl)
     );
   }
 
   deleteIncamAddfare(addfareSeq: number) {
-    return this.http.delete(this.baseUrl + 'incamaddfare/' + addfareSeq).pipe(
+    return this.http.delete(this.baseUrl + 'incamaddfare/' + addfareSeq, this.jwt()).pipe(
       retry(1),
       catchError(this.errorHandl)
     );

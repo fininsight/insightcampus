@@ -133,7 +133,7 @@
       <input nz-input type="text" placeholder="분반" [(ngModel)]="popupIncamAddfare.class"/>
   </div>
   <div>
-      <nz-select [nzPlaceHolder]="'구분'" [(ngModel)]="popupIncamAddfare.gubun">  
+      <nz-select [nzPlaceHolder]="'구분'" [(ngModel)]="popupGubun">  
         <nz-option nzValue="1" nzLabel="강사"></nz-option>
         <nz-option nzValue="2" nzLabel="멘토"></nz-option>
       </nz-select>
@@ -143,9 +143,6 @@
   </div>
   <div>
       <nz-input-number [nzPlaceHolder]="'단가'" [nzStep]="1" [nzMin]="0" [(ngModel)]="popupIncamAddfare.price"  [nzFormatter]="currencyFormatter" [nzParser]="currencyParser"></nz-input-number>
-      <!-- <input nz-input="" nz-tooltip="" nztooltiptrigger="focus" nztooltipplacement="topRight" nzoverlayclassname="numeric-input" placeholder="Input a number" style="width: 120px;"> -->
-      <!-- <input #inputElement style="width: 120px" nz-input nzOverlayClassName="numeric-input" [ngModel]="popupIncamAddfare.price" placeholder="단가" (ngModelChange)="onChange($event)" (blur)="onBlur()" /> -->
-      <!-- <input id="price" #inputElement style="width: 300px" nz-input nz-tooltip nzTooltipTrigger="focus" nzTooltipPlacement="topLeft" nzOverlayClassName="numeric-input" [ngModel]="popupIncamAddfare.price" [nzTooltipTitle]="title" placeholder="Input a number" (ngModelChange)="onChange($event)"/> -->
   </div>
   <div>
       <nz-input-number [nzPlaceHolder]="'시수'" [nzStep]="1" [nzMin]="0" [(ngModel)]="popupIncamAddfare.hour"></nz-input-number>
@@ -154,7 +151,7 @@
       <nz-input-number [nzPlaceHolder]="'원천세'" [nzStep]="0.01" [nzMin]="0.01" [nzMax]="1"[(ngModel)]="popupIncamAddfare.tax"></nz-input-number>
   </div>
   <div>
-      <nz-select [nzPlaceHolder]="'소득타입'"  [(ngModel)]="popupIncamAddfare.income_type">  
+      <nz-select [nzPlaceHolder]="'소득타입'"  [(ngModel)]="popupIncomeType">  
         <nz-option nzValue="1" nzLabel="사업소득"></nz-option>
         <nz-option nzValue="2" nzLabel="기타소득"></nz-option>
       </nz-select>

@@ -15,6 +15,8 @@ import en from '@angular/common/locales/en';
 export class PageIncamAddfareComponent implements OnInit {
   gubun = [{'gubun_num':1, 'gubun_val': '강사'}, {'gubun_num':2, 'gubun_val': '멘토'}];
   income_type = [{'income_type_num':1, 'income_type_val': '사업소득'}, {'income_type_num':2, 'income_type_val': '기타소득'}];
+  popupGubun = "";
+  popupIncomeType = "";
 
   incamAddfares = new DataTable();
 
@@ -81,7 +83,6 @@ export class PageIncamAddfareComponent implements OnInit {
   }
 
   incamAddfareAddOk() : void {
-    // this.popupIncamAddfare.price = Number((<HTMLInputElement>document.getElementById("price")).value);
     this.incamAddfareService.addIncamAddfare(this.popupIncamAddfare).subscribe(data => {
       this.getIncamAddfares();
       this.selectedIncamAddfare = new IncamAddfare();
@@ -104,10 +105,15 @@ export class PageIncamAddfareComponent implements OnInit {
     this.popupIncamAddfare.income_type = this.selectedIncamAddfare.income_type;
     this.popupIncamAddfare.remit = this.selectedIncamAddfare.remit;
     this.isIncamAddfareUpdate = true;
-    console.log(this.selectedIncamAddfare.gubun);
+    this.popupGubun = this.selectedIncamAddfare.gubun.toString();
+    this.popupIncomeType = this.selectedIncamAddfare.income_type.toString();
   }
 
   incamAddfareUpdateOk() : void {
+    this.popupIncamAddfare.gubun = Number(this.popupGubun);
+    this.popupIncamAddfare.income_type = Number(this.popupIncomeType);
+    // console.log("Date : " + this.popupIncamAddfare.addfare_date.toISOString());
+    this.popupIncamAddfare.addfare_date.setDate(this.popupIncamAddfare.addfare_date.getDate() + 1);
     this.incamAddfareService.updateIncamAddfare(this.popupIncamAddfare).subscribe(data => {
       this.getIncamAddfares();
       this.isIncamAddfareUpdate = false;

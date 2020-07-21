@@ -4,17 +4,22 @@
   </div>
   <div>
     <ul nz-menu nzMode="horizontal" nzTheme="dark">
-      <li nz-submenu nzTitle="회원관리" nzIcon="user">
+      <li nz-submenu nzTitle="정산" nzIcon="form" *ngIf="authService.roleCheck(['family'])">
+        <ul class="subment">
+          <li routerLink="/admin/family-addfare" nz-menu-item>정산</li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="회원관리" nzIcon="user" *ngIf="authService.roleCheck(['admin'])">
         <ul class="subment">
           <li routerLink="/admin/user" nz-menu-item>회원관리</li>
         </ul>
       </li>
-      <li nz-submenu nzTitle="강사관리" nzIcon="solution">
+      <li nz-submenu nzTitle="강사관리" nzIcon="solution" *ngIf="authService.roleCheck(['admin'])">
         <ul class="subment">
           <li nz-menu-item>강사관리</li>
         </ul>
       </li>
-      <li nz-submenu nzTitle="강의관리" nzIcon="robot">
+      <li nz-submenu nzTitle="강의관리" nzIcon="robot" *ngIf="authService.roleCheck(['admin'])">
         <ul class="subment">
           <li routerLink="/admin/class" nz-menu-item>강의관리</li>
         </ul>
@@ -28,21 +33,21 @@
           <li routerLink="/admin/curriculum" nz-menu-item>커리큘럼</li>
         </ul>
       </li>
-      <li nz-submenu nzTitle="쿠폰관리" nzIcon="tags">
+      <li nz-submenu nzTitle="쿠폰관리" nzIcon="tags" *ngIf="authService.roleCheck(['admin'])">
 
       </li>
-      <li nz-submenu nzTitle="메일관리" nzIcon="mail">
+      <li nz-submenu nzTitle="메일관리" nzIcon="mail" *ngIf="authService.roleCheck(['admin'])">
 
       </li>
-      <li nz-submenu nzTitle="통계" nzIcon="line-chart">
+      <li nz-submenu nzTitle="통계" nzIcon="line-chart" *ngIf="authService.roleCheck(['admin'])">
 
       </li>
-      <li nz-submenu nzTitle="설정" nzIcon="setting">
+      <li nz-submenu nzTitle="설정" nzIcon="setting" *ngIf="authService.roleCheck(['admin'])">
         <ul class="subment">
           <li routerLink="/admin/code" nz-menu-item>코드관리</li>
         </ul>
       </li> 
-      <li nz-submenu nzTitle="업무" nzIcon="form">
+      <li nz-submenu nzTitle="업무" nzIcon="form" *ngIf="authService.roleCheck(['admin'])">
         <ul class="subment">
           <li routerLink="/admin/incam-addfare" nz-menu-item>내부정산</li>
         </ul>

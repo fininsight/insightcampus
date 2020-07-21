@@ -14,6 +14,7 @@ import { PageReviewModule } from './page-review/page-review.module';
 import { AuthService } from './core/services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { PageIncamAddfareModule } from './page-incam-addfare/page-incam-addfare.module';
+import { PageFamilyAddfareModule } from './page-family-addfare/page-family-addfare.module';
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import { PageIncamAddfareModule } from './page-incam-addfare/page-incam-addfare.
     PageReviewModule,
     FormsModule,
     PageIncamAddfareModule,
+    PageFamilyAddfareModule
   ],
   providers: [
     AuthService

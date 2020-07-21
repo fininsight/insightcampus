@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './core/services/auth.service';
+import { ActivatedRoute } from '@angular/router';
 import { User } from './core/models/user';
 
 @Component({
@@ -16,7 +17,14 @@ export class AdminComponent implements OnInit {
     user_pw: ''
   };
 
-  constructor(private authService: AuthService) {
+  name = null;
+
+  constructor(private authService: AuthService,
+              private route: ActivatedRoute) {
+
+    this.name = this.route.snapshot.queryParamMap.get('name');
+    this.user.user_id = this.name;
+
   }
 
   ngOnInit() {
@@ -26,9 +34,15 @@ export class AdminComponent implements OnInit {
     return this.authService.loggedIn();
   }
 
-  LoginKeyDown(event) {
+  loginKeyDown(event) {
     if (event.key === 'Enter') {
       this.login();
+    }
+  }
+
+  familyLoginKeyDown(event) {
+    if (event.key === 'Enter') {
+      this.familyLogin();
     }
   }
 
@@ -39,5 +53,14 @@ export class AdminComponent implements OnInit {
     }, error => {
     });
   }
+
+  familyLogin() {
+    this.authService.familyLogin(this.user).subscribe(data => {
+      this.user.user_id = '';
+      this.user.user_pw = '';
+    }, error => {
+    });
+  }
+
 
 }

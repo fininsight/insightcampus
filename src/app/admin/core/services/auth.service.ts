@@ -36,6 +36,38 @@ export class AuthService {
     );
   }
 
+  familyLogin(login: any): Observable<User> {
+    return this.http.post<User>(this.baseUrl + 'auth/familyLogin', login)
+    .pipe(map((user: User) => {
+      if (user.result) {
+        localStorage.setItem('token', user.message);
+        this.userToken = user.message;
+      }
+      return user;
+    }),
+    catchError(this.errorHandl)
+    );
+  }
+
+  roleCheck(allowedRoles: any): boolean {
+    const token: string = localStorage.getItem('token');
+    const decodedToken = this.jwtHelper.decodeToken(token);
+    let match = false;
+
+    if (decodedToken.role === undefined) {
+      return match;
+    }
+
+    allowedRoles.forEach(element => {
+
+      if (decodedToken.role.indexOf(element) > -1) {
+        match = true;
+      }
+    });
+
+    return match;
+  }
+
   // Error handling
   errorHandl(error) {
     let errorMessage = '';

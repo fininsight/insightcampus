@@ -8,14 +8,12 @@ import { PageClassNoticeComponent } from './page-class-notice/page-class-notice.
 import { PageCurriculumComponent } from './page-curriculum/page-curriculum.component';
 import { PageReviewComponent } from './page-review/page-review.component';
 import { PageIncamAddfareComponent } from './page-incam-addfare/page-incam-addfare.component';
+import { PageFamilyAddfareComponent } from './page-family-addfare/page-family-addfare.component';
 
 const routes: Routes = [{
   path: '',
   component: AdminComponent,
   children: [
-  {
-      path: '', component: MainComponent
-  },
   {
       path: 'user', component: PageUserComponent
   },
@@ -36,6 +34,9 @@ const routes: Routes = [{
   },
   {
       path: 'incam-addfare', component: PageIncamAddfareComponent
+  },
+  {
+      path: 'family-addfare', component: PageFamilyAddfareComponent
   }
 
 ]}];

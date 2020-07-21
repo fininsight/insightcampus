@@ -8,15 +8,16 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import en from '@angular/common/locales/en';
 
 @Component({
-  selector: 'app-page-incam-addfare',
-  templateUrl: './page-incam-addfare.component.html',
-  styleUrls: ['./page-incam-addfare.component.css']
+  selector: 'app-page-family-addfare',
+  templateUrl: './page-family-addfare.component.html',
+  styleUrls: ['./page-family-addfare.component.css']
 })
-export class PageIncamAddfareComponent implements OnInit {
+export class PageFamilyAddfareComponent implements OnInit {
+
   gubun = [{'gubun_num':1, 'gubun_val': '강사'}, {'gubun_num':2, 'gubun_val': '멘토'}];
   income_type = [{'income_type_num':1, 'income_type_val': '사업소득'}, {'income_type_num':2, 'income_type_val': '기타소득'}];
-  popupGubun = "";
-  popupIncomeType = "";
+  popupGubun = '';
+  popupIncomeType = '';
 
   incamAddfares = new DataTable();
 
@@ -69,15 +70,7 @@ export class PageIncamAddfareComponent implements OnInit {
   }
 
   getIncamAddfares() {
-    this.incamAddfareService.getIncamAddfares(this.incamAddfares).subscribe(data => {
-      this.incamAddfares = data;
-      this.incamAddfareLoading = false;
-      this.selectedIncamAddfare = new IncamAddfare();
-    });
-  }
-
-  getIncamAddfare() {
-    this.incamAddfareService.getIncamAddfare(this.incamAddfares, this.selectedIncamAddfare.addfare_seq).subscribe(data => {
+    this.incamAddfareService.getFamilyIncamAddfare(this.incamAddfares).subscribe(data => {
       this.incamAddfares = data;
       this.incamAddfareLoading = false;
       this.selectedIncamAddfare = new IncamAddfare();
@@ -86,21 +79,6 @@ export class PageIncamAddfareComponent implements OnInit {
 
   selectIncamAddfare(param) {
     this.selectedIncamAddfare = param;
-  }
-
-  incamAddfareAdd() {
-    this.popupIncamAddfare = new IncamAddfare();
-    this.popupIncamAddfare.addfare_seq = this.selectedIncamAddfare.addfare_seq;
-    this.isIncamAddfareAdd = true;
-  }
-
-  incamAddfareAddOk(): void {
-    this.incamAddfareService.addIncamAddfare(this.popupIncamAddfare).subscribe(data => {
-      this.getIncamAddfares();
-      this.selectedIncamAddfare = new IncamAddfare();
-      this.isIncamAddfareAdd = false;
-      this.message.create('success', '등록이 완료되었습니다.');
-    });
   }
 
   incamAddfareUpdate() {
@@ -122,37 +100,8 @@ export class PageIncamAddfareComponent implements OnInit {
     this.popupIncomeType = this.selectedIncamAddfare.income_type.toString();
   }
 
-  incamAddfareUpdateOk(): void {
-    this.popupIncamAddfare.gubun = Number(this.popupGubun);
-    this.popupIncamAddfare.income_type = Number(this.popupIncomeType);
-    // console.log("Date : " + this.popupIncamAddfare.addfare_date.toISOString());
-    this.popupIncamAddfare.addfare_date.setDate(this.popupIncamAddfare.addfare_date.getDate() + 1);
-    this.incamAddfareService.updateIncamAddfare(this.popupIncamAddfare).subscribe(data => {
-      this.getIncamAddfares();
-      this.isIncamAddfareUpdate = false;
-      this.message.create('sucess', '수정이 완료되었습니다.');
-    });
-  }
-
   popupCancel(): void {
-    this.isIncamAddfareAdd = false;
     this.isIncamAddfareUpdate = false;
-  }
-
-  incamAddfareDelete() {
-    this.modal.confirm({
-      nzTitle: '삭제하시겠습니까?',
-      // nzContent: '',
-      nzOkText: '예',
-      nzOkType: 'danger',
-      nzCancelText: '아니요',
-      nzOnOk: () => {
-        this.incamAddfareService.deleteIncamAddfare(this.selectedIncamAddfare.addfare_seq).subscribe(data => {
-          this.getIncamAddfares();
-          this.message.create('success', '삭제가 완료되었습니다.');
-        });
-      }
-    });
   }
 
   incamAddfarePdf() {

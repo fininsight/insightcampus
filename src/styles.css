@@ -8,9 +8,17 @@ body, html{
 }
 
 #content div.ant-table {
-    /* font-size: 11px; */
+    font-size: 12px;
 }
 
+div.ant-modal-title {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+div.ant-modal-body {
+    font-size: 12px;
+}
 
 .class-info {
     margin-top: 30px;

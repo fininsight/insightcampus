@@ -1,1 +1,58 @@
-<p>detail-notice works!</p>
+<div id="notice">
+  <form class="search-box">
+    <input type="text" name="search" placeholder="공지를 검색하세요." />
+    <button>검색</button>
+  </form>
+  <div class="notice-box" *ngFor='let data of notices.data' (click)="popupNoticeOpen(header, body, footer)">
+    <div class="icon-image">
+      <img src="#" alt="그림없음" />
+    </div>
+    <div class="content">
+      <h1>{{ data.title }}<span>7일전</span></h1>
+      <p>
+        {{ data.content }}
+      </p>
+      <div class="reactions">
+        <span
+          ><i
+            nz-icon
+            nzType="heart"
+            nzTheme="outline"
+            style="color: indianred; font-size: 20px;"
+          ></i>
+          1
+          </span
+        >
+        <span
+          ><i
+            nz-icon
+            nzType="message"
+            nzTheme="fill"
+            style="color: lightslategray; font-size: 20px;"
+          ></i>
+          10
+          </span
+        >
+      </div>
+    </div>
+
+    <ng-template #header>
+      <div id="modal-header">
+        {{ data.title }}
+      </div>
+    </ng-template>
+    
+    <ng-template #body>
+      <div id="modal-body">
+        {{ data.content }}
+      </div>
+    </ng-template>
+    
+    <ng-template #footer>
+      <button nz-button nzType="default" (click)="popupNoticeClose()">나가기</button>
+    </ng-template> 
+  </div>
+  <div class="more-button-wrap">
+    <button nz-button nzType="primary" class="more-button" (click)="getMoreNotices()" [nzLoading]="buttonLoading">더 보기</button>
+  </div>
+</div>

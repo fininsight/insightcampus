@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from './core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-page',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router,
+              private authService: AuthService) { }
 
   ngOnInit() {
+  }
+
+  loggedIn() {
+    return this.authService.loggedIn();
+  }
+
+  logout() {
+    if (localStorage.getItem('token') == null ) {
+    } else {
+      localStorage.removeItem('token');
+      this.router.navigate(['/login']);
+    }
   }
 
 }

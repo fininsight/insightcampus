@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
 import { registerLocaleData } from '@angular/common';
+import { OverlayModule } from '@angular/cdk/overlay';
 registerLocaleData(en);
 import en from '@angular/common/locales/ko';
 import { NZ_I18N, ko_KR } from 'ng-zorro-antd/i18n';
@@ -21,6 +22,7 @@ export function tokenGetter() {
       AppComponent
    ],
    imports: [
+      OverlayModule,
       BrowserModule,
       BrowserAnimationsModule,
       AppRoutingModule,

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ClassModule } from './class/class.module';
+import { FormsModule } from '@angular/forms';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 import { PageComponent } from './page.component';
@@ -18,6 +19,7 @@ import { ClassService } from './core/services/class.service';
     CommonModule,
     ClassModule,
     NgZorroAntdModule,
+    FormsModule,
     PageRoutes
   ],
   providers: [

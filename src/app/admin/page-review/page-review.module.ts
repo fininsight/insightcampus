@@ -5,7 +5,6 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { FormsModule } from '@angular/forms';
 import { ClassService } from '../core/services/class.service';
 import { ReviewService } from '../core/services/review.service';
- 
 
 @NgModule({
   imports: [
@@ -17,7 +16,6 @@ import { ReviewService } from '../core/services/review.service';
     ClassService,
     ReviewService,
   ],
-  
   declarations: [
     PageReviewComponent
   ]

@@ -23,7 +23,24 @@ export class ClassNoticeService extends Common {
     super();
   }
 
-  getClassNotices(dataTable: DataTable): Observable<DataTable> {
+  getClassNotices(dataTable: DataTable, class_seq: number): Observable<DataTable> {
+
+    let searchText = '';
+
+    if (dataTable.search != null) {
+      searchText = JSON.stringify(dataTable.search);
+      searchText = encodeURI(searchText);
+    }
+
+    return this.http.get<DataTable>(this.baseUrl + 'classnotice/' + class_seq + '/' + dataTable.size + '/' + dataTable.pageNumber + '/' + searchText, this.jwt())
+    .pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+
+  }
+
+  getAllClassNotices(dataTable: DataTable): Observable<DataTable> {
 
     let searchText = '';
 

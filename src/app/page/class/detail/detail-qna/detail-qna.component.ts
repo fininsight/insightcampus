@@ -43,7 +43,7 @@ export class DetailQnaComponent implements OnInit {
     this.buttonLoading = true;
     this.classQnaService.getClassQnaes(this.qnaes, this.class_seq).subscribe(data => {
       this.qnaes = data;
-      this.isEndOfPage();
+      if(this.isEndOfPage()) this.updateFinishBtn();
       this.buttonLoading = false;
     });
   }
@@ -54,7 +54,7 @@ export class DetailQnaComponent implements OnInit {
       this.qnaes.pageNumber += 1;
       this.classQnaService.getClassQnaes(this.qnaes, this.class_seq).subscribe(data => {
         this.qnaes.data = this.qnaes.data.concat(data.data);
-        this.isEndOfPage();
+        if(this.isEndOfPage()) this.updateFinishBtn();
         this.buttonLoading = false;
       })
     } else {
@@ -63,11 +63,18 @@ export class DetailQnaComponent implements OnInit {
   }
 
   isEndOfPage() {
-    if (this.qnaes.pageNumber === this.qnaes.totalPages) {
-      const btn = document.querySelector('.more-button');
-      btn.setAttribute('disabled', '');
-      btn.querySelector('span').innerText = '끝';
-    }
+    if (this.qnaes.pageNumber === this.qnaes.totalPages)
+      return true;
+    else if (!this.qnaes.data.length)
+      return true;
+    else
+      return false;
+  }
+
+  updateFinishBtn() {
+    const btn = document.querySelector('.more-button');
+    btn.setAttribute('disabled', '');
+    btn.querySelector('span').innerText = '끝';
   }
 
   createQuestionWrite(header: TemplateRef<{}>, body: TemplateRef<{}>, footer: TemplateRef<{}>) {

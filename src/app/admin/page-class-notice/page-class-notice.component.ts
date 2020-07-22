@@ -45,7 +45,7 @@ export class PageClassNoticeComponent implements OnInit {
   }
 
   getClassNotice() {
-    this.classNoticeService.getClassNotices(this.notices).subscribe(data => {
+    this.classNoticeService.getAllClassNotices(this.notices).subscribe(data => {
       this.notices = data;
       this.noticeLoading = false;
       this.selectedNotice = new ClassNotice();

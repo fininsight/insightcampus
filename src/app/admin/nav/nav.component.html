@@ -16,7 +16,7 @@
       </li>
       <li nz-submenu nzTitle="강사관리" nzIcon="solution" *ngIf="authService.roleCheck(['admin'])">
         <ul class="subment">
-          <li nz-menu-item>강사관리</li>
+          <li routerLink="/admin/teacher" nz-menu-item>강사관리</li>
         </ul>
       </li>
       <li nz-submenu nzTitle="강의관리" nzIcon="robot" *ngIf="authService.roleCheck(['admin'])">

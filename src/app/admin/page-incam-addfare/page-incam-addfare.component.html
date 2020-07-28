@@ -76,7 +76,9 @@
           </div>
           <div>
             <nz-form-label nzRequired>대상자</nz-form-label>
-            <input nz-input type="text" placeholder="대상자" [(ngModel)]="popupIncamAddfare.teacher_seq"/>
+            <nz-select nzShowSearch nzServerSearch nzPlaceHolder="대상자" [(ngModel)]="popupIncamAddfare.teacher_seq" [nzShowArrow]="false" [nzFilterOption]="nzFilterOption" (nzOnSearch)="search($event)" style="ime-mode: active;">
+              <nz-option *ngFor="let o of listOfOption" [nzLabel]="o.text" [nzValue]="o.value"> </nz-option>
+            </nz-select>
          </div>
           <div>
             <nz-form-label nzRequired>원청사</nz-form-label>
@@ -170,7 +172,9 @@
       </div>
       <div>
         <nz-form-label nzRequired>대상자</nz-form-label>
-        <input nz-input type="text" placeholder="대상자" [(ngModel)]="popupIncamAddfare.teacher_seq"/>
+        <nz-select nzShowSearch nzServerSearch nzPlaceHolder="대상자" [(ngModel)]="popupIncamAddfare.teacher_seq" [nzShowArrow]="false" [nzFilterOption]="nzFilterOption" (nzOnSearch)="search($event)" style="ime-mode: active;">
+          <nz-option *ngFor="let o of listOfOption" [nzLabel]="o.text" [nzValue]="o.value"> </nz-option>
+        </nz-select>
       </div>
       <div>
         <nz-form-label nzRequired>원청사</nz-form-label>

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { IncamAddfareService } from '../core/services/incam-addfare.service';
 import { IncamAddfare } from '../core/models/incam-addfare';
 import { DataTable } from '../core/models/datatable';
@@ -29,6 +29,8 @@ export class PageIncamAddfareComponent implements OnInit {
   incamAddfareLoading = true;
 
   private subscription: Subscription;
+
+  confirmModal?: NzModalRef;
 
   currencyParser = (value: string) => value.replace(/\$\s?|(,*)/g, '');
   currencyFormatter = (value: string) => {
@@ -156,7 +158,17 @@ export class PageIncamAddfareComponent implements OnInit {
   }
 
   incamAddfarePdf() {
-    this.message.create('sucess', '준비중입니다.');
+    const pdfLink = 'http://localhost:5000/api/pdf/';
+    this.confirmModal = this.modal.confirm({
+      nzTitle: '정산내용 PDF 다운로드',
+      nzContent: '선택하신 내용을 PDF로 다운로드하시겠습니까?',
+      nzOnOk: () => {
+        location.assign(pdfLink + this.selectedIncamAddfare.addfare_seq);
+      },
+      nzOnCancel: () => {
+        this.confirmModal.destroy();
+      }
+    });
   }
 
 }

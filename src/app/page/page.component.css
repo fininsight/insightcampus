@@ -19,14 +19,65 @@
 
 @media (min-width: 769px) {
     .wrapper {
-        width: 992px;
+        width: 1200px;
         margin: 0 auto;
     }
 }
 
 #bottom {
-    background-color:#303030;
+    background-color:#60676b;
     margin-top: 100px;
-    height: 200px;
+    height: 330px;
     color: white;
+}
+
+.grid {
+    padding: 20px 0 20px;
+    width: 1200px;
+}
+
+.grid aside {
+    float: left;
+    width: 23%;
+    margin-right: 2%;
+}
+
+.title h3{
+    color: white;
+    margin-top: 30px;
+    text-transform: uppercase;
+    font-weight: bolder;
+    font-family:'Malgun Gothic';
+    font-size: 16px;
+}
+
+.text {
+    margin-top:20px;
+    font-family:'Malgun Gothic';
+}
+
+.text p{
+    font-size: 13px;
+    line-height: 25px;
+}
+
+.text ul {
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.text li {
+    font-size: 13px;
+    line-height: 25px;
+}
+
+.copyright_text {
+    /* position: absolute; */
+    clear: left;
+    float: left;
+    font-size: 13px;
+    margin-top: 50px;
+    /* width: 992px; */
+    
 }

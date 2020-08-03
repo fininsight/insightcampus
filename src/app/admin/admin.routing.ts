@@ -9,6 +9,7 @@ import { PageCurriculumComponent } from './page-curriculum/page-curriculum.compo
 import { PageReviewComponent } from './page-review/page-review.component';
 import { PageIncamAddfareComponent } from './page-incam-addfare/page-incam-addfare.component';
 import { PageFamilyAddfareComponent } from './page-family-addfare/page-family-addfare.component';
+import { PageTeacherComponent } from './page-teacher/page-teacher.component';
 
 const routes: Routes = [{
   path: '',
@@ -37,6 +38,9 @@ const routes: Routes = [{
   },
   {
       path: 'family-addfare', component: PageFamilyAddfareComponent
+  },
+  {
+      path: 'teacher', component: PageTeacherComponent
   }
 
 ]}];

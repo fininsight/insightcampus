@@ -6,6 +6,8 @@ import { IncamAddfare } from '../core/models/incam-addfare';
 import { DataTable } from '../core/models/datatable';
 import { Subscription } from 'rxjs/internal/Subscription';
 import en from '@angular/common/locales/en';
+import { HttpClient } from '@angular/common/http';
+import { TeacherService } from '../core/services/teacher.service';
 
 @Component({
   selector: 'app-page-incam-addfare',
@@ -28,6 +30,11 @@ export class PageIncamAddfareComponent implements OnInit {
 
   incamAddfareLoading = true;
 
+  selectedValue = null;
+  listOfOption: Array<{ value: string; text: string }> = [];
+  nzFilterOption = () => true;
+  teachers = new DataTable();
+
   private subscription: Subscription;
 
   confirmModal?: NzModalRef;
@@ -47,6 +54,8 @@ export class PageIncamAddfareComponent implements OnInit {
   constructor(private incamAddfareService: IncamAddfareService,
               private modal: NzModalService,
               private message: NzMessageService,
+              private httpClient: HttpClient,
+              private teacherService: TeacherService,
               ) {
                 this.incamAddfares.pageNumber = 1;
                 this.incamAddfares.size = 10;
@@ -103,6 +112,7 @@ export class PageIncamAddfareComponent implements OnInit {
       this.isIncamAddfareAdd = false;
       this.message.create('success', '등록이 완료되었습니다.');
     });
+    this.selectedValue = null; //initialize value
   }
 
   incamAddfareUpdate() {
@@ -122,13 +132,22 @@ export class PageIncamAddfareComponent implements OnInit {
     this.isIncamAddfareUpdate = true;
     this.popupGubun = this.selectedIncamAddfare.gubun.toString();
     this.popupIncomeType = this.selectedIncamAddfare.income_type.toString();
+
+    this.teacherService.getTeachers(this.teachers).subscribe(data => {
+      data.data.forEach(item => {
+        if(item.teacher_seq == this.selectedIncamAddfare.teacher_seq) {
+          this.search(item.name);
+        }
+      });
+    });
+
   }
 
   incamAddfareUpdateOk(): void {
     this.popupIncamAddfare.gubun = Number(this.popupGubun);
     this.popupIncamAddfare.income_type = Number(this.popupIncomeType);
-    // console.log("Date : " + this.popupIncamAddfare.addfare_date.toISOString());
-    this.popupIncamAddfare.addfare_date.setDate(this.popupIncamAddfare.addfare_date.getDate() + 1);
+    console.log("teacher seq = ", this.popupIncamAddfare.teacher_seq);
+    // this.popupIncamAddfare.addfare_date.setDate(this.popupIncamAddfare.addfare_date.getDate() + 1);
     this.incamAddfareService.updateIncamAddfare(this.popupIncamAddfare).subscribe(data => {
       this.getIncamAddfares();
       this.isIncamAddfareUpdate = false;
@@ -169,6 +188,26 @@ export class PageIncamAddfareComponent implements OnInit {
         this.confirmModal.destroy();
       }
     });
+  }
+
+  search(value: string): void {
+    this.listOfOption = null;
+    this.teacherService.getTeachers(this.teachers)
+    .subscribe(data => {
+      const listOfOption: Array<{ value: string; text: string }> = [];
+      data.data.forEach(item => {
+        if(item.name.indexOf(value) > -1) {
+          if(value !== '') {
+            listOfOption.push({
+              value: item.teacher_seq,
+              text: item.name
+            });
+          }
+        }
+      });
+      this.listOfOption = listOfOption;
+    });
+
   }
 
 }

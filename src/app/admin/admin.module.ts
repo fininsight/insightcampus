@@ -15,6 +15,7 @@ import { AuthService } from './core/services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { PageIncamAddfareModule } from './page-incam-addfare/page-incam-addfare.module';
 import { PageFamilyAddfareModule } from './page-family-addfare/page-family-addfare.module';
+import { PageTeacherModule } from './page-teacher/page-teacher.module';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { PageFamilyAddfareModule } from './page-family-addfare/page-family-addfa
     PageReviewModule,
     FormsModule,
     PageIncamAddfareModule,
-    PageFamilyAddfareModule
+    PageFamilyAddfareModule,
+    PageTeacherModule,
   ],
   providers: [
     AuthService

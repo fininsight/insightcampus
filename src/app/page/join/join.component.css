@@ -64,6 +64,11 @@
     background-color: #FFF;
 }
 
+#join-content-inner .join-content-forms .join-form #password-confirm-message {
+    margin: 10px 0;
+    padding-left: 8px;
+}
+
 #join-content-inner .join-conditions .join-condition-item {
     margin: 20px 0;
     padding: 20px 0;

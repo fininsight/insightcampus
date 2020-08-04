@@ -4,29 +4,30 @@
   <div id="join-content-inner">
     <h1>회원가입</h1>
     <div class="join-content-forms">
-      <div class="join-form">
+      <div class="join-form" id="id-wrapper">
         <h2>아이디<span style="color: red;">*</span></h2>
         <input type="text" placeholder="아이디(ID)" [(ngModel)]="inputUser.user_id" />
       </div>
-      <div class="join-form">
+      <div class="join-form" id="email-wrapper">
         <h2>이메일 주소<span style="color: red;">*</span></h2>
-        <input type="text" placeholder="이메일 주소(Email)" [(ngModel)]="inputUser.email" />
+        <input type="email" placeholder="이메일 주소(Email)" [(ngModel)]="inputUser.email" />
       </div>
-      <div class="join-form">
+      <div class="join-form" id="name-wrapper">
         <h2>이름<span style="color: red;">*</span></h2>
         <input type="text" placeholder="이름(Name)" [(ngModel)]="inputUser.name" />
       </div>
-      <div class="join-form">
+      <div class="join-form" id="password-wrapper">
         <h2>비밀번호<span style="color: red;">*</span></h2>
-        <input type="text" placeholder="비밀번호" [(ngModel)]="inputUser.user_pw" />
+        <input type="password" placeholder="비밀번호" [(ngModel)]="inputUser.user_pw" />
       </div>
       <div class="join-form">
         <h2>비밀번호 확인<span style="color: red;">*</span></h2>
-        <input type="text" placeholder="비밀번호 확인" />
+        <input type="password" placeholder="비밀번호 확인" [(ngModel)]="pwConfirm" (ngModelChange)="passwordCheck()" />
+        <p id="password-confirm-message"></p>
       </div>
     </div>
     <div class="join-conditions">
-      <div class="join-condition-item">
+      <div class="join-condition-item" id="termsOfUse">
         <h2>이용약관</h2>
         <div class="condition">
           <pre>
@@ -244,11 +245,9 @@
 2. 이 개정약관은 시행일 이후에 체결되는 계약에만 적용되고 그 이전에 체결된 계약에 대해서는 개정 전의 약관조항을 그대로 적용합니다.
           </pre>
         </div>
-        <form>
-          <input type="checkbox" name="termsOfUse"> 이용약관에 동의합니다.
-        </form>
+        <input type="checkbox" [(ngModel)]="terms"> 이용약관에 동의합니다.<span style="color: red;">*</span>
       </div>
-      <div class="join-condition-item">
+      <div class="join-condition-item" id="privacy">
         <h2>개인정보</h2>
         <div class="condition">
           <pre>
@@ -288,11 +287,9 @@ G. 접속에 관한 기록보존
 2. 기타, 회원의 개별적인 동의가 있는 경우에는 개별 동의에 따른 기간까지 보관합니다.
           </pre>
         </div>
-        <form>
-          <input type="checkbox" name="privacy"> 개인정보수집이용에 동의합니다.
-        </form>
+        <input type="checkbox" [(ngModel)]="privacy"> 개인정보수집이용에 동의합니다.<span style="color: red;">*</span>
       </div>
-      <div class="join-condition-item">
+      <div class="join-condition-item" id="marketing">
         <h2>뉴스홍보레터</h2>
         <div class="condition">
           <pre>
@@ -313,9 +310,7 @@ G. 접속에 관한 기록보존
 ※ 위와 같은 개인정보 수집 이용에 대하여 동의를 거부할 권리가 있습니다. 그러나 동의를 거부할 경우 고객 문의 시 서비스가 제한될 수 있습니다. 
           </pre>
         </div>
-        <form>
-          <input type="checkbox" name="marketing"> 이용약관에 동의합니다.
-        </form>
+        <input type="checkbox" name="marketing" [(ngModel)]="marketing"> 이용약관에 동의합니다.(선택)
       </div>
     </div>
     <div class="join-btn-wrapper">

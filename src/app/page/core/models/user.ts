@@ -7,4 +7,5 @@ export class User {
     status: number;
     result: boolean;
     message: string;
+    ad: number;
 }

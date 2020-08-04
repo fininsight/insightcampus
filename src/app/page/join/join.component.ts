@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../core/models/user';
 
 @Component({
   selector: 'app-join',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JoinComponent implements OnInit {
 
+  inputUser: User = new User();
+
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.inputUser = new User()
+  }
+
+  joinOk() {
+    console.log(this.inputUser);
   }
 
 }

@@ -52,7 +52,7 @@
 
 #join-content-inner .join-content-forms .join-form input {
     width: 100%;
-    padding: 15px;
+    padding: 10px;
     border: 1px solid #CCC;
     border-radius: 10px;
     background-color: #F7F7F7;
@@ -79,4 +79,26 @@
     box-sizing: border-box;
     background-color: #F7F7F7;
     text-align: left;
+}
+
+#join-content-inner .join-btn-wrapper {
+    padding: 20px 0;
+}
+
+#join-content-inner .join-btn-wrapper button {
+    width: 250px;
+    height: 40px;
+    border: none;
+    border-radius: 7px;
+    background-color: #F77929;
+    color: #F7F7F7;
+    cursor: pointer;
+}
+
+#join-content-inner .join-btn-wrapper button:hover {
+    background-color: #F48B49;
+}
+
+#join-content-inner .join-btn-wrapper button:active {
+    transform: translateZ(0) scale(0.98);
 }

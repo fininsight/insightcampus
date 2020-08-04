@@ -6,33 +6,23 @@
     <div class="join-content-forms">
       <div class="join-form">
         <h2>아이디<span style="color: red;">*</span></h2>
-        <form>
-          <input type="text" placeholder="아이디(ID)" />
-        </form>
+        <input type="text" placeholder="아이디(ID)" [(ngModel)]="inputUser.user_id" />
       </div>
       <div class="join-form">
         <h2>이메일 주소<span style="color: red;">*</span></h2>
-        <form class="join-form">
-          <input type="text" placeholder="이메일 주소(Email)" />
-        </form>
+        <input type="text" placeholder="이메일 주소(Email)" [(ngModel)]="inputUser.email" />
       </div>
       <div class="join-form">
         <h2>이름<span style="color: red;">*</span></h2>
-        <form class="join-form">
-          <input type="text" placeholder="이름(Name)" />
-        </form>
+        <input type="text" placeholder="이름(Name)" [(ngModel)]="inputUser.name" />
       </div>
       <div class="join-form">
         <h2>비밀번호<span style="color: red;">*</span></h2>
-        <form class="join-form">
-          <input type="text" placeholder="비밀번호" />
-        </form>
+        <input type="text" placeholder="비밀번호" [(ngModel)]="inputUser.user_pw" />
       </div>
       <div class="join-form">
         <h2>비밀번호 확인<span style="color: red;">*</span></h2>
-        <form class="join-form">
-          <input type="text" placeholder="비밀번호 확인" />
-        </form>
+        <input type="text" placeholder="비밀번호 확인" />
       </div>
     </div>
     <div class="join-conditions">
@@ -328,8 +318,8 @@ G. 접속에 관한 기록보존
         </form>
       </div>
     </div>
-    <div class="join-btn-wrraper">
-      <button>회원가입</button>
+    <div class="join-btn-wrapper">
+      <button (click)="joinOk()">회원가입</button>
     </div>
   </div>
 </div>

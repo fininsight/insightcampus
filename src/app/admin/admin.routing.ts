@@ -9,6 +9,7 @@ import { PageCurriculumComponent } from './page-curriculum/page-curriculum.compo
 import { PageReviewComponent } from './page-review/page-review.component';
 import { PageIncamAddfareComponent } from './page-incam-addfare/page-incam-addfare.component';
 import { PageFamilyAddfareComponent } from './page-family-addfare/page-family-addfare.component';
+import { PageIncamContractComponent } from './page-incam-contract/page-incam-contract.component';
 import { PageTeacherComponent } from './page-teacher/page-teacher.component';
 
 const routes: Routes = [{
@@ -35,6 +36,9 @@ const routes: Routes = [{
   },
   {
       path: 'incam-addfare', component: PageIncamAddfareComponent
+  },
+  {
+      path: 'incam-contract', component: PageIncamContractComponent
   },
   {
       path: 'family-addfare', component: PageFamilyAddfareComponent

@@ -4,22 +4,20 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, throwError } from 'rxjs';
 import { DataTable } from '../models/datatable';
 import { map, retry, catchError } from 'rxjs/operators';
-import { User } from '../models/user'
+import { User } from '../models/user';
+import { Common } from './common';
+
 
 @Injectable({
   providedIn: "root",
 })
-export class UserService {
+export class UserService extends Common {
 
   baseUrl = environment.apiUrl;
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      "Content-Type": "application/json",
-    }),
-  };
-
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    super();
+  }
 
   getUsers(dataTable: DataTable): Observable<DataTable> {
 
@@ -59,17 +57,4 @@ export class UserService {
     );
   }
 
-  // Error handling
-  errorHandl(error) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      // Get client-side error
-      errorMessage = error.error.message;
-    } else {
-      // Get server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    console.log(errorMessage);
-    return throwError(errorMessage);
-  }
 }

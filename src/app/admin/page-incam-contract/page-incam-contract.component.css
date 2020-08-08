@@ -1,0 +1,65 @@
+anz-form-label {
+    width: 100px;    
+}
+
+#title {
+    margin-top: 50px;
+    font-weight: 600;
+    color: black;
+}
+
+#header {
+    margin: 20px 0 10px 0;
+}
+
+#content {
+    display: flex;
+    justify-content: center;
+}
+
+#content #main-table {
+    width: 1200px;
+    margin-right: 10px;
+}
+
+#content #right-table {
+    width: 800px;
+}
+
+#main-table th, #right-table th  {
+    background-color: #fafafa;
+    font-weight: 600;
+    color: black;
+}
+
+.table-menu {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 50px;
+}
+
+.table-menu button {
+    margin-left: 5px;
+}
+
+tr.on td {
+    background-color: #e3f8ff;
+}
+
+.popup-content input, .popup-content nz-input-number, .popup-content nz-select{
+    width: 300px;
+    margin-bottom: 5px;
+}
+
+.popup-content {
+    overflow:auto; 
+}
+
+.popup-content .left {
+    float: left;
+}
+
+.popup-content .right {
+    float: right;
+}

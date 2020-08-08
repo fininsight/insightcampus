@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Curriculum } from '../models/curriculum';
+import { IncamContract } from '../models/incam-contract';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
@@ -10,7 +10,7 @@ import { Common } from './common';
 @Injectable({
   providedIn: 'root'
 })
-export class CurriculumService extends Common {
+export class IncamContractService extends Common {
 
   baseUrl = environment.apiUrl;
 
@@ -22,17 +22,11 @@ export class CurriculumService extends Common {
 
   constructor(private http: HttpClient) {
     super();
-   }
+  }
 
-  getCurriculum(dataTable: DataTable, classSeq: number): Observable<DataTable> {
-    let searchText = '';
+  getIncamContracts(dataTable: DataTable): Observable<DataTable> {
 
-    if (dataTable.search != null) {
-      searchText = JSON.stringify(dataTable.search);
-      searchText = encodeURI(searchText);
-    }
-
-    return this.http.get<DataTable>(this.baseUrl + 'curriculum/' + classSeq + "/" +
+    return this.http.get<DataTable>(this.baseUrl + 'incamcontract/' +
                                     + dataTable.size + '/' + dataTable.pageNumber, this.jwt())
     .pipe(
       retry(1),
@@ -40,25 +34,34 @@ export class CurriculumService extends Common {
     );
   }
 
-  addCurriculum(curriculum: Curriculum) {
-    return this.http.post(this.baseUrl + 'curriculum', curriculum, this.jwt()).pipe(
+  getIncamContract(dataTable: DataTable, contractSeq: number): Observable<DataTable> {
+
+    return this.http.get<DataTable>(this.baseUrl + 'incamcontract/' + contractSeq, this.jwt())
+    .pipe(
       retry(1),
       catchError(this.errorHandl)
     );
   }
 
-  updateCurriculum(curriculum: Curriculum) {
-    return this.http.put(this.baseUrl + 'curriculum', curriculum, this.jwt()).pipe(
+  addIncamContract(incamContract: IncamContract) {
+    return this.http.post(this.baseUrl + 'incamcontract', incamContract, this.jwt()).pipe(
       retry(1),
       catchError(this.errorHandl)
     );
   }
 
-  deleteCurriculum(curriculumSeq: number) {
-    return this.http.delete(this.baseUrl + 'curriculum/' + curriculumSeq, this.jwt()).pipe(
+  updateIncamContract(incamContract: IncamContract) {
+    return this.http.put(this.baseUrl + 'incamcontract', incamContract, this.jwt()).pipe(
       retry(1),
       catchError(this.errorHandl)
     );
   }
+
+  deleteIncamContract(contractSeq: number) {
+    return this.http.delete(this.baseUrl + 'incamcontract/' + contractSeq, this.jwt()).pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
+
 }
-

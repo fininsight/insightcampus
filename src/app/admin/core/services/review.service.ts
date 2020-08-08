@@ -5,11 +5,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { DataTable } from '../models/datatable';
 import { map, retry, catchError } from 'rxjs/operators';
+import { Common } from './common';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ReviewService {
+export class ReviewService extends Common {
   baseUrl = environment.apiUrl;
 
   httpOptions = {
@@ -18,7 +19,9 @@ export class ReviewService {
     })
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    super();
+   }
 
   getClassReview(dataTable: DataTable, classSeq: number): Observable<DataTable> {
     let searchText = '';
@@ -35,20 +38,5 @@ export class ReviewService {
       catchError(this.errorHandl)
     );
   }
-
-  // Error handling
-  errorHandl(error) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      // Get client-side error
-      errorMessage = error.error.message;
-    } else {
-      // Get server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    console.log(errorMessage);
-    return throwError(errorMessage);
-  }
-
 
 }

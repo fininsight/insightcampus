@@ -5,17 +5,19 @@ import { environment } from 'src/environments/environment';
 import { map, catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { User } from '../models/user';
+import { Common } from './common';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService extends Common  {
 
   baseUrl = environment.apiUrl;
   userToken: any;
 
   constructor(private http: HttpClient,
               private jwtHelper: JwtHelperService) {
+                super();
   }
 
   loggedIn() {
@@ -66,19 +68,5 @@ export class AuthService {
     });
 
     return match;
-  }
-
-  // Error handling
-  errorHandl(error) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      // Get client-side error
-      errorMessage = error.error.message;
-    } else {
-      // Get server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    console.log(errorMessage);
-    return throwError(errorMessage);
   }
 }

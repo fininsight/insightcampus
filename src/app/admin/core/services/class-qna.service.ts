@@ -5,11 +5,17 @@ import { Observable, throwError } from "rxjs";
 import { DataTable } from "../models/datatable";
 import { map, retry, catchError } from "rxjs/operators";
 import { ClassQna } from "../models/class-qna";
+import { Common } from './common';
 
 @Injectable({
   providedIn: "root",
 })
-export class ClassQnaService {
+export class ClassQnaService extends Common {
+
+  constructor(private http: HttpClient) {
+    super();
+  }
+
   baseUrl = environment.apiUrl;
 
   httpOptions = {
@@ -40,21 +46,5 @@ export class ClassQnaService {
       retry(1),
       catchError(this.errorHandl)
     );
-  }
-
-  constructor(private http: HttpClient) {}
-
-  // Error handling
-  errorHandl(error) {
-    let errorMessage = "";
-    if (error.error instanceof ErrorEvent) {
-      // Get client-side error
-      errorMessage = error.error.message;
-    } else {
-      // Get server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    console.log(errorMessage);
-    return throwError(errorMessage);
   }
 }

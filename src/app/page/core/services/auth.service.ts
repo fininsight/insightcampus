@@ -2,7 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
-import { map, catchError } from 'rxjs/operators';
+import { retry, map, catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { User } from '../models/user';
 import { Common } from './common';
@@ -18,6 +18,14 @@ export class AuthService extends Common {
   constructor(private http: HttpClient,
               private jwtHelper: JwtHelperService) {
       super();
+  }
+
+  join(join: any) {
+    return this.http.post<User>(this.baseUrl + 'auth/join', join)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
   }
 
   loggedIn() {

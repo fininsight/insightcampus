@@ -58,14 +58,15 @@ export class PageFamilyAddfareComponent implements OnInit {
 
   calculation(incamAddfare: IncamAddfare) {
     return {
-      all: incamAddfare.price * incamAddfare.hour,
-      all_tax: incamAddfare.price * incamAddfare.hour * incamAddfare.tax,
-      all_deposit: incamAddfare.price * incamAddfare.hour - (incamAddfare.price * incamAddfare.hour * incamAddfare.tax),
-      employee_all: incamAddfare.hour_price * incamAddfare.hour,
-      employee_tax: incamAddfare.hour_price * incamAddfare.hour * incamAddfare.tax,
-      employee_deposit: (incamAddfare.hour_price * incamAddfare.hour) - (incamAddfare.hour_price * incamAddfare.hour * incamAddfare.tax),
-      remittance: (incamAddfare.price * incamAddfare.hour - (incamAddfare.price * incamAddfare.hour * incamAddfare.tax)) -
-                  ((incamAddfare.hour_price * incamAddfare.hour) - (incamAddfare.hour_price * incamAddfare.hour * incamAddfare.tax))
+      all: 0, // incamAddfare.price * incamAddfare.hour,
+      all_tax: 0, // incamAddfare.price * incamAddfare.hour * incamAddfare.tax,
+      all_deposit: 0, // incamAddfare.price * incamAddfare.hour - (incamAddfare.price * incamAddfare.hour * incamAddfare.tax),
+      employee_all: 0, // incamAddfare.hour_price * incamAddfare.hour,
+      employee_tax: 0, // incamAddfare.hour_price * incamAddfare.hour * incamAddfare.tax,
+      employee_deposit: 0, // (incamAddfare.hour_price * incamAddfare.hour) - 
+        // (incamAddfare.hour_price * incamAddfare.hour * incamAddfare.tax),
+      remittance: 0, //(incamAddfare.price * incamAddfare.hour - (incamAddfare.price * incamAddfare.hour * incamAddfare.tax)) -
+                  //((incamAddfare.hour_price * incamAddfare.hour) - (incamAddfare.hour_price * incamAddfare.hour * incamAddfare.tax))
     };
   }
 
@@ -86,17 +87,10 @@ export class PageFamilyAddfareComponent implements OnInit {
     this.popupIncamAddfare.addfare_seq = this.selectedIncamAddfare.addfare_seq;
     this.popupIncamAddfare.addfare_date = this.selectedIncamAddfare.addfare_date;
     this.popupIncamAddfare.teacher_seq = this.selectedIncamAddfare.teacher_seq;
-    this.popupIncamAddfare.original_company = this.selectedIncamAddfare.original_company;
     this.popupIncamAddfare.class = this.selectedIncamAddfare.class;
-    this.popupIncamAddfare.gubun = this.selectedIncamAddfare.gubun;
-    this.popupIncamAddfare.price = this.selectedIncamAddfare.price;
-    this.popupIncamAddfare.hour_price = this.selectedIncamAddfare.hour_price;
     this.popupIncamAddfare.hour = this.selectedIncamAddfare.hour;
-    this.popupIncamAddfare.tax = this.selectedIncamAddfare.tax;
     this.popupIncamAddfare.income_type = this.selectedIncamAddfare.income_type;
-    this.popupIncamAddfare.remit = this.selectedIncamAddfare.remit;
     this.isIncamAddfareUpdate = true;
-    this.popupGubun = this.selectedIncamAddfare.gubun.toString();
     this.popupIncomeType = this.selectedIncamAddfare.income_type.toString();
   }
 

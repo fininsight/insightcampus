@@ -1,12 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { IncamAddfareService } from '../core/services/incam-addfare.service';
 import { IncamAddfare } from '../core/models/incam-addfare';
+import { IncamContractService } from '../core/services/incam-contract.service';
+import { CodeService } from '../core/services/code.service';
 import { DataTable } from '../core/models/datatable';
-import { Subscription } from 'rxjs/internal/Subscription';
-import en from '@angular/common/locales/en';
-import { HttpClient } from '@angular/common/http';
 import { TeacherService } from '../core/services/teacher.service';
 
 @Component({
@@ -15,10 +14,6 @@ import { TeacherService } from '../core/services/teacher.service';
   styleUrls: ['./page-incam-addfare.component.css']
 })
 export class PageIncamAddfareComponent implements OnInit {
-  gubun = [{'gubun_num':1, 'gubun_val': '강사'}, {'gubun_num':2, 'gubun_val': '멘토'}];
-  income_type = [{'income_type_num':1, 'income_type_val': '사업소득'}, {'income_type_num':2, 'income_type_val': '기타소득'}];
-  popupGubun = "";
-  popupIncomeType = "";
 
   incamAddfares = new DataTable();
 
@@ -31,13 +26,22 @@ export class PageIncamAddfareComponent implements OnInit {
   incamAddfareLoading = true;
 
   selectedValue = null;
-  listOfOption: Array<{ value: string; text: string }> = [];
-  nzFilterOption = () => true;
+  listOfTeacher: Array<{ value: number; text: string }> = [];
+  listOfContract: Array<{ value: number; text: string; hour_price: number, hour_incen: number, contract_price: number }> = [];
+  listOfIncom: Array<{ value: string; text: string, rate: number }> = [];
+
   teachers = new DataTable();
-
-  private subscription: Subscription;
-
   confirmModal?: NzModalRef;
+
+  calculation = {
+      all: 0,
+      all_tax: 0,
+      all_deposit: 0,
+      employee_all: 0,
+      employee_tax: 0,
+      employee_deposit: 0,
+      remittance: 0
+  };
 
   currencyParser = (value: string) => value.replace(/\$\s?|(,*)/g, '');
   currencyFormatter = (value: string) => {
@@ -52,10 +56,11 @@ export class PageIncamAddfareComponent implements OnInit {
   }
 
   constructor(private incamAddfareService: IncamAddfareService,
+              private incamContractService: IncamContractService,
+              private codeService: CodeService,
               private modal: NzModalService,
               private message: NzMessageService,
-              private httpClient: HttpClient,
-              private teacherService: TeacherService,
+              private teacherService: TeacherService
               ) {
                 this.incamAddfares.pageNumber = 1;
                 this.incamAddfares.size = 10;
@@ -63,20 +68,40 @@ export class PageIncamAddfareComponent implements OnInit {
               }
 
   ngOnInit() {
-
+    this.searchTeacher('ALL');
+    this.searchContract('ALL');
+    this.codeService.getCodes('incom').subscribe(data => {
+      data.forEach(item => {
+        this.listOfIncom.push({
+          value: item.code_id,
+          text: item.code_nm,
+          rate: parseFloat(item.value1)
+        });
+      });
+    });
   }
 
-  calculation(incamAddfare: IncamAddfare) {
-    return {
-      all: incamAddfare.price * incamAddfare.hour,
-      all_tax: incamAddfare.price * incamAddfare.hour * incamAddfare.tax,
-      all_deposit: incamAddfare.price * incamAddfare.hour - (incamAddfare.price * incamAddfare.hour * incamAddfare.tax),
-      employee_all: incamAddfare.hour_price * incamAddfare.hour,
-      employee_tax: incamAddfare.hour_price * incamAddfare.hour * incamAddfare.tax,
-      employee_deposit: (incamAddfare.hour_price * incamAddfare.hour) - (incamAddfare.hour_price * incamAddfare.hour * incamAddfare.tax),
-      remittance: (incamAddfare.price * incamAddfare.hour - (incamAddfare.price * incamAddfare.hour * incamAddfare.tax)) -
-                  ((incamAddfare.hour_price * incamAddfare.hour) - (incamAddfare.hour_price * incamAddfare.hour * incamAddfare.tax))
-    };
+  setCalculation(value: string) {
+    const incomIndex = this.listOfIncom.findIndex(item => item.value === this.popupIncamAddfare.income_type);
+    const contractIndex = this.listOfContract.findIndex(item => item.value === this.popupIncamAddfare.contract_seq);
+
+    if (incomIndex != -1 && contractIndex != -1 && this.popupIncamAddfare.hour > 0) {
+      this.calculation.all = this.listOfContract[contractIndex].hour_price * this.popupIncamAddfare.hour;
+      this.calculation.all_tax = this.calculation.all * this.listOfIncom[incomIndex].rate;
+      this.calculation.all_deposit = this.calculation.all - this.calculation.all_tax;
+      this.calculation.employee_all = this.listOfContract[contractIndex].contract_price * this.popupIncamAddfare.hour;
+      this.calculation.employee_tax = this.calculation.employee_all * this.listOfIncom[incomIndex].rate;
+      this.calculation.employee_deposit = this.calculation.employee_all - this.calculation.employee_tax;
+      this.calculation.remittance = this.calculation.all_deposit - this.calculation.employee_deposit;
+    } else {
+      this.calculation.all = 0;
+      this.calculation.all_tax = 0;
+      this.calculation.all_deposit = 0;
+      this.calculation.employee_all = 0;
+      this.calculation.employee_tax = 0;
+      this.calculation.employee_deposit = 0;
+      this.calculation.remittance = 0;
+    }
   }
 
   getIncamAddfares() {
@@ -101,8 +126,9 @@ export class PageIncamAddfareComponent implements OnInit {
 
   incamAddfareAdd() {
     this.popupIncamAddfare = new IncamAddfare();
-    this.popupIncamAddfare.addfare_seq = this.selectedIncamAddfare.addfare_seq;
+    this.popupIncamAddfare.hour = 0;
     this.isIncamAddfareAdd = true;
+    this.setCalculation(null);
   }
 
   incamAddfareAddOk(): void {
@@ -112,42 +138,17 @@ export class PageIncamAddfareComponent implements OnInit {
       this.isIncamAddfareAdd = false;
       this.message.create('success', '등록이 완료되었습니다.');
     });
-    this.selectedValue = null; //initialize value
+    this.selectedValue = null;
   }
 
   incamAddfareUpdate() {
     this.popupIncamAddfare = new IncamAddfare();
-    this.popupIncamAddfare.addfare_seq = this.selectedIncamAddfare.addfare_seq;
-    this.popupIncamAddfare.addfare_date = this.selectedIncamAddfare.addfare_date;
-    this.popupIncamAddfare.teacher_seq = this.selectedIncamAddfare.teacher_seq;
-    this.popupIncamAddfare.original_company = this.selectedIncamAddfare.original_company;
-    this.popupIncamAddfare.class = this.selectedIncamAddfare.class;
-    this.popupIncamAddfare.gubun = this.selectedIncamAddfare.gubun;
-    this.popupIncamAddfare.price = this.selectedIncamAddfare.price;
-    this.popupIncamAddfare.hour_price = this.selectedIncamAddfare.hour_price;
-    this.popupIncamAddfare.hour = this.selectedIncamAddfare.hour;
-    this.popupIncamAddfare.tax = this.selectedIncamAddfare.tax;
-    this.popupIncamAddfare.income_type = this.selectedIncamAddfare.income_type;
-    this.popupIncamAddfare.remit = this.selectedIncamAddfare.remit;
+    this.popupIncamAddfare = JSON.parse(JSON.stringify(this.selectedIncamAddfare));
     this.isIncamAddfareUpdate = true;
-    this.popupGubun = this.selectedIncamAddfare.gubun.toString();
-    this.popupIncomeType = this.selectedIncamAddfare.income_type.toString();
-
-    this.teacherService.getTeachers(this.teachers).subscribe(data => {
-      data.data.forEach(item => {
-        if(item.teacher_seq == this.selectedIncamAddfare.teacher_seq) {
-          this.search(item.name);
-        }
-      });
-    });
-
+    this.setCalculation(null);
   }
 
   incamAddfareUpdateOk(): void {
-    this.popupIncamAddfare.gubun = Number(this.popupGubun);
-    this.popupIncamAddfare.income_type = Number(this.popupIncomeType);
-    console.log("teacher seq = ", this.popupIncamAddfare.teacher_seq);
-    // this.popupIncamAddfare.addfare_date.setDate(this.popupIncamAddfare.addfare_date.getDate() + 1);
     this.incamAddfareService.updateIncamAddfare(this.popupIncamAddfare).subscribe(data => {
       this.getIncamAddfares();
       this.isIncamAddfareUpdate = false;
@@ -190,24 +191,39 @@ export class PageIncamAddfareComponent implements OnInit {
     });
   }
 
-  search(value: string): void {
-    this.listOfOption = null;
-    this.teacherService.getTeachers(this.teachers)
-    .subscribe(data => {
-      const listOfOption: Array<{ value: string; text: string }> = [];
-      data.data.forEach(item => {
-        if(item.name.indexOf(value) > -1) {
-          if(value !== '') {
-            listOfOption.push({
-              value: item.teacher_seq,
-              text: item.name
-            });
-          }
-        }
-      });
-      this.listOfOption = listOfOption;
-    });
+  selectTeacher(value: string): void {
+    this.searchTeacher(value);
+  }
 
+  searchTeacher(value: string) {
+    this.teacherService.searchTeacher(value).subscribe(data => {
+      this.listOfTeacher = [];
+      data.forEach(item => {
+        this.listOfTeacher.push({
+          value: item.teacher_seq,
+          text: item.name
+        });
+      });
+    });
+  }
+
+  selectContract(value: string): void {
+    this.searchContract(value);
+  }
+
+  searchContract(value: string) {
+    this.incamContractService.searchIncamContract(value).subscribe(data => {
+      this.listOfContract = [];
+      data.forEach(item => {
+        this.listOfContract.push({
+          value: item.contract_seq,
+          text: item.original_company_nm + ' ' + item.class,
+          hour_price: item.hour_price,
+          hour_incen: item.hour_incen,
+          contract_price: item.contract_price
+        });
+      });
+    });
   }
 
 }

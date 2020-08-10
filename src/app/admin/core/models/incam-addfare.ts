@@ -1,14 +1,11 @@
 export class IncamAddfare {
     addfare_seq: number;
     teacher_seq: number;
-    addfare_date: Date;
-    original_company: string;
-    class: string;
-    gubun: number;
-    hour_price: number;
-    price: number;
+    contract_seq: number;
     hour: number;
-    tax: number;
-    income_type: number;
-    remit: number;
+    addfare_date: Date;
+    income_type: string;
+    original_company_nm: string;
+    class: string;
+    name: string;
 }

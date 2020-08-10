@@ -43,6 +43,17 @@ export class IncamContractService extends Common {
     );
   }
 
+  searchIncamContract(searchText: string): Observable<Array<IncamContract>> {
+    if (searchText === '') {
+      searchText = 'ALL';
+    }
+    return this.http.get<Array<IncamContract>>(this.baseUrl + 'incamcontract/search/' + searchText, this.jwt())
+    .pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
+
   addIncamContract(incamContract: IncamContract) {
     return this.http.post(this.baseUrl + 'incamcontract', incamContract, this.jwt()).pipe(
       retry(1),

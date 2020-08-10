@@ -36,6 +36,15 @@ export class CodeService extends Common {
     );
   }
 
+  getCodes(codegroupId: string): Observable<Array<Code>> {
+
+    return this.http.get<Array<Code>>(this.baseUrl + 'code/' + codegroupId, this.jwt())
+    .pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
+
   addCode(code: Code) {
     return this.http.post(this.baseUrl + 'code', code, this.jwt()).pipe(
       retry(1),

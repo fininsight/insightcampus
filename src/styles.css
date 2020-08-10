@@ -7,6 +7,10 @@ body, html{
     font-family: "Nanum Gothic";
 }
 
+nz-form-label.none-label > label::after {
+    content: '';
+}
+
 #content div.ant-table {
     font-size: 12px;
 }

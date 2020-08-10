@@ -44,9 +44,21 @@ export class TeacherService extends Common {
     );
   }
 
-  getTeacher(dataTable: DataTable, teacherSeq: number) : Observable<DataTable> {
+  getTeacher(dataTable: DataTable, teacherSeq: number): Observable<DataTable> {
 
     return this.http.get<DataTable>(this.baseUrl + 'teacher/' + teacherSeq, this.jwt())
+    .pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
+
+  searchTeacher(searchText: string): Observable<Array<Teacher>> {
+
+    if (searchText === '') {
+      searchText = 'ALL';
+    }
+    return this.http.get<Array<Teacher>>(this.baseUrl + 'teacher/search/' + searchText, this.jwt())
     .pipe(
       retry(1),
       catchError(this.errorHandl)

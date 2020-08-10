@@ -14,6 +14,7 @@ import { PageReviewModule } from './page-review/page-review.module';
 import { AuthService } from './core/services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { PageIncamAddfareModule } from './page-incam-addfare/page-incam-addfare.module';
+import { PageIncamContractModule } from './page-incam-contract/page-incam-contract.module';
 import { PageFamilyAddfareModule } from './page-family-addfare/page-family-addfare.module';
 import { PageTeacherModule } from './page-teacher/page-teacher.module';
 
@@ -31,6 +32,7 @@ import { PageTeacherModule } from './page-teacher/page-teacher.module';
     FormsModule,
     PageIncamAddfareModule,
     PageFamilyAddfareModule,
+    PageIncamContractModule,
     PageTeacherModule,
   ],
   providers: [

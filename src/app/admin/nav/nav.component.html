@@ -49,6 +49,7 @@
       </li> 
       <li nz-submenu nzTitle="업무" nzIcon="form" *ngIf="authService.roleCheck(['admin'])">
         <ul class="subment">
+          <li routerLink="/admin/teacher" nz-menu-item>강사관리</li>
           <li routerLink="/admin/incam-contract" nz-menu-item>계약관리</li>
           <li routerLink="/admin/incam-addfare" nz-menu-item>내부정산</li>
         </ul>

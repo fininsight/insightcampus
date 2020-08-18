@@ -74,10 +74,6 @@
       <input id="teacher_seq" nz-input type="text" placeholder="대상자" [(ngModel)]="popupIncamAddfare.teacher_seq"/>
     </div>
     <div>
-      <nz-form-label nzRequired nzFor="original_company">원청사</nz-form-label>
-      <input id="original_company" nz-input type="text" placeholder="원청사" [(ngModel)]="popupIncamAddfare.original_company"/>
-    </div>
-    <div>
         <nz-form-label nzRequired nzFor="class">분반</nz-form-label>
         <input id="class" nz-input type="text" placeholder="분반" [(ngModel)]="popupIncamAddfare.class"/>
     </div>
@@ -89,20 +85,8 @@
         </nz-select>
     </div>      
     <div>
-        <nz-form-label nzRequired nzFor="price">단가</nz-form-label>
-        <nz-input-number id="price" [nzPlaceHolder]="'단가'" [nzStep]="1" [nzMin]="0" [(ngModel)]="popupIncamAddfare.price"  [nzFormatter]="currencyFormatter" [nzParser]="currencyParser"></nz-input-number>
-    </div>
-    <div>
         <nz-form-label nzRequired nzFor="hour">시수</nz-form-label>
         <nz-input-number id="hour" [nzPlaceHolder]="'시수'" [nzStep]="1" [nzMin]="0" [(ngModel)]="popupIncamAddfare.hour"></nz-input-number>
-    </div>
-    <div>
-      <nz-form-label nzRequired nzFor="hour_price">시간당강의료</nz-form-label>
-      <nz-input-number id="hour_price" [nzPlaceHolder]="'시간당강의료'" [nzStep]="1" [nzMin]="0" [(ngModel)]="popupIncamAddfare.hour_price"  [nzFormatter]="currencyFormatter" [nzParser]="currencyParser"></nz-input-number>
-    </div>
-    <div>
-        <nz-form-label nzRequired nzFor="tax">원천세율</nz-form-label>
-        <nz-input-number id="tax" [nzPlaceHolder]="'원천세율'" [nzStep]="0.01" [nzMin]="0.01" [nzMax]="1"[(ngModel)]="popupIncamAddfare.tax"></nz-input-number>
     </div>
     <div>
         <nz-form-label nzRequired nzFor="popupIncomeType">소득타입</nz-form-label>
@@ -110,9 +94,6 @@
           <nz-option nzValue="1" nzLabel="사업소득"></nz-option>
           <nz-option nzValue="2" nzLabel="기타소득"></nz-option>
         </nz-select>
-    </div>
-    <div>
-        <nz-input-number [nzPlaceHolder]="'송금'" [nzStep]="1" value="0" [(ngModel)]="popupIncamAddfare.remit" style="display: none"></nz-input-number>
     </div>
   </div>
   <div class="right">

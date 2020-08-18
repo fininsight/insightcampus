@@ -1,5 +1,7 @@
 export class IncamContract {
     contract_seq: number;
+    teacher_seq: number;
+    name: string;
     class: string;
     original_company: string;
     original_company_nm: string;

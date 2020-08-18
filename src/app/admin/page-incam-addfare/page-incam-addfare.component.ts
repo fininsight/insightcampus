@@ -68,7 +68,6 @@ export class PageIncamAddfareComponent implements OnInit {
               }
 
   ngOnInit() {
-    this.searchTeacher('ALL');
     this.searchContract('ALL');
     this.codeService.getCodes('incom').subscribe(data => {
       data.forEach(item => {
@@ -87,10 +86,10 @@ export class PageIncamAddfareComponent implements OnInit {
 
     if (incomIndex != -1 && contractIndex != -1 && this.popupIncamAddfare.hour > 0) {
       this.calculation.all = this.listOfContract[contractIndex].hour_price * this.popupIncamAddfare.hour;
-      this.calculation.all_tax = this.calculation.all * this.listOfIncom[incomIndex].rate;
+      this.calculation.all_tax =  Math.floor(this.calculation.all * this.listOfIncom[incomIndex].rate / 10) * 10;
       this.calculation.all_deposit = this.calculation.all - this.calculation.all_tax;
       this.calculation.employee_all = this.listOfContract[contractIndex].contract_price * this.popupIncamAddfare.hour;
-      this.calculation.employee_tax = this.calculation.employee_all * this.listOfIncom[incomIndex].rate;
+      this.calculation.employee_tax = Math.floor(this.calculation.employee_all * this.listOfIncom[incomIndex].rate / 10) * 10;
       this.calculation.employee_deposit = this.calculation.employee_all - this.calculation.employee_tax;
       this.calculation.remittance = this.calculation.all_deposit - this.calculation.employee_deposit;
     } else {
@@ -102,6 +101,21 @@ export class PageIncamAddfareComponent implements OnInit {
       this.calculation.employee_deposit = 0;
       this.calculation.remittance = 0;
     }
+  }
+
+  test(data) {
+      const incomIndex = this.listOfIncom.findIndex(item => item.value === data.income_type);
+      const contractIndex = this.listOfContract.findIndex(item => item.value === data.contract_seq);
+
+      const all = this.listOfContract[contractIndex].hour_price * data.hour;
+      const all_tax =  Math.floor(all * this.listOfIncom[incomIndex].rate / 10) * 10;
+      const all_deposit = all - all_tax;
+      const employee_all = this.listOfContract[contractIndex].contract_price * data.hour;
+      const employee_tax = Math.floor(employee_all * this.listOfIncom[incomIndex].rate / 10) * 10;
+      const employee_deposit = employee_all - employee_tax;
+      const remittance = all_deposit - employee_deposit;
+
+      return [employee_deposit, remittance];
   }
 
   getIncamAddfares() {
@@ -191,22 +205,6 @@ export class PageIncamAddfareComponent implements OnInit {
     });
   }
 
-  selectTeacher(value: string): void {
-    this.searchTeacher(value);
-  }
-
-  searchTeacher(value: string) {
-    this.teacherService.searchTeacher(value).subscribe(data => {
-      this.listOfTeacher = [];
-      data.forEach(item => {
-        this.listOfTeacher.push({
-          value: item.teacher_seq,
-          text: item.name
-        });
-      });
-    });
-  }
-
   selectContract(value: string): void {
     this.searchContract(value);
   }
@@ -217,7 +215,7 @@ export class PageIncamAddfareComponent implements OnInit {
       data.forEach(item => {
         this.listOfContract.push({
           value: item.contract_seq,
-          text: item.original_company_nm + ' ' + item.class,
+          text: item.name + ' ' + item.original_company_nm + ' ' + item.class,
           hour_price: item.hour_price,
           hour_incen: item.hour_incen,
           contract_price: item.contract_price

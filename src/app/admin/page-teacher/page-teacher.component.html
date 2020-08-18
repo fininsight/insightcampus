@@ -43,9 +43,9 @@
           }"
           style="cursor: pointer;">
           <td [nzAlign]="'center'">{{ data.name}}</td>
-          <td [nzAlign]="'center'">{{ data.email }}</td>
+          <td [nzAlign]="'left'">{{ data.email }}</td>
           <td [nzAlign]="'center'">{{ data.phone }}</td>
-          <td [nzAlign]="'center'">{{ data.address }}</td>
+          <td [nzAlign]="'left'">{{ data.address }}</td>
         </tr>
       </tbody>
     </nz-table>
@@ -53,7 +53,7 @@
 </div>
   
  <nz-modal [(nzVisible)]="isTeacherAdd"
-            nzTitle="강사관리 추가" 
+            nzTitle="강사관리 추가"  
             (nzOnCancel)="popupCancel()"
             (nzOnOk)="teacherAddOk()"
             nzWidth="550">

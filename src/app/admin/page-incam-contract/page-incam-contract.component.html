@@ -27,11 +27,14 @@
     nzSize="small">
     <thead>
       <tr>
-        <th nzWidth="27%" [nzAlign]="'center'">원청사</th>
-        <th nzWidth="28%" [nzAlign]="'center'">강의명</th>
-        <th nzWidth="15%" [nzAlign]="'center'">시간당단가</th>
-        <th nzWidth="15%" [nzAlign]="'center'">시간당계약금액</th>
-        <th nzWidth="15%" [nzAlign]="'center'">시간당인센티브</th>
+        <th nzWidth="10%" [nzAlign]="'center'">계약서 No.</th>
+        <th nzWidth="10%" [nzAlign]="'center'">강사명</th>
+        <th nzWidth="15%" [nzAlign]="'center'">원청사</th>
+        <th nzWidth="15%" [nzAlign]="'center'">강의명</th>
+        <th nzWidth="10%" [nzAlign]="'center'">시간당금액</th>
+        <th nzWidth="10%" [nzAlign]="'center'">시간당인센티브</th>
+        <th nzWidth="20%" [nzAlign]="'center'">계약기간</th>
+        
       </tr>
     </thead>
     <tbody>
@@ -42,11 +45,14 @@
           'on':this.selectedIncamContract.contract_seq === data.contract_seq
         }"
         style="cursor: pointer;">
+        <td [nzAlign]="'center'">{{ data.contract_start_date.substring(0,5) }} {{ data.contract_seq }}</td>
+        <td [nzAlign]="'center'">{{ data.name }}</td>
         <td [nzAlign]="'center'">{{ data.original_company_nm }}</td>
         <td [nzAlign]="'center'">{{ data.class }}</td>
-        <td [nzAlign]="'center'">{{ data.hour_price | number }}</td>
-        <td [nzAlign]="'center'">{{ data.contract_price | number}}</td>
-        <td [nzAlign]="'center'">{{ data.hour_incen | number}}</td>
+        <td [nzAlign]="'right'">{{ data.hour_price | number }}</td>
+        <td [nzAlign]="'right'">{{ data.hour_incen | number}}</td>
+        <td [nzAlign]="'center'">{{ data.contract_start_date.substring(0,10) }} - {{ data.contract_end_date.substring(0,10) }}</td>
+        
       </tr>
     </tbody>
   </nz-table>
@@ -64,6 +70,12 @@
           <nz-form-label nzRequired>원청사</nz-form-label>
           <nz-select nzShowSearch nzServerSearch nzPlaceHolder="원청사" [(ngModel)]="popupIncamContract.original_company" [nzShowArrow]="false" style="ime-mode: active;">
             <nz-option *ngFor="let o of listOfCooperative" [nzLabel]="o.text" [nzValue]="o.value"> </nz-option>
+          </nz-select>
+        </div>
+        <div>
+          <nz-form-label nzRequired>대상자</nz-form-label>
+          <nz-select nzShowSearch nzServerSearch nzPlaceHolder="대상자" [(ngModel)]="popupIncamContract.teacher_seq" [nzShowArrow]="false" (nzOnSearch)="selectTeacher($event)" style="ime-mode: active;">
+            <nz-option *ngFor="let o of listOfTeacher" [nzLabel]="o.text" [nzValue]="o.value"> </nz-option>
           </nz-select>
         </div>
         <div>
@@ -110,6 +122,12 @@
         <nz-form-label nzRequired>원청사</nz-form-label>
         <nz-select nzShowSearch nzServerSearch nzPlaceHolder="원청사" [(ngModel)]="popupIncamContract.original_company" [nzShowArrow]="false" style="ime-mode: active;">
           <nz-option *ngFor="let o of listOfCooperative" [nzLabel]="o.text" [nzValue]="o.value"> </nz-option>
+        </nz-select>
+      </div>
+      <div>
+        <nz-form-label nzRequired>대상자</nz-form-label>
+        <nz-select nzShowSearch nzServerSearch nzPlaceHolder="대상자" [(ngModel)]="popupIncamContract.teacher_seq" [nzShowArrow]="false" (nzOnSearch)="selectTeacher($event)" style="ime-mode: active;">
+          <nz-option *ngFor="let o of listOfTeacher" [nzLabel]="o.text" [nzValue]="o.value"> </nz-option>
         </nz-select>
       </div>
       <div>

@@ -30,9 +30,9 @@ export class PageIncamContractComponent implements OnInit {
   isIncamContractUpdate = false;
 
   incamContractLoading = true;
+  listOfTeacher: Array<{ value: number; text: string }> = [];
 
   selectedValue = null;
-  teachers = new DataTable();
   confirmModal?: NzModalRef;
 
   listOfCooperative: Array<{ value: string; text: string }> = [];
@@ -57,10 +57,13 @@ export class PageIncamContractComponent implements OnInit {
               private httpClient: HttpClient,
               private teacherService: TeacherService,
               ) {
-                this.incamContract.pageNumber = 1;
-                this.incamContract.size = 10;
-                this.getIncamContract();
-              }
+
+    this.searchTeacher('ALL');
+    this.incamContract.pageNumber = 1;
+    this.incamContract.size = 10;
+    this.getIncamContract();
+
+  }
 
   ngOnInit() {
     this.codeService.getCodes('cooperative').subscribe(data => {
@@ -68,6 +71,22 @@ export class PageIncamContractComponent implements OnInit {
         this.listOfCooperative.push({
           value: item.code_id,
           text: item.code_nm
+        });
+      });
+    });
+  }
+
+  selectTeacher(value: string): void {
+    this.searchTeacher(value);
+  }
+
+  searchTeacher(value: string) {
+    this.teacherService.searchTeacher(value).subscribe(data => {
+      this.listOfTeacher = [];
+      data.forEach(item => {
+        this.listOfTeacher.push({
+          value: item.teacher_seq,
+          text: item.name
         });
       });
     });

@@ -28,11 +28,15 @@
       nzSize="small">
       <thead>
         <tr>
-          <th nzWidth="20%" [nzAlign]="'center'">정산일자</th>
-          <th nzWidth="20%" [nzAlign]="'center'">이름</th>
-          <th nzWidth="20%" [nzAlign]="'center'">원청사</th>
-          <th nzWidth="20%" [nzAlign]="'center'">강의명</th>
-          <th nzWidth="20%" [nzAlign]="'center'">시수</th>
+          <th nzWidth="10%" [nzAlign]="'center'">정산서 No.</th>
+          <th nzWidth="10%" [nzAlign]="'center'">정산일자</th>
+          <th nzWidth="15%" [nzAlign]="'center'">원청사</th>
+          <th nzWidth="15%" [nzAlign]="'center'">강의명</th>
+          <th nzWidth="10%" [nzAlign]="'center'">이름</th>
+          <th nzWidth="10%" [nzAlign]="'center'">정산시수</th>
+          <th nzWidth="10%" [nzAlign]="'center'">소득구분</th>
+          <th nzWidth="10%" [nzAlign]="'center'">실지급액</th>
+          <th nzWidth="10%" [nzAlign]="'center'">소금요청액</th>
         </tr>
       </thead>
       <tbody>
@@ -44,11 +48,15 @@
             'on':this.selectedIncamAddfare.addfare_seq === data.addfare_seq
           }"
           style="cursor: pointer;">
+          <td [nzAlign]="'center'">{{ data.addfare_date.substring(0,5) }}{{ data.addfare_seq }}</td>
           <td [nzAlign]="'center'">{{ data.addfare_date | date:'yyyy/MM/dd' }}</td>
-          <td [nzAlign]="'center'">{{ data.name }}</td>
           <td [nzAlign]="'center'">{{ data.original_company_nm }}</td>
           <td [nzAlign]="'center'">{{ data.class }}</td>
+          <td [nzAlign]="'center'">{{ data.name }}</td>
           <td [nzAlign]="'center'">{{ data.hour }}</td>
+          <td [nzAlign]="'center'">{{ data.income_type_nm }}</td>
+          <td [nzAlign]="'right'">{{ test(data)[0] | number }}</td>
+          <td [nzAlign]="'right'">{{ test(data)[1] | number }}</td>
         </tr>
       </tbody>
     </nz-table>
@@ -65,12 +73,6 @@
           <div>
               <nz-form-label nzRequired>정산일자</nz-form-label>
               <nz-date-picker [nzPlaceHolder]="'정산일자'" [(ngModel)]="popupIncamAddfare.addfare_date" [nzShowToday]=false [nzStyle]="{'width': '300px'}" style="margin-bottom: 5px;"></nz-date-picker>          
-          </div>
-          <div>
-            <nz-form-label nzRequired>대상자</nz-form-label>
-            <nz-select nzShowSearch nzServerSearch nzPlaceHolder="대상자" [(ngModel)]="popupIncamAddfare.teacher_seq" [nzShowArrow]="false" (nzOnSearch)="selectTeacher($event)" style="ime-mode: active;">
-              <nz-option *ngFor="let o of listOfTeacher" [nzLabel]="o.text" [nzValue]="o.value"> </nz-option>
-            </nz-select>
           </div>
           <div>
             <nz-form-label nzRequired>계약</nz-form-label>
@@ -136,12 +138,6 @@
       <div>
           <nz-form-label nzRequired>정산일자</nz-form-label>
           <nz-date-picker [nzPlaceHolder]="'정산일자'" [(ngModel)]="popupIncamAddfare.addfare_date" [nzShowToday]=false [nzStyle]="{'width': '300px'}" style="margin-bottom: 5px;"></nz-date-picker>          
-      </div>
-      <div>
-        <nz-form-label nzRequired>대상자</nz-form-label>
-        <nz-select nzShowSearch nzServerSearch nzPlaceHolder="대상자" [(ngModel)]="popupIncamAddfare.teacher_seq" [nzShowArrow]="false" (nzOnSearch)="selectTeacher($event)" style="ime-mode: active;">
-          <nz-option *ngFor="let o of listOfTeacher" [nzLabel]="o.text" [nzValue]="o.value"> </nz-option>
-        </nz-select>
       </div>
       <div>
         <nz-form-label nzRequired>계약</nz-form-label>

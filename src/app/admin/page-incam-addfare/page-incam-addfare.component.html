@@ -36,7 +36,7 @@
           <th nzWidth="10%" [nzAlign]="'center'">정산시수</th>
           <th nzWidth="10%" [nzAlign]="'center'">소득구분</th>
           <th nzWidth="10%" [nzAlign]="'center'">실지급액</th>
-          <th nzWidth="10%" [nzAlign]="'center'">소금요청액</th>
+          <th nzWidth="10%" [nzAlign]="'center'">송금요청액</th>
         </tr>
       </thead>
       <tbody>
@@ -76,13 +76,14 @@
           </div>
           <div>
             <nz-form-label nzRequired>계약</nz-form-label>
-            <nz-select nzShowSearch nzServerSearch nzPlaceHolder="대상자" [(ngModel)]="popupIncamAddfare.contract_seq" (ngModelChange)="setCalculation($event)" [nzShowArrow]="false" (nzOnSearch)="searchContract($event)" style="ime-mode: active;">
+            <!-- <nz-select nzShowSearch nzServerSearch nzPlaceHolder="대상자" [(ngModel)]="popupIncamAddfare.contract_seq" (ngModelChange)="setCalculation($event)" [nzShowArrow]="false" (nzOnSearch)="searchContract($event)" style="ime-mode: active;"> -->
+            <nz-select nzShowSearch nzPlaceHolder="대상자" [(ngModel)]="popupIncamAddfare.contract_seq" (ngModelChange)="setCalculation($event)" [nzShowArrow]="false" style="ime-mode: active;">
               <nz-option *ngFor="let o of listOfContract" [nzLabel]="o.text" [nzValue]="o.value"> </nz-option>
             </nz-select>
           </div>
           <div>
               <nz-form-label nzRequired>시수</nz-form-label>
-              <nz-input-number [nzPlaceHolder]="'시수'" [nzStep]="1" [nzMin]="0" [(ngModel)]="popupIncamAddfare.hour" (ngModelChange)="setCalculation($event)"></nz-input-number>
+              <nz-input-number [nzPlaceHolder]="'시수'" [nzStep]="0.1" [nzMin]="0" [(ngModel)]="popupIncamAddfare.hour" (ngModelChange)="setCalculation($event)"></nz-input-number>
           </div>
           <div>
               <nz-form-label nzRequired>소득타입</nz-form-label>

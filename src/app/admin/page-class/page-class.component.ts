@@ -34,10 +34,10 @@ export class PageClassComponent implements OnInit {
 
   constructor(private userService: ClassService,
               private modal: NzModalService,
-              private message: NzMessageService) { 
+              private message: NzMessageService) {
                 this.classes.pageNumber = 1;
                 this.classes.size = 10;
-          
+
                 this.getClass();
   }
 

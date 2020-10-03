@@ -29,11 +29,12 @@
       <tr>
         <th nzWidth="10%" [nzAlign]="'center'">계약서 No.</th>
         <th nzWidth="10%" [nzAlign]="'center'">강사명</th>
-        <th nzWidth="15%" [nzAlign]="'center'">원청사</th>
+        <th nzWidth="10%" [nzAlign]="'center'">원청사</th>
         <th nzWidth="15%" [nzAlign]="'center'">강의명</th>
         <th nzWidth="10%" [nzAlign]="'center'">시간당금액</th>
+        <th nzWidth="10%" [nzAlign]="'center'">시간당계약금액</th>
         <th nzWidth="10%" [nzAlign]="'center'">시간당인센티브</th>
-        <th nzWidth="20%" [nzAlign]="'center'">계약기간</th>
+        <th nzWidth="15%" [nzAlign]="'center'">계약기간</th>
         
       </tr>
     </thead>
@@ -50,6 +51,7 @@
         <td [nzAlign]="'center'">{{ data.original_company_nm }}</td>
         <td [nzAlign]="'center'">{{ data.class }}</td>
         <td [nzAlign]="'right'">{{ data.hour_price | number }}</td>
+        <td [nzAlign]="'right'">{{ data.contract_price | number }}</td>
         <td [nzAlign]="'right'">{{ data.hour_incen | number}}</td>
         <td [nzAlign]="'center'">{{ data.contract_start_date.substring(0,10) }} - {{ data.contract_end_date.substring(0,10) }}</td>
         

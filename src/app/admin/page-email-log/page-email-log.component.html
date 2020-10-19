@@ -1,0 +1,94 @@
+<div id="header">
+    <div id="title">
+      <i nz-icon nzType="mail" nzTheme="outline"></i>
+      메일관리
+    </div>
+    <div id="manage">
+      <button nz-button nzType="default" nzShape="circle" (click)="emaillogAdd()"><i title="추가" nz-icon nzType="plus"></i></button>
+      <button nz-button nzType="default" nzShape="circle" (click)="emaillogUpdate()" [disabled]="selectedEmailLog.email_log_seq == undefined"><i title="수정" nz-icon nzType="edit"></i></button>
+      <button nz-button nzType="default" nzShape="circle" (click)="emaillogDelete()" [disabled]="selectedEmailLog.email_log_seq == undefined"><i title="삭제" nz-icon nzType="delete"></i></button>
+    </div>
+  </div>
+  <div id="content">
+    <div>
+      <nz-table
+      #testTable
+      nzShowSizeChanger
+      nzNoResult = "조회된 결과가 없습니다"
+      [nzFrontPagination]="false"
+      [nzData]="emaillogs.data"
+      [nzLoading]="emaillogLoading"
+      [nzTotal]="emaillogs.totalElements"
+      [(nzPageIndex)]="emaillogs.pageNumber"
+      [(nzPageSize)]="emaillogs.size"
+      (nzPageIndexChange)="getEmailLogs()"
+      nzShowSizeChanger="false"
+      nzSize="small">
+      <thead>
+        <tr>
+          <th nzShowSort nzSortKey="subject">메일제목</th>
+          <th nzShowSort nzSortKey="contents">메일내용</th>
+          <th nzShowSort nzSortKey="to">수신자</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of testTable.data"
+          (click)="selectEmailLog(data)"
+          (dblclick)="emaillogUpdate()"
+  
+          [ngClass]="{
+            'on':this.selectedEmailLog.email_log_seq === data.email_log_seq
+          }"
+          style="cursor: pointer;"
+        >
+          <td>{{ data.subject }}</td>
+          <td>{{ data.contents }}</td>
+          <td>{{ data.to }}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+    </div>
+  </div>
+  <nz-modal [(nzVisible)]="isEmailLogAdd"
+            nzTitle="메일추가" 
+            (nzOnCancel)="popupCancel()"
+            (nzOnOk)="emaillogAddOk()"
+            nzWidth="350">
+    <div class="popup-content">
+      <div>
+        <input nz-input type="text" placeholder="메일 제목" [(ngModel)]="popupEmailLog.subject"/>
+      </div>
+      <div>
+        <input nz-input type="text" placeholder="메일 내용" [(ngModel)]="popupEmailLog.contents"/>
+      </div>
+      <div>
+        <input nz-input type="text" placeholder="수신자" [(ngModel)]="popupEmailLog.to"/>
+      </div>
+    </div>
+    <div *nzModalFooter>
+      <button nz-button nzType="default" (click)="popupCancel()">취소</button>
+      <button nz-button nzType="primary" (click)="emaillogAddOk()">등록</button>
+    </div>
+  </nz-modal>
+  
+  <nz-modal [(nzVisible)]="isEmailLogUpdate"
+            nzTitle="메일관리수정" 
+            (nzOnCancel)="popupCancel()"
+            (nzOnOk)="emaillogUpdateOk()"
+            nzWidth="350">
+    <div class="popup-content">
+      <div>
+        <input nz-input type="text" placeholder="메일 제목" [(ngModel)]="popupEmailLog.subject"/>
+      </div>
+      <div>
+        <input nz-input type="text" placeholder="메일 내용" [(ngModel)]="popupEmailLog.contents"/>
+      </div>
+      <div>
+        <input nz-input type="text" placeholder="수신자" [(ngModel)]="popupEmailLog.to"/>
+      </div>
+    </div>
+    <div *nzModalFooter>
+      <button nz-button nzType="default" (click)="popupCancel()">취소</button>
+      <button nz-button nzType="primary" (click)="emaillogUpdateOk()">수정</button>
+    </div>
+  </nz-modal>

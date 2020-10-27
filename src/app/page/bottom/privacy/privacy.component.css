@@ -1,0 +1,58 @@
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+@media (min-width:768px) {
+.container {
+    width: 750px;
+}
+}
+@media (min-width:992px) {
+.container {
+    width: 970px;
+}
+}
+@media (min-width:1200px) {
+.container {
+    width: 1170px;
+}
+}
+
+.entry-title-left{
+    height: 180px;
+    line-height: 185px;
+}
+
+.entry-title{
+    font-size: 25px;
+    font-weight: 400;
+    font-family: 'rtl_demo';
+    text-align: center;
+}
+
+.entry-header{
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.a{
+    height: auto;
+    margin-top: 25px;
+    color: black;
+}
+
+ul{
+    width: auto;
+    height: auto;
+    margin-top: 20px;
+    margin-left: -25px;
+    margin-bottom: -50px;
+}
+
+ul li{
+    height: auto;
+    margin-top: 10px;
+    color: black;
+}

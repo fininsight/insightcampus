@@ -103,6 +103,7 @@ export class PageTeacherComponent implements OnInit {
     this.popupTeacher.upd_dt = now;
     this.popupTeacher.reg_user = this.user_id;
     this.popupTeacher.upd_user = this.user_id;
+    this.popupTeacher.use_yn = 1;
     this.teacherService.addTeacher(this.popupTeacher).subscribe(data => {
       this.getTeachers();
       this.selectedTeacher = new Teacher();

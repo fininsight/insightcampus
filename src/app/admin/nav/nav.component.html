@@ -34,7 +34,9 @@
         </ul>
       </li>
       <li nz-submenu nzTitle="쿠폰관리" nzIcon="tags" *ngIf="authService.roleCheck(['admin'])">
-
+        <ul class="subment">
+          <li routerLink="" nz-menu-item>쿠폰관리</li>
+        </ul>
       </li>
       <li nz-submenu nzTitle="메일관리" nzIcon="mail" *ngIf="authService.roleCheck(['admin'])">
         <ul class="subment">

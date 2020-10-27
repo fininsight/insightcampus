@@ -10,6 +10,9 @@ import { MainComponent } from './main/main.component';
 import { LoginComponent } from './login/login.component';
 import { JoinComponent } from './join/join.component';
 
+import { TermsComponent } from './bottom/terms/terms.component';
+import { PrivacyComponent } from './bottom/privacy/privacy.component';
+
 import { PageRoutes } from './page.routing';
 import { ClassService } from './core/services/class.service';
 
@@ -30,7 +33,9 @@ import { ClassService } from './core/services/class.service';
     MainComponent,
     NavComponent,
     LoginComponent,
-    JoinComponent
+    JoinComponent,
+    TermsComponent,
+    PrivacyComponent
   ]
 })
 export class PageModule { }

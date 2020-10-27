@@ -11,6 +11,7 @@ import { PageIncamAddfareComponent } from './page-incam-addfare/page-incam-addfa
 import { PageFamilyAddfareComponent } from './page-family-addfare/page-family-addfare.component';
 import { PageIncamContractComponent } from './page-incam-contract/page-incam-contract.component';
 import { PageTeacherComponent } from './page-teacher/page-teacher.component';
+import { PageCouponComponent } from './page-coupon/page-coupon.component';
 
 const routes: Routes = [{
   path: '',
@@ -45,7 +46,10 @@ const routes: Routes = [{
   },
   {
       path: 'teacher', component: PageTeacherComponent
-  }
+  },
+  {
+      path: 'coupon', component: PageCouponComponent
+  },
 
 ]}];
 

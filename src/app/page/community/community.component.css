@@ -1,0 +1,19 @@
+#community-content {
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+#community-content-inner {
+  width: 95%;
+}
+
+#community-content-inner > table {
+  width: 100%;
+  text-align: center;
+}
+
+#community-content-inner > table > thead {
+  border-bottom: 2px solid #ccc;
+}

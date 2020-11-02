@@ -10,4 +10,5 @@ export class Teacher {
     ret_dt: Date;
     upd_user: number;
     upd_dt: Date;
+    use_yn: number;
 }

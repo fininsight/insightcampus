@@ -18,6 +18,7 @@ import { PageIncamContractModule } from './page-incam-contract/page-incam-contra
 import { PageFamilyAddfareModule } from './page-family-addfare/page-family-addfare.module';
 import { PageTeacherModule } from './page-teacher/page-teacher.module';
 import { PageCouponModule } from './page-coupon/page-coupon.module';
+import { PageEmailLogModule } from './page-email-log/page-email-log.module';
 
 @NgModule({
   imports: [
@@ -36,6 +37,7 @@ import { PageCouponModule } from './page-coupon/page-coupon.module';
     PageIncamContractModule,
     PageTeacherModule,
     PageCouponModule, // Coupon Module 포함
+    PageEmailLogModule,
   ],
   providers: [
     AuthService

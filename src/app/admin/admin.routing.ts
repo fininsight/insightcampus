@@ -51,6 +51,7 @@ const routes: Routes = [{
   {
       path: 'coupon', component: PageCouponComponent
   },
+  {
       path: 'emaillog', component: PageEmailLogComponent
   }
 ]}];

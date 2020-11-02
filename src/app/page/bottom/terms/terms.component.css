@@ -1,0 +1,42 @@
+.header {
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 50px;
+  color: white;
+  text-align: center;
+
+  background-color: #174052;
+  padding-bottom: 50px;
+  padding-top: 50px;
+  margin-bottom: 30px;
+}
+
+.body{
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: 145px;
+    margin-right: 145px;
+}
+
+p{
+    color: #2E2E2E;
+    margin-bottom: 30px;
+}
+
+.article{
+    font-weight: 800;
+}
+
+@media (max-width: 1000px){
+
+  .header {
+    font-size: 30px;
+    line-height: 30px;
+  }
+
+  .body {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+
+}

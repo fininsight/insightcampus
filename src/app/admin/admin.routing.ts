@@ -12,6 +12,7 @@ import { PageFamilyAddfareComponent } from './page-family-addfare/page-family-ad
 import { PageIncamContractComponent } from './page-incam-contract/page-incam-contract.component';
 import { PageTeacherComponent } from './page-teacher/page-teacher.component';
 import { PageCouponComponent } from './page-coupon/page-coupon.component';
+import { PageFaqComponent } from './page-faq/page-faq.component';
 
 const routes: Routes = [{
   path: '',
@@ -49,6 +50,9 @@ const routes: Routes = [{
   },
   {
       path: 'coupon', component: PageCouponComponent
+  },
+  {
+      path: 'faq', component: PageFaqComponent
   },
 
 ]}];

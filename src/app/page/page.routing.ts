@@ -9,6 +9,7 @@ import { JoinComponent } from './join/join.component';
 //bottom
 import { TermsComponent } from './bottom/terms/terms.component';
 import { PrivacyComponent } from './bottom/privacy/privacy.component';
+import { FaqComponent } from './bottom/faq/faq.component';
 
 const routes: Routes = [{
   path: '',
@@ -34,6 +35,9 @@ const routes: Routes = [{
     },
     {
         path: 'privacy', component: PrivacyComponent
+    },
+    {
+        path: 'faq', component: FaqComponent
     }
   ]
 }];

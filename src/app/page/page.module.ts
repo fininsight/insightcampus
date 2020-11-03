@@ -15,6 +15,8 @@ import { PrivacyComponent } from './bottom/privacy/privacy.component';
 
 import { PageRoutes } from './page.routing';
 import { ClassService } from './core/services/class.service';
+import { RefundComponent } from './bottom/refund/refund.component';
+
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import { ClassService } from './core/services/class.service';
     LoginComponent,
     JoinComponent,
     TermsComponent,
-    PrivacyComponent
+    PrivacyComponent,
+    RefundComponent
   ]
 })
 export class PageModule { }

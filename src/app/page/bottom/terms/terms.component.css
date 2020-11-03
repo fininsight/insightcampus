@@ -12,10 +12,8 @@
 }
 
 .body{
-    padding-left: 15px;
-    padding-right: 15px;
-    margin-left: 145px;
-    margin-right: 145px;
+    margin: 0 auto;
+    width: 1200px;
 }
 
 p{
@@ -32,11 +30,6 @@ p{
   .header {
     font-size: 30px;
     line-height: 30px;
-  }
-
-  .body {
-    margin-left: 15px;
-    margin-right: 15px;
   }
 
 }

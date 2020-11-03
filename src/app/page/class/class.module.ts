@@ -14,7 +14,6 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 
-
 @Pipe({ name: 'safeHtml'})
 export class SafeHtmlPipe implements PipeTransform  {
   constructor(private sanitized: DomSanitizer) {}
@@ -38,6 +37,7 @@ import 'froala-editor/js/third_party/image_tui.min';
 import 'froala-editor/js/third_party/spell_checker.min';
 import 'froala-editor/js/third_party/embedly.min';
 import { importType } from '@angular/compiler/src/output/output_ast';
+import { AboutusComponent } from './aboutus/aboutus.component';
 
 @NgModule({
   imports: [
@@ -57,7 +57,8 @@ import { importType } from '@angular/compiler/src/output/output_ast';
     DetailComponent,
     DetailQnaComponent,
     DetailNoticeComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    AboutusComponent,
   ],
   providers: [
   ]

@@ -1,0 +1,553 @@
+.container{
+    font-family: "Noto Sans", Sans-serif;
+}
+
+h2{
+    font-size: 30px;
+    font-weight: bolder;
+    margin-bottom: 10px;
+    color: black;
+}
+
+.elementor-divider{
+    width: 50px;
+    margin: 0 auto;
+    border: 0.2px solid black;
+}
+
+.campus .elementor-divider{
+    width: 100px;
+    border-color:white ;
+    margin: 0 0;
+}
+
+.campus > div > div {
+    font-size: 20px;
+    color: white;
+}
+
+.about{
+    height: auto;
+    width: auto;
+    position: relative;
+    margin: 0 0 5% 0;
+    background-color: whitesmoke;
+}
+
+.about-text .elementor-divider{
+    margin: 0 0;
+}
+
+.marchine-text{
+    width: auto;
+    position: relative;
+    margin-top: 20px;
+    background-color: whitesmoke;
+}
+
+.marchine-text > div{
+    top: 50px;
+    height: auto;
+    position: relative;
+    margin: 0 auto;
+}
+
+.marchine-text h2{
+    height: 50px;
+    position: relative;
+    text-align: center;
+}
+
+.marchine-text img{
+    height: auto;
+    width: 100%;
+    position: relative;
+    margin: 30px 0;
+}
+
+.benefit-text{
+    top: 30px;
+    height: 250px;
+    width: auto;    
+    margin: 3% 0;
+    position: relative;
+}
+
+.benefit-text h2{
+    text-align: center;
+}
+
+.benefit-text ul{
+    height: auto;
+    margin: 0 auto;
+}
+
+.recommend-text{
+    position: relative;
+    margin-top: 5%;
+}
+
+.recommend-text p{
+    font-size: 14px;
+}
+
+.recommend-text .elementor-divider{
+    width: 70px;
+    margin: 0 0;
+}
+
+.comment{
+    height: 400px;
+    width: 100%;
+    position: relative;
+    margin: 2% auto 10% auto;
+}
+
+.comment h2{
+    position: relative;
+}
+
+.comment > div{
+    height: auto;
+    width: 90%;
+    position: relative;
+    margin: 0 auto;
+}
+
+.comment > div > .elementor-widget-container{
+    height: auto;
+    max-width: 100%;
+    text-align: center;
+    margin-top: 6%;
+}
+
+.comment .comment-content{
+    height: auto;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.comment .elementor-divider{
+    width: 60px;
+    margin: 40px auto;
+}
+
+.elementor-widget-wrap p {
+    font-size: 14px;
+}
+
+.elementor-img-part h2{
+    height: 40px;
+    width: 100%;
+    position: relative;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.elementor-img-part .elementor-divider{
+    height: 0;
+    margin-top: 40px;
+}
+
+.elementor-maps-route{
+    top: 10px;
+    height: 500px;
+    width: 100%;
+    position: relative;
+    margin-top: 10px;
+}
+
+.elementor-maps-route h2{
+    width: auto;
+    margin: 60px auto;
+}
+
+.elementor-maps-route p{
+    margin: -5px auto;
+}
+
+.elementor-maps-route div{
+    text-align: center;
+}
+
+.elementor-maps-route .elementor-widget-container-route{
+    margin-bottom: 40px;
+}
+
+.elementor-maps-route .elementor-divider{
+    height: 0;
+    margin-top: -20px;
+    margin-bottom: 20px;
+    
+}
+
+.elementor-widget-google_maps{
+    height: auto;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.elementor-widget-google_maps iframe {
+    height: 300px;
+    width: 100%;
+}
+
+@media screen and (max-width:768px){
+
+    p{
+        margin: 20px 0;
+        font-size: 14px;
+        font-weight: lighter;
+    }
+
+    .campus{
+        width: auto;
+        height: 100px;
+        position: relative;
+        overflow: hidden;
+        background-image: url("https://insightcampus.co.kr/wp-content/uploads/2018/08/main_bg.jpg");
+        background-repeat: no-repeat;
+        background-size : cover;
+        box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.514);
+    }
+
+    .campus  > div{
+        height: auto;
+        margin-top: 2%;
+        margin-left: 15%;
+    }
+
+    .campus > div > h1 {
+        font-size: 25px;
+        font-weight: bold;
+        color: white;
+    }
+    
+    .about{
+        height: auto;
+        width: auto;
+        position: relative;
+        background-color: whitesmoke;
+    }
+
+    .about > div{
+        height: 850px;
+        width: 100%;
+        margin: 0 auto;
+        background-color: whitesmoke;
+    }
+
+    .about > div > .elementor-image-about > img{
+        height: auto;
+        width: 100%;
+        margin-top: 50px;
+    }
+    
+    .about > div > .about-text{
+        height: auto;
+        width: 90%;
+        margin-top: 40px;
+        margin-left: 5%;
+        margin-bottom: 50px;
+    }
+
+    .fin-text > div{
+        height: auto;
+        width: 90%;
+        margin: 20px auto;
+    }
+
+    .fin-text{
+        height: auto;
+        width: auto;
+        position: relative;
+        margin: 40px 0;
+        background-color: white;
+    }
+
+    .fin-text h2 {
+        text-align: center;
+    }
+
+    .marchine-text{
+        height: 600px;
+    }
+
+    .marchine-text > div{
+        width: 90%;
+    }
+
+    .benefit-text ul{
+        width: 90%;
+    }
+
+    .benefit-text li{
+        margin: 20px 0 20px -20px;
+        color: black;
+    }
+
+    .recommend-text{
+        height: 600px;
+        width: 90%;
+        position: relative;
+        margin: 20px auto;
+    }
+
+    .recommend-text h2{
+        text-align: center;
+    }
+
+    .recommend-text > .elementor-image{
+        height: auto;
+        width: auto;
+        line-height: 300px;
+        text-align: center;
+    }
+
+    .recommend-text img{
+        height: auto;
+        width: 40%;
+        border-radius: 20%;
+    }
+
+    .recommend-text > .elementor-text{
+        height: auto;
+    }
+
+    .recommend-text .elementor-divider{
+        margin: 0 auto;
+    }
+
+    .comment{
+        height: 750px;
+    }
+
+    .comment .elementor-widget-wrap{
+        height: auto;
+        width: 90%;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .elementor-widget-heading{
+        height: 30px;
+        margin: 0 0 -20px 0;
+    }
+    
+    .elementor-img-part{
+        top: auto;
+        height: 1500px;
+        width: 100%;
+        position: relative;
+        margin: 100px 0;
+
+        border: 1px solid transparent;
+    }
+    .elementor-img-part section .elementor-widget-container{
+        height: auto;
+        width: 100%;
+        text-align: center;
+        vertical-align: middle;
+        margin: 25px auto;
+    }
+    
+    .elementor-img-part .img-section > div{
+        height: auto;
+        width: 48%;
+        text-align: center;
+        margin: 20px 1%;
+        float: left;
+    }
+
+    .elementor-img-part img{
+        max-width: 100%;
+        height: auto;
+    }
+
+    .elementor-img-part .img-section{
+        height: 100%;
+        width: 90%;
+        margin: 0 auto;
+    }
+    
+}
+
+@media screen and (min-width:769px){
+
+    p{
+        margin: 40px 0;
+        font-size: 17px;
+        font-weight: lighter;
+    }
+
+    .campus{
+        width: auto;
+        height: 350px;
+        position: relative;
+        overflow: hidden;
+        background-image: url("https://insightcampus.co.kr/wp-content/uploads/2018/08/main_bg.jpg");
+        background-repeat: no-repeat;
+        background-size : cover;
+        box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.514);
+    }
+
+    .campus  > div{
+        height: auto;
+        margin-top: 8%;
+        margin-left: 15%;
+    }
+
+    .campus > div > h1 {
+        font-size: 50px;
+        font-weight: bold;
+        color: white;
+    }    
+
+    .about{
+        height: auto;
+        width: auto;
+        position: relative;
+        background-color: whitesmoke;
+    }
+
+    .about > div{
+        height: 550px;
+        width: 90%;
+        margin: 0 auto;
+        background-color: whitesmoke;
+    }
+    .about > div > .elementor-image-about > img{
+        height: auto;
+        float: left;
+        margin-top: 50px;
+        width: 50%;
+    }
+    
+    .about > div > .about-text{
+        height: auto;
+        float: left;
+        margin-top: 40px;
+        margin-left: 5%;
+        margin-bottom: 50px;
+        width: 40%;
+    }
+
+    .fin-text > div{
+        height: auto;
+        width: 85%;
+        margin: 20px auto;
+    }
+
+    .fin-text{
+        height: auto;
+        width: auto;
+        position: relative;
+        background-color: white;
+        text-align: center;
+    }
+
+    .marchine-text{
+        height: 700px;
+    }
+
+    .marchine-text > div{
+        width: 80%;
+        text-align: center;
+    }
+
+    .benefit-text ul{
+        width: 80%;
+        margin-left: 50px;
+    }
+    
+    .benefit-text li{
+        margin: 20px 0;
+    }
+
+    .recommend-text{
+        height: 300px;
+        width: 80%;
+        margin-left: 15%;
+        margin-bottom: 5%;
+    }
+
+    .recommend-text > div{
+        float: left;
+    }
+
+    .recommend-text > .elementor-image{
+        height: auto;
+        width: 15%;
+        line-height: 300px;
+    }
+
+    .recommend-text img{
+        max-width: 100%;
+        height: auto;
+        border-radius: 50%;
+
+    }
+
+    .recommend-text > .elementor-text{
+        height: auto;
+        width: 75%;
+        margin-left: 50px;
+    }
+
+    .comment{
+        height: 400px;
+        margin-bottom: 10px;
+    }
+
+    .elementor-widget-heading{
+        height: 30px;
+        margin: 0 0 10% 0;
+    }
+
+    .elementor-img-part{
+        height: 400px;
+        width: 100%;
+        position: relative;
+        margin-top: 10%;
+        margin-bottom: 20px;
+    }
+
+    .elementor-widget-wrap{
+        height: auto;
+        max-width: 30%;
+        float: left;
+        margin: 0 1.5%;
+        text-align: center;
+    }
+
+    .elementor-widget-wrap > div{
+        max-width: 100%;
+        height: auto;
+    }
+        
+    .elementor-widget-text-time{
+        height: 20px;
+        margin: -30px 0 0 0;
+    }
+
+    .elementor-img-part section .elementor-widget-container{
+        height: auto;
+        width: 10%;
+        text-align: center;
+        vertical-align: middle;
+        float: left;
+        margin: 0 3.3%;
+    }
+    
+    .elementor-img-part img{
+        max-width: 100%;
+        height: auto;
+    }
+    
+    .elementor-img-part section{
+        height: 50px;
+        width: 100%;
+        margin: 20px auto;
+    }
+
+}

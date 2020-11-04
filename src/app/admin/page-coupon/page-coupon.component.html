@@ -44,8 +44,8 @@
           style="cursor: pointer;">
           <td [nzAlign]="'center'">{{ data.coupon_nm}}</td>
           <td [nzAlign]="'center'">{{ data.type }}</td>
-          <td [nzAlign]="'center'">{{ data.start_date }}</td>
-          <td [nzAlign]="'center'">{{ data.end_date }}</td>
+          <td [nzAlign]="'center'">{{ data.start_date.substring(0,10) }}</td>
+          <td [nzAlign]="'center'">{{ data.end_date.substring(0,10) }}</td>
         </tr>
       </tbody>
     </nz-table>
@@ -68,11 +68,11 @@
      </div>
      <div>
        <nz-form-label>시작일</nz-form-label>
-       <input nz-input type="tel" placeholder="시작일" [(ngModel)]="popupCoupon.start_date" />
+       <nz-date-picker [nzPlaceHolder]="'시작일'" [(ngModel)]="popupCoupon.start_date" [nzShowToday]=false [nzStyle]="{'width': '300px'}" style="margin-bottom: 5px;"></nz-date-picker>
      </div>
      <div>
        <nz-form-label>종료일</nz-form-label>
-       <input nz-input type="text" placeholder="종료일" [(ngModel)]="popupCoupon.end_date" />
+       <nz-date-picker [nzPlaceHolder]="'종료일'" [(ngModel)]="popupCoupon.end_date" [nzShowToday]=false [nzStyle]="{'width': '300px'}" style="margin-bottom: 5px;"></nz-date-picker>
      </div>
 
    </div>
@@ -98,11 +98,11 @@
       </div>
       <div>
         <nz-form-label>시작일</nz-form-label>
-        <input nz-input type="tel" placeholder="시작일" [(ngModel)]="popupCoupon.start_date" />
+        <nz-date-picker [nzPlaceHolder]="'시작일'" [(ngModel)]="popupCoupon.start_date" [nzShowToday]=false [nzStyle]="{'width': '300px'}" style="margin-bottom: 5px;"></nz-date-picker>
       </div>
       <div>
         <nz-form-label>종료일</nz-form-label>
-        <input nz-input type="text" placeholder="종료일" [(ngModel)]="popupCoupon.end_date" />
+        <nz-date-picker [nzPlaceHolder]="'종료일'" [(ngModel)]="popupCoupon.end_date" [nzShowToday]=false [nzStyle]="{'width': '300px'}" style="margin-bottom: 5px;"></nz-date-picker>
       </div>
 
     </div>

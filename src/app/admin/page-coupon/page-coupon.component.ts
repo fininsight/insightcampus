@@ -43,27 +43,12 @@ export class PageCouponComponent implements OnInit {
 
   ngOnInit() {}
 
-
-  loggedInfo() {
-    var userData = this.couponService.getUserId();
-    
-    this.userService.getUsers(this.users).subscribe(data => {
-      this.users = data;
-      data.data.forEach(element => {
-        if(userData['nameid'] === element.user_id) { 
-          this.user_id = element.user_seq;
-        }
-     });
-    });
-  }
-
   getCoupons() {
     this.couponService.getCoupons(this.coupons).subscribe(data => {
       this.coupons = data;
       this.couponLoading = false;
       this.selectedCoupon = new Coupon();
     });
-    this.loggedInfo();
   }
 
   getCoupon() {

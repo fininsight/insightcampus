@@ -35,6 +35,16 @@ export class IncamAddfareService extends Common{
     );
   }
 
+  getFamilyIncamAddfares(dataTable: DataTable): Observable<DataTable> {
+
+    return this.http.get<DataTable>(this.baseUrl + 'incamaddfare/family/' +
+                                    + dataTable.size + '/' + dataTable.pageNumber, this.jwt())
+    .pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
+
   getIncamAddfare(dataTable: DataTable, addfareSeq: number): Observable<DataTable> {
 
     return this.http.get<DataTable>(this.baseUrl + 'incamaddfare/' + addfareSeq, this.jwt())
@@ -70,6 +80,13 @@ export class IncamAddfareService extends Common{
     return this.http.get<DataTable>(this.baseUrl + 'incamaddfare/family/' +
                                     + dataTable.size + '/' + dataTable.pageNumber, this.jwt())
     .pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
+
+  sendAddfare(incamaddfare: IncamAddfare[]) {
+    return this.http.post(this.baseUrl + 'incamaddfare/SendAddfare', incamaddfare, this.jwt()).pipe(
       retry(1),
       catchError(this.errorHandl)
     );

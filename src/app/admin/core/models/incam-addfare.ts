@@ -5,7 +5,10 @@ export class IncamAddfare {
     hour: number;
     addfare_date: Date;
     income_type: string;
+    income: number;
     original_company_nm: string;
     class: string;
     name: string;
+    hour_price: number;
+    contract_price: number;
 }

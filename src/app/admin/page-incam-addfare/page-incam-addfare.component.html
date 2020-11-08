@@ -10,13 +10,14 @@
             <button nz-button nzType="default" nzShape="circle" (click)="incamAddfareAdd()"><i title="추가" nz-icon nzType="plus"></i></button>
             <button nz-button nzType="default" nzShape="circle" (click)="incamAddfareUpdate()" [disabled]="selectedIncamAddfare.addfare_seq == undefined"><i nz-icon nzType="edit"></i></button>
             <button nz-button nzType="default" nzShape="circle" (click)="incamAddfareDelete()" [disabled]="selectedIncamAddfare.addfare_seq == undefined"><i nz-icon nzType="delete"></i></button>
+            <button nz-button nzType="default" nzShape="circle" (click)="sendMail()"><i nz-icon nzType="mail"></i></button>
             <button nz-button nzType="default" nzShape="circle" (click)="incamAddfarePdf()" [disabled]="selectedIncamAddfare.addfare_seq == undefined"><i nz-icon nzType="file-pdf"></i></button>
           </div>
     <nz-table
       #incamAddfareTable
       nzShowSizeChanger
       nzBordered
-      nzNoResult = "조회된 결과가 없습니다"
+      nzNoResult="조회된 결과가 없습니다"
       [nzFrontPagination]="false"
       [nzData]="incamAddfares.data"
       [nzLoading]="incamAddfareLoading"
@@ -28,9 +29,10 @@
       nzSize="small">
       <thead>
         <tr>
+          <th nzWidth="3%" [nzAlign]="'center'"><label nz-checkbox [(ngModel)]="allCheck" (ngModelChange)="allCheckChange()"></label></th>
           <th nzWidth="10%" [nzAlign]="'center'">정산서 No.</th>
-          <th nzWidth="10%" [nzAlign]="'center'">정산일자</th>
-          <th nzWidth="15%" [nzAlign]="'center'">원청사</th>
+          <th nzWidth="9%" [nzAlign]="'center'">정산일자</th>
+          <th nzWidth="12%" [nzAlign]="'center'">원청사</th>
           <th nzWidth="15%" [nzAlign]="'center'">강의명</th>
           <th nzWidth="10%" [nzAlign]="'center'">이름</th>
           <th nzWidth="10%" [nzAlign]="'center'">정산시수</th>
@@ -43,11 +45,11 @@
         <tr *ngFor="let data of incamAddfareTable.data"
           (click)="selectIncamAddfare(data)"
           (dblclick)="incamAddfareUpdate()"
-  
           [ngClass]="{
             'on':this.selectedIncamAddfare.addfare_seq === data.addfare_seq
           }"
           style="cursor: pointer;">
+          <td [nzAlign]="'center'"><label nz-checkbox [(ngModel)]="data.check "></label></td>
           <td [nzAlign]="'center'">{{ data.addfare_date.substring(0,5) }}{{ data.addfare_seq }}</td>
           <td [nzAlign]="'center'">{{ data.addfare_date | date:'yyyy/MM/dd' }}</td>
           <td [nzAlign]="'center'">{{ data.original_company_nm }}</td>
@@ -55,14 +57,13 @@
           <td [nzAlign]="'center'">{{ data.name }}</td>
           <td [nzAlign]="'center'">{{ data.hour }}</td>
           <td [nzAlign]="'center'">{{ data.income_type_nm }}</td>
-          <td [nzAlign]="'right'">{{ test(data)[0] | number }}</td>
-          <td [nzAlign]="'right'">{{ test(data)[1] | number }}</td>
+          <td [nzAlign]="'right'">{{ calculate(data)[0] | number }}</td>
+          <td [nzAlign]="'right'">{{ calculate(data)[1] | number }}</td>
         </tr>
       </tbody>
     </nz-table>
     </div>
 </div>
-  
   <nz-modal [(nzVisible)]="isIncamAddfareAdd"
             nzTitle="내부정산 추가" 
             (nzOnCancel)="popupCancel()"
@@ -87,7 +88,7 @@
           </div>
           <div>
               <nz-form-label nzRequired>소득타입</nz-form-label>
-              <nz-select [nzPlaceHolder]="'소득타입'"  [(ngModel)]="popupIncamAddfare.income_type" (ngModelChange)="setCalculation($event)">
+              <nz-select [nzPlaceHolder]="'소득타입'"  [(ngModel)]="popupIncamAddfare.income_type" (ngModelChange)="changeIncome($event)">
                 <nz-option *ngFor="let o of listOfIncom" [nzLabel]="o.text" [nzValue]="o.value"> </nz-option>
               </nz-select>
           </div>
@@ -152,7 +153,7 @@
       </div>
       <div>
           <nz-form-label nzRequired>소득타입</nz-form-label>
-          <nz-select [nzPlaceHolder]="'소득타입'"  [(ngModel)]="popupIncamAddfare.income_type" (ngModelChange)="setCalculation($event)">
+          <nz-select [nzPlaceHolder]="'소득타입'"  [(ngModel)]="popupIncamAddfare.income_type" (ngModelChange)="changeIncome($event)">
             <nz-option *ngFor="let o of listOfIncom" [nzLabel]="o.text" [nzValue]="o.value"> </nz-option>
           </nz-select>
       </div>
@@ -190,6 +191,51 @@
   </div>
   <div *nzModalFooter>
     <button nz-button nzType="default" (click)="popupCancel()">취소</button>
-    <button nz-button nzType="primary" (click)="incamAddfareUpdateOk()">등록</button>
+    <button nz-button nzType="primary" (click)="incamAddfareUpdateOk()">수정</button>
+  </div>
+</nz-modal>
+
+
+<nz-modal [(nzVisible)]="isSendMail"
+          nzTitle="정산메일발송" 
+          (nzOnCancel)="popupCancel()"
+          (nzOnOk)="isSendMailOk()"
+          nzWidth="1100">
+  <div class="popup-content">
+     <nz-table
+      #checksTable [nzData]="checks"
+      nzNoResult="조회된 결과가 없습니다"
+      nzSize="small">
+      <thead>
+        <tr>
+          <th nzWidth="13%" [nzAlign]="'center'">정산서 No.</th>
+          <th nzWidth="9%" [nzAlign]="'center'">정산일자</th>
+          <th nzWidth="12%" [nzAlign]="'center'">원청사</th>
+          <th nzWidth="15%" [nzAlign]="'center'">강의명</th>
+          <th nzWidth="10%" [nzAlign]="'center'">이름</th>
+          <th nzWidth="10%" [nzAlign]="'center'">정산시수</th>
+          <th nzWidth="10%" [nzAlign]="'center'">소득구분</th>
+          <th nzWidth="10%" [nzAlign]="'center'">실지급액</th>
+          <th nzWidth="10%" [nzAlign]="'center'">송금요청액</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of checksTable.data">
+          <td [nzAlign]="'center'">{{ data.addfare_date.substring(0,5) }}{{ data.addfare_seq }}</td>
+          <td [nzAlign]="'center'">{{ data.addfare_date | date:'yyyy/MM/dd' }}</td>
+          <td [nzAlign]="'center'">{{ data.original_company_nm }}</td>
+          <td [nzAlign]="'center'">{{ data.class }}</td>
+          <td [nzAlign]="'center'">{{ data.name }}</td>
+          <td [nzAlign]="'center'">{{ data.hour }}</td>
+          <td [nzAlign]="'center'">{{ data.income_type_nm }}</td>
+          <td [nzAlign]="'right'">{{ calculate(data)[0] | number }}</td>
+          <td [nzAlign]="'right'">{{ calculate(data)[1] | number }}</td>
+        </tr>
+      </tbody>
+      </nz-table>
+  </div>
+  <div *nzModalFooter>
+    <button nz-button nzType="default" (click)="popupCancel()">취소</button>
+    <button nz-button nzType="primary" (click)="isSendMailOk()">등록</button>
   </div>
 </nz-modal>

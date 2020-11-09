@@ -60,7 +60,7 @@ export class PageIncamContractComponent implements OnInit {
 
     this.searchTeacher('ALL');
     this.incamContract.pageNumber = 1;
-    this.incamContract.size = 10;
+    this.incamContract.size = 30;
     this.getIncamContract();
 
   }

@@ -19,6 +19,7 @@ import { PageFamilyAddfareModule } from './page-family-addfare/page-family-addfa
 import { PageTeacherModule } from './page-teacher/page-teacher.module';
 import { PageCouponModule } from './page-coupon/page-coupon.module';
 import { PageFaqModule } from './page-faq/page-faq.module';
+import { PageEmailLogModule } from './page-email-log/page-email-log.module';
 
 @NgModule({
   imports: [
@@ -38,6 +39,7 @@ import { PageFaqModule } from './page-faq/page-faq.module';
     PageTeacherModule,
     PageCouponModule, // Coupon Module 포함
     PageFaqModule,      // FAQ Module 포함
+    PageEmailLogModule,
   ],
   providers: [
     AuthService

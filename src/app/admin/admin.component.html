@@ -1,4 +1,4 @@
-<ng-container *ngIf="!loggedIn() && name != null">
+<ng-container *ngIf="!loggedIn() && seq != null">
     <div id="login-wrapper">
         <div id="login">
             <nz-input-group>
@@ -14,7 +14,7 @@
         </div>
     </div>
 </ng-container>
-<ng-container *ngIf="!loggedIn() && name == null">
+<ng-container *ngIf="!loggedIn() && seq == null">
     <div id="login-wrapper">
         <div id="login">
             <nz-input-group>

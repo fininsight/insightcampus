@@ -1,10 +1,13 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { IncamAddfareService } from '../core/services/incam-addfare.service';
 import { IncamAddfare } from '../core/models/incam-addfare';
+import { IncamContractService } from '../core/services/incam-contract.service';
+import { CodeService } from '../core/services/code.service';
+import { environment } from 'src/environments/environment';
 import { DataTable } from '../core/models/datatable';
-import { Subscription } from 'rxjs/internal/Subscription';
+import { TeacherService } from '../core/services/teacher.service';
 import en from '@angular/common/locales/en';
 
 @Component({
@@ -14,10 +17,7 @@ import en from '@angular/common/locales/en';
 })
 export class PageFamilyAddfareComponent implements OnInit {
 
-  gubun = [{'gubun_num':1, 'gubun_val': '강사'}, {'gubun_num':2, 'gubun_val': '멘토'}];
-  income_type = [{'income_type_num':1, 'income_type_val': '사업소득'}, {'income_type_num':2, 'income_type_val': '기타소득'}];
-  popupGubun = '';
-  popupIncomeType = '';
+  baseUrl = environment.apiUrl;
 
   incamAddfares = new DataTable();
 
@@ -26,10 +26,29 @@ export class PageFamilyAddfareComponent implements OnInit {
 
   isIncamAddfareAdd = false;
   isIncamAddfareUpdate = false;
+  isSendMail = false;
 
   incamAddfareLoading = true;
+  allCheck = false;
+  checks = [];
 
-  private subscription: Subscription;
+  selectedValue = null;
+  listOfTeacher: Array<{ value: number; text: string }> = [];
+  listOfContract: Array<{ value: number; text: string; hour_price: number, hour_incen: number, contract_price: number }> = [];
+  listOfIncom: Array<{ value: string; text: string, rate: number }> = [];
+
+  teachers = new DataTable();
+  confirmModal?: NzModalRef;
+
+  calculation = {
+      all: 0,
+      all_tax: 0,
+      all_deposit: 0,
+      employee_all: 0,
+      employee_tax: 0,
+      employee_deposit: 0,
+      remittance: 0
+  };
 
   currencyParser = (value: string) => value.replace(/\$\s?|(,*)/g, '');
   currencyFormatter = (value: string) => {
@@ -44,37 +63,38 @@ export class PageFamilyAddfareComponent implements OnInit {
   }
 
   constructor(private incamAddfareService: IncamAddfareService,
+              private incamContractService: IncamContractService,
+              private codeService: CodeService,
               private modal: NzModalService,
               private message: NzMessageService,
+              private teacherService: TeacherService
               ) {
                 this.incamAddfares.pageNumber = 1;
-                this.incamAddfares.size = 10;
+                this.incamAddfares.size = 30;
                 this.getIncamAddfares();
               }
 
   ngOnInit() {
-
   }
 
-  calculation(incamAddfare: IncamAddfare) {
-    return {
-      all: 0, // incamAddfare.price * incamAddfare.hour,
-      all_tax: 0, // incamAddfare.price * incamAddfare.hour * incamAddfare.tax,
-      all_deposit: 0, // incamAddfare.price * incamAddfare.hour - (incamAddfare.price * incamAddfare.hour * incamAddfare.tax),
-      employee_all: 0, // incamAddfare.hour_price * incamAddfare.hour,
-      employee_tax: 0, // incamAddfare.hour_price * incamAddfare.hour * incamAddfare.tax,
-      employee_deposit: 0, // (incamAddfare.hour_price * incamAddfare.hour) - 
-        // (incamAddfare.hour_price * incamAddfare.hour * incamAddfare.tax),
-      remittance: 0, //(incamAddfare.price * incamAddfare.hour - (incamAddfare.price * incamAddfare.hour * incamAddfare.tax)) -
-                  //((incamAddfare.hour_price * incamAddfare.hour) - (incamAddfare.hour_price * incamAddfare.hour * incamAddfare.tax))
-    };
+  calculate(data) {
+    const all = data.hour_price * data.hour;
+    const all_tax =  Math.floor(all * data.income / 10) * 10;
+    const all_deposit = all - all_tax;
+    const employee_all = data.contract_price * data.hour;
+    const employee_tax = Math.floor(employee_all * data.income / 10) * 10;
+    const employee_deposit = employee_all - employee_tax;
+    const remittance = all_deposit - employee_deposit;
+
+    return [employee_deposit, remittance];
   }
 
   getIncamAddfares() {
-    this.incamAddfareService.getFamilyIncamAddfare(this.incamAddfares).subscribe(data => {
+    this.incamAddfareService.getFamilyIncamAddfares(this.incamAddfares).subscribe(data => {
       this.incamAddfares = data;
       this.incamAddfareLoading = false;
       this.selectedIncamAddfare = new IncamAddfare();
+
     });
   }
 
@@ -82,24 +102,18 @@ export class PageFamilyAddfareComponent implements OnInit {
     this.selectedIncamAddfare = param;
   }
 
-  incamAddfareUpdate() {
-    this.popupIncamAddfare = new IncamAddfare();
-    this.popupIncamAddfare.addfare_seq = this.selectedIncamAddfare.addfare_seq;
-    this.popupIncamAddfare.addfare_date = this.selectedIncamAddfare.addfare_date;
-    this.popupIncamAddfare.teacher_seq = this.selectedIncamAddfare.teacher_seq;
-    this.popupIncamAddfare.class = this.selectedIncamAddfare.class;
-    this.popupIncamAddfare.hour = this.selectedIncamAddfare.hour;
-    this.popupIncamAddfare.income_type = this.selectedIncamAddfare.income_type;
-    this.isIncamAddfareUpdate = true;
-    this.popupIncomeType = this.selectedIncamAddfare.income_type.toString();
-  }
-
-  popupCancel(): void {
-    this.isIncamAddfareUpdate = false;
-  }
-
   incamAddfarePdf() {
-    this.message.create('sucess', '준비중입니다.');
+    const pdfLink = this.baseUrl + 'pdf/';
+    this.confirmModal = this.modal.confirm({
+      nzTitle: '정산내용 PDF 다운로드',
+      nzContent: '선택하신 내용을 PDF로 다운로드하시겠습니까?',
+      nzOnOk: () => {
+        location.assign(pdfLink + this.selectedIncamAddfare.addfare_seq);
+      },
+      nzOnCancel: () => {
+        this.confirmModal.destroy();
+      }
+    });
   }
 
 }

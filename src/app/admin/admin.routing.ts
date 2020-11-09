@@ -13,6 +13,7 @@ import { PageIncamContractComponent } from './page-incam-contract/page-incam-con
 import { PageTeacherComponent } from './page-teacher/page-teacher.component';
 import { PageCouponComponent } from './page-coupon/page-coupon.component';
 import { PageFaqComponent } from './page-faq/page-faq.component';
+import { PageEmailLogComponent } from './page-email-log/page-email-log.component';
 
 const routes: Routes = [{
   path: '',
@@ -54,7 +55,9 @@ const routes: Routes = [{
   {
       path: 'faq', component: PageFaqComponent
   },
-
+  {
+      path: 'emaillog', component: PageEmailLogComponent
+  }
 ]}];
 
 export const AdminRoutes = RouterModule.forChild(routes);

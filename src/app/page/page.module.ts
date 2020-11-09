@@ -16,6 +16,8 @@ import { FaqComponent } from './bottom/faq/faq.component';
 
 import { PageRoutes } from './page.routing';
 import { ClassService } from './core/services/class.service';
+import { RefundComponent } from './bottom/refund/refund.component';
+
 
 @NgModule({
   imports: [
@@ -36,6 +38,7 @@ import { ClassService } from './core/services/class.service';
     JoinComponent,
     TermsComponent,
     PrivacyComponent,
+    RefundComponent
     FaqComponent,
   ]
 })

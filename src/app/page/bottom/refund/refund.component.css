@@ -1,0 +1,115 @@
+@media (min-width:768px) {
+    .container {
+        width: 750px;
+}
+}
+@media (min-width:992px) {
+    .container {
+        width: 970px;
+    }
+}
+@media (min-width:1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 13px;
+    color: black;
+}
+
+.entry-title-left{
+    height: 180px;
+    line-height: 185px;
+}
+
+.entry-title{
+    font-size: 25px;
+    font-weight: 400;
+    font-family: 'rtl_demo';
+    text-align: center;
+}
+
+.entry-header{
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.post_type_exist>p{
+    margin: 30px 0;
+}
+
+.table > thead, .table > tbody{
+    height: auto;
+    color: black;
+}
+
+table {
+    background-color: transparent;
+}
+
+th {
+    text-align: left;
+  }
+
+.table {
+width: 100%;
+max-width: 100%;
+margin-bottom: 20px;
+}
+.table>tbody>tr>td,.table>tbody>tr>th,.table>tfoot>tr>td,.table>tfoot>tr>th,.table>thead>tr>td,.table>thead>tr>th {
+padding: 8px;
+line-height: 1.42857143;
+vertical-align: middle;
+border-top: 1px solid #ddd;
+}
+.table>thead>tr>th {
+vertical-align: bottom;
+border-bottom: 2px solid #ddd;
+}
+.table>tbody+tbody {
+border-top: 2px solid #ddd;
+}
+.table-condensed>tbody>tr>td,.table-condensed>tbody>tr>th,.table-condensed>tfoot>tr>td,.table-condensed>tfoot>tr>th,.table-condensed>thead>tr>td,.table-condensed>thead>tr>th {
+padding: 5px;
+}
+.table-bordered {
+border: 1px solid #ddd;
+}
+.table-bordered>tbody>tr>td,.table-bordered>tbody>tr>th,.table-bordered>tfoot>tr>td,.table-bordered>tfoot>tr>th,.table-bordered>thead>tr>td,.table-bordered>thead>tr>th {
+border: 1px solid #ddd;
+}
+.table-bordered>thead>tr>td,.table-bordered>thead>tr>th {
+border-bottom-width: 2px;
+}
+.table-striped>tbody>tr:nth-of-type(odd) {
+background-color: #f9f9f9;
+}
+.table-hover>tbody>tr:hover {
+background-color: #f5f5f5;
+}
+table col[class*=col-] {
+position: static;
+display: table-column;
+float: none;
+}
+table td[class*=col-],table th[class*=col-] {
+position: static;
+display: table-cell;
+float: none;
+}
+
+.table-responsive {
+min-height: .01%;
+overflow-x: auto;
+}
+
+.table{
+    background-color: #fff;
+    border: 1px solid #ddd;
+}

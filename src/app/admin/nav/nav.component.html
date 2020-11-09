@@ -40,6 +40,7 @@
       </li>
       <li nz-submenu nzTitle="메일관리" nzIcon="mail" *ngIf="authService.roleCheck(['admin'])">
         <ul class="subment">
+          <li routerLink="" nz-menu-item>메일이력</li>
           <li routerLink="/admin/emaillog" nz-menu-item>메일관리</li>
         </ul>
       </li>
@@ -57,7 +58,12 @@
           <li routerLink="/admin/incam-contract" nz-menu-item>계약관리</li>
           <li routerLink="/admin/incam-addfare" nz-menu-item>내부정산</li>
         </ul>
-      </li>      
+      </li>
+      <li nz-submenu nzTitle="FAQ" nzIcon="question" *ngIf="authService.roleCheck(['admin'])">
+        <ul class="subment">
+          <li routerLink="/admin/faq" nz-menu-item>FAQ</li>
+        </ul>
+      </li>
       <li nz-menu-item nzIcon="setting" (click)="logout()">로그아웃</li>      
     </ul>
   </div>

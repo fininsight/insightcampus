@@ -9,6 +9,7 @@
     <app-nav></app-nav>
 </div>
 <router-outlet id="article"></router-outlet>
+<router-outlet (activate)="onActivate($event)"></router-outlet>
 <div id="bottom">
     <div class="wrapper">
         <div class="grid">
@@ -66,7 +67,7 @@
                         <li routerLink="/privacy">개인정보처리방침</li>
                         <li routerLink="/refund">환불 규정</li>
                         <li>이메일 무단 수집거부</li>
-                        <li>FAQ</li>
+                        <li routerLink="/faq">FAQ</li>
                     </ul>
                 </div>
             </aside>

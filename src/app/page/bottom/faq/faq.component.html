@@ -1,0 +1,25 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+</head>
+
+<body>
+
+  <div class="header">FAQ</div>
+
+  <div class="body">
+
+    <div class="faq" *ngFor="let data of faqs.data; let i = index">
+      <div class="question" (click)="dropDown(i)" [ngClass]="{'activate': (nowIndex == i) && (isActivate)}">
+        <i class="fas fa-plus" [hidden]="(nowIndex == i) && (isActivate)"></i>
+        <i class="fas fa-minus" [hidden]="(nowIndex != i) || (!isActivate)"></i>{{ data.faq_nm }}
+      </div>
+      <div class="answer" [@slideInOut]="(nowIndex == i) && (isActivate)">{{ data.content }}</div>
+    </div>
+
+  </div>
+
+</body>
+
+</html>

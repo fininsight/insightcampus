@@ -5,6 +5,7 @@ import { IncamAddfareService } from '../core/services/incam-addfare.service';
 import { IncamAddfare } from '../core/models/incam-addfare';
 import { IncamContractService } from '../core/services/incam-contract.service';
 import { CodeService } from '../core/services/code.service';
+import { environment } from 'src/environments/environment';
 import { DataTable } from '../core/models/datatable';
 import { TeacherService } from '../core/services/teacher.service';
 
@@ -15,6 +16,8 @@ import { TeacherService } from '../core/services/teacher.service';
 })
 export class PageIncamAddfareComponent implements OnInit {
 
+  baseUrl = environment.apiUrl;
+
   incamAddfares = new DataTable();
 
   selectedIncamAddfare: IncamAddfare = new IncamAddfare();
@@ -22,8 +25,11 @@ export class PageIncamAddfareComponent implements OnInit {
 
   isIncamAddfareAdd = false;
   isIncamAddfareUpdate = false;
+  isSendMail = false;
 
   incamAddfareLoading = true;
+  allCheck = false;
+  checks = [];
 
   selectedValue = null;
   listOfTeacher: Array<{ value: number; text: string }> = [];
@@ -62,10 +68,10 @@ export class PageIncamAddfareComponent implements OnInit {
               private message: NzMessageService,
               private teacherService: TeacherService
               ) {
-                this.incamAddfares.pageNumber = 1;
-                this.incamAddfares.size = 10;
-                this.getIncamAddfares();
-              }
+      this.incamAddfares.pageNumber = 1;
+      this.incamAddfares.size = 30;
+      this.getIncamAddfares();
+  }
 
   ngOnInit() {
     this.searchContract('ALL');
@@ -80,16 +86,20 @@ export class PageIncamAddfareComponent implements OnInit {
     });
   }
 
+  changeIncome(event) {
+    this.popupIncamAddfare.income = this.listOfIncom.filter(f => f.value === event)[0].rate;
+    this.setCalculation(event);
+  }
+
   setCalculation(value: string) {
-    const incomIndex = this.listOfIncom.findIndex(item => item.value === this.popupIncamAddfare.income_type);
     const contractIndex = this.listOfContract.findIndex(item => item.value === this.popupIncamAddfare.contract_seq);
 
-    if (incomIndex != -1 && contractIndex != -1 && this.popupIncamAddfare.hour > 0) {
-      this.calculation.all = this.listOfContract[contractIndex].hour_price * this.popupIncamAddfare.hour;
-      this.calculation.all_tax =  Math.floor(this.calculation.all * this.listOfIncom[incomIndex].rate / 10) * 10;
+    if (contractIndex !== -1 && this.popupIncamAddfare.hour > 0) {
+      this.calculation.all = this.popupIncamAddfare.hour_price * this.popupIncamAddfare.hour;
+      this.calculation.all_tax =  Math.floor(this.calculation.all * this.popupIncamAddfare.income / 10) * 10;
       this.calculation.all_deposit = this.calculation.all - this.calculation.all_tax;
-      this.calculation.employee_all = this.listOfContract[contractIndex].contract_price * this.popupIncamAddfare.hour;
-      this.calculation.employee_tax = Math.floor(this.calculation.employee_all * this.listOfIncom[incomIndex].rate / 10) * 10;
+      this.calculation.employee_all = this.popupIncamAddfare.contract_price * this.popupIncamAddfare.hour;
+      this.calculation.employee_tax = Math.floor(this.calculation.employee_all * this.popupIncamAddfare.income / 10) * 10;
       this.calculation.employee_deposit = this.calculation.employee_all - this.calculation.employee_tax;
       this.calculation.remittance = this.calculation.all_deposit - this.calculation.employee_deposit;
     } else {
@@ -103,26 +113,52 @@ export class PageIncamAddfareComponent implements OnInit {
     }
   }
 
-  test(data) {
-      const incomIndex = this.listOfIncom.findIndex(item => item.value === data.income_type);
+  calculate(data) {
       const contractIndex = this.listOfContract.findIndex(item => item.value === data.contract_seq);
 
       const all = this.listOfContract[contractIndex].hour_price * data.hour;
-      const all_tax =  Math.floor(all * this.listOfIncom[incomIndex].rate / 10) * 10;
+      const all_tax =  Math.floor(all * data.income / 10) * 10;
       const all_deposit = all - all_tax;
       const employee_all = this.listOfContract[contractIndex].contract_price * data.hour;
-      const employee_tax = Math.floor(employee_all * this.listOfIncom[incomIndex].rate / 10) * 10;
+      const employee_tax = Math.floor(employee_all * data.income / 10) * 10;
       const employee_deposit = employee_all - employee_tax;
       const remittance = all_deposit - employee_deposit;
 
       return [employee_deposit, remittance];
   }
 
+  sendMail() {
+    this.checks = this.incamAddfares.data.filter(v => (v.check));
+    this.isSendMail = true;
+  }
+
+  isSendMailOk() {
+    this.incamAddfareService.sendAddfare(this.checks).subscribe(data => {
+      this.message.create('success', '전송이 완료되었습니다.');
+      this.isSendMail = false;
+    });
+  }
+
+  allCheckChange() {
+    this.incamAddfares.data = this.incamAddfares.data.map(v => {
+      v.check = this.allCheck;
+      return v;
+    });
+  }
+
   getIncamAddfares() {
     this.incamAddfareService.getIncamAddfares(this.incamAddfares).subscribe(data => {
+      console.log(data);
+
+      data.data = data.data.map(v => {
+        v.check = false;
+        return v;
+      });
+
       this.incamAddfares = data;
       this.incamAddfareLoading = false;
       this.selectedIncamAddfare = new IncamAddfare();
+
     });
   }
 
@@ -173,6 +209,7 @@ export class PageIncamAddfareComponent implements OnInit {
   popupCancel(): void {
     this.isIncamAddfareAdd = false;
     this.isIncamAddfareUpdate = false;
+    this.isSendMail = false;
   }
 
   incamAddfareDelete() {
@@ -192,7 +229,7 @@ export class PageIncamAddfareComponent implements OnInit {
   }
 
   incamAddfarePdf() {
-    const pdfLink = 'http://localhost:5000/api/pdf/';
+    const pdfLink = this.baseUrl + 'pdf/';
     this.confirmModal = this.modal.confirm({
       nzTitle: '정산내용 PDF 다운로드',
       nzContent: '선택하신 내용을 PDF로 다운로드하시겠습니까?',

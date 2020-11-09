@@ -25,109 +25,35 @@
     nzSize="small">
     <thead>
       <tr>
-        <th nzWidth="10%" [nzAlign]="'center'">번호</th>
+        <th nzWidth="11%" [nzAlign]="'center'">정산서 No.</th>
         <th nzWidth="10%" [nzAlign]="'center'">정산일자</th>
-        <th nzWidth="10%" [nzAlign]="'center'">원청사</th>
-        <th nzWidth="10%" [nzAlign]="'center'">구분</th>
-        <th nzWidth="11%" [nzAlign]="'center'">이름</th>
-        <th nzWidth="10%" [nzAlign]="'center'">소득타입</th>
+        <th nzWidth="13%" [nzAlign]="'center'">원청사</th>
+        <th nzWidth="15%" [nzAlign]="'center'">강의명</th>
+        <th nzWidth="10%" [nzAlign]="'center'">이름</th>
+        <th nzWidth="10%" [nzAlign]="'center'">정산시수</th>
+        <th nzWidth="10%" [nzAlign]="'center'">소득구분</th>
         <th nzWidth="10%" [nzAlign]="'center'">실지급액</th>
-        <th nzWidth="10%" [nzAlign]="'center'">송금액</th>
-        <th nzWidth="10%" [nzAlign]="'center'">송금여부</th>
+        <th nzWidth="10%" [nzAlign]="'center'">송금요청액</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let data of incamAddfareTable.data"
         (click)="selectIncamAddfare(data)"
-        (dblclick)="incamAddfareUpdate()"
-
         [ngClass]="{
           'on':this.selectedIncamAddfare.addfare_seq === data.addfare_seq
         }"
         style="cursor: pointer;">
-        <td [nzAlign]="'center'">{{ data.addfare_seq }}</td>
-        <td [nzAlign]="'center'">{{ data.addfare_date | date:'yyyy/MM/dd' }}</td>
-        <td [nzAlign]="'center'">{{ data.original_company }}</td>
-        <td [nzAlign]="'center'">{{ gubun[data.gubun-1].gubun_val }}</td>
-        <td [nzAlign]="'center'">{{ data.teacher_seq }}</td>
-        <td [nzAlign]="'center'">{{ income_type[data.income_type-1].income_type_val }}</td>
-        <td [nzAlign]="'right'">{{ calculation(data)['employee_deposit'] | number }}</td>
-        <td [nzAlign]="'right'">{{ calculation(data)['remittance'] | number }}</td>
-        <td [nzAlign]="'center'">{{ data.remit }}</td>
+          <td [nzAlign]="'center'">{{ data.addfare_date.substring(0,5) }}{{ data.addfare_seq }}</td>
+          <td [nzAlign]="'center'">{{ data.addfare_date | date:'yyyy/MM/dd' }}</td>
+          <td [nzAlign]="'center'">{{ data.original_company_nm }}</td>
+          <td [nzAlign]="'center'">{{ data.class }}</td>
+          <td [nzAlign]="'center'">{{ data.name }}</td>
+          <td [nzAlign]="'center'">{{ data.hour }}</td>
+          <td [nzAlign]="'center'">{{ data.income_type_nm }}</td>
+          <td [nzAlign]="'right'">{{ calculate(data)[0] | number }}</td>
+          <td [nzAlign]="'right'">{{ calculate(data)[1] | number }}</td>
       </tr>
     </tbody>
   </nz-table>
   </div>
 </div>
-<nz-modal [(nzVisible)]="isIncamAddfareUpdate"
-        nzTitle="내부정산수정" 
-        (nzOnCancel)="popupCancel()"
-        nzWidth="870">
-<div class="popup-content">
-  <div class="left">
-    <div>
-      <nz-form-label nzRequired nzFor="addfare_date">정산일자</nz-form-label>
-      <nz-date-picker id="addfare_date" [nzPlaceHolder]="'정산일자'" [(ngModel)]="popupIncamAddfare.addfare_date" [nzShowToday]=false [nzStyle]="{'width': '300px'}" style="margin-bottom: 5px;"></nz-date-picker>          
-    </div>
-    <div>
-      <nz-form-label nzRequired nzFor="teacher_seq">대상자</nz-form-label>
-      <input id="teacher_seq" nz-input type="text" placeholder="대상자" [(ngModel)]="popupIncamAddfare.teacher_seq"/>
-    </div>
-    <div>
-        <nz-form-label nzRequired nzFor="class">분반</nz-form-label>
-        <input id="class" nz-input type="text" placeholder="분반" [(ngModel)]="popupIncamAddfare.class"/>
-    </div>
-    <div>
-        <nz-form-label nzRequired nzFor="popupGubun">구분</nz-form-label>
-        <nz-select id="popupGubun" [nzPlaceHolder]="'구분'" [(ngModel)]="popupGubun">  
-          <nz-option nzValue="1" nzLabel="강사"></nz-option>
-          <nz-option nzValue="2" nzLabel="멘토"></nz-option>
-        </nz-select>
-    </div>      
-    <div>
-        <nz-form-label nzRequired nzFor="hour">시수</nz-form-label>
-        <nz-input-number id="hour" [nzPlaceHolder]="'시수'" [nzStep]="1" [nzMin]="0" [(ngModel)]="popupIncamAddfare.hour"></nz-input-number>
-    </div>
-    <div>
-        <nz-form-label nzRequired nzFor="popupIncomeType">소득타입</nz-form-label>
-        <nz-select id="popupIncomeType" [nzPlaceHolder]="'소득타입'"  [(ngModel)]="popupIncomeType">  
-          <nz-option nzValue="1" nzLabel="사업소득"></nz-option>
-          <nz-option nzValue="2" nzLabel="기타소득"></nz-option>
-        </nz-select>
-    </div>
-  </div>
-  <div class="right">
-    <div>
-      <nz-form-label>총금액</nz-form-label>
-      <nz-input-number [nzFormatter]="currencyFormatter" [(ngModel)]="calculation(popupIncamAddfare)['all']" [nzParser]="currencyParser" disabled></nz-input-number>
-    </div>
-    <div>
-      <nz-form-label>총원천세</nz-form-label>
-      <nz-input-number [nzFormatter]="currencyFormatter" [(ngModel)]="calculation(popupIncamAddfare)['all_tax']" [nzParser]="currencyParser" disabled></nz-input-number>
-    </div>
-    <div>
-      <nz-form-label>총입금액</nz-form-label>
-      <nz-input-number [nzFormatter]="currencyFormatter" [(ngModel)]="calculation(popupIncamAddfare)['all_deposit']" [nzParser]="currencyParser" disabled></nz-input-number>
-    </div>
-    <div>
-      <nz-form-label>강사강의료</nz-form-label>
-      <nz-input-number [nzFormatter]="currencyFormatter" [(ngModel)]="calculation(popupIncamAddfare)['employee_all']" [nzParser]="currencyParser" disabled></nz-input-number>
-    </div>
-    <div>
-      <nz-form-label>원천세</nz-form-label>
-      <nz-input-number [nzFormatter]="currencyFormatter" [(ngModel)]="calculation(popupIncamAddfare)['employee_tax']" [nzParser]="currencyParser" disabled></nz-input-number>
-    </div>
-    <div>
-      <nz-form-label>실지급액</nz-form-label>
-      <nz-input-number [nzFormatter]="currencyFormatter" [(ngModel)]="calculation(popupIncamAddfare)['employee_deposit']" [nzParser]="currencyParser" disabled></nz-input-number>
-    </div>
-    <div>
-      <nz-form-label>송금액</nz-form-label>
-      <nz-input-number [nzFormatter]="currencyFormatter" [(ngModel)]="calculation(popupIncamAddfare)['remittance']" [nzParser]="currencyParser" disabled></nz-input-number>
-    </div>
-  </div>
-</div>
-<div *nzModalFooter>
-  <button nz-button nzType="default" (click)="popupCancel()">취소</button>
-</div>
-</nz-modal>

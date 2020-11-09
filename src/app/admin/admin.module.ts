@@ -17,6 +17,8 @@ import { PageIncamAddfareModule } from './page-incam-addfare/page-incam-addfare.
 import { PageIncamContractModule } from './page-incam-contract/page-incam-contract.module';
 import { PageFamilyAddfareModule } from './page-family-addfare/page-family-addfare.module';
 import { PageTeacherModule } from './page-teacher/page-teacher.module';
+import { PageCouponModule } from './page-coupon/page-coupon.module';
+import { PageFaqModule } from './page-faq/page-faq.module';
 import { PageEmailLogModule } from './page-email-log/page-email-log.module';
 
 @NgModule({
@@ -35,6 +37,8 @@ import { PageEmailLogModule } from './page-email-log/page-email-log.module';
     PageFamilyAddfareModule,
     PageIncamContractModule,
     PageTeacherModule,
+    PageCouponModule, // Coupon Module 포함
+    PageFaqModule,      // FAQ Module 포함
     PageEmailLogModule,
   ],
   providers: [

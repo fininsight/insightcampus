@@ -12,11 +12,11 @@ import { JoinComponent } from './join/join.component';
 
 import { TermsComponent } from './bottom/terms/terms.component';
 import { PrivacyComponent } from './bottom/privacy/privacy.component';
+import { FaqComponent } from './bottom/faq/faq.component';
 
 import { PageRoutes } from './page.routing';
 import { ClassService } from './core/services/class.service';
 import { RefundComponent } from './bottom/refund/refund.component';
-
 
 
 @NgModule({
@@ -25,7 +25,7 @@ import { RefundComponent } from './bottom/refund/refund.component';
     ClassModule,
     NgZorroAntdModule,
     FormsModule,
-    PageRoutes
+    PageRoutes,
   ],
   providers: [
     ClassService
@@ -39,6 +39,7 @@ import { RefundComponent } from './bottom/refund/refund.component';
     TermsComponent,
     PrivacyComponent,
     RefundComponent
+    FaqComponent,
   ]
 })
 export class PageModule { }

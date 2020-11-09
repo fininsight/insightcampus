@@ -13,6 +13,8 @@ import { AboutusComponent } from './class/aboutus/aboutus.component';
 import { TermsComponent } from './bottom/terms/terms.component';
 import { PrivacyComponent } from './bottom/privacy/privacy.component';
 import { RefundComponent } from './bottom/refund/refund.component';;
+import { FaqComponent } from './bottom/faq/faq.component';
+
 const routes: Routes = [{
   path: '',
   component: PageComponent,
@@ -43,6 +45,9 @@ const routes: Routes = [{
     },
     {
         path: 'aboutus', component: AboutusComponent
+    },
+    {
+        path: 'faq', component: FaqComponent
     }
   ]
 }];

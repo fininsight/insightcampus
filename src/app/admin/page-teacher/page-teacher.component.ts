@@ -40,7 +40,7 @@ export class PageTeacherComponent implements OnInit {
     private route: ActivatedRoute) 
     { 
       this.teachers.pageNumber = 1;
-      this.teachers.size = 10;
+      this.teachers.size = 30;
       this.getTeachers();
       
     }

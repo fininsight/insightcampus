@@ -17,13 +17,20 @@ export class AdminComponent implements OnInit {
     user_pw: ''
   };
 
-  name = null;
+  seq = null;
+  password = null;
 
   constructor(private authService: AuthService,
               private route: ActivatedRoute) {
 
-    this.name = this.route.snapshot.queryParamMap.get('name');
-    this.user.user_id = this.name;
+    this.seq = this.route.snapshot.queryParamMap.get('seq');
+    this.password = this.route.snapshot.queryParamMap.get('password');
+
+    if (this.seq !== null) {
+      this.user.user_id = this.seq;
+      this.user.user_pw = this.password;
+      this.familyLogin();
+    }
 
   }
 

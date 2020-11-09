@@ -38,7 +38,7 @@ import { RefundComponent } from './bottom/refund/refund.component';
     JoinComponent,
     TermsComponent,
     PrivacyComponent,
-    RefundComponent
+    RefundComponent,
     FaqComponent,
   ]
 })

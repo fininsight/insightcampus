@@ -4,13 +4,11 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { FaqService } from '../../core/services/faq.service';
 import { Faq } from '../../core/models/faq';
 import { DataTable } from '../../core/models/datatable';
-import { SlideInOutAnimation } from './faq.animations';
 
 @Component({
   selector: 'app-faq',
   templateUrl: './faq.component.html',
   styleUrls: ['./faq.component.css'],
-  animations: [SlideInOutAnimation]
 })
 export class FaqComponent implements OnInit {
 

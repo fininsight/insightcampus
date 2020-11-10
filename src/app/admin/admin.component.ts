@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './core/services/auth.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from './core/models/user';
 
 @Component({
@@ -21,7 +21,8 @@ export class AdminComponent implements OnInit {
   password = null;
 
   constructor(private authService: AuthService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private router: Router)   {
 
     this.seq = this.route.snapshot.queryParamMap.get('seq');
     this.password = this.route.snapshot.queryParamMap.get('password');
@@ -57,6 +58,8 @@ export class AdminComponent implements OnInit {
     this.authService.login(this.user).subscribe(data => {
       this.user.user_id = '';
       this.user.user_pw = '';
+
+      this.router.navigate(['/root/child/child']);
     }, error => {
     });
   }
@@ -65,6 +68,7 @@ export class AdminComponent implements OnInit {
     this.authService.familyLogin(this.user).subscribe(data => {
       this.user.user_id = '';
       this.user.user_pw = '';
+      this.router.navigate(['/admin/family-addfare']);
     }, error => {
     });
   }

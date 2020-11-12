@@ -3,74 +3,64 @@
     <i nz-icon nzType="user" nzTheme="outline"></i>
     회원관리
   </div>
-  <div id="manage">
-    <button nz-button nzType="default" nzShape="circle" (click)="userAdd()"><i title="추가" nz-icon nzType="plus"></i></button>
-    <button nz-button nzType="default" nzShape="circle" (click)="userUpdate()" [disabled]="selectedUser.user_seq == undefined"><i title="수정" nz-icon nzType="edit"></i></button>
-    <button nz-button nzType="default" nzShape="circle" (click)="userDelete()" [disabled]="selectedUser.user_seq == undefined"><i title="삭제" nz-icon nzType="delete"></i></button>
-  </div>
 </div>
-<div id="content">
-  <div>
-    <nz-table
-    #testTable
-    nzShowSizeChanger
-    nzNoResult = "조회된 결과가 없습니다"
-    [nzFrontPagination]="false"
-    [nzData]="users.data"
-    [nzLoading]="userLoading"
-    [nzTotal]="users.totalElements"
-    [(nzPageIndex)]="users.pageNumber"
-    [(nzPageSize)]="users.size"
-    (nzPageIndexChange)="getUser()"
-    nzShowSizeChanger="false"
-    nzSize="small">
-    <thead (nzSortChange)="sort($event)" nzSingleSort>
-      <tr>
-        <th nzShowSort nzSortKey="user_id">아이디</th>
-        <th nzShowSort nzSortKey="user_pw">비밀번호</th>
-        <th nzShowSort nzSortKey="name">이름</th>
-        <th nzShowSort nzSortKey="email"><span>이메일</span></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let data of testTable.data"
-        (click)="selectUser(data)"
-        (dblclick)="userUpdate()"
 
-        [ngClass]="{
+<div id="content">
+  <div id="main-table">
+    <div class="table-menu">
+    <button nz-button nzType="default" nzShape="circle" (click)="userAdd()"><i title="추가" nz-icon
+        nzType="plus"></i></button>
+    <button nz-button nzType="default" nzShape="circle" (click)="userUpdate()"
+      [disabled]="selectedUser.user_seq == undefined"><i title="수정" nz-icon nzType="edit"></i></button>
+    <button nz-button nzType="default" nzShape="circle" (click)="userDelete()"
+      [disabled]="selectedUser.user_seq == undefined"><i title="삭제" nz-icon nzType="delete"></i></button>
+    </div>
+      <nz-table #testTable nzShowSizeChanger nzBordered nzNoResult="조회된 결과가 없습니다" [nzFrontPagination]="false"
+        [nzData]="users.data" [nzLoading]="userLoading" [nzTotal]="users.totalPages * users.size"
+        [(nzPageIndex)]="users.pageNumber" [(nzPageSize)]="users.size" (nzPageIndexChange)="getUser()"
+        nzShowSizeChanger="false" nzSize="small">
+        <thead (nzSortChange)="sort($event)" nzSingleSort>
+          <tr>
+            <th nzWidth="10%" [nzAlign]="'center'">아이디</th>
+            <th nzWidth="40%" [nzAlign]="'center'">비밀번호</th>
+            <th nzWidth="10%" [nzAlign]="'center'">이름</th>
+            <th nzWidth="40%" [nzAlign]="'center'">이메일</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of testTable.data" (click)="selectUser(data)" (dblclick)="userUpdate()" [ngClass]="{
           'on':this.selectedUser.user_seq === data.user_seq
-        }"
-        style="cursor: pointer;"
-      >
-        <td>{{ data.user_id }}</td>
-        <td>{{ data.user_pw }}</td>
-        <td>{{ data.name }}</td>
-        <td>{{ data.email }}</td>
-      </tr>
-    </tbody>
-  </nz-table>
+        }" style="cursor: pointer;">
+            <td [nzAlign]="'center'">{{ data.user_id }}</td>
+            <td [nzAlign]="'center'">{{ data.user_pw }}</td>
+            <td [nzAlign]="'center'">{{ data.name }}</td>
+            <td [nzAlign]="'center'">{{ data.email }}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
   </div>
-</div>
-<nz-modal [(nzVisible)]="isUserAdd"
-          nzTitle="사용자추가" 
-          (nzOnCancel)="popupCancel()"
-          (nzOnOk)="userAddOk()"
-          nzWidth="350">
+<nz-modal [(nzVisible)]="isUserAdd" nzTitle="사용자추가" (nzOnCancel)="popupCancel()" (nzOnOk)="userAddOk()" nzWidth="550">
   <div class="popup-content">
     <div>
-      <input nz-input type="text" placeholder="사용자 ID" [(ngModel)]="popupUser.user_id"/>
+      <nz-form-label>사용자 ID</nz-form-label>
+      <input nz-input type="text" placeholder="사용자 ID" [(ngModel)]="popupUser.user_id" />
     </div>
     <div>
-      <input nz-input type="text" placeholder="사용자 PW" [(ngModel)]="popupUser.user_pw"/>
+      <nz-form-label>사용자 PW</nz-form-label>
+      <input nz-input type="text" placeholder="사용자 PW" [(ngModel)]="popupUser.user_pw" />
     </div>
     <div>
-      <input nz-input type="text" placeholder="이름" [(ngModel)]="popupUser.name"/>
+      <nz-form-label>이름</nz-form-label>
+      <input nz-input type="text" placeholder="이름" [(ngModel)]="popupUser.name" />
     </div>
     <div>
-      <input nz-input type="text" placeholder="이메일" [(ngModel)]="popupUser.email"/>
+      <nz-form-label>이메일</nz-form-label>
+      <input nz-input type="text" placeholder="이메일" [(ngModel)]="popupUser.email" />
     </div>
     <div>
-      <input nz-input type="text" placeholder="상태" [(ngModel)]="popupUser.status"/>
+      <nz-form-label>상태</nz-form-label>
+      <input nz-input type="text" placeholder="상태" [(ngModel)]="popupUser.status" />
     </div>
   </div>
   <div *nzModalFooter>
@@ -79,26 +69,28 @@
   </div>
 </nz-modal>
 
-<nz-modal [(nzVisible)]="isUserUpdate"
-          nzTitle="사용자수정" 
-          (nzOnCancel)="popupCancel()"
-          (nzOnOk)="userUpdateOk()"
-          nzWidth="350">
+<nz-modal [(nzVisible)]="isUserUpdate" nzTitle="사용자수정" (nzOnCancel)="popupCancel()" (nzOnOk)="userUpdateOk()"
+  nzWidth="550">
   <div class="popup-content">
     <div>
-      <input nz-input type="text" placeholder="사용자 ID" [(ngModel)]="popupUser.user_id" disabled/>
+      <nz-form-label>사용자 ID</nz-form-label>
+      <input nz-input type="text" placeholder="사용자 ID" [(ngModel)]="popupUser.user_id" disabled />
     </div>
     <div>
-      <input nz-input type="text" placeholder="사용자 PW" [(ngModel)]="popupUser.user_pw"/>
+      <nz-form-label>사용자 PW</nz-form-label>
+      <input nz-input type="text" placeholder="사용자 PW" [(ngModel)]="popupUser.user_pw" />
     </div>
     <div>
-      <input nz-input type="text" placeholder="이름" [(ngModel)]="popupUser.name"/>
+      <nz-form-label>이름</nz-form-label>
+      <input nz-input type="text" placeholder="이름" [(ngModel)]="popupUser.name" />
     </div>
     <div>
-      <input nz-input type="text" placeholder="이메일" [(ngModel)]="popupUser.email"/>
+      <nz-form-label>이메일</nz-form-label>
+      <input nz-input type="text" placeholder="이메일" [(ngModel)]="popupUser.email" />
     </div>
     <div>
-      <input nz-input type="text" placeholder="상태" [(ngModel)]="popupUser.status"/>
+      <nz-form-label>상태</nz-form-label>
+      <input nz-input type="text" placeholder="상태" [(ngModel)]="popupUser.status" />
     </div>
   </div>
   <div *nzModalFooter>

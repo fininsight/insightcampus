@@ -15,7 +15,7 @@
         <i class="fas fa-plus" [hidden]="(nowIndex == i) && (isActivate)"></i>
         <i class="fas fa-minus" [hidden]="(nowIndex != i) || (!isActivate)"></i>{{ data.faq_nm }}
       </div>
-      <div class="answer" [@slideInOut]="(nowIndex == i) && (isActivate)">{{ data.content }}</div>
+      <div class="answer" [hidden]="(nowIndex != i) || (!isActivate)">{{ data.content }}</div>
     </div>
 
   </div>

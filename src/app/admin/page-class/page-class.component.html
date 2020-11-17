@@ -3,17 +3,20 @@
     <i nz-icon nzType="user" nzTheme="outline"></i>
     강의관리
   </div>
-  <div id="manage">
-    <button nz-button nzType="default" nzShape="circle" (click)="classAdd()"><i title="추가" nz-icon nzType="plus"></i></button>
-    <button nz-button nzType="default" nzShape="circle" (click)="classUpdate()" [disabled]="selectedClass.class_seq == undefined"><i title="수정" nz-icon nzType="edit"></i></button>
-    <button nz-button nzType="default" nzShape="circle" (click)="classDelete()" [disabled]="selectedClass.class_seq == undefined"><i title="삭제" nz-icon nzType="delete"></i></button>
-  </div>
 </div>
 <div id="content">
+  <div id="main-table">
+    <div class="table-menu">
+      <button nz-button nzType="default" nzShape="circle" (click)="classAdd()"><i title="추가" nz-icon nzType="plus"></i></button>
+      <button nz-button nzType="default" nzShape="circle" (click)="classUpdate()" [disabled]="selectedClass.class_seq == undefined"><i title="수정" nz-icon nzType="edit"></i></button>
+      <button nz-button nzType="default" nzShape="circle" (click)="classDelete()" [disabled]="selectedClass.class_seq == undefined"><i title="삭제" nz-icon nzType="delete"></i></button>
+    </div>
+
   <div id="main-table">
     <nz-table
     #testTable
     nzShowSizeChanger
+    nzBordered
     nzNoResult = "조회된 결과가 없습니다"
     [nzFrontPagination]="false"
     [nzData]="classes.data"
@@ -26,12 +29,12 @@
     nzSize="small">
     <thead (nzSortChange)="sort($event)" nzSingleSort>
       <tr>
-        <th nzShowSort nzSortKey="class_nm">수업</th>
-        <th nzShowSort nzSortKey="teacher">강사</th>
-        <th nzShowSort nzSortKey="duration">기간</th>
-        <th nzShowSort nzSortKey="duration_nm">기간이름</th>
-        <th nzShowSort nzSortKey="price">가격</th>
-        <th nzShowSort nzSortKey="real_price"><span>실제가격</span></th>
+        <th nzWidth="10%" [nzAlign]="'center'">수업</th>
+        <th nzWidth="10%" [nzAlign]="'center'">강사</th>
+        <th nzWidth="10%" [nzAlign]="'center'">기간</th>
+        <th nzWidth="30%" [nzAlign]="'center'">기간이름</th>
+        <th nzWidth="20%" [nzAlign]="'center'">가격</th>
+        <th nzWidth="20%" [nzAlign]="'center'">실제가격</th>
       </tr>
     </thead>
     <tbody>
@@ -44,37 +47,43 @@
         }"
         style="cursor: pointer;"
       >
-        <td>{{ data.class_nm }}</td>
-        <td>{{ data.teacher }}</td>
-        <td>{{ data.duration }}</td>
-        <td>{{ data.duration_nm }}</td>
-        <td>{{ data.price }}</td>
-        <td>{{ data.real_price }}</td>
+        <td [nzAlign]="'center'">{{ data.class_nm }}</td>
+        <td [nzAlign]="'center'">{{ data.teacher }}</td>
+        <td [nzAlign]="'center'">{{ data.duration }}</td>
+        <td [nzAlign]="'center'">{{ data.duration_nm }}</td>
+        <td [nzAlign]="'center'">{{ data.price }}</td>
+        <td [nzAlign]="'center'">{{ data.real_price }}</td>
       </tr>
     </tbody>
   </nz-table>
   </div>
+</div>
 </div>
 
 <nz-modal [(nzVisible)]="isClassAdd"
           nzTitle="수업추가" 
           (nzOnCancel)="popupCancel()"
           (nzOnOk)="classAddOk()"
-          nzWidth="350">
+          nzWidth="550">
   <div class="popup-content">
     <div>
+      <nz-form-label nzRequired>수업 이름</nz-form-label>
       <input nz-input type="text" placeholder="수업 이름" [(ngModel)]="popupClass.class_nm"/>
     </div>
     <div>
+      <nz-form-label nzRequired>기간</nz-form-label>
       <input nz-input type="text" placeholder="기간" [(ngModel)]="popupClass.duration"/>
     </div>
     <div>
+      <nz-form-label nzRequired>기간이름</nz-form-label>
       <input nz-input type="text" placeholder="기간이름" [(ngModel)]="popupClass.duration_nm"/>
     </div>
     <div>
+      <nz-form-label nzRequired>가격</nz-form-label>
       <input nz-input type="text" placeholder="가격" [(ngModel)]="popupClass.price"/>
     </div>
     <div>
+      <nz-form-label nzRequired>실제가격</nz-form-label>
       <input nz-input type="text" placeholder="실제가격" [(ngModel)]="popupClass.real_price"/>
     </div>
   </div>
@@ -91,18 +100,23 @@
           nzWidth="350">
   <div class="popup-content">
     <div>
+      <nz-form-label nzRequired>수업 이름</nz-form-label>
       <input nz-input type="text" placeholder="수업 이름" [(ngModel)]="popupClass.class_nm"/>
     </div>
     <div>
+      <nz-form-label nzRequired>기간</nz-form-label>
       <input nz-input type="text" placeholder="기간" [(ngModel)]="popupClass.duration"/>
     </div>
     <div>
+      <nz-form-label nzRequired>기간이름</nz-form-label>
       <input nz-input type="text" placeholder="기간이름" [(ngModel)]="popupClass.duration_nm"/>
     </div>
     <div>
+      <nz-form-label nzRequired>가격</nz-form-label>
       <input nz-input type="text" placeholder="가격" [(ngModel)]="popupClass.price"/>
     </div>
     <div>
+      <nz-form-label nzRequired>실제가격</nz-form-label>
       <input nz-input type="text" placeholder="실제가격" [(ngModel)]="popupClass.real_price"/>
     </div>
   </div>

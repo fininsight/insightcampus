@@ -14,6 +14,7 @@ import { PageTeacherComponent } from './page-teacher/page-teacher.component';
 import { PageCouponComponent } from './page-coupon/page-coupon.component';
 import { PageFaqComponent } from './page-faq/page-faq.component';
 import { PageEmailLogComponent } from './page-email-log/page-email-log.component';
+import { PageWpboardNoticeComponent } from './page-wpboard-notice/page-wpboard-notice.component';
 
 const routes: Routes = [{
   path: '',
@@ -57,7 +58,10 @@ const routes: Routes = [{
   },
   {
       path: 'emaillog', component: PageEmailLogComponent
-  }
+  },
+  {
+      path: 'wpboard-notice', component: PageWpboardNoticeComponent
+  },
 ]}];
 
 export const AdminRoutes = RouterModule.forChild(routes);

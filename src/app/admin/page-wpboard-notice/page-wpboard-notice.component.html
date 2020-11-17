@@ -1,0 +1,116 @@
+<div id="header">
+    <div id="title">
+      <i nz-icon nzType="dashboard" nzTheme="outline"></i>
+      워드 프레스 최신글 연동
+    </div>
+</div>
+
+<div id="content">
+
+  <div id="main-table">
+    <nz-table #wpboardnoticeTable
+              nzShowSizeChanger
+              nzBordered
+              nzNoResult="조회된 결과가 없습니다"
+              [nzFrontPagination]="false"
+              [nzData]="wpboardnotices.data"
+              [nzLoading]="wpboardnoticeLoading"
+              [nzTotal]="wpboardnotices.totalPages * wpboardnotices.size"
+              [(nzPageIndex)]="wpboardnotices.pageNumber"
+              [(nzPageSize)]="wpboardnotices.size"
+              (nzPageIndexChange)="getWpboardNotices()"
+              nzShowSizeChanger="false"
+              nzSize="small">
+      <thead>
+        <tr>
+          <th nzWidth="35%" [nzAlign]="'center'">Title</th>
+          <th nzWidth="20%" [nzAlign]="'center'">Category1</th>
+          <th nzWidth="20%" [nzAlign]="'center'">Category2</th>
+          <th nzWidth="25%" [nzAlign]="'center'">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of wpboardnoticeTable.data"
+            style="cursor: pointer;">
+          <td [nzAlign]="'center'">{{ data.title }}</td>
+          <td [nzAlign]="'center'">{{ data.category1 }}</td>
+          <td [nzAlign]="'center'">{{ data.category2 }}</td>
+          <td [nzAlign]="'center'">{{ data.date }}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+
+  <div id="right-table">
+
+    <span id="right-table1">
+      <nz-table #wpboardnoticelibraryTable
+                nzShowSizeChanger
+                nzBordered
+                nzNoResult="조회된 결과가 없습니다"
+                [nzFrontPagination]="false"
+                [nzData]="wpboardnoticelibrarys.data"
+                [nzLoading]="wpboardnoticelibraryLoading"
+                [nzTotal]="wpboardnoticelibrarys.totalPages * wpboardnoticelibrarys.size"
+                [(nzPageIndex)]="wpboardnoticelibrarys.pageNumber"
+                [(nzPageSize)]="wpboardnoticelibrarys.size"
+                (nzPageIndexChange)="getWpboardNoticeLibrarys()"
+                nzShowSizeChanger="false"
+                nzSize="small">
+        <thead>
+          <tr>
+            <th nzWidth="35%" [nzAlign]="'center'">Title</th>
+            <th nzWidth="20%" [nzAlign]="'center'">Category1</th>
+            <th nzWidth="20%" [nzAlign]="'center'">Category2</th>
+            <th nzWidth="25%" [nzAlign]="'center'">Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of wpboardnoticelibraryTable.data"
+              style="cursor: pointer;">
+            <td [nzAlign]="'center'">{{ data.title }}</td>
+            <td [nzAlign]="'center'">{{ data.category1 }}</td>
+            <td [nzAlign]="'center'">{{ data.category2 }}</td>
+            <td [nzAlign]="'center'">{{ data.date }}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </span>
+
+    <span id="right-table2">
+      <nz-table #wpboardnoticereviewTable
+                nzShowSizeChanger
+                nzBordered
+                nzNoResult="조회된 결과가 없습니다"
+                [nzFrontPagination]="false"
+                [nzData]="wpboardnoticereviews.data"
+                [nzLoading]="wpboardnoticereviewLoading"
+                [nzTotal]="wpboardnoticereviews.totalPages * wpboardnoticereviews.size"
+                [(nzPageIndex)]="wpboardnoticereviews.pageNumber"
+                [(nzPageSize)]="wpboardnoticereviews.size"
+                (nzPageIndexChange)="getWpboardNoticeReviews()"
+                nzShowSizeChanger="false"
+                nzSize="small">
+        <thead>
+          <tr>
+            <th nzWidth="35%" [nzAlign]="'center'">Title</th>
+            <th nzWidth="20%" [nzAlign]="'center'">Category1</th>
+            <th nzWidth="20%" [nzAlign]="'center'">Category2</th>
+            <th nzWidth="25%" [nzAlign]="'center'">Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of wpboardnoticereviewTable.data"
+              style="cursor: pointer;">
+            <td [nzAlign]="'center'">{{ data.title }}</td>
+            <td [nzAlign]="'center'">{{ data.category1 }}</td>
+            <td [nzAlign]="'center'">{{ data.category2 }}</td>
+            <td [nzAlign]="'center'">{{ data.date }}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </span>
+
+  </div>
+
+</div>

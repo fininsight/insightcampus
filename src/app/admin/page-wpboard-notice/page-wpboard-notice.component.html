@@ -5,8 +5,13 @@
     </div>
 </div>
 
-<div id="content">
+  <div class="table-menu">
+    <button nz-button nzType="default" (click)="moveLibrarys()">자료실로이동</button>
+    <button nz-button nzType="default" (click)="moveReviews()">수강생후기로이동</button>
+    <button nz-button nzType="danger" (click)="deleteNotice()">최근글제외하기</button>
+  </div>
 
+<div id="content">
   <div id="main-table">
     <nz-table #wpboardnoticeTable
               nzShowSizeChanger
@@ -31,7 +36,11 @@
       </thead>
       <tbody>
         <tr *ngFor="let data of wpboardnoticeTable.data"
-            style="cursor: pointer;">
+            (click)="selectLeftGrid(data)"
+            style="cursor: pointer;"
+            [ngClass]="{
+            'on':this.left_uid === data.uid
+            }">
           <td [nzAlign]="'center'">{{ data.title }}</td>
           <td [nzAlign]="'center'">{{ data.category1 }}</td>
           <td [nzAlign]="'center'">{{ data.category2 }}</td>
@@ -67,7 +76,11 @@
         </thead>
         <tbody>
           <tr *ngFor="let data of wpboardnoticelibraryTable.data"
-              style="cursor: pointer;">
+              (click)="selectRightGrid(data)"
+              style="cursor: pointer;"
+              [ngClass]="{
+              'on':this.right_uid === data.uid
+              }">
             <td [nzAlign]="'center'">{{ data.title }}</td>
             <td [nzAlign]="'center'">{{ data.category1 }}</td>
             <td [nzAlign]="'center'">{{ data.category2 }}</td>
@@ -101,7 +114,11 @@
         </thead>
         <tbody>
           <tr *ngFor="let data of wpboardnoticereviewTable.data"
-              style="cursor: pointer;">
+              (click)="selectRightGrid(data)"
+              style="cursor: pointer;"
+              [ngClass]="{
+              'on':this.right_uid=== data.uid
+              }">
             <td [nzAlign]="'center'">{{ data.title }}</td>
             <td [nzAlign]="'center'">{{ data.category1 }}</td>
             <td [nzAlign]="'center'">{{ data.category2 }}</td>

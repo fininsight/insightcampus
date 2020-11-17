@@ -24,7 +24,7 @@ export class WpboardNoticeService extends Common {
   };
 
   constructor(private http: HttpClient,
-    private jwtHelper: JwtHelperService) {
+              private jwtHelper: JwtHelperService) {
     super();
    }
 
@@ -96,4 +96,19 @@ export class WpboardNoticeService extends Common {
     );
   }
 
+  updateWpboardNotice(uid: string, category: string) {
+    return this.http.put(this.baseUrl + 'wpboardnotice/' + uid + '/' + category, null, this.jwt())
+    .pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
+
+  initWpboardNotice(uid: string) {
+    return this.http.put(this.baseUrl + 'wpboardnotice/init/' + uid, null, this.jwt())
+    .pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
 }

@@ -16,8 +16,9 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./page-wpboard-notice.component.css']
 })
 export class PageWpboardNoticeComponent implements OnInit {
-  users = new DataTable();
-  user_id;
+
+  left_uid = null;
+  right_uid = null;
 
   wpboardnotices = new DataTable();
   wpboardnoticelibrarys = new DataTable();
@@ -28,13 +29,9 @@ export class PageWpboardNoticeComponent implements OnInit {
   wpboardnoticereviewLoading = true;
 
   constructor(private wpboardnoticeService: WpboardNoticeService,
-    private authService: AuthService,
-    private userService: UserService,
-    private modal: NzModalService,
-    private message: NzMessageService,
-    public datepipe: DatePipe,
-    private route: ActivatedRoute) 
-    {
+              private userService: UserService,
+              private message: NzMessageService,
+              public datepipe: DatePipe) {
       this.wpboardnotices.pageNumber = 1;
       this.wpboardnotices.size = 10;
       this.wpboardnoticelibrarys.pageNumber = 1;
@@ -49,42 +46,73 @@ export class PageWpboardNoticeComponent implements OnInit {
 
   ngOnInit() {}
 
-
-  loggedInfo() {
-    var userData = this.wpboardnoticeService.getUserId();
-    
-    this.userService.getUsers(this.users).subscribe(data => {
-      this.users = data;
-      data.data.forEach(element => {
-        if(userData['nameid'] === element.user_id) { 
-          this.user_id = element.user_seq;
-        }
-     });
-    });
-  }
-
   getWpboardNotices() {
     this.wpboardnoticeService.getWpboardNotices(this.wpboardnotices).subscribe(data => {
       this.wpboardnotices = data;
       this.wpboardnoticeLoading = false;
+      this.left_uid = null;
     });
-    this.loggedInfo();
   }
 
   getWpboardNoticeLibrarys() {
     this.wpboardnoticeService.getWpboardNoticeLibrarys(this.wpboardnoticelibrarys).subscribe(data => {
       this.wpboardnoticelibrarys = data;
       this.wpboardnoticelibraryLoading = false;
+      this.right_uid = null;
     });
-    this.loggedInfo();
   }
 
   getWpboardNoticeReviews() {
     this.wpboardnoticeService.getWpboardNoticeReviews(this.wpboardnoticereviews).subscribe(data => {
       this.wpboardnoticereviews = data;
       this.wpboardnoticereviewLoading = false;
+      this.right_uid = null;
     });
-    this.loggedInfo();
   }
 
+  selectRightGrid(param) {
+    console.log(param.uid)
+    this.right_uid = param.uid;
+  }
+
+  selectLeftGrid(param) {
+    this.left_uid = param.uid;
+  }
+
+  moveLibrarys() {
+    if (this.left_uid === null) {
+      this.message.create('error', '왼쪽 그리드를 선택해주세요.');
+    } else {
+      this.wpboardnoticeService.updateWpboardNotice(this.left_uid, '자료실').subscribe(data => {
+        this.getWpboardNotices();
+        this.getWpboardNoticeLibrarys();
+        this.message.create('success', '이동이 완료되었습니다.');
+      });
+    }
+  }
+
+  moveReviews() {
+    if (this.left_uid === null) {
+      this.message.create('error', '왼쪽 그리드를 선택해주세요.');
+    } else {
+      this.wpboardnoticeService.updateWpboardNotice(this.left_uid, '수강생후기').subscribe(data => {
+        this.getWpboardNotices();
+        this.getWpboardNoticeReviews();
+        this.message.create('success', '이동이 완료되었습니다.');
+      });
+    }
+  }
+
+  deleteNotice() {
+    if (this.right_uid === null) {
+      this.message.create('error', '오른쪽 그리드를 선택해주세요.');
+    } else {
+      this.wpboardnoticeService.initWpboardNotice(this.right_uid).subscribe(data => {
+        this.getWpboardNotices();
+        this.getWpboardNoticeLibrarys();
+        this.getWpboardNoticeReviews();
+        this.message.create('success', '최신글에서 제외가 완료되었습니다.');
+      });
+    }
+  }
 }

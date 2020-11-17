@@ -32,7 +32,7 @@ nz-form-label {
     color: black;
 }
 
-/*.table-menu {
+.table-menu {
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -43,6 +43,11 @@ nz-form-label {
     margin-left: 5px;
 }
 
+tr.on td {
+    background-color: #e3f8ff;
+}
+
+/*
 .popup-content input{
     width: 300px;
     margin-bottom: 5px;

@@ -58,8 +58,6 @@ export class AdminComponent implements OnInit {
     this.authService.login(this.user).subscribe(data => {
       this.user.user_id = '';
       this.user.user_pw = '';
-
-      this.router.navigate(['/root/child/child']);
     }, error => {
     });
   }

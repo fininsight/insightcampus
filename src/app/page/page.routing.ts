@@ -6,6 +6,7 @@ import { DetailComponent } from './class/detail/detail.component';
 import { LoginComponent } from './login/login.component';
 import { JoinComponent } from './join/join.component';
 import { CommunityComponent } from './community/community.component';
+import { BoardComponent } from './community/board/board.component';
 
 //bottom
 import { TermsComponent } from './bottom/terms/terms.component';
@@ -32,6 +33,9 @@ const routes: Routes = [{
     },
     {
         path: 'community', component: CommunityComponent
+    },
+    {
+        path: 'board/:board_seq', component: BoardComponent
     },
     {
         path: 'terms', component: TermsComponent

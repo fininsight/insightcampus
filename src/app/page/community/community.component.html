@@ -11,26 +11,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>100</td>
-          <td>제목입니다</td>
-          <td>인사이트캠퍼스</td>
-          <td>4</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>101</td>
-          <td>제목입니다</td>
-          <td>인사이트캠퍼스</td>
-          <td>4</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>102</td>
-          <td>제목입니다</td>
-          <td>인사이트캠퍼스</td>
-          <td>4</td>
-          <td>5</td>
+        <tr *ngFor="let board of boards.data" (click)="gotoPage(board.board_seq)">
+          <td>{{ board.board_seq }}</td>
+          <td>{{ board.title }}</td>
+          <td>{{ board.reg_user }}</td>
+          <td>{{ convertDateType(board.reg_dt) }}</td>
+          <td>{{ board.view_count }}</td>
         </tr>
       </tbody>
     </table>

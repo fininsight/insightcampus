@@ -12,8 +12,22 @@
 #community-content-inner > table {
   width: 100%;
   text-align: center;
+  font-size: 13px;
 }
 
 #community-content-inner > table > thead {
   border-bottom: 2px solid #ccc;
+}
+
+#community-content-inner > table > tbody td {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+#community-content-inner > table > tbody tr {
+  cursor: pointer;
+}
+
+#community-content-inner > table > tbody tr:hover {
+  background-color: #f4f4f4;
 }

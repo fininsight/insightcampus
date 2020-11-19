@@ -41,7 +41,8 @@
 
 .answer {
     border-top: 0px;
-    height: 100px;
+    min-height: 100px;
+    white-space: pre-wrap;
 }
 
 .fas {

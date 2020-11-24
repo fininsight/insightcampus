@@ -21,7 +21,7 @@ export class FaqComponent implements OnInit {
     private modal: NzModalService,
     private message: NzMessageService) {
     this.faqs.pageNumber = 1;
-    this.faqs.size = 10;
+    this.faqs.size = 15;
     this.getFaqs();
   }
 

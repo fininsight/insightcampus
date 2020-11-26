@@ -51,6 +51,15 @@ export class CommunityService {
     );
   }
 
+  increaseViewCount(_community: Community) {
+    _community.view_count += 1;
+    
+    return this.http.put(this.baseUrl + 'community/view_count', _community).pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    )
+  }
+
   // Error handling
   errorHandl(error) {
     let errorMessage = '';

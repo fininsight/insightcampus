@@ -11,7 +11,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let board of boards.data" (click)="gotoPage(board.board_seq)">
+        <tr *ngFor="let board of boards.data" (click)="gotoPage(board.board_seq, board.view_count)">
           <td>{{ board.board_seq }}</td>
           <td>{{ board.title }}</td>
           <td>{{ board.reg_user }}</td>

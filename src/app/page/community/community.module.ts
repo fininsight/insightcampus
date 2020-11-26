@@ -1,7 +1,16 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Pipe, PipeTransform } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { BoardComponent } from './board/board.component';
+
+@Pipe({ name: 'safeHtml'})
+export class SafeHtmlPipe implements PipeTransform  {
+  constructor(private sanitized: DomSanitizer) {}
+  transform(value) {
+    return this.sanitized.bypassSecurityTrustHtml(value);
+  }
+}
 
 // Import all Froala Editor plugins.
 import 'froala-editor/js/plugins.pkgd.min.js';
@@ -26,7 +35,8 @@ import 'froala-editor/js/third_party/embedly.min';
     FroalaViewModule.forRoot(),
   ],
   declarations: [
-    BoardComponent
+    BoardComponent,
+    SafeHtmlPipe
   ]
 })
 export class CommunityModule { }

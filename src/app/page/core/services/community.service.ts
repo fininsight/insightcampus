@@ -44,6 +44,13 @@ export class CommunityService {
     );
   }
 
+  updateTemplate(_community: Community) {
+    return this.http.put(this.baseUrl + 'community/template', _community).pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
+
   // Error handling
   errorHandl(error) {
     let errorMessage = '';

@@ -13,7 +13,7 @@ export class BoardComponent implements OnInit {
   public board_seq: any;
   public board: Community = new Community();
   public admin = false;
-  public templates = ["<div>hello</div>", "<div>good</div>"];
+  public templates = [];
 
   @ViewChildren('class') classes: QueryList<ElementRef>;
 
@@ -26,6 +26,9 @@ export class BoardComponent implements OnInit {
 
     this.communityService.getBoard(this.board_seq).subscribe(data => {
       this.board = data;
+      if (data.content !== null && data.content !== '') {
+        this.templates = JSON.parse(data.content);
+      }
     })
   }
 
@@ -67,8 +70,32 @@ export class BoardComponent implements OnInit {
     this.admin = false;
   }
 
-  test() {
-    console.log(this.templates);
+  boardSave() {
+    const boardContent: any = {
+      board_seq: this.board_seq,
+      content: JSON.stringify(this.templates)
+    }
+
+    this.communityService.updateTemplate(boardContent).subscribe(data => {
+      console.log(data);
+    })
+  }
+
+  convertDateType(dateStr) {
+    if (dateStr == null) {
+      return;
+    }
+
+    const dateDate = new Date(dateStr);
+    let dateConvert = "";
+
+    dateConvert += (dateDate.getFullYear() + ". ");
+    dateConvert += (dateDate.getMonth()+1 + ". ");
+    dateConvert += (dateDate.getDate() + " ");
+    dateConvert += (dateDate.getHours() + ":");
+    dateConvert += dateDate.getMinutes();
+
+    return dateConvert;
   }
 
 }

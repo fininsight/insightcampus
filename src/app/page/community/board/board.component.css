@@ -15,8 +15,17 @@
 
 #board-content-inner > .board-info {
   width: 100%;
+  margin-bottom: 50px;
   padding: 15px;
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
   background-color: #f6f6f6;
+}
+
+#board-content-inner > .board-info > span {
+  margin-right: 50px;
+}
+
+#board-content-inner > .board-info > span > b {
+  margin-right: 10px;
 }

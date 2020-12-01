@@ -1,0 +1,24 @@
+<div id="community-content">
+  <div id="community-content-inner">
+    <table>
+      <thead>
+        <tr>
+          <th width="10%">번호</th>
+          <th width="60%">제목</th>
+          <th width="10%">작성자</th>
+          <th width="10%">작성일</th>
+          <th width="10%">조회</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let board of boards.data" (click)="gotoPage(board.board_seq, board.view_count)">
+          <td>{{ board.board_seq }}</td>
+          <td>{{ board.title }}</td>
+          <td>{{ board.reg_user }}</td>
+          <td>{{ convertDateType(board.reg_dt) }}</td>
+          <td>{{ board.view_count }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

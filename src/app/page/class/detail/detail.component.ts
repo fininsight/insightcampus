@@ -150,6 +150,7 @@ testTemplage2 = `
 
   testAdmin() {
     this.admin = true;
+    console.log(this.classes);
   }
 
   testAdminDisable() {

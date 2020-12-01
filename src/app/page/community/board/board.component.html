@@ -1,0 +1,25 @@
+<div id="board-content">
+  <div id="board-content-inner">
+    <div class="board-title">
+      <h1>{{ board.title }}</h1>
+    </div>
+    <div class="board-info">
+      <span><b>{{ board.category }}</b></span>
+      <span><b>작성자</b> {{ board.reg_user}}</span>
+      <span><b>작성일</b> {{ convertDateType(board.reg_dt )}}</span>
+      <span><b>조회수</b> {{ board.view_count }}</span>
+      <button (click)="adminAble()" *ngIf="admin === false">관리자</button>
+      <button (click)="adminDisable()" *ngIf="admin === true">관리자제거</button>
+      <button (click)="boardSave()">저장</button>
+    </div>
+    <ng-container *ngFor="let template of templates; index as i">
+      <div
+        #class
+        [froalaEditor]="option"
+        [innerHTML]="template | safeHtml"
+        *ngIf="admin === true"
+      ></div>
+      <div [innerHTML]="template | safeHtml" *ngIf="admin === false"></div>
+    </ng-container>
+  </div>
+</div>

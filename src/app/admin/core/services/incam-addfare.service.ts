@@ -85,10 +85,7 @@ export class IncamAddfareService extends Common{
     );
   }
 
-  sendAddfare(incamaddfare: IncamAddfare[]) {
-    return this.http.post(this.baseUrl + 'incamaddfare/SendAddfare', incamaddfare, this.jwt()).pipe(
-      retry(1),
-      catchError(this.errorHandl)
-    );
+  async sendAddfare(incamaddfare: IncamAddfare[]) {
+    return await this.http.post(this.baseUrl + 'incamaddfare/SendAddfare', incamaddfare, this.jwt()).toPromise();
   }
 }

@@ -103,7 +103,7 @@ export class PageFamilyAddfareComponent implements OnInit {
   }
 
   incamAddfarePdf() {
-    const pdfLink = this.baseUrl + 'pdf/';
+    const pdfLink = this.baseUrl + 'pdf/addfare/';
     this.confirmModal = this.modal.confirm({
       nzTitle: '정산내용 PDF 다운로드',
       nzContent: '선택하신 내용을 PDF로 다운로드하시겠습니까?',

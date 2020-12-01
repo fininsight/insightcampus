@@ -202,37 +202,39 @@
           (nzOnOk)="isSendMailOk()"
           nzWidth="1100">
   <div class="popup-content">
-     <nz-table
-      #checksTable [nzData]="checks"
-      nzNoResult="조회된 결과가 없습니다"
-      nzSize="small">
-      <thead>
-        <tr>
-          <th nzWidth="13%" [nzAlign]="'center'">정산서 No.</th>
-          <th nzWidth="9%" [nzAlign]="'center'">정산일자</th>
-          <th nzWidth="12%" [nzAlign]="'center'">원청사</th>
-          <th nzWidth="15%" [nzAlign]="'center'">강의명</th>
-          <th nzWidth="10%" [nzAlign]="'center'">이름</th>
-          <th nzWidth="10%" [nzAlign]="'center'">정산시수</th>
-          <th nzWidth="10%" [nzAlign]="'center'">소득구분</th>
-          <th nzWidth="10%" [nzAlign]="'center'">실지급액</th>
-          <th nzWidth="10%" [nzAlign]="'center'">송금요청액</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let data of checksTable.data">
-          <td [nzAlign]="'center'">{{ data.addfare_date.substring(0,5) }}{{ data.addfare_seq }}</td>
-          <td [nzAlign]="'center'">{{ data.addfare_date | date:'yyyy/MM/dd' }}</td>
-          <td [nzAlign]="'center'">{{ data.original_company_nm }}</td>
-          <td [nzAlign]="'center'">{{ data.class }}</td>
-          <td [nzAlign]="'center'">{{ data.name }}</td>
-          <td [nzAlign]="'center'">{{ data.hour }}</td>
-          <td [nzAlign]="'center'">{{ data.income_type_nm }}</td>
-          <td [nzAlign]="'right'">{{ calculate(data)[0] | number }}</td>
-          <td [nzAlign]="'right'">{{ calculate(data)[1] | number }}</td>
-        </tr>
-      </tbody>
-      </nz-table>
+    <nz-spin [nzSpinning]="mailSendLoading" [nzTip]="mailSendLoadingText">
+      <nz-table
+        #checksTable [nzData]="checks"
+        nzNoResult="조회된 결과가 없습니다"
+        nzSize="small">
+        <thead>
+          <tr>
+            <th nzWidth="13%" [nzAlign]="'center'">정산서 No.</th>
+            <th nzWidth="9%" [nzAlign]="'center'">정산일자</th>
+            <th nzWidth="12%" [nzAlign]="'center'">원청사</th>
+            <th nzWidth="15%" [nzAlign]="'center'">강의명</th>
+            <th nzWidth="10%" [nzAlign]="'center'">이름</th>
+            <th nzWidth="10%" [nzAlign]="'center'">정산시수</th>
+            <th nzWidth="10%" [nzAlign]="'center'">소득구분</th>
+            <th nzWidth="10%" [nzAlign]="'center'">실지급액</th>
+            <th nzWidth="10%" [nzAlign]="'center'">송금요청액</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of checksTable.data">
+            <td [nzAlign]="'center'">{{ data.addfare_date.substring(0,5) }}{{ data.addfare_seq }}</td>
+            <td [nzAlign]="'center'">{{ data.addfare_date | date:'yyyy/MM/dd' }}</td>
+            <td [nzAlign]="'center'">{{ data.original_company_nm }}</td>
+            <td [nzAlign]="'center'">{{ data.class }}</td>
+            <td [nzAlign]="'center'">{{ data.name }}</td>
+            <td [nzAlign]="'center'">{{ data.hour }}</td>
+            <td [nzAlign]="'center'">{{ data.income_type_nm }}</td>
+            <td [nzAlign]="'right'">{{ calculate(data)[0] | number }}</td>
+            <td [nzAlign]="'right'">{{ calculate(data)[1] | number }}</td>
+          </tr>
+        </tbody>
+        </nz-table>
+    </nz-spin>
   </div>
   <div *nzModalFooter>
     <button nz-button nzType="default" (click)="popupCancel()">취소</button>

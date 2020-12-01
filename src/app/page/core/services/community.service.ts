@@ -29,7 +29,7 @@ export class CommunityService {
       searchText = encodeURI(searchText);
     }
 
-    return this.http.get<DataTable>(this.baseUrl + 'community/' + dataTable.size + '/' + dataTable.pageNumber + '/' + searchText)
+    return this.http.get<DataTable>(this.baseUrl + 'community/' + dataTable.size + '/' + dataTable.pageNumber)
     .pipe(
       retry(1),
       catchError(this.errorHandl)

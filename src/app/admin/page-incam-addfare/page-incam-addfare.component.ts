@@ -31,6 +31,9 @@ export class PageIncamAddfareComponent implements OnInit {
   allCheck = false;
   checks = [];
 
+  mailSendLoading = false;
+  mailSendLoadingText = '메일전송중';
+
   selectedValue = null;
   listOfTeacher: Array<{ value: number; text: string }> = [];
   listOfContract: Array<{ value: number; text: string; hour_price: number, hour_incen: number, contract_price: number }> = [];
@@ -69,7 +72,7 @@ export class PageIncamAddfareComponent implements OnInit {
               private teacherService: TeacherService
               ) {
       this.incamAddfares.pageNumber = 1;
-      this.incamAddfares.size = 30;
+      this.incamAddfares.size = 100;
       this.getIncamAddfares();
   }
 
@@ -132,11 +135,31 @@ export class PageIncamAddfareComponent implements OnInit {
     this.isSendMail = true;
   }
 
-  isSendMailOk() {
-    this.incamAddfareService.sendAddfare(this.checks).subscribe(data => {
-      this.message.create('success', '전송이 완료되었습니다.');
-      this.isSendMail = false;
-    });
+  async isSendMailOk() {
+    this.mailSendLoading = true;
+    const checksCopy = JSON.parse(JSON.stringify(this.checks));
+    const all = checksCopy.length;
+    this.mailSendLoadingText = `메일전송중 (총 : ${all} / 전송완료 : 0)`;
+
+    while (checksCopy.length > 0) {
+
+      const basket = [];
+      basket.push(checksCopy.pop());
+      await this.incamAddfareService.sendAddfare(basket);
+      this.mailSendLoadingText = `메일전송중 (총 : ${all} / 전송완료 : ${all - checksCopy.length})`;
+
+      // const basket = [];
+      // for (let i = 0; i < 5 && checksCopy.length > 0; i++) {
+      //   basket.push(checksCopy.pop());
+      //   ing++;
+      // }
+      // this.mailSendLoadingText = `메일전송중 (총 : ${all} / 전송중 : ${ing})`;
+      // await this.incamAddfareService.sendAddfare(basket);
+    }
+
+    this.message.create('success', '전송이 완료되었습니다.');
+    this.mailSendLoading = false;
+    this.isSendMail = false;
   }
 
   allCheckChange() {
@@ -229,7 +252,7 @@ export class PageIncamAddfareComponent implements OnInit {
   }
 
   incamAddfarePdf() {
-    const pdfLink = this.baseUrl + 'pdf/';
+    const pdfLink = this.baseUrl + 'pdf/addfare/';
     this.confirmModal = this.modal.confirm({
       nzTitle: '정산내용 PDF 다운로드',
       nzContent: '선택하신 내용을 PDF로 다운로드하시겠습니까?',

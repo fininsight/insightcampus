@@ -1,21 +1,30 @@
 import { Injectable } from "@angular/core";
+import { User } from '../models/user';
 import { environment } from "src/environments/environment";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, throwError } from 'rxjs';
 import { DataTable } from '../models/datatable';
 import { map, retry, catchError } from 'rxjs/operators';
-import { User } from '../models/user';
 import { Common } from './common';
+import { JwtHelperService } from '@auth0/angular-jwt'
 
 
 @Injectable({
   providedIn: "root",
 })
 export class UserService extends Common {
+  [x: string]: any;
 
   baseUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) {
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
+
+  constructor(private http: HttpClient,
+    private jwtHelper: JwtHelperService) {
     super();
   }
 
@@ -25,10 +34,10 @@ export class UserService extends Common {
 
     if (dataTable.search != null) {
       searchText = JSON.stringify(dataTable.search);
-      searchText = encodeURI(searchText);
+      searchText = '/' + encodeURI(searchText);
     }
 
-    return this.http.get<DataTable>(this.baseUrl + 'user/' + dataTable.size + '/' + dataTable.pageNumber + '/' + searchText)
+    return this.http.get<DataTable>(this.baseUrl + 'user/' + dataTable.size + '/' + dataTable.pageNumber + searchText, this.jwt())
     .pipe(
       retry(1),
       catchError(this.errorHandl)

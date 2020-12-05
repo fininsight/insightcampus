@@ -25,6 +25,51 @@ export class IncamAddfareService extends Common{
     super();
   }
 
+  getIncamAddfaresExcel(filter) {
+
+    const param_filter = [];
+
+    if (filter.name !== '') {
+      param_filter.push({
+        k: 'name',
+        v: filter.name
+      });
+    }
+
+    if (filter.original_company !== '') {
+      param_filter.push({
+        k: 'company',
+        v: filter.original_company
+      });
+    }
+
+    if (filter.class !== '') {
+      param_filter.push({
+        k: 'class',
+        v: filter.class
+      });
+    }
+
+    if (filter.date.length > 0) {
+
+      param_filter.push({
+        k: 'start_date',
+        v: this.getFormatDate(filter.date[0])
+      });
+
+      param_filter.push({
+        k: 'end_date',
+        v: this.getFormatDate(filter.date[1])
+      });
+    }
+    const req = new XMLHttpRequest();
+    req.open('GET', this.baseUrl + 'incamaddfare/excel' + '?f=' + JSON.stringify(param_filter), true);
+    const token = localStorage.getItem('token');
+    req.setRequestHeader('Authorization', 'Bearer ' + token);
+    req.send();
+    // location.assign(this.baseUrl + 'incamaddfare/excel' + '?f=' + JSON.stringify(param_filter));
+  }
+
   getIncamAddfares(dataTable: DataTable, filter): Observable<DataTable> {
 
     const param_filter = [];

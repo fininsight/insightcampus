@@ -208,12 +208,23 @@ export class PageIncamAddfareComponent implements OnInit {
   }
 
   getIncamAddfare() {
-
-
     this.incamAddfareService.getIncamAddfare(this.incamAddfares, this.selectedIncamAddfare.addfare_seq).subscribe(data => {
       this.incamAddfares = data;
       this.incamAddfareLoading = false;
       this.selectedIncamAddfare = new IncamAddfare();
+    });
+  }
+
+  incamAddfareExcel() {
+    this.confirmModal = this.modal.confirm({
+      nzTitle: '정산리스트 엑셀 다운로드',
+      nzContent: '정산리스트를 엑셀로 다운로드하시겠습니까?',
+      nzOnOk: () => {
+        this.incamAddfareService.getIncamAddfaresExcel(this.filter);
+      },
+      nzOnCancel: () => {
+        this.confirmModal.destroy();
+      }
     });
   }
 

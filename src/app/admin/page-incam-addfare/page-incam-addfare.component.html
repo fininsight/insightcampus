@@ -6,13 +6,21 @@
 </div>
 <div id="content">
 <div id="main-table">
-    <div class="table-menu">
-            <button nz-button nzType="default" nzShape="circle" (click)="incamAddfareAdd()"><i title="추가" nz-icon nzType="plus"></i></button>
-            <button nz-button nzType="default" nzShape="circle" (click)="incamAddfareUpdate()" [disabled]="selectedIncamAddfare.addfare_seq == undefined"><i nz-icon nzType="edit"></i></button>
-            <button nz-button nzType="default" nzShape="circle" (click)="incamAddfareDelete()" [disabled]="selectedIncamAddfare.addfare_seq == undefined"><i nz-icon nzType="delete"></i></button>
-            <button nz-button nzType="default" nzShape="circle" (click)="sendMail()"><i nz-icon nzType="mail"></i></button>
-            <button nz-button nzType="default" nzShape="circle" (click)="incamAddfarePdf()" [disabled]="selectedIncamAddfare.addfare_seq == undefined"><i nz-icon nzType="file-pdf"></i></button>
-          </div>
+    <div style="overflow:auto;">
+      <div class="table-filter">
+        <nz-range-picker [(ngModel)]="filter.date" (ngModelChange)="getIncamAddfares()"></nz-range-picker>
+        <input nz-input placeholder="원청사" [(ngModel)]="filter.original_company" (change)="getIncamAddfares()"/>
+        <input nz-input placeholder="강의명" [(ngModel)]="filter.class" (change)="getIncamAddfares()"/>
+        <input nz-input placeholder="이름" [(ngModel)]="filter.name" (change)="getIncamAddfares()"/>
+      </div>
+      <div class="table-menu">
+        <button nz-button nzType="default" nzShape="circle" (click)="incamAddfareAdd()"><i title="추가" nz-icon nzType="plus"></i></button>
+        <button nz-button nzType="default" nzShape="circle" (click)="incamAddfareUpdate()" [disabled]="selectedIncamAddfare.addfare_seq == undefined"><i nz-icon nzType="edit"></i></button>
+        <button nz-button nzType="default" nzShape="circle" (click)="incamAddfareDelete()" [disabled]="selectedIncamAddfare.addfare_seq == undefined"><i nz-icon nzType="delete"></i></button>
+        <button nz-button nzType="default" nzShape="circle" (click)="sendMail()"><i nz-icon nzType="mail"></i></button>
+        <button nz-button nzType="default" nzShape="circle" (click)="incamAddfarePdf()" [disabled]="selectedIncamAddfare.addfare_seq == undefined"><i nz-icon nzType="file-pdf"></i></button>
+      </div>
+    </div>
     <nz-table
       #incamAddfareTable
       nzShowSizeChanger

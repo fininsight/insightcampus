@@ -42,6 +42,18 @@ export class PageIncamAddfareComponent implements OnInit {
   teachers = new DataTable();
   confirmModal?: NzModalRef;
 
+  start_date = new Date();
+
+  filter = {
+    original_company: '',
+    class: '',
+    name: '',
+    date: [
+      this.addMonths(new Date(), -1),
+      new Date()
+    ]
+  };
+
   calculation = {
       all: 0,
       all_tax: 0,
@@ -71,8 +83,9 @@ export class PageIncamAddfareComponent implements OnInit {
               private message: NzMessageService,
               private teacherService: TeacherService
               ) {
+
       this.incamAddfares.pageNumber = 1;
-      this.incamAddfares.size = 100;
+      this.incamAddfares.size = 30;
       this.getIncamAddfares();
   }
 
@@ -87,6 +100,15 @@ export class PageIncamAddfareComponent implements OnInit {
         });
       });
     });
+  }
+
+  addMonths(date, months) {
+    const d = date.getDate();
+    date.setMonth(date.getMonth() + +months);
+    if (date.getDate() != d) {
+      date.setDate(0);
+    }
+    return date;
   }
 
   changeIncome(event) {
@@ -170,7 +192,7 @@ export class PageIncamAddfareComponent implements OnInit {
   }
 
   getIncamAddfares() {
-    this.incamAddfareService.getIncamAddfares(this.incamAddfares).subscribe(data => {
+    this.incamAddfareService.getIncamAddfares(this.incamAddfares, this.filter).subscribe(data => {
       console.log(data);
 
       data.data = data.data.map(v => {
@@ -186,6 +208,8 @@ export class PageIncamAddfareComponent implements OnInit {
   }
 
   getIncamAddfare() {
+
+
     this.incamAddfareService.getIncamAddfare(this.incamAddfares, this.selectedIncamAddfare.addfare_seq).subscribe(data => {
       this.incamAddfares = data;
       this.incamAddfareLoading = false;

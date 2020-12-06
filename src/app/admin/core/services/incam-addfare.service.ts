@@ -62,12 +62,22 @@ export class IncamAddfareService extends Common{
         v: this.getFormatDate(filter.date[1])
       });
     }
-    const req = new XMLHttpRequest();
-    req.open('GET', this.baseUrl + 'incamaddfare/excel' + '?f=' + JSON.stringify(param_filter), true);
+
+    const postData = new FormData();
+    const xhr = new XMLHttpRequest();
     const token = localStorage.getItem('token');
-    req.setRequestHeader('Authorization', 'Bearer ' + token);
-    req.send();
-    // location.assign(this.baseUrl + 'incamaddfare/excel' + '?f=' + JSON.stringify(param_filter));
+    xhr.open('GET', this.baseUrl + 'incamaddfare/excel' + '?f=' + JSON.stringify(param_filter), true);
+    xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+    xhr.responseType = 'blob';
+    xhr.onload = (e) => {
+      const downloadUrl = URL.createObjectURL(xhr.response);
+      const a = document.createElement('a');
+      document.body.appendChild(a);
+      a.href = downloadUrl;
+      a.download = '내부정산.xlsx';
+      a.click();
+    };
+    xhr.send(postData);
   }
 
   getIncamAddfares(dataTable: DataTable, filter): Observable<DataTable> {

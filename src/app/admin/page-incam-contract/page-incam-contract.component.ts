@@ -30,12 +30,24 @@ export class PageIncamContractComponent implements OnInit {
   isIncamContractUpdate = false;
 
   incamContractLoading = true;
-  listOfTeacher: Array<{ value: number; text: string }> = [];
+  allCheck = false;
+  checks = [];
 
   selectedValue = null;
+  listOfTeacher: Array<{ value: number; text: string }> = [];
+  listOfCooperative: Array<{ value: string; text: string }> = [];
+
   confirmModal?: NzModalRef;
 
-  listOfCooperative: Array<{ value: string; text: string }> = [];
+  filter = {
+    original_company: '',
+    class: '',
+    name: '',
+    date: [
+      this.addMonths(new Date(), -1),
+      new Date()
+    ]
+  };
 
   currencyParser = (value: string) => value.replace(/\$\s?|(,*)/g, '');
   currencyFormatter = (value: string) => {
@@ -76,6 +88,15 @@ export class PageIncamContractComponent implements OnInit {
     });
   }
 
+  addMonths(date, months) {
+    const d = date.getDate();
+    date.setMonth(date.getMonth() + +months);
+    if (date.getDate() != d) {
+      date.setDate(0);
+    }
+    return date;
+  }
+
   selectTeacher(value: string): void {
     this.searchTeacher(value);
   }
@@ -92,8 +113,15 @@ export class PageIncamContractComponent implements OnInit {
     });
   }
 
+  allCheckChange() {
+    this.incamContract.data = this.incamContract.data.map(v => {
+      v.check = this.allCheck;
+      return v;
+    });
+  }
+
   getIncamContract() {
-    this.incamContractService.getIncamContracts(this.incamContract).subscribe(data => {
+    this.incamContractService.getIncamContracts(this.incamContract, this.filter).subscribe(data => {
       this.incamContract = data;
       this.incamContractLoading = false;
       this.selectedIncamContract = new IncamContract();
@@ -108,6 +136,19 @@ export class PageIncamContractComponent implements OnInit {
     });
   }
 
+  incamContractExcel() {
+    this.confirmModal = this.modal.confirm({
+      nzTitle: '정산리스트 엑셀 다운로드',
+      nzContent: '정산리스트를 엑셀로 다운로드하시겠습니까?',
+      nzOnOk: () => {
+        this.incamContractService.getIncamContractsExcel(this.filter);
+      },
+      nzOnCancel: () => {
+        this.confirmModal.destroy();
+      }
+    });
+  }
+
   selectIncamContract(param) {
     this.selectedIncamContract = param;
   }
@@ -117,7 +158,7 @@ export class PageIncamContractComponent implements OnInit {
     this.isIncamContractAdd = true;
   }
 
-  incamContractOk(): void {
+  incamContractAddOk(): void {
     this.incamContractService.addIncamContract(this.popupIncamContract).subscribe(data => {
       this.getIncamContract();
       this.selectedIncamContract = new IncamContract();

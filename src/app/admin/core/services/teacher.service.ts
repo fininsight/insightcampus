@@ -33,11 +33,48 @@ export class TeacherService extends Common {
     return this.jwtHelper.decodeToken(token);
    }
 
+   getTeacherExcel(filter) {
 
-   getTeachers(dataTable: DataTable): Observable<DataTable> {
+    const param_filter = [];
+
+    if (filter.name !== '') {
+      param_filter.push({
+        k: 'name',
+        v: filter.name
+      });
+    }
+
+    const postData = new FormData();
+    const xhr = new XMLHttpRequest();
+    const token = localStorage.getItem('token');
+    xhr.open('GET', this.baseUrl + 'teacher/excel' + '?f=' + JSON.stringify(param_filter), true);
+    xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+    xhr.responseType = 'blob';
+    xhr.onload = (e) => {
+      const downloadUrl = URL.createObjectURL(xhr.response);
+      const a = document.createElement('a');
+      document.body.appendChild(a);
+      a.href = downloadUrl;
+      a.download = '강사관리.xlsx';
+      a.click();
+    };
+    xhr.send(postData);
+  }
+
+   getTeachers(dataTable: DataTable, filter): Observable<DataTable> {
+     
+    const param_filter = [];
+
+    if (filter.name !== '') {
+      param_filter.push({
+        k: 'name',
+        v: filter.name
+      });
+    }
 
     return this.http.get<DataTable>(this.baseUrl + 'teacher/' +
-                                    + dataTable.size + '/' + dataTable.pageNumber, this.jwt())
+                                    + dataTable.size + '/' + dataTable.pageNumber + '?f=' + JSON.stringify(param_filter), this.jwt())
+
     .pipe(
       retry(1),
       catchError(this.errorHandl)

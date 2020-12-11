@@ -11,4 +11,5 @@ export class IncamAddfare {
     name: string;
     hour_price: number;
     contract_price: number;
+    check_yn: number;
 }

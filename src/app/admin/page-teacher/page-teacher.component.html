@@ -6,10 +6,14 @@
 </div>
 <div id="content">
 <div id="main-table">
+  <div class="table-filter">
+    <input nz-input placeholder="이름" [(ngModel)]="filter.name" (change)="getTeachers()"/>
+  </div>
     <div class="table-menu">
             <button nz-button nzType="default" nzShape="circle" (click)="teacherAdd()"><i title="추가" nz-icon nzType="plus"></i></button>
             <button nz-button nzType="default" nzShape="circle" (click)="teacherUpdate()" [disabled]="selectedTeacher.teacher_seq == undefined"><i nz-icon nzType="edit"></i></button>
             <button nz-button nzType="default" nzShape="circle" (click)="teacherDelete()" [disabled]="selectedTeacher.teacher_seq == undefined"><i nz-icon nzType="delete"></i></button>
+            <button nz-button nzType="default" nzShape="circle" (click)="teacherExcel()"><i nz-icon nzType="file-excel"></i></button>
           </div>
     <nz-table
       #teacherTable

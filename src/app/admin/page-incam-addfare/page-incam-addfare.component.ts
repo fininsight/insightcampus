@@ -152,6 +152,24 @@ export class PageIncamAddfareComponent implements OnInit {
       return [employee_deposit, remittance];
   }
 
+  depositCheck(data) {
+    const contractIndex = this.listOfContract.findIndex(item => item.value === data.contract_seq);
+
+    const all = this.listOfContract[contractIndex].hour_price * data.hour;
+    const all_tax =  Math.floor(all * data.income / 10) * 10;
+
+    var check;
+    if(data.check_yn == 1){
+      check = "완료";
+    }
+    else{
+      check = "미완료";
+    }
+
+
+    return [check];
+}
+
   sendMail() {
     this.checks = this.incamAddfares.data.filter(v => (v.check));
     this.isSendMail = true;
@@ -293,6 +311,20 @@ export class PageIncamAddfareComponent implements OnInit {
       nzContent: '선택하신 내용을 PDF로 다운로드하시겠습니까?',
       nzOnOk: () => {
         location.assign(pdfLink + this.selectedIncamAddfare.addfare_seq);
+      },
+      nzOnCancel: () => {
+        this.confirmModal.destroy();
+      }
+    });
+  }
+
+  incamAddfareDeposit(){
+    const depositLink = this.baseUrl + 'incamAddfare/deposit';
+    this.confirmModal = this.modal.confirm({
+      nzTitle: '입금완료 확인',
+      nzContent: '입금완료 처리하시겠습니까? ',
+      nzOnOk: () => {
+        location.assign(depositLink + this.selectedIncamAddfare.addfare_seq);
       },
       nzOnCancel: () => {
         this.confirmModal.destroy();

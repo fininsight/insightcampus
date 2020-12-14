@@ -1,6 +1,7 @@
 import { Component, OnInit, SecurityContext } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzModalRef } from 'ng-zorro-antd/modal';
 import { TeacherService } from '../core/services/teacher.service';
 import { Teacher } from '../core/models/teacher';
 import { User } from '../core/models/user'
@@ -28,8 +29,13 @@ export class PageTeacherComponent implements OnInit {
   teacherLoading = true;
 
   getCurrentUserId = "";
+  confirmModal?: NzModalRef;
 
   user_id; 
+
+  filter = {
+    name: ''
+  };
 
   constructor(private teacherService: TeacherService,
     private authService: AuthService,
@@ -42,13 +48,12 @@ export class PageTeacherComponent implements OnInit {
       this.teachers.pageNumber = 1;
       this.teachers.size = 30;
       this.getTeachers();
-      
+ 
     }
 
   ngOnInit() {
    
   }
-
 
   loggedInfo() {
     var userData = this.teacherService.getUserId();
@@ -71,12 +76,18 @@ export class PageTeacherComponent implements OnInit {
   }
 
   getTeachers() {
-    this.teacherService.getTeachers(this.teachers).subscribe(data => {
+    this.teacherService.getTeachers(this.teachers, this.filter).subscribe(data => {
+      console.log(data);
+
+      data.data = data.data.map(v => {
+        v.check = false;
+        return v;
+      });
+
       this.teachers = data;
       this.teacherLoading = false;
       this.selectedTeacher = new Teacher();
     });
-    this.loggedInfo();
   }
 
   getTeacher() {
@@ -156,6 +167,19 @@ export class PageTeacherComponent implements OnInit {
           this.getTeachers();
           this.message.create('success', '삭제가 완료되었습니다.');
         });
+      }
+    });
+  }
+
+  teacherExcel(){
+    this.confirmModal = this.modal.confirm({
+      nzTitle: '강사관리 엑셀 다운로드',
+      nzContent: '강사관리를 엑셀로 다운로드하시겠습니까?',
+      nzOnOk: () => {
+        this.teacherService.getTeacherExcel(this.filter);
+      },
+      nzOnCancel: () => {
+        this.confirmModal.destroy();
       }
     });
   }

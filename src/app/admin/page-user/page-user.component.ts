@@ -82,6 +82,11 @@ export class PageUserComponent implements OnInit {
     this.searchData();
   }
 
+  filter = {
+    name: '',
+    email: ''
+  };
+
   constructor(private userService: UserService,
               private randomUserService: RandomUserService,
               private modal: NzModalService,
@@ -98,7 +103,7 @@ export class PageUserComponent implements OnInit {
   }
 
   getUser() {
-    this.userService.getUsers(this.users).subscribe(data => {
+    this.userService.getUsers(this.users, this.filter).subscribe(data => {
       this.users = data;
       this.userLoading = false;
       this.selectedUser = new User();

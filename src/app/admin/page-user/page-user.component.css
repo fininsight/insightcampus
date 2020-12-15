@@ -32,12 +32,35 @@ nz-form-label {
     color: black;
 }
 
+.table-filter {
+  height: 50px;
+  padding: 10px;
+  float: left;
+  box-sizing: border-box;
+  width: 80%;
+}
+
+  .table-filter input {
+    margin-right: 5px;
+    width: 150px;
+  }
+
 .table-menu {
+  float: left;
+  box-sizing: border-box;
+  width: 20%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 50px;
+}
+
+/*.table-menu {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     height: 50px;
-}
+}*/
 
 .table-menu button {
     margin-left: 5px;

@@ -319,17 +319,19 @@ export class PageIncamAddfareComponent implements OnInit {
   }
 
   incamAddfareDeposit(){
-    const depositLink = this.baseUrl + 'incamAddfare/deposit';
     this.confirmModal = this.modal.confirm({
       nzTitle: '입금완료 확인',
       nzContent: '입금완료 처리하시겠습니까? ',
       nzOnOk: () => {
-        location.assign(depositLink + this.selectedIncamAddfare.addfare_seq);
+        this.incamAddfareService.updateDeposit(this.selectedIncamAddfare.addfare_seq).subscribe(data => {
+          this.getIncamAddfares();
+        });
       },
       nzOnCancel: () => {
         this.confirmModal.destroy();
       }
     });
+      
   }
 
   selectContract(value: string): void {

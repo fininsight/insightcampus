@@ -26,6 +26,12 @@ export class PageClassComponent implements OnInit {
   sortValue: string | null = null;
   sortKey: string | null = null;
 
+  filter = {
+    class_nm: '',
+    teacher: '',
+    duration_nm: ''
+  };
+
   sort(sort: { key: string; value: string }): void {
     this.sortKey = sort.key;
     this.sortValue = sort.value;
@@ -38,11 +44,26 @@ export class PageClassComponent implements OnInit {
                 this.classes.pageNumber = 1;
                 this.classes.size = 10;
 
-                this.getClass();
+                this.getClassesFilter();
   }
 
   ngOnInit(): void {
   }
+
+  getClassesFilter() {
+    this.userService.getClassesFilter(this.classes, this.filter).subscribe(data => {
+      console.log(data);
+      data.data = data.data.map(v => {
+        v.check = false;
+        return v;
+      });
+
+      this.classes = data;
+      this.classLoading = false;
+      this.selectedClass = new Class();
+    });
+  }
+
 
   getClass() {
     this.userService.getClasses(this.classes).subscribe(data => {

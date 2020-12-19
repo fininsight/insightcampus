@@ -20,5 +20,6 @@
         </tr>
       </tbody>
     </table>
+    <nz-pagination [(nzPageIndex)]="boards.pageNumber" [nzTotal]="boards.totalElements" (nzPageIndexChange)="movePage()"></nz-pagination>
   </div>
 </div>

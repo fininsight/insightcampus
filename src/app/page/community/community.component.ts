@@ -17,11 +17,11 @@ export class CommunityComponent implements OnInit {
   constructor(private communityService: CommunityService,
               private router: Router) {
     this.boards.pageNumber = 1;
-    this.boards.size = 20;
+    this.boards.size = 10;
 
     this.communityService.getBoards(this.boards).subscribe(data => {
       this.boards = data;
-      console.log(this.boards.data);
+      console.log(this.boards);
     });
   }
 
@@ -46,6 +46,13 @@ export class CommunityComponent implements OnInit {
     dateConvert += dateDate.getDate();
 
     return dateConvert;
+  }
+
+  movePage() {
+    this.communityService.getBoards(this.boards).subscribe(data => {
+      this.boards = data;
+      console.log(this.boards);
+    });
   }
 
 }

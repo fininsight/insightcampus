@@ -3,6 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { BoardComponent } from './board/board.component';
+import { NewComponent } from './new/new.component';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
 @Pipe({ name: 'safeHtml'})
@@ -38,6 +39,7 @@ import 'froala-editor/js/third_party/embedly.min';
   ],
   declarations: [
     BoardComponent,
+    NewComponent,
     SafeHtmlPipe
   ]
 })

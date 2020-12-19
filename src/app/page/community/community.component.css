@@ -12,7 +12,7 @@
 
 #community-content-inner > table {
   width: 100%;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   text-align: center;
   font-size: 13px;
 }
@@ -32,4 +32,23 @@
 
 #community-content-inner > table > tbody tr:hover {
   background-color: #f4f4f4;
+}
+
+#community-content-inner > .community-write-wrapper {
+  margin-bottom: 10px;
+  text-align: right;
+}
+
+#community-content-inner > .community-write-wrapper > button {
+  width: 60px;
+  padding: 7px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ccc;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+#community-content-inner > .community-write-wrapper > button:hover {
+  transform: translateZ(0) scale(0.98);
 }

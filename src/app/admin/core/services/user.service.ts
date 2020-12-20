@@ -28,16 +28,25 @@ export class UserService extends Common {
     super();
   }
 
-  getUsers(dataTable: DataTable): Observable<DataTable> {
+  getUsers(dataTable: DataTable, filter): Observable<DataTable> {
 
-    let searchText = '';
+    const param_filter = [];
 
-    if (dataTable.search != null) {
-      searchText = JSON.stringify(dataTable.search);
-      searchText = '/' + encodeURI(searchText);
+    if (filter.name !== '') {
+      param_filter.push({
+        k: 'name',
+        v: filter.name
+      });
     }
 
-    return this.http.get<DataTable>(this.baseUrl + 'user/' + dataTable.size + '/' + dataTable.pageNumber + searchText, this.jwt())
+    if (filter.email !== '') {
+      param_filter.push({
+        k: 'email',
+        v: filter.email
+      });
+    }
+
+    return this.http.get<DataTable>(this.baseUrl + 'user/' + dataTable.size + '/' + dataTable.pageNumber + '?f=' + JSON.stringify(param_filter), this.jwt())
     .pipe(
       retry(1),
       catchError(this.errorHandl)

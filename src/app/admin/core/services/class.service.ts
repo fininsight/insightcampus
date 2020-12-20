@@ -25,6 +25,41 @@ export class ClassService extends Common {
     super();
   }
 
+  getClassesFilter(dataTable: DataTable, filter): Observable<DataTable> {
+
+    const param_filter = [];
+
+    if (filter.class_nm !== '') {
+      param_filter.push({
+        k: 'class_nm',
+        v: filter.class_nm
+      });
+    }
+
+    if (filter.teacher !== '') {
+      param_filter.push({
+        k: 'teacher',
+        v: filter.teacher
+      });
+    }
+
+    if (filter.duration_nm !== '') {
+      param_filter.push({
+        k: 'duration_nm',
+        v: filter.duration_nm
+      });
+    }
+
+    console.log(param_filter);
+
+    return this.http.get<DataTable>(this.baseUrl + 'class/'
+                                    + dataTable.size + '/' + dataTable.pageNumber + '?f=' + JSON.stringify(param_filter), this.jwt())
+    .pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
+
   getClasses(dataTable: DataTable): Observable<DataTable> {
 
     let searchText = '';

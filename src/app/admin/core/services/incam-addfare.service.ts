@@ -159,6 +159,13 @@ export class IncamAddfareService extends Common{
     );
   }
 
+  updateDeposit(addfareSeq: number) {
+    return this.http.put(this.baseUrl + 'incamaddfare/deposit/' + addfareSeq, this.jwt()).pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
+
   deleteIncamAddfare(addfareSeq: number) {
     return this.http.delete(this.baseUrl + 'incamaddfare/' + addfareSeq, this.jwt()).pipe(
       retry(1),

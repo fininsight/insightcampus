@@ -318,7 +318,7 @@ export class PageIncamAddfareComponent implements OnInit {
     });
   }
 
-  incamAddfareDeposit(){
+  incamAddfareDeposit() {
     this.confirmModal = this.modal.confirm({
       nzTitle: '입금완료 확인',
       nzContent: '입금완료 처리하시겠습니까? ',
@@ -331,7 +331,6 @@ export class PageIncamAddfareComponent implements OnInit {
         this.confirmModal.destroy();
       }
     });
-      
   }
 
   selectContract(value: string): void {

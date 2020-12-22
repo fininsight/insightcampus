@@ -21,6 +21,7 @@ import { PageCouponModule } from './page-coupon/page-coupon.module';
 import { PageFaqModule } from './page-faq/page-faq.module';
 import { PageEmailLogModule } from './page-email-log/page-email-log.module';
 import { PageWpboardNoticeModule } from './page-wpboard-notice/page-wpboard-notice.module';
+import { PageFinWorkModule } from './page-fin-work/page-fin-work.module';
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import { PageWpboardNoticeModule } from './page-wpboard-notice/page-wpboard-noti
     PageFaqModule,      // FAQ Module 포함
     PageEmailLogModule,
     PageWpboardNoticeModule, // Wpboard Notice Module 포함
+    PageFinWorkModule, // Fin Work Module 포함
   ],
   providers: [
     AuthService

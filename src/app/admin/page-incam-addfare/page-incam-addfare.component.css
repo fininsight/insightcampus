@@ -45,8 +45,17 @@ nz-form-label {
     width: 150px;
 }
 
+.table-filter nz-select {
+    margin-right:5px;
+    width: 100px;
+}
+
 .table-filter nz-range-picker {
     margin-right:5px;
+}
+
+.filter-select{
+    width: 100px;
 }
 
 .table-menu {

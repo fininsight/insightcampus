@@ -34,7 +34,8 @@ export class PageTeacherComponent implements OnInit {
   user_id; 
 
   filter = {
-    name: ''
+    name: '',
+    email: ''
   };
 
   constructor(private teacherService: TeacherService,
@@ -59,7 +60,7 @@ export class PageTeacherComponent implements OnInit {
     var userData = this.teacherService.getUserId();
     // console.log("Data : " + typeof(userData['nameid']));
     
-    this.userService.getUsers(this.users).subscribe(data => {
+    this.userService.getUsers(this.users, this.filter).subscribe(data => {
       this.users = data;
       data.data.forEach(element => { //get all user id in user table
         // console.log("Element : " + element.user_id);

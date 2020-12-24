@@ -28,6 +28,11 @@ export class PageFaqComponent implements OnInit {
   selectedFaq: Faq = new Faq();
   popupFaq: Faq = new Faq();
 
+  filter = {
+    name: '',
+    email: ''
+  };
+
   constructor(private faqService: FaqService,
     private authService: AuthService,
     private userService: UserService,
@@ -47,7 +52,7 @@ export class PageFaqComponent implements OnInit {
   loggedInfo() {
     var userData = this.faqService.getUserId();
     
-    this.userService.getUsers(this.users).subscribe(data => {
+    this.userService.getUsers(this.users, this.filter).subscribe(data => {
       this.users = data;
       data.data.forEach(element => {
         if(userData['nameid'] === element.user_id) { 

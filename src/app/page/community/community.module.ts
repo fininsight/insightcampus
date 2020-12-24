@@ -5,6 +5,7 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { BoardComponent } from './board/board.component';
 import { NewComponent } from './new/new.component';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { FormsModule } from '@angular/forms';
 
 @Pipe({ name: 'safeHtml'})
 export class SafeHtmlPipe implements PipeTransform  {
@@ -36,6 +37,7 @@ import 'froala-editor/js/third_party/embedly.min';
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot(),
     NzPaginationModule,
+    FormsModule,
   ],
   declarations: [
     BoardComponent,

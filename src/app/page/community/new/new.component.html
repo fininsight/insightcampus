@@ -3,29 +3,37 @@
     <h1>커뮤니티 글쓰기</h1>
     <div class="article-info">
       <div class="input-row">
-        <label for="test">제목:</label><input id="title" type="text" required />
+        <label for="test">제목:</label
+        ><input id="title" type="text" [(ngModel)]="title" />
       </div>
       <div class="input-row">
         <label for="author">작성자:</label
-        ><input id="author" type="text" required />
+        ><input id="author" type="text" [(ngModel)]="author" />
       </div>
       <div class="input-row">
         <label for="password">비밀번호:</label
-        ><input id="password" type="password" required />
+        ><input id="password" type="password" [(ngModel)]="password" />
       </div>
       <br />
       <div class="input-row">
         <label for="category">카테고리:</label
-        ><select id="category">
+        ><select id="category" [(ngModel)]="category">
           <option value="자료실">자료실</option>
           <option value="기타">기타</option>
         </select>
       </div>
     </div>
-    <div class="froala-editor" [froalaEditor]></div>
+    <div
+      #class
+      class="froala-editor"
+      [froalaEditor]="options"
+      [(froalaModel)]="froalaValue"
+    ><div>test</div></div>
     <div class="control-btn-wrapper">
-      <button style="background-color: #0087FA;">글쓰기</button>
-      <button>돌아가기</button>
+      <button style="background-color: #0087fa" (click)="submit()">
+        글쓰기
+      </button>
+      <button (click)="goBackPage()">돌아가기</button>
     </div>
   </div>
 </div>

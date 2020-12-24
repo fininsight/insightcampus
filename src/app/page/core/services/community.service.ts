@@ -51,6 +51,14 @@ export class CommunityService {
     );
   }
 
+  writeBoard(_community: Community) {
+    return this.http.post(this.baseUrl + 'community', _community)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
+
   increaseViewCount(_community: Community) {
     _community.view_count += 1;
     

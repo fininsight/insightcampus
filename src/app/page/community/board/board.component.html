@@ -19,16 +19,17 @@
         #class
         [froalaEditor]="option"
         [innerHTML]="template | safeHtml"
-        *ngIf="admin === true"
+        *ngIf="edit === true"
       ></div>
-      <div [innerHTML]="template | safeHtml" *ngIf="admin === false"></div>
+      <div [innerHTML]="template | safeHtml" *ngIf="edit === false"></div>
     </ng-container>
     <div class="board-control-btn-wrapper">
       <div class="left-box">
         <button (click)="goBoardList()">목록 보기</button>
       </div>
       <div class="right-box">
-        <button>글 수정</button>
+        <button (click)="editAble()" *ngIf="edit === false">글 수정</button>
+        <button (click)="editComplete()" *ngIf="edit === true">글 수정 완료</button>
         <button (click)="boardDelete()">글 삭제</button>
       </div>
     </div>

@@ -13,6 +13,7 @@ export class BoardComponent implements OnInit {
   public board_seq: any;
   public board: Community = new Community();
   public admin = false;
+  public edit = false;
   public templates = [];
 
   @ViewChildren('class') classes: QueryList<ElementRef>;
@@ -34,9 +35,9 @@ export class BoardComponent implements OnInit {
   }
 
   public option =  {
-    toolbarInline: true,
-    charCounterCount: false,
-    toolbarVisibleWithoutSelection: true,
+    // toolbarInline: true,
+    // charCounterCount: false,
+    // toolbarVisibleWithoutSelection: true,
 
     events : {
       initialized: (editor) => {
@@ -52,7 +53,7 @@ export class BoardComponent implements OnInit {
       contentChanged: () => {
         try {
           for (let i = 0; i < this.classes['_results'].length; i++) {
-            this.templates[i] = this.classes['_results'][i].nativeElement.children[0].children[0].innerHTML;
+            this.templates[i] = this.classes['_results'][i].nativeElement.children[2].children[0].innerHTML;
           }
         } catch {
 
@@ -69,6 +70,15 @@ export class BoardComponent implements OnInit {
 
   adminDisable() {
     this.admin = false;
+  }
+
+  editAble() {
+    this.edit = true;
+  }
+
+  editComplete() {
+    this.edit = false;
+    this.boardSave();
   }
 
   boardSave() {

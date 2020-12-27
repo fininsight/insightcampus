@@ -26,6 +26,7 @@ export class PageIncamAddfareComponent implements OnInit {
   isIncamAddfareAdd = false;
   isIncamAddfareUpdate = false;
   isSendMail = false;
+  isDepositCheck = false;
 
   incamAddfareLoading = true;
   allCheck = false;
@@ -38,6 +39,7 @@ export class PageIncamAddfareComponent implements OnInit {
   listOfTeacher: Array<{ value: number; text: string }> = [];
   listOfContract: Array<{ value: number; text: string; hour_price: number, hour_incen: number, contract_price: number }> = [];
   listOfIncom: Array<{ value: string; text: string, rate: number }> = [];
+  listOfDeposit: Array< { value: number; text: string;}> = [{value: 2, text: "전체"},{value: 1, text: "완료"},{value: 0, text: "미완료"}];
 
   teachers = new DataTable();
   confirmModal?: NzModalRef;
@@ -51,7 +53,8 @@ export class PageIncamAddfareComponent implements OnInit {
     date: [
       this.addMonths(new Date(), -1),
       new Date()
-    ]
+    ],
+    deposit: 2
   };
 
   calculation = {
@@ -286,6 +289,7 @@ export class PageIncamAddfareComponent implements OnInit {
     this.isIncamAddfareAdd = false;
     this.isIncamAddfareUpdate = false;
     this.isSendMail = false;
+    this.isDepositCheck = false;
   }
 
   incamAddfareDelete() {
@@ -319,16 +323,29 @@ export class PageIncamAddfareComponent implements OnInit {
   }
 
   incamAddfareDeposit() {
+    this.checks = this.incamAddfares.data.filter(v => (v.check));
+    this.isDepositCheck = true;
+  }
+
+  async isDepositCheckOK(){
+    var num = 0;
     this.confirmModal = this.modal.confirm({
       nzTitle: '입금완료 확인',
       nzContent: '입금완료 처리하시겠습니까? ',
       nzOnOk: () => {
-        this.incamAddfareService.updateDeposit(this.selectedIncamAddfare.addfare_seq).subscribe(data => {
-          this.getIncamAddfares();
-        });
+        const checksCopy = JSON.parse(JSON.stringify(this.checks));
+        while (checksCopy.length > 0) {
+          const basket = [];
+          basket.push(checksCopy.pop());
+          this.incamAddfareService.updateDeposit(basket[num].addfare_seq).subscribe(data => {
+            this.getIncamAddfares();
+          });
+          num++;
+        }
       },
       nzOnCancel: () => {
         this.confirmModal.destroy();
+        this.isDepositCheck = false;
       }
     });
   }

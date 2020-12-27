@@ -118,6 +118,16 @@ export class IncamAddfareService extends Common{
       });
     }
 
+    if (filter.deposit == 0 || filter.deposit == 1 ) {
+
+      param_filter.push({
+        k: 'deposit',
+        v: filter.deposit
+      });
+    }
+
+    console.log(param_filter);
+
     return this.http.get<DataTable>(this.baseUrl + 'incamaddfare/' +
                                     + dataTable.size + '/' + dataTable.pageNumber + '?f=' + JSON.stringify(param_filter), this.jwt())
     .pipe(

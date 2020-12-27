@@ -28,8 +28,6 @@ export class PageFaqComponent implements OnInit {
   selectedFaq: Faq = new Faq();
   popupFaq: Faq = new Faq();
 
-  
-
   constructor(private faqService: FaqService,
     private authService: AuthService,
     private userService: UserService,

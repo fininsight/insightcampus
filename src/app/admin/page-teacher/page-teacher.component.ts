@@ -33,6 +33,10 @@ export class PageTeacherComponent implements OnInit {
 
   user_id; 
 
+  filter = {
+    name: ''
+  };
+
   constructor(private teacherService: TeacherService,
     private authService: AuthService,
     private userService: UserService,

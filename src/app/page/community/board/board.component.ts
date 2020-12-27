@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChildren, QueryList, ElementRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommunityService } from '../../core/services/community.service';
 import { Community } from '../../core/models/community';
 
@@ -18,7 +18,8 @@ export class BoardComponent implements OnInit {
   @ViewChildren('class') classes: QueryList<ElementRef>;
 
   constructor(private communityService: CommunityService,
-              private route: ActivatedRoute) { 
+              private route: ActivatedRoute,
+              private router: Router) { 
     
     route.params.subscribe(val => {
       this.board_seq = val.board_seq;
@@ -96,6 +97,19 @@ export class BoardComponent implements OnInit {
     dateConvert += dateDate.getMinutes();
 
     return dateConvert;
+  }
+
+  goBoardList() {
+    this.router.navigate(['/community']);
+  }
+
+  boardDelete() {
+    if (confirm("이 글을 정말 지우시겠습니까?") === true) {
+       this.communityService.deleteBoard(this.board_seq).subscribe(data => {
+         console.log(data);
+         this.router.navigate(['/community']);
+       });
+    }
   }
 
 }

@@ -29,3 +29,27 @@
 #board-content-inner > .board-info > span > b {
   margin-right: 10px;
 }
+
+#board-content-inner > .board-control-btn-wrapper {
+  margin: 40px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+#board-content-inner > .board-control-btn-wrapper button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #eee;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#board-content-inner > .board-control-btn-wrapper button:hover {
+  transform: translateZ(0) scale(0.97);
+}
+
+#board-content-inner > .board-control-btn-wrapper > .right-box button {
+  margin-left: 10px;
+}

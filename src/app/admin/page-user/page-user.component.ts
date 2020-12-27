@@ -19,6 +19,7 @@ interface Name {
   last: string;
 }
 
+
 @Injectable()
 export class RandomUserService {
   randomUserUrl = 'https://api.randomuser.me/';
@@ -75,17 +76,16 @@ export class PageUserComponent implements OnInit {
   filterGender = [{ text: 'male', value: 'male' }, { text: 'female', value: 'female' }];
   searchGenderList: string[] = [];
 
+  filter = {
+    name: '',
+    email: ''
+  };
 
   sort(sort: { key: string; value: string }): void {
     this.sortKey = sort.key;
     this.sortValue = sort.value;
     this.searchData();
   }
-
-  filter = {
-    name: '',
-    email: ''
-  };
 
   constructor(private userService: UserService,
               private randomUserService: RandomUserService,

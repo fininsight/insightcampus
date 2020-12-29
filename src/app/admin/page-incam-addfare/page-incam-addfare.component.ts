@@ -31,6 +31,8 @@ export class PageIncamAddfareComponent implements OnInit {
   incamAddfareLoading = true;
   allCheck = false;
   checks = [];
+  checked = false;
+
 
   mailSendLoading = false;
   mailSendLoadingText = '메일전송중';
@@ -253,6 +255,10 @@ export class PageIncamAddfareComponent implements OnInit {
     this.selectedIncamAddfare = param;
   }
 
+  checkedIncamAddfare(){
+    this.checked = true;
+  }
+
   incamAddfareAdd() {
     this.popupIncamAddfare = new IncamAddfare();
     this.popupIncamAddfare.hour = 0;
@@ -328,12 +334,12 @@ export class PageIncamAddfareComponent implements OnInit {
   }
 
   async isDepositCheckOK(){
-    var num = 0;
     this.confirmModal = this.modal.confirm({
       nzTitle: '입금완료 확인',
       nzContent: '입금완료 처리하시겠습니까? ',
       nzOnOk: () => {
         const checksCopy = JSON.parse(JSON.stringify(this.checks));
+        var num = 0;
         while (checksCopy.length > 0) {
           const basket = [];
           basket.push(checksCopy.pop());
@@ -342,6 +348,7 @@ export class PageIncamAddfareComponent implements OnInit {
           });
           num++;
         }
+        this.isDepositCheck = false;
       },
       nzOnCancel: () => {
         this.confirmModal.destroy();

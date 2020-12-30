@@ -31,8 +31,6 @@ export class PageIncamAddfareComponent implements OnInit {
   incamAddfareLoading = true;
   allCheck = false;
   checks = [];
-  checked = false;
-
 
   mailSendLoading = false;
   mailSendLoadingText = '메일전송중';
@@ -157,24 +155,6 @@ export class PageIncamAddfareComponent implements OnInit {
       return [employee_deposit, remittance];
   }
 
-  depositCheck(data) {
-    const contractIndex = this.listOfContract.findIndex(item => item.value === data.contract_seq);
-
-    const all = this.listOfContract[contractIndex].hour_price * data.hour;
-    const all_tax =  Math.floor(all * data.income / 10) * 10;
-
-    var check;
-    if(data.check_yn == 1){
-      check = "완료";
-    }
-    else{
-      check = "미완료";
-    }
-
-
-    return [check];
-}
-
   sendMail() {
     this.checks = this.incamAddfares.data.filter(v => (v.check));
     this.isSendMail = true;
@@ -216,7 +196,6 @@ export class PageIncamAddfareComponent implements OnInit {
 
   getIncamAddfares() {
     this.incamAddfareService.getIncamAddfares(this.incamAddfares, this.filter).subscribe(data => {
-      console.log(data);
 
       data.data = data.data.map(v => {
         v.check = false;
@@ -253,10 +232,6 @@ export class PageIncamAddfareComponent implements OnInit {
 
   selectIncamAddfare(param) {
     this.selectedIncamAddfare = param;
-  }
-
-  checkedIncamAddfare(){
-    this.checked = true;
   }
 
   incamAddfareAdd() {
@@ -333,21 +308,25 @@ export class PageIncamAddfareComponent implements OnInit {
     this.isDepositCheck = true;
   }
 
-  async isDepositCheckOK(){
+  isDepositCheckOK() {
+
     this.confirmModal = this.modal.confirm({
       nzTitle: '입금완료 확인',
       nzContent: '입금완료 처리하시겠습니까? ',
       nzOnOk: () => {
-        const checksCopy = JSON.parse(JSON.stringify(this.checks));
-        var num = 0;
-        while (checksCopy.length > 0) {
-          const basket = [];
-          basket.push(checksCopy.pop());
-          this.incamAddfareService.updateDeposit(basket[num].addfare_seq).subscribe(data => {
-            this.getIncamAddfares();
-          });
-          num++;
-        }
+
+        let checksCopy = JSON.parse(JSON.stringify(this.checks));
+
+        // 입금으로 변경
+        checksCopy = checksCopy.map(v => {
+          v.check_yn = 1;
+          return v;
+        });
+
+        this.incamAddfareService.updateDeposit(checksCopy).subscribe(data => {
+          this.getIncamAddfares();
+        });
+
         this.isDepositCheck = false;
       },
       nzOnCancel: () => {

@@ -51,6 +51,22 @@ export class CommunityService {
     );
   }
 
+  deleteBoard(board_seq: number) {
+    return this.http.delete(this.baseUrl + 'community/' + board_seq)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
+
+  writeBoard(_community: Community) {
+    return this.http.post(this.baseUrl + 'community', _community)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
+
   increaseViewCount(_community: Community) {
     _community.view_count += 1;
     

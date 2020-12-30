@@ -20,5 +20,9 @@
         </tr>
       </tbody>
     </table>
+    <div class="community-write-wrapper">
+      <button routerLink="/community/new">글쓰기</button>
+    </div>
+    <nz-pagination [(nzPageIndex)]="boards.pageNumber" [nzTotal]="boards.totalElements" (nzPageIndexChange)="movePage()"></nz-pagination>
   </div>
 </div>

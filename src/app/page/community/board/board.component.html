@@ -5,11 +5,13 @@
     </div>
     <div class="board-info">
       <span><b>{{ board.category }}</b></span>
-      <span><b>작성자</b> {{ board.reg_user}}</span>
-      <span><b>작성일</b> {{ convertDateType(board.reg_dt )}}</span>
+      <span><b>작성자</b> {{ board.reg_user }}</span>
+      <span><b>작성일</b> {{ convertDateType(board.reg_dt) }}</span>
       <span><b>조회수</b> {{ board.view_count }}</span>
       <button (click)="adminAble()" *ngIf="admin === false">관리자</button>
-      <button (click)="adminDisable()" *ngIf="admin === true">관리자제거</button>
+      <button (click)="adminDisable()" *ngIf="admin === true">
+        관리자제거
+      </button>
       <button (click)="boardSave()">저장</button>
     </div>
     <ng-container *ngFor="let template of templates; index as i">
@@ -17,9 +19,19 @@
         #class
         [froalaEditor]="option"
         [innerHTML]="template | safeHtml"
-        *ngIf="admin === true"
+        *ngIf="edit === true"
       ></div>
-      <div [innerHTML]="template | safeHtml" *ngIf="admin === false"></div>
+      <div [innerHTML]="template | safeHtml" *ngIf="edit === false"></div>
     </ng-container>
+    <div class="board-control-btn-wrapper">
+      <div class="left-box">
+        <button (click)="goBoardList()">목록 보기</button>
+      </div>
+      <div class="right-box">
+        <button (click)="editAble()" *ngIf="edit === false">글 수정</button>
+        <button (click)="editComplete()" *ngIf="edit === true">글 수정 완료</button>
+        <button (click)="boardDelete()">글 삭제</button>
+      </div>
+    </div>
   </div>
 </div>

@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { JoinComponent } from './join/join.component';
 import { CommunityComponent } from './community/community.component';
 import { BoardComponent } from './community/board/board.component';
+import { NewComponent } from './community/new/new.component';
 
 import { AboutusComponent } from './class/aboutus/aboutus.component';
 
@@ -38,6 +39,9 @@ const routes: Routes = [{
     },
     {
         path: 'community', component: CommunityComponent
+    },
+    {
+        path: 'community/new', component: NewComponent
     },
     {
         path: 'board/:board_seq', component: BoardComponent

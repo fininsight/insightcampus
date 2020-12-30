@@ -1,0 +1,61 @@
+.new-content {
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.new-content-inner {
+  width: 800px;
+}
+
+.new-content-inner > h1 {
+  font-weight: bold;
+  font-size: 2.7em;
+}
+
+.new-content-inner > .article-info > .input-row {
+  margin: 10px 0;
+}
+
+.new-content-inner > .article-info > .input-row > label {
+  width: 70px;
+  display: inline-block;
+  font-weight: bold;
+}
+
+.new-content-inner > .article-info > .input-row > input {
+  width: 400px;
+  padding: 3px;
+  border: none;
+  border-bottom: 1px solid #bbb;
+}
+
+.new-content-inner > .article-info > .input-row > input:focus {
+  outline: none;
+  border-bottom: 1px solid #0087FA;
+}
+
+.new-content-inner > .article-info > .input-row > select {
+  width: 150px;
+  padding: 5px;
+}
+
+.new-content-inner > .froala-editor {
+  margin: 40px 0;
+}
+
+.new-content-inner > .control-btn-wrapper {
+  text-align: right;
+}
+
+.new-content-inner > .control-btn-wrapper > button {
+  width: 70px;
+  margin-left: 15px;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: #666;
+  color: #fff;
+  cursor: pointer;
+}

@@ -1,0 +1,272 @@
+<div id="header">
+    <div id="title">
+      <i nz-icon nzType="user" nzTheme="outline"></i>
+      사업관리
+    </div>
+</div>
+<div id="content">
+<div id="main-table">
+    <div class="table-menu">
+            <button nz-button nzType="default" nzShape="circle" (click)="finWorkAdd()"><i title="추가" nz-icon nzType="plus"></i></button>
+            <button nz-button nzType="default" nzShape="circle" (click)="finWorkUpdate()" [disabled]="selectedFinWork.work_seq == undefined"><i nz-icon nzType="edit"></i></button>
+            <button nz-button nzType="default" nzShape="circle" (click)="finWorkDelete()" [disabled]="selectedFinWork.work_seq == undefined"><i nz-icon nzType="delete"></i></button>
+          </div>
+    <nz-table
+      #finWorkTable
+      nzShowSizeChanger
+      nzBordered
+      nzNoResult = "조회된 결과가 없습니다"
+      [nzFrontPagination]="false"
+      [nzData]="finWorks.data"
+      [nzLoading]="finWorkLoading"
+      [nzTotal]="finWorks.totalPages * finWorks.size"
+      [(nzPageIndex)]="finWorks.pageNumber"
+      [(nzPageSize)]="finWorks.size"
+      (nzPageIndexChange)="getFinWorks()"
+      nzShowSizeChanger="false"
+      nzSize="small">
+      <thead>
+        <tr>
+          <th nzWidth="10%" [nzAlign]="'center'">사업명</th>
+          <th nzWidth="15%" [nzAlign]="'center'">시작일</th>
+          <th nzWidth="15%" [nzAlign]="'center'">종료일</th>
+          <th nzWidth="15%" [nzAlign]="'center'">예상매출</th>
+          <th nzWidth="15%" [nzAlign]="'center'">예상매입</th>
+          <th nzWidth="15%" [nzAlign]="'center'">매출</th>
+          <th nzWidth="15%" [nzAlign]="'center'">매입</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of finWorkTable.data"
+            (click)="selectFinWork(data)"
+            (dblclick)="finWorkUpdate()"
+            [ngClass]="{
+            'on':this.selectedFinWork.work_seq === data.work_seq
+          }"
+            style="cursor: pointer;">
+          <td [nzAlign]="'center'">{{ data.work_name }}</td>
+          <td [nzAlign]="'center'">{{ data.start_date.substring(0,10) }}</td>
+          <td [nzAlign]="'center'">{{ data.end_date.substring(0,10) }}</td>
+          <td [nzAlign]="'center'">{{ data.expected_sales }}</td>
+          <td [nzAlign]="'center'">{{ data.expected_purchase }}</td>
+          <td [nzAlign]="'center'">{{ data.sales }}</td>
+          <td [nzAlign]="'center'">{{ data.purchase }}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+    </div>
+</div>
+  
+ <nz-modal [(nzVisible)]="isFinWorkAdd"
+            nzTitle="사업 추가"  
+            (nzOnCancel)="popupCancel()"
+            (nzOnOk)="finWorkAddOk()"
+            nzWidth="550">
+   <div class="popup-content">
+     <div>
+       <nz-form-label nzRequired>사업명</nz-form-label>
+       <input nz-input type="text" placeholder="사업명" [(ngModel)]="popupFinWork.work_name" />
+     </div>
+     <div>
+       <nz-form-label>시작일</nz-form-label>
+       <nz-date-picker [nzPlaceHolder]="'시작일'" [(ngModel)]="popupFinWork.start_date" [nzShowToday]=false [nzStyle]="{'width': '300px'}" style="margin-bottom: 5px;"></nz-date-picker>
+     </div>
+     <div>
+       <nz-form-label>종료일</nz-form-label>
+       <nz-date-picker [nzPlaceHolder]="'종료일'" [(ngModel)]="popupFinWork.end_date" [nzShowToday]=false [nzStyle]="{'width': '300px'}" style="margin-bottom: 5px;"></nz-date-picker>
+     </div>
+     <div>
+       <nz-form-label>예상매출</nz-form-label>
+       <input nz-input type="text" placeholder="예상매출" [(ngModel)]="popupFinWork.expected_sales" />
+     </div>
+     <div>
+       <nz-form-label>예상매입</nz-form-label>
+       <input nz-input type="text" placeholder="예상매입" [(ngModel)]="popupFinWork.expected_purchase" />
+     </div>
+     <div>
+       <nz-form-label>매출</nz-form-label>
+       <input nz-input type="text" placeholder="매출" [(ngModel)]="popupFinWork.sales" />
+     </div>
+     <div>
+       <nz-form-label>매입</nz-form-label>
+       <input nz-input type="text" placeholder="매입" [(ngModel)]="popupFinWork.purchase" />
+     </div>
+
+   </div>
+    <div *nzModalFooter>
+        <button nz-button nzType="default" (click)="popupCancel()">취소</button>
+        <button nz-button nzType="primary" (click)="finWorkAddOk()">등록</button>
+      </div>
+  </nz-modal>
+
+ <nz-modal [(nzVisible)]="isFinWorkUpdate"
+           nzTitle="사업 수정"
+           (nzOnCancel)="popupCancel()"
+           (nzOnOk)="finWorkUpdateOk()"
+           nzWidth="550">
+   <div class="popup-content">
+     <div>
+       <nz-form-label nzRequired>사업명</nz-form-label>
+       <input nz-input type="text" placeholder="사업명" [(ngModel)]="popupFinWork.work_name" />
+     </div>
+     <div>
+       <nz-form-label>시작일</nz-form-label>
+       <nz-date-picker [nzPlaceHolder]="'시작일'" [(ngModel)]="popupFinWork.start_date" [nzShowToday]=false [nzStyle]="{'width': '300px'}" style="margin-bottom: 5px;"></nz-date-picker>
+     </div>
+     <div>
+       <nz-form-label>종료일</nz-form-label>
+       <nz-date-picker [nzPlaceHolder]="'종료일'" [(ngModel)]="popupFinWork.end_date" [nzShowToday]=false [nzStyle]="{'width': '300px'}" style="margin-bottom: 5px;"></nz-date-picker>
+     </div>
+     <div>
+       <nz-form-label>예상매출</nz-form-label>
+       <input nz-input type="text" placeholder="예상매출" [(ngModel)]="popupFinWork.expected_sales" />
+     </div>
+     <div>
+       <nz-form-label>예상매입</nz-form-label>
+       <input nz-input type="text" placeholder="예상매입" [(ngModel)]="popupFinWork.expected_purchase" />
+     </div>
+     <div>
+       <nz-form-label>매출</nz-form-label>
+       <input nz-input type="text" placeholder="매출" [(ngModel)]="popupFinWork.sales" />
+     </div>
+     <div>
+       <nz-form-label>매입</nz-form-label>
+       <input nz-input type="text" placeholder="매입" [(ngModel)]="popupFinWork.purchase" />
+     </div>
+
+     <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+     <div>
+       <div>
+         <div class="table-menu">
+           <button nz-button nzType="default" nzShape="circle" (click)="finWorkDetailAdd()"><i title="추가" nz-icon nzType="plus"></i></button>
+           <button nz-button nzType="default" nzShape="circle" (click)="finWorkDetailUpdate()" [disabled]="selectedFinWorkDetail.work_detail_seq == undefined"><i nz-icon nzType="edit"></i></button>
+           <button nz-button nzType="default" nzShape="circle" (click)="finWorkDetailDelete()" [disabled]="selectedFinWorkDetail.work_detail_seq == undefined"><i nz-icon nzType="delete"></i></button>
+         </div>
+         <nz-table #finWorkDetailTable
+                   nzShowSizeChanger
+                   nzBordered
+                   nzNoResult="조회된 결과가 없습니다"
+                   [nzFrontPagination]="false"
+                   [nzData]="finWorkDetails.data"
+                   [nzLoading]="finWorkDetailLoading"
+                   [nzTotal]="finWorkDetails.totalPages * finWorkDetails.size"
+                   [(nzPageIndex)]="finWorkDetails.pageNumber"
+                   [(nzPageSize)]="finWorkDetails.size"
+                   (nzPageIndexChange)="getFinWorkDetails()"
+                   nzShowSizeChanger="false"
+                   nzSize="small">
+           <thead>
+             <tr>
+               <th nzWidth="20%" [nzAlign]="'center'">년</th>
+               <th nzWidth="20%" [nzAlign]="'center'">월</th>
+               <th nzWidth="15%" [nzAlign]="'center'">예상매출</th>
+               <th nzWidth="15%" [nzAlign]="'center'">예상매입</th>
+               <th nzWidth="15%" [nzAlign]="'center'">매출</th>
+               <th nzWidth="15%" [nzAlign]="'center'">매입</th>
+             </tr>
+           </thead>
+           <tbody>
+             <tr *ngFor="let data of finWorkDetailTable.data"
+                 (click)="selectFinWorkDetail(data)"
+                 (dblclick)="finWorkDetailUpdate()"
+                 [ngClass]="{
+            'on':this.selectedFinWorkDetail.work_detail_seq === data.work_detail_seq
+          }"
+                 style="cursor: pointer;">
+               <td [nzAlign]="'center'">{{ data.year }}</td>
+               <td [nzAlign]="'center'">{{ data.month }}</td>
+               <td [nzAlign]="'center'">{{ data.expected_sales }}</td>
+               <td [nzAlign]="'center'">{{ data.expected_purchase }}</td>
+               <td [nzAlign]="'center'">{{ data.sales }}</td>
+               <td [nzAlign]="'center'">{{ data.purchase }}</td>
+             </tr>
+           </tbody>
+         </nz-table>
+       </div>
+     </div>
+
+     <nz-modal [(nzVisible)]="isFinWorkDetailAdd"
+               nzTitle="사업 추가"
+               (nzOnCancel)="popupDetailCancel()"
+               (nzOnOk)="finWorkDetailAddOk()"
+               nzWidth="550">
+       <div class="popup-content">
+         <div>
+           <nz-form-label>년</nz-form-label>
+           <input nz-input type="text" placeholder="년" [(ngModel)]="popupFinWorkDetail.year" />
+         </div>
+         <div>
+           <nz-form-label>월</nz-form-label>
+           <input nz-input type="text" placeholder="월" [(ngModel)]="popupFinWorkDetail.month" />
+         </div>
+         <div>
+           <nz-form-label>예상매출</nz-form-label>
+           <input nz-input type="text" placeholder="예상매출" [(ngModel)]="popupFinWorkDetail.expected_sales" />
+         </div>
+         <div>
+           <nz-form-label>예상매입</nz-form-label>
+           <input nz-input type="text" placeholder="예상매입" [(ngModel)]="popupFinWorkDetail.expected_purchase" />
+         </div>
+         <div>
+           <nz-form-label>매출</nz-form-label>
+           <input nz-input type="text" placeholder="매출" [(ngModel)]="popupFinWorkDetail.sales" />
+         </div>
+         <div>
+           <nz-form-label>매입</nz-form-label>
+           <input nz-input type="text" placeholder="매입" [(ngModel)]="popupFinWorkDetail.purchase" />
+         </div>
+
+       </div>
+       <div *nzModalFooter>
+         <button nz-button nzType="default" (click)="popupDetailCancel()">취소</button>
+         <button nz-button nzType="primary" (click)="finWorkDetailAddOk()">등록</button>
+       </div>
+     </nz-modal>
+
+     <nz-modal [(nzVisible)]="isFinWorkDetailUpdate"
+               nzTitle="사업 수정"
+               (nzOnCancel)="popupDetailCancel()"
+               (nzOnOk)="finWorkDetailUpdateOk()"
+               nzWidth="550">
+       <div class="popup-content">
+         <div>
+           <nz-form-label>년</nz-form-label>
+           <input nz-input type="text" placeholder="년" [(ngModel)]="popupFinWorkDetail.year" />
+         </div>
+         <div>
+           <nz-form-label>월</nz-form-label>
+           <input nz-input type="text" placeholder="월" [(ngModel)]="popupFinWorkDetail.month" />
+         </div>
+         <div>
+           <nz-form-label>예상매출</nz-form-label>
+           <input nz-input type="text" placeholder="예상매출" [(ngModel)]="popupFinWorkDetail.expected_sales" />
+         </div>
+         <div>
+           <nz-form-label>예상매입</nz-form-label>
+           <input nz-input type="text" placeholder="예상매입" [(ngModel)]="popupFinWorkDetail.expected_purchase" />
+         </div>
+         <div>
+           <nz-form-label>매출</nz-form-label>
+           <input nz-input type="text" placeholder="매출" [(ngModel)]="popupFinWorkDetail.sales" />
+         </div>
+         <div>
+           <nz-form-label>매입</nz-form-label>
+           <input nz-input type="text" placeholder="매입" [(ngModel)]="popupFinWorkDetail.purchase" />
+         </div>
+
+       </div>
+       <div *nzModalFooter>
+         <button nz-button nzType="default" (click)="popupDetailCancel()">취소</button>
+         <button nz-button nzType="primary" (click)="finWorkDetailUpdateOk()">등록</button>
+       </div>
+     </nz-modal>
+
+     <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+   </div>
+   <div *nzModalFooter>
+     <button nz-button nzType="default" (click)="popupCancel()">취소</button>
+     <button nz-button nzType="primary" (click)="finWorkUpdateOk()">등록</button>
+   </div>
+ </nz-modal>

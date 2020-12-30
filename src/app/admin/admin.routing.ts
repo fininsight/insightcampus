@@ -15,6 +15,7 @@ import { PageCouponComponent } from './page-coupon/page-coupon.component';
 import { PageFaqComponent } from './page-faq/page-faq.component';
 import { PageEmailLogComponent } from './page-email-log/page-email-log.component';
 import { PageWpboardNoticeComponent } from './page-wpboard-notice/page-wpboard-notice.component';
+import { PageFinWorkComponent } from './page-fin-work/page-fin-work.component';
 
 const routes: Routes = [{
   path: '',
@@ -61,6 +62,9 @@ const routes: Routes = [{
   },
   {
       path: 'wpboard-notice', component: PageWpboardNoticeComponent
+  },
+  {
+      path: 'fin-work', component: PageFinWorkComponent
   },
 ]}];
 

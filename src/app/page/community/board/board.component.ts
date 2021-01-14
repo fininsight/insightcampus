@@ -35,9 +35,7 @@ export class BoardComponent implements OnInit {
   }
 
   public option =  {
-    // toolbarInline: true,
-    // charCounterCount: false,
-    // toolbarVisibleWithoutSelection: true,
+    imageUploadURL: 'http://localhost:5000/api/froala/uploadfiles',
 
     events : {
       initialized: (editor) => {

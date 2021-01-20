@@ -24,6 +24,7 @@ export class NewComponent implements OnInit {
 
   public options = {
     placeholderText: "내용을 입력하세요",
+    imageUploadURL: 'http://localhost:5000/api/froala/uploadfiles',
 
     events: {
       contentChanged: () => {

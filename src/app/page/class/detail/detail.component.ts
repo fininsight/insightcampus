@@ -54,19 +54,19 @@ testTemplage2 = `
     toolbarInline: true,
     charCounterCount: false,
     toolbarVisibleWithoutSelection: true,
-     // Set the image upload parameter.
-     imageUploadParam: 'image_param',
-     // Set the image upload URL.
-     imageUploadURL: '/upload_image',
-     // Additional upload params.
-     imageUploadParams: {id: 'my_editor'},
-     // Set request type.
-     imageUploadMethod: 'POST',
-     // Set max image size to 5MB.
-     imageMaxSize: 5 * 1024 * 1024,
-     // Allow to upload PNG and JPG.
-     imageAllowedTypes: ['jpeg', 'jpg', 'png'],
-     events : {
+    // Set the image upload parameter.
+    // imageUploadParam: 'image_param',
+    // Additional upload params.
+    // imageUploadParams: {id: 'my_editor'},
+    // Set the image upload URL.
+    imageUploadURL: 'http://localhost:5000/api/froala/upload/class',
+    // Set request type.
+    imageUploadMethod: 'POST',
+    // Set max image size to 5MB.
+    imageMaxSize: 5 * 1024 * 1024,
+    // Allow to upload PNG and JPG.
+    imageAllowedTypes: ['jpeg', 'jpg', 'png'],
+    events : {
       initialized: (editor) => {
         // editor._editor.edit.off();
       },

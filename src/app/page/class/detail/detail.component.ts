@@ -26,7 +26,7 @@ export class DetailComponent implements OnInit {
   @ViewChildren('class') classes: QueryList<ElementRef>;
 
   testTemplage = `
-  <div class="class-info">
+  <div class="template-class-info">
     <div class="title">
       <div class="title-text">
         <div style="font-size:30px">제목을 입력해 주세요</div>
@@ -40,7 +40,7 @@ export class DetailComponent implements OnInit {
 `;
 
 testTemplage2 = `
-  <div class="class-title">
+  <div class="template-class-title">
     <div class="image">
       <img src="../../../../assets/images/template/template02-02.png"/>
     </div>

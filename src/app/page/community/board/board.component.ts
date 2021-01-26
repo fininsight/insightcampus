@@ -35,7 +35,10 @@ export class BoardComponent implements OnInit {
   }
 
   public option =  {
-    imageUploadURL: 'http://localhost:5000/api/froala/uploadfiles',
+    imageUploadURL: 'http://localhost:5000/api/froala/upload/community',
+    imageUploadMethod: 'POST',
+    imageMaxSize: 5 * 1024 * 1024,
+    imageAllowedTypes: ['jpeg', 'jpg', 'png'],
 
     events : {
       initialized: (editor) => {

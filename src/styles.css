@@ -58,3 +58,260 @@ div.ant-modal-body {
 .template-class-title .title {
     margin-top: 5px;
 }
+
+/* introduceTemplate  */
+.template-class-introduce {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.template-class-introduce .icon-box {
+    width: 100%;
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.template-class-introduce .icon-box .icon {
+    padding: 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: rgba(244, 130, 30, 0.8);
+    font-size: 42px;
+    color: #fff;
+}
+
+.template-class-introduce .icon-box .icon img {
+    width: 42px;
+    height: 42px;
+    margin: 0;
+    color: #fff;
+}
+
+.template-class-introduce .title {
+    margin-bottom: 15px;
+}
+
+.template-class-introduce .title h1 {
+    padding: 15px 20px;
+    border-bottom: 2px solid #f6981f;
+    font-weight: 700;
+    font-size: 26px;
+}
+
+.template-class-introduce .content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.template-class-introduce .content img {
+    width: 40px;
+    height: 40px;
+    margin: 30px 0;
+}
+
+.template-class-introduce .content p {
+    margin: 0;
+    line-height: 1.5;
+    font-size: 24px;
+}
+
+/* class2 */
+.template-class-class2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.template-class-class2 .icon-box {
+    width: 100%;
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.template-class-class2 .icon-box .icon {
+    padding: 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: rgba(244, 130, 30, 0.8);
+    font-size: 42px;
+    color: #fff;
+}
+
+.template-class-class2 .icon-box .icon img {
+    width: 42px;
+    height: 42px;
+    margin: 0;
+    color: #fff;
+}
+
+.template-class-class2 .title h1 {
+    margin: 0;
+    padding: 15px 20px;
+    border-bottom: 2px solid #f6981f;
+    font-weight: 700;
+    font-size: 26px;
+}
+
+.template-class-class2 .intro-list h2 {
+    margin-bottom: 30px;
+    font-size: 20px;
+}
+
+.template-class-class2 .intro-list ol {
+    margin: 40px 0;
+}
+
+.template-class-class2 .intro-list ol li {
+    font-size: 18px;
+}
+
+/* tag */
+.template-class-tag .tag-box {
+    padding: 80px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f6981f;
+    box-sizing: border-box;
+}
+
+.template-class-tag .tag-box p {
+    margin: 0;
+    line-height: 1.5;
+    font-weight: 700;
+    font-size: 28px;
+    color: #fff;
+}
+
+/* curriculum */
+.template-class-curriculum {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.template-class-curriculum .icon-box {
+    width: 100%;
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.template-class-curriculum .icon-box .icon {
+    padding: 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: rgba(244, 130, 30, 0.8);
+    font-size: 42px;
+    color: #fff;
+}
+
+.template-class-curriculum .icon-box .icon img {
+    width: 42px;
+    height: 42px;
+    margin: 0;
+    color: #fff;
+}
+
+.template-class-curriculum .title {
+    width: 100%;
+}
+
+.template-class-curriculum .title h1 {
+    margin: 0;
+    padding: 15px 20px;
+    border-bottom: 2px solid #000;
+    text-align: center;
+    font-weight: 700;
+    font-size: 26px;
+}
+
+.template-class-curriculum .class-part {
+    width: 100%;
+}
+
+.template-class-curriculum .class-part h2 {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.template-class-curriculum .class-part ul {
+    margin: 40px 0;
+    padding: 15px 30px;
+    list-style-type: disc;
+    border: 1px solid #000;
+}
+
+.template-class-curriculum .class-part ul li {
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+
+/* info */
+.template-class-info {
+    display: flex;
+    justify-content: center;
+}
+
+.template-class-info .icon-box {
+    margin: 15px 0;
+    margin-right: 15px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.template-class-info .icon-box .icon {
+    padding: 0.3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: rgba(244, 130, 30, 0.8);
+    font-size: 30px;
+    color: #fff;
+}
+
+.template-class-info .icon-box .icon img {
+    width: 35px;
+    height: 32px;
+    margin: 0;
+    color: #fff;
+}
+
+.template-class-info .info-box {
+    width: 100%;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.template-class-info .info-box .title {
+    margin-bottom: 15px;
+    display: block;
+}
+
+.template-class-info .info-box .title h2 {
+    font-weight: 600;
+    font-size: 1rem;
+}

@@ -13,6 +13,11 @@
     <div id="admin-menu">
       <button (click)="testAdd()" *ngIf="admin === true">추가(강의소개)</button>
       <button (click)="testAdd2()" *ngIf="admin === true">추가2(타이틀)</button>
+      <button (click)="introduceAdd()" *ngIf="admin === true">추가3(소개)</button>
+      <button (click)="class2Add()" *ngIf="admin === true">추가4(포인트)</button>
+      <button (click)="tagAdd()" *ngIf="admin === true">추가5(태그)</button>
+      <button (click)="curriculumAdd()" *ngIf="admin === true">추가6(커리큘럼)</button>
+      <button (click)="infoAdd()" *ngIf="admin === true">추가7(수강방법)</button>
       <button (click)="testAdmin()" *ngIf="admin !== true">관리자권한</button>
       <button (click)="testAdminDisable()" *ngIf="admin === true">
         관리자권한제거

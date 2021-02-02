@@ -50,6 +50,90 @@ testTemplage2 = `
   </div>
 `;
 
+  introduceTemplate = `
+    <div class="template-class-introduce">
+      <div class="icon-box">
+        <div class="icon">
+          <img src="../../../../assets/icons/folder-regular.svg" />
+        </div>
+      </div>
+      <div class="title">
+        <h1>Introduction</h1>
+      </div>
+      <div class="content">
+        <img src="../../../../assets/icons/quote-left-solid.svg" />
+        <p>글자를 입력하세요</p>
+        <img src="../../../../assets/icons/quote-right-solid.svg" />
+      </div>
+    </div>
+  `;
+
+  class2Template = `
+  <div class="template-class-class2">
+    <div class="icon-box">
+      <div class="icon">
+        <img src="../../../../assets/icons/lightbulb-regular.svg" />
+      </div>
+    </div>
+    <div class="title">
+      <h1>Point</h1>
+    </div>
+    <div class="intro-list">
+      <h2>이 강의가 특별한 이유</h2>
+      <ol>
+        <li>입력하세요</li>
+        <li>입력하세요</li>
+        <li>입력하세요</li>
+      </ol>
+    </div>
+  </div>
+  `;
+
+  tagTemplate = `
+  <div class="template-class-tag">
+    <div class="tag-box">
+      <p>#입력해주세요</p>
+    </div>
+  </div>
+  `;
+
+  curriculumTemplate = `
+  <div class="template-class-curriculum">
+    <div class="icon-box">
+      <div class="icon">
+        <img src="../../../../assets/icons/clipboard-regular.svg" />
+      </div>
+    </div>
+    <div class="title">
+      <h1>Curriculum</h1>
+    </div>
+    <div class="class-part">
+      <h2>제 1장 | 타이틀</h2>
+      <ul>
+        <li>입력하세요</li>
+        <li>입력하세요</li>
+        <li>입력하세요</li>
+      </ul>
+    </div>
+  </div>
+  `;
+
+  infoTemplate = `
+  <div class="template-class-info">
+    <div class="icon-box">
+      <div class="icon">
+        <img src="../../../../assets/icons/info-solid.svg" />
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title">
+        <h2>수강 방법</h2>
+      </div>
+      <p>입력해주세요</p>
+    </div>
+  </div>
+  `;
+
   public option =  {
     toolbarInline: true,
     charCounterCount: false,
@@ -146,6 +230,26 @@ testTemplage2 = `
 
   testAdd2() {
     this.templates.push(this.testTemplage2);
+  }
+
+  introduceAdd() {
+    this.templates.push(this.introduceTemplate);
+  }
+
+  class2Add() {
+    this.templates.push(this.class2Template);
+  }
+
+  tagAdd() {
+    this.templates.push(this.tagTemplate);
+  }
+
+  curriculumAdd() {
+    this.templates.push(this.curriculumTemplate);
+  }
+
+  infoAdd() {
+    this.templates.push(this.infoTemplate);
   }
 
   testAdmin() {

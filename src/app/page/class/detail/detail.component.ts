@@ -134,6 +134,77 @@ testTemplage2 = `
   </div>
   `;
 
+  goalTemplate = `
+  <div class="template-class-goal">
+    <div class="icon-box">
+      <div class="icon">
+        <img src="../../../../assets/icons/check-double-solid.svg" />
+      </div>
+    </div>
+    <div class="content-box">
+      <div class="title">
+        <p>Goal</p>
+      </div>
+      <div class="goal-list">
+        <ul>
+          <li>입력해주세요</li>
+          <li>입력해주세요</li>
+          <li>입력해주세요</li>
+          <li>입력해주세요</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  `;
+
+  professorTemplate = `
+  <div class="template-class-professor">
+    <div class="title">
+      <h1>Professor</h1>
+    </div>
+    <div class="professor-info">
+      <h2>이정훈</h2>
+      <p>이정훈 교수님은 의료 데이터 딥러닝 분야의 전문가입니다. 풍부한 연구 경험과 데이터 북석 강의 경력을 가지고 있습니다.</p>
+    </div>
+    <div class="career">
+      <p>[학력]</p>
+      <br />
+      <br />
+      <p>서울대학교 자연과학대학 생물정보학(Bioinformatics)협동과정</p>
+      <p>서울대학교 의과대학 Biomedical informatics(SNUBI)박사과정</p>
+      <p>인하대학교 컴퓨터정보공학 학사</p>
+    </div>
+  </div>
+  `;
+
+  foryouTemplate = `
+  <div class="template-class-foryou">
+    <div class="icon-box">
+      <div class="icon">
+        <img src="../../../../assets/icons/hand-point-down-regular.svg" />
+      </div>
+    </div>
+    <div class="title">
+      <h1>For You</h1>
+    </div>
+    <div class="recommend">
+      <p>이런 분들께 추천드립니다!</p>
+      <div class="recommend-box-wrapper">
+        <div class="recommend-box">
+          <h3>IT 엔지니어</h3>
+          <p>실무에 딥러닝 분석을</p>
+          <p>적용하고 싶은 IT 실무자</p>
+        </div>
+        <div class="recommend-box">
+          <h3>데이터 분석가</h3>
+          <p>데이터 분석에 딥러닝을</p>
+          <p>적용해 보고 싶은 연구원, 대학원생</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  `;
+
   public option =  {
     toolbarInline: true,
     charCounterCount: false,
@@ -250,6 +321,18 @@ testTemplage2 = `
 
   infoAdd() {
     this.templates.push(this.infoTemplate);
+  }
+
+  goalAdd() {
+    this.templates.push(this.goalTemplate);
+  }
+
+  professorAdd() {
+    this.templates.push(this.professorTemplate);
+  }
+
+  foryouAdd() {
+    this.templates.push(this.foryouTemplate);
   }
 
   testAdmin() {

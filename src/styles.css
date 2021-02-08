@@ -58,3 +58,447 @@ div.ant-modal-body {
 .template-class-title .title {
     margin-top: 5px;
 }
+
+/* introduceTemplate  */
+.template-class-introduce {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.template-class-introduce .icon-box {
+    width: 100%;
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.template-class-introduce .icon-box .icon {
+    padding: 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: rgba(244, 130, 30, 0.8);
+    font-size: 42px;
+    color: #fff;
+}
+
+.template-class-introduce .icon-box .icon img {
+    width: 42px;
+    height: 42px;
+    margin: 0;
+    color: #fff;
+}
+
+.template-class-introduce .title {
+    margin-bottom: 15px;
+}
+
+.template-class-introduce .title h1 {
+    padding: 15px 20px;
+    border-bottom: 2px solid #f6981f;
+    font-weight: 700;
+    font-size: 26px;
+}
+
+.template-class-introduce .content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.template-class-introduce .content img {
+    width: 40px;
+    height: 40px;
+    margin: 30px 0;
+}
+
+.template-class-introduce .content p {
+    margin: 0;
+    line-height: 1.5;
+    font-size: 24px;
+}
+
+/* class2 */
+.template-class-class2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.template-class-class2 .icon-box {
+    width: 100%;
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.template-class-class2 .icon-box .icon {
+    padding: 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: rgba(244, 130, 30, 0.8);
+    font-size: 42px;
+    color: #fff;
+}
+
+.template-class-class2 .icon-box .icon img {
+    width: 42px;
+    height: 42px;
+    margin: 0;
+    color: #fff;
+}
+
+.template-class-class2 .title h1 {
+    margin: 0;
+    padding: 15px 20px;
+    border-bottom: 2px solid #f6981f;
+    font-weight: 700;
+    font-size: 26px;
+}
+
+.template-class-class2 .intro-list h2 {
+    margin-bottom: 30px;
+    font-size: 20px;
+}
+
+.template-class-class2 .intro-list ol {
+    margin: 40px 0;
+}
+
+.template-class-class2 .intro-list ol li {
+    font-size: 18px;
+}
+
+/* tag */
+.template-class-tag .tag-box {
+    padding: 80px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f6981f;
+    box-sizing: border-box;
+}
+
+.template-class-tag .tag-box p {
+    margin: 0;
+    line-height: 1.5;
+    font-weight: 700;
+    font-size: 28px;
+    color: #fff;
+}
+
+/* curriculum */
+.template-class-curriculum {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.template-class-curriculum .icon-box {
+    width: 100%;
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.template-class-curriculum .icon-box .icon {
+    padding: 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: rgba(244, 130, 30, 0.8);
+    font-size: 42px;
+    color: #fff;
+}
+
+.template-class-curriculum .icon-box .icon img {
+    width: 42px;
+    height: 42px;
+    margin: 0;
+    color: #fff;
+}
+
+.template-class-curriculum .title {
+    width: 100%;
+}
+
+.template-class-curriculum .title h1 {
+    margin: 0;
+    padding: 15px 20px;
+    border-bottom: 2px solid #000;
+    text-align: center;
+    font-weight: 700;
+    font-size: 26px;
+}
+
+.template-class-curriculum .class-part {
+    width: 100%;
+}
+
+.template-class-curriculum .class-part h2 {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.template-class-curriculum .class-part ul {
+    margin: 40px 0;
+    padding: 15px 30px;
+    list-style-type: disc;
+    border: 1px solid #000;
+}
+
+.template-class-curriculum .class-part ul li {
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+
+/* info */
+.template-class-info {
+    display: flex;
+    justify-content: center;
+}
+
+.template-class-info .icon-box {
+    margin: 15px 0;
+    margin-right: 15px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.template-class-info .icon-box .icon {
+    padding: 0.3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: rgba(244, 130, 30, 0.8);
+    font-size: 30px;
+    color: #fff;
+}
+
+.template-class-info .icon-box .icon img {
+    width: 35px;
+    height: 32px;
+    margin: 0;
+    color: #fff;
+}
+
+.template-class-info .info-box {
+    width: 100%;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.template-class-info .info-box .title {
+    margin-bottom: 15px;
+    display: block;
+}
+
+.template-class-info .info-box .title h2 {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+/* goal */
+.template-class-goal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.template-class-goal .icon-box {
+    width: 100%;
+    margin: 15px 0;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.template-class-goal .icon-box .icon {
+    padding: 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: rgba(244, 130, 30, 0.8);
+    font-size: 42px;
+    color: #fff;
+}
+
+.template-class-goal .icon-box .icon img {
+    width: 42px;
+    height: 42px;
+    margin: 0;
+    color: #fff;
+}
+
+.template-class-goal .content-box {
+    width: 100%;
+    display: flex;
+}
+
+.template-class-goal .content-box .title {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.template-class-goal .content-box .title p {
+    padding: 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(244, 130, 30, 0.8);
+    font-weight: 700;
+    font-size: 2.3rem;
+}
+
+.template-class-goal .content-box .goal-list {
+    width: 100%;
+}
+
+.template-class-goal .content-box .goal-list ul {
+    margin-bottom: 0;
+}
+
+.template-class-goal .content-box .goal-list ul li {
+    font-size: 1.25rem;
+}
+
+/* professor */
+.template-class-professor {
+    margin: 15px 0;
+}
+
+.template-class-professor .title h1 {
+    padding-left: 0.5rem;
+    padding-right: 1.5rem;
+    padding-bottom: 0.5rem;
+    display: inline-block;
+    border-bottom: 2px solid rgba(244, 130, 30, 0.8);
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+.template-class-professor .professor-info {
+    padding: 0 0.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid #000;
+}
+
+.template-class-professor .professor-info h2 {
+    font-weight: 700;
+    font-size: 3rem;
+}
+
+.template-class-professor .professor-info p {
+    font-size: 0.9rem;
+}
+
+.template-class-professor .career {
+    padding: 1.5rem 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* for you */
+.template-class-foryou {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.template-class-foryou .icon-box {
+    width: 100%;
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.template-class-foryou .icon-box .icon {
+    padding: 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: rgba(244, 130, 30, 0.8);
+    font-size: 42px;
+    color: #fff;
+}
+
+.template-class-foryou .icon-box .icon img {
+    width: 42px;
+    height: 42px;
+    margin: 0;
+    color: #fff;
+}
+
+.template-class-foryou .title h1 {
+    margin: 0;
+    padding: 15px 20px;
+    border-bottom: 2px solid #f6981f;
+    font-weight: 700;
+    font-size: 26px;
+}
+
+.template-class-foryou .recommend {
+    width: 100%;
+}
+
+.template-class-foryou .recommend p {
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+.template-class-foryou .recommend .recommend-box-wrapper {
+    width: 100%;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.template-class-foryou .recommend .recommend-box-wrapper .recommend-box {
+    width: 48%;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.template-class-foryou .recommend .recommend-box-wrapper .recommend-box h3 {
+    margin-bottom: 1rem;
+    font-weight: 700;
+    font-size: 1.15rem;
+}
+
+.template-class-foryou .recommend .recommend-box-wrapper .recommend-box p {
+    margin-bottom: 0;
+    line-height: 1.5;
+    font-weight: 0.9rem;
+    color: #606060;
+}

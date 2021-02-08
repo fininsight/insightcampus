@@ -94,6 +94,7 @@ export class PageClassComponent implements OnInit {
     this.popupClass = new Class();
     this.popupClass.class_seq = this.selectedClass.class_seq;
     this.popupClass.class_nm = this.selectedClass.class_nm;
+    this.popupClass.category = this.selectedClass.category;
     this.popupClass.teacher = this.selectedClass.teacher;
     this.popupClass.duration = this.selectedClass.duration;
     this.popupClass.duration_nm = this.selectedClass.duration_nm;

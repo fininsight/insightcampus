@@ -72,3 +72,7 @@ tr.on td {
 .popup-content {
   overflow:auto; 
 }
+
+nz-select {
+  width: 300px;
+}

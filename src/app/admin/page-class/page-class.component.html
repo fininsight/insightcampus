@@ -36,8 +36,9 @@
       <tr>
         <th nzWidth="10%" [nzAlign]="'center'">수업</th>
         <th nzWidth="10%" [nzAlign]="'center'">강사</th>
+        <th nzWidth="10%" [nzAlign]="'center'">카테고리</th>
         <th nzWidth="10%" [nzAlign]="'center'">기간</th>
-        <th nzWidth="30%" [nzAlign]="'center'">기간이름</th>
+        <th nzWidth="20%" [nzAlign]="'center'">기간이름</th>
         <th nzWidth="20%" [nzAlign]="'center'">가격</th>
         <th nzWidth="20%" [nzAlign]="'center'">실제가격</th>
       </tr>
@@ -54,6 +55,7 @@
       >
         <td [nzAlign]="'center'">{{ data.class_nm }}</td>
         <td [nzAlign]="'center'">{{ data.teacher }}</td>
+        <td [nzAlign]="'center'">{{ data.category }}</td>
         <td [nzAlign]="'center'">{{ data.duration }}</td>
         <td [nzAlign]="'center'">{{ data.duration_nm }}</td>
         <td [nzAlign]="'center'">{{ data.price }}</td>
@@ -74,6 +76,13 @@
     <div>
       <nz-form-label nzRequired>수업 이름</nz-form-label>
       <input nz-input type="text" placeholder="수업 이름" [(ngModel)]="popupClass.class_nm"/>
+    </div>
+    <div>
+      <nz-form-label nzRequired>카테고리</nz-form-label>
+      <nz-select [(ngModel)]="popupClass.category">
+        <nz-option [nzValue]="1" nzLabel="카테고리1"></nz-option>
+        <nz-option [nzValue]="2" nzLabel="카테고리2"></nz-option>
+      </nz-select>
     </div>
     <div>
       <nz-form-label nzRequired>기간</nz-form-label>
@@ -107,6 +116,13 @@
     <div>
       <nz-form-label nzRequired>수업 이름</nz-form-label>
       <input nz-input type="text" placeholder="수업 이름" [(ngModel)]="popupClass.class_nm"/>
+    </div>
+    <div>
+      <nz-form-label nzRequired>카테고리</nz-form-label>
+      <nz-select [(ngModel)]="popupClass.category">
+        <nz-option [nzValue]="1" nzLabel="카테고리1"></nz-option>
+        <nz-option [nzValue]="2" nzLabel="카테고리2"></nz-option>
+      </nz-select>
     </div>
     <div>
       <nz-form-label nzRequired>기간</nz-form-label>

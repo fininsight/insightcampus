@@ -22,6 +22,7 @@ export class DetailComponent implements OnInit {
   public tab = 1;
   public all_class = new DataTable();
   public selectLoadClass;
+  public thumbnail: File = null;
 
   @ViewChildren('class') classes: QueryList<ElementRef>;
 
@@ -335,6 +336,11 @@ testTemplage2 = `
     this.templates.push(this.foryouTemplate);
   }
 
+  thumbnailUpload(files) {
+    this.thumbnail = files.item(0);
+    alert("파일 업로드가 되었습니다\n꼭 저장하여 썸네일을 등록해주세요");
+  }
+
   testAdmin() {
     this.admin = true;
     console.log(this.classes);
@@ -355,6 +361,10 @@ testTemplage2 = `
     this.classService.updateTemplate(saveClass).subscribe(data => {
       console.log(data);
     });
+
+    this.classService.updateThumbnail(this.class_seq ,this.thumbnail).subscribe(data => {
+      console.log(data);
+    })
 
     console.log(this.templates);
 

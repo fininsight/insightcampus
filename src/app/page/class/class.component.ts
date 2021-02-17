@@ -14,6 +14,7 @@ export class ClassComponent implements OnInit, OnDestroy {
   // public Editor = InlineEditor;
   public type: any;
   classes = new DataTable();
+  defaultThumbnailUrl: string = 'https://insightcampus.s3.ap-northeast-2.amazonaws.com/thumbnail_class/none.png';
 
   constructor(private route: ActivatedRoute,
               private router: Router,

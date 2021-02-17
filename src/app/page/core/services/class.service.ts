@@ -56,6 +56,15 @@ export class ClassService {
     );
   }
 
+  updateThumbnail(class_seq: number, _file: File) {
+    const formData = new FormData();
+    formData.append('file', _file);
+    return this.http.put(this.baseUrl + 'class/thumbnail/' + class_seq, formData).pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
+
   // Error handling
   errorHandl(error) {
     let errorMessage = '';

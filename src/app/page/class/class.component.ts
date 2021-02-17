@@ -25,16 +25,20 @@ export class ClassComponent implements OnInit, OnDestroy {
 
     route.params.subscribe(val => {
       this.type = val.type;
+      this.classService.getClasses(this.classes).subscribe(data => {
+        this.classes = data;
+        if (this.type === 'offline') {
+          this.classes.data = this.classes.data.filter(classObj => classObj.online_yn === 0);
+        }
+  
+        if (this.type === 'online') {
+          this.classes.data = this.classes.data.filter(classObj => classObj.online_yn === 1);
+        }
+      });
     });
-
-    this.classService.getClasses(this.classes).subscribe(data => {
-      this.classes = data;
-    });
-
   }
 
   ngOnInit() {
-
   }
 
   gotoPage(class_seq) {

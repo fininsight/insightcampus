@@ -38,9 +38,10 @@
         <th nzWidth="10%" [nzAlign]="'center'">강사</th>
         <th nzWidth="10%" [nzAlign]="'center'">카테고리</th>
         <th nzWidth="10%" [nzAlign]="'center'">기간</th>
-        <th nzWidth="20%" [nzAlign]="'center'">기간이름</th>
-        <th nzWidth="20%" [nzAlign]="'center'">가격</th>
-        <th nzWidth="20%" [nzAlign]="'center'">실제가격</th>
+        <th nzWidth="10%" [nzAlign]="'center'">구분</th>
+        <th nzWidth="30%" [nzAlign]="'center'">기간이름</th>
+        <th nzWidth="10%" [nzAlign]="'center'">가격</th>
+        <th nzWidth="10%" [nzAlign]="'center'">실제가격</th>
       </tr>
     </thead>
     <tbody>
@@ -57,6 +58,7 @@
         <td [nzAlign]="'center'">{{ data.teacher }}</td>
         <td [nzAlign]="'center'">{{ data.category }}</td>
         <td [nzAlign]="'center'">{{ data.duration }}</td>
+        <td [nzAlign]="'center'">{{ data.online_yn ? '온라인' : '오프라인'}}</td>
         <td [nzAlign]="'center'">{{ data.duration_nm }}</td>
         <td [nzAlign]="'center'">{{ data.price }}</td>
         <td [nzAlign]="'center'">{{ data.real_price }}</td>
@@ -82,6 +84,13 @@
       <nz-select [(ngModel)]="popupClass.category">
         <nz-option [nzValue]="1" nzLabel="카테고리1"></nz-option>
         <nz-option [nzValue]="2" nzLabel="카테고리2"></nz-option>
+      </nz-select>
+    </div>
+    <div>
+      <nz-form-label nzRequired>구분</nz-form-label>
+      <nz-select [(ngModel)]="popupClass.online_yn">
+        <nz-option [nzValue]="1" nzLabel="온라인"></nz-option>
+        <nz-option [nzValue]="0" nzLabel="오프라인"></nz-option>
       </nz-select>
     </div>
     <div>
@@ -122,6 +131,13 @@
       <nz-select [(ngModel)]="popupClass.category">
         <nz-option [nzValue]="1" nzLabel="카테고리1"></nz-option>
         <nz-option [nzValue]="2" nzLabel="카테고리2"></nz-option>
+      </nz-select>
+    </div>
+    <div>
+      <nz-form-label nzRequired>구분</nz-form-label>
+      <nz-select [(ngModel)]="popupClass.online_yn">
+        <nz-option [nzValue]="1" nzLabel="온라인"></nz-option>
+        <nz-option [nzValue]="0" nzLabel="오프라인"></nz-option>
       </nz-select>
     </div>
     <div>

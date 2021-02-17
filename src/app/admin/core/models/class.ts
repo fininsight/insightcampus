@@ -6,6 +6,7 @@ export class Class {
     duration: number;
     duration_nm: string;
     thumbnail: Date;
+    online_yn: number;
     price: number;
     real_price: number;
     template: string;

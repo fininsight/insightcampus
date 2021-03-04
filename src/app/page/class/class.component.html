@@ -1,7 +1,7 @@
 <div id="class-content">
   <div id="class-content-inner">
     <div *ngFor="let class of classes.data" (click)="gotoPage(class.class_seq)">
-      <img src="../../../assets/images/none.png">
+      <img [src]="class.thumbnail || defaultThumbnailUrl">
       <div class="name">
         {{ class.class_nm }}
       </div>

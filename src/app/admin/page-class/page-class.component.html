@@ -70,7 +70,7 @@
 </div>
 
 <nz-modal [(nzVisible)]="isClassAdd"
-          nzTitle="수업추가" 
+          nzTitle="강의추가" 
           (nzOnCancel)="popupCancel()"
           (nzOnOk)="classAddOk()"
           nzWidth="550">
@@ -117,10 +117,10 @@
 </nz-modal>
 
 <nz-modal [(nzVisible)]="isClassUpdate"
-          nzTitle="수업수정" 
+          nzTitle="강의수정" 
           (nzOnCancel)="popupCancel()"
           (nzOnOk)="classUpdateOk()"
-          nzWidth="350">
+          nzWidth="550">
   <div class="popup-content">
     <div>
       <nz-form-label nzRequired>수업 이름</nz-form-label>

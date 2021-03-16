@@ -8,6 +8,11 @@
     <button (click)="changeTab(3)">강의후기</button>
     <button (click)="changeTab(4)">질문답변</button>
     <button (click)="changeTab(5)">공지사항</button>
+    <button (click)="buyClass('card')">강의구매(카드)</button>
+    <button (click)="buyClass('trans')">강의구매(실시간계좌이체)</button>
+    <button (click)="buyClass('phone')">강의구매(휴대폰)</button>
+    <button (click)="buyClass('samsung')">강의구매(삼성페이)</button>
+    <button (click)="buyClass('cultureland')">강의구매(문화상품권)</button>
   </div>
   <ng-container *ngIf="tab === 1">
     <div id="admin-menu">

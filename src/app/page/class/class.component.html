@@ -1,27 +1,46 @@
+<div id="class-title">
+  <h1>Courses</h1>
+  <div id="class-featured-head">
+    <h3> Featured Courses </h3>
+  </div>
+</div>
 <div id="class-content">
   <div id="class-content-inner">
     <div *ngFor="let class of classes.data" (click)="gotoPage(class.class_seq)">
       <img [src]="class.thumbnail || defaultThumbnailUrl">
-      <div class="name">
-        {{ class.class_nm }}
+      <div class="class-title">
+        <div class="category">
+          {{ class.class_nm }}
+        </div>
+        <div class="name">
+          <h5>{{ class.class_nm }}</h5>
+        </div>
       </div>
-      <div class="price">
-        <span *ngIf="class.price != class.real_price">{{ class.price | number:'.2' }}</span>
+      
+      <div id="class-info">
+        <div class="duration">
+          {{ class.duration_nm }}
+        </div>
+        <div class="price-info">
+          <div class="price">
+            <span *ngIf="class.price != class.real_price">{{ class.price | number:'.2' }}</span>
+          </div>
+          <div class="real_price">
+            <span *ngIf="class.real_price !== 0">
+            {{ class.real_price | number:'.2' }}
+            </span>
+            <span *ngIf="class.real_price === 0">
+              무료
+            </span>
+          </div>
+        </div>
+        
+        <!-- <div class="teacher">
+          강의선생님
+        </div> -->
+        
       </div>
-      <div class="real_price">
-        <span *ngIf="class.real_price !== 0">
-        {{ class.real_price | number:'.2' }}
-        </span>
-        <span *ngIf="class.real_price === 0">
-          무료
-        </span>
-      </div>
-      <div class="teacher">
-        강의선생님
-      </div>
-      <div class="duration">
-        {{ class.duration_nm }}
-      </div>
+      
     </div>
   </div>
 </div>

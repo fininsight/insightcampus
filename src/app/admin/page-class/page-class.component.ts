@@ -22,6 +22,7 @@ export class PageClassComponent implements OnInit {
   isClassUpdate = false;
   
   classLoading = true;
+  date = null;
 
   sortValue: string | null = null;
   sortKey: string | null = null;
@@ -80,9 +81,11 @@ export class PageClassComponent implements OnInit {
   classAdd() {
     this.popupClass = new Class();
     this.isClassAdd= true;
+    this.date = null;
   }
   
   classAddOk() : void {
+    console.log(this.popupClass)
     this.userService.addClass(this.popupClass).subscribe(data => {
       this.getClass();
       this.isClassAdd = false;
@@ -96,7 +99,8 @@ export class PageClassComponent implements OnInit {
     this.popupClass.class_nm = this.selectedClass.class_nm;
     this.popupClass.category = this.selectedClass.category;
     this.popupClass.teacher = this.selectedClass.teacher;
-    this.popupClass.duration = this.selectedClass.duration;
+    this.popupClass.start_date = this.selectedClass.start_date;
+    this.popupClass.end_date = this.selectedClass.end_date;
     this.popupClass.duration_nm = this.selectedClass.duration_nm;
     this.popupClass.thumbnail = this.selectedClass.thumbnail;
     this.popupClass.online_yn = this.selectedClass.online_yn;
@@ -104,6 +108,7 @@ export class PageClassComponent implements OnInit {
     this.popupClass.real_price = this.selectedClass.real_price;
     this.popupClass.template = this.selectedClass.template;
     this.isClassUpdate = true;
+    this.date = [new Date(this.popupClass.start_date), new Date(this.popupClass.end_date)]
   }
   
   classUpdateOk() : void {
@@ -133,5 +138,25 @@ export class PageClassComponent implements OnInit {
   popupCancel() : void {
     this.isClassAdd = false;
     this.isClassUpdate = false;
+  }
+
+  onDateChange(event) {
+    this.popupClass.start_date = event[0]
+    this.popupClass.end_date = event[1]
+  }
+
+  getFullDate(target: string) {
+    const date = new Date(target);
+    let year: string | number = date.getFullYear();
+    let month: string | number = date.getMonth() + 1;
+    let day: string | number = date.getDate();
+
+    if (month < 10)
+      month = '0' + month.toString();
+    if (day < 10)
+      day = '0' + day.toString();
+
+    const result = [year, month, day].join('-');
+    return result;
   }
 }

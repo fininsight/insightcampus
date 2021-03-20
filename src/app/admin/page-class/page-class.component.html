@@ -37,11 +37,11 @@
         <th nzWidth="10%" [nzAlign]="'center'">수업</th>
         <th nzWidth="10%" [nzAlign]="'center'">강사</th>
         <th nzWidth="10%" [nzAlign]="'center'">카테고리</th>
-        <th nzWidth="10%" [nzAlign]="'center'">기간</th>
+        <th nzWidth="20%" [nzAlign]="'center'">기간</th>
         <th nzWidth="10%" [nzAlign]="'center'">구분</th>
-        <th nzWidth="30%" [nzAlign]="'center'">기간이름</th>
-        <th nzWidth="10%" [nzAlign]="'center'">가격</th>
-        <th nzWidth="10%" [nzAlign]="'center'">실제가격</th>
+        <th nzWidth="20%" [nzAlign]="'center'">기간이름</th>
+        <th nzWidth="10%" [nzAlign]="'center'">정가</th>
+        <th nzWidth="10%" [nzAlign]="'center'">결제가</th>
       </tr>
     </thead>
     <tbody>
@@ -57,7 +57,7 @@
         <td [nzAlign]="'center'">{{ data.class_nm }}</td>
         <td [nzAlign]="'center'">{{ data.teacher }}</td>
         <td [nzAlign]="'center'">{{ data.category }}</td>
-        <td [nzAlign]="'center'">{{ data.duration }}</td>
+        <td [nzAlign]="'center'">{{ getFullDate(data.start_date) + " ~ " + getFullDate(data.end_date) }}</td>
         <td [nzAlign]="'center'">{{ data.online_yn ? '온라인' : '오프라인'}}</td>
         <td [nzAlign]="'center'">{{ data.duration_nm }}</td>
         <td [nzAlign]="'center'">{{ data.price }}</td>
@@ -95,19 +95,20 @@
     </div>
     <div>
       <nz-form-label nzRequired>기간</nz-form-label>
-      <input nz-input type="text" placeholder="기간" [(ngModel)]="popupClass.duration"/>
+      <!-- <input nz-input type="text" placeholder="기간" [(ngModel)]="popupClass.duration"/> -->
+      <nz-range-picker [(ngModel)]="date" (ngModelChange)="onDateChange($event)"></nz-range-picker>
     </div>
     <div>
       <nz-form-label nzRequired>기간이름</nz-form-label>
       <input nz-input type="text" placeholder="기간이름" [(ngModel)]="popupClass.duration_nm"/>
     </div>
     <div>
-      <nz-form-label nzRequired>가격</nz-form-label>
-      <input nz-input type="text" placeholder="가격" [(ngModel)]="popupClass.price"/>
+      <nz-form-label nzRequired>정가</nz-form-label>
+      <input nz-input type="text" placeholder="정가" [(ngModel)]="popupClass.price"/>
     </div>
     <div>
-      <nz-form-label nzRequired>실제가격</nz-form-label>
-      <input nz-input type="text" placeholder="실제가격" [(ngModel)]="popupClass.real_price"/>
+      <nz-form-label nzRequired>결제가</nz-form-label>
+      <input nz-input type="text" placeholder="결제가" [(ngModel)]="popupClass.real_price"/>
     </div>
   </div>
   <div *nzModalFooter>
@@ -142,19 +143,20 @@
     </div>
     <div>
       <nz-form-label nzRequired>기간</nz-form-label>
-      <input nz-input type="text" placeholder="기간" [(ngModel)]="popupClass.duration"/>
+      <!-- <input nz-input type="text" placeholder="기간" [(ngModel)]="popupClass.duration"/> -->
+      <nz-range-picker [(ngModel)]="date" (ngModelChange)="onDateChange($event)"></nz-range-picker>
     </div>
     <div>
       <nz-form-label nzRequired>기간이름</nz-form-label>
       <input nz-input type="text" placeholder="기간이름" [(ngModel)]="popupClass.duration_nm"/>
     </div>
     <div>
-      <nz-form-label nzRequired>가격</nz-form-label>
-      <input nz-input type="text" placeholder="가격" [(ngModel)]="popupClass.price"/>
+      <nz-form-label nzRequired>정가</nz-form-label>
+      <input nz-input type="text" placeholder="정가" [(ngModel)]="popupClass.price"/>
     </div>
     <div>
-      <nz-form-label nzRequired>실제가격</nz-form-label>
-      <input nz-input type="text" placeholder="실제가격" [(ngModel)]="popupClass.real_price"/>
+      <nz-form-label nzRequired>결제가</nz-form-label>
+      <input nz-input type="text" placeholder="결제가" [(ngModel)]="popupClass.real_price"/>
     </div>
   </div>
   <div *nzModalFooter>

@@ -103,6 +103,12 @@
       <input nz-input type="text" placeholder="기간이름" [(ngModel)]="popupClass.duration_nm"/>
     </div>
     <div>
+      <nz-form-label nzRequired>강의 교수</nz-form-label>
+      <nz-select nzShowSearch nzServerSearch nzPlaceHolder="강의 교수" [(ngModel)]="popupClass.teacher" [nzShowArrow]="false" (nzOnSearch)="selectTeacher($event)">
+        <nz-option *ngFor="let o of listOfTeacher" [nzLabel]="o.text" [nzValue]="o.value"> </nz-option>
+      </nz-select>
+    </div>
+    <div>
       <nz-form-label nzRequired>정가</nz-form-label>
       <input nz-input type="text" placeholder="정가" [(ngModel)]="popupClass.price"/>
     </div>
@@ -165,12 +171,17 @@
     </div>
     <div>
       <nz-form-label nzRequired>기간</nz-form-label>
-      <!-- <input nz-input type="text" placeholder="기간" [(ngModel)]="popupClass.duration"/> -->
       <nz-range-picker [(ngModel)]="date" (ngModelChange)="onDateChange($event)"></nz-range-picker>
     </div>
     <div>
       <nz-form-label nzRequired>기간이름</nz-form-label>
       <input nz-input type="text" placeholder="기간이름" [(ngModel)]="popupClass.duration_nm"/>
+    </div>
+    <div>
+      <nz-form-label nzRequired>강의 교수</nz-form-label>
+      <nz-select nzShowSearch nzServerSearch nzPlaceHolder="강의 교수" [(ngModel)]="popupClass.teacher" [nzShowArrow]="false" (nzOnSearch)="selectTeacher($event)">
+        <nz-option *ngFor="let o of listOfTeacher" [nzLabel]="o.text" [nzValue]="o.value"> </nz-option>
+      </nz-select>
     </div>
     <div>
       <nz-form-label nzRequired>정가</nz-form-label>

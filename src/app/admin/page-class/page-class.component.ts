@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClassService } from '../core/services/class.service';
 import { CodeService } from '../core/services/code.service';
+import { TeacherService } from '../core/services/teacher.service';
 import { DataTable } from '../core/models/datatable';
 import { Class } from '../core/models/class'
 import { Code } from '../core/models/code';
@@ -27,6 +28,8 @@ export class PageClassComponent implements OnInit {
   date = null;
   classCode: Array<Code> = [];
 
+  listOfTeacher: Array<{ value: number; text: string }> = [];
+
   sortValue: string | null = null;
   sortKey: string | null = null;
 
@@ -44,6 +47,7 @@ export class PageClassComponent implements OnInit {
 
   constructor(private userService: ClassService,
               private codeService: CodeService,
+              private teacherService: TeacherService,
               private modal: NzModalService,
               private message: NzMessageService) {
                 this.classes.pageNumber = 1;
@@ -51,6 +55,7 @@ export class PageClassComponent implements OnInit {
 
                 this.getClassesFilter();
                 this.getCodes();
+                this.searchTeacher('ALL');
   }
 
   ngOnInit(): void {
@@ -87,6 +92,22 @@ export class PageClassComponent implements OnInit {
 
   selectClass(param) {
     this.selectedClass = param;
+  }
+
+  selectTeacher(value: string): void {
+    this.searchTeacher(value);
+  }
+
+  searchTeacher(value: string) {
+    this.teacherService.searchTeacher(value).subscribe(data => {
+      this.listOfTeacher = [];
+      data.forEach(item => {
+        this.listOfTeacher.push({
+          value: item.teacher_seq,
+          text: item.name
+        });
+      });
+    });
   }
   
   classAdd() {

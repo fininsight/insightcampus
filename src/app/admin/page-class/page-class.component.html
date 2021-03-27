@@ -110,7 +110,29 @@
       <nz-form-label nzRequired>결제가</nz-form-label>
       <input nz-input type="text" placeholder="결제가" [(ngModel)]="popupClass.real_price"/>
     </div>
+    <div>
+      <nz-form-label nzRequired>강의 상태</nz-form-label>
+      <nz-select [(ngModel)]="popupClass.status">
+        <nz-option *ngFor="let data of classCode" [nzValue]="data.code_id" [nzLabel]="data.code_nm"></nz-option>
+      </nz-select>
+    </div>
+    <div>
+      <nz-form-label nzRequired>줌 링크</nz-form-label>
+      <input nz-input type="text" placeholder="줌 링크" [(ngModel)]="popupClass.zoom_link"/>
+    </div>
+    <div>
+      <nz-form-label nzRequired>줌 비밀번호</nz-form-label>
+      <input nz-input type="text" placeholder="줌 비밀번호" [(ngModel)]="popupClass.zoom_pw"/>
+    </div>
+    <div>
+      <nz-form-label nzRequired>공개여부</nz-form-label>
+      <nz-select [(ngModel)]="popupClass.view_yn">
+        <nz-option [nzValue]="1" nzLabel="공개"></nz-option>
+        <nz-option [nzValue]="0" nzLabel="비공개"></nz-option>
+      </nz-select>
+    </div>
   </div>
+  
   <div *nzModalFooter>
     <button nz-button nzType="default" (click)="popupCancel()">취소</button>
     <button nz-button nzType="primary" (click)="classAddOk()">등록</button>
@@ -158,7 +180,29 @@
       <nz-form-label nzRequired>결제가</nz-form-label>
       <input nz-input type="text" placeholder="결제가" [(ngModel)]="popupClass.real_price"/>
     </div>
+    <div>
+      <nz-form-label nzRequired>강의 상태</nz-form-label>
+      <nz-select [(ngModel)]="popupClass.status">
+        <nz-option *ngFor="let data of classCode" [nzValue]="data.code_id" [nzLabel]="data.code_nm"></nz-option>
+      </nz-select>
+    </div>
+    <div>
+      <nz-form-label nzRequired>줌 링크</nz-form-label>
+      <input nz-input type="text" placeholder="줌 링크" [(ngModel)]="popupClass.zoom_link"/>
+    </div>
+    <div>
+      <nz-form-label nzRequired>줌 비밀번호</nz-form-label>
+      <input nz-input type="text" placeholder="줌 비밀번호" [(ngModel)]="popupClass.zoom_pw"/>
+    </div>
+    <div>
+      <nz-form-label nzRequired>공개여부</nz-form-label>
+      <nz-select [(ngModel)]="popupClass.view_yn">
+        <nz-option [nzValue]="1" nzLabel="공개"></nz-option>
+        <nz-option [nzValue]="0" nzLabel="비공개"></nz-option>
+      </nz-select>
+    </div>
   </div>
+  
   <div *nzModalFooter>
     <button nz-button nzType="default" (click)="popupCancel()">취소</button>
     <button nz-button nzType="primary" (click)="classUpdateOk()">수정</button>

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ClassService } from '../core/services/class.service';
+import { CodeService } from '../core/services/code.service';
 import { DataTable } from '../core/models/datatable';
 import { Class } from '../core/models/class'
+import { Code } from '../core/models/code';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 
@@ -23,6 +25,7 @@ export class PageClassComponent implements OnInit {
   
   classLoading = true;
   date = null;
+  classCode: Array<Code> = [];
 
   sortValue: string | null = null;
   sortKey: string | null = null;
@@ -40,12 +43,14 @@ export class PageClassComponent implements OnInit {
   }
 
   constructor(private userService: ClassService,
+              private codeService: CodeService,
               private modal: NzModalService,
               private message: NzMessageService) {
                 this.classes.pageNumber = 1;
                 this.classes.size = 10;
 
                 this.getClassesFilter();
+                this.getCodes();
   }
 
   ngOnInit(): void {
@@ -72,6 +77,12 @@ export class PageClassComponent implements OnInit {
       this.classLoading = false;
       this.selectedClass = new Class();
     });
+  }
+
+  getCodes() {
+    this.codeService.getCodes('class_status').subscribe(data => {
+      this.classCode = data;
+    })
   }
 
   selectClass(param) {
@@ -107,6 +118,10 @@ export class PageClassComponent implements OnInit {
     this.popupClass.price = this.selectedClass.price;
     this.popupClass.real_price = this.selectedClass.real_price;
     this.popupClass.template = this.selectedClass.template;
+    this.popupClass.zoom_link = this.selectedClass.zoom_link;
+    this.popupClass.zoom_pw = this.selectedClass.zoom_pw;
+    this.popupClass.view_yn = this.selectedClass.view_yn;
+    this.popupClass.status = this.selectedClass.status;
     this.isClassUpdate = true;
     this.date = [new Date(this.popupClass.start_date), new Date(this.popupClass.end_date)]
   }

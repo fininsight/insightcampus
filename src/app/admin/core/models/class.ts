@@ -11,4 +11,8 @@ export class Class {
     price: number;
     real_price: number;
     template: string;
+    zoom_link: string;
+    zoom_pw: string;
+    view_yn: number;
+    status: string;
 }

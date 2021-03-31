@@ -24,6 +24,8 @@ export class DetailComponent implements OnInit {
   public all_class = new DataTable();
   public selectLoadClass;
   public thumbnail: File = null;
+  public tabSize = 10;
+  public isCollapsedTab = [true, false, false, false, false];
 
   @ViewChildren('class') classes: QueryList<ElementRef>;
 
@@ -382,6 +384,10 @@ testTemplage2 = `
 
   changeTab(tab){
     this.tab = tab;
+    for(let i=0; i<this.isCollapsedTab.length; i++) 
+      this.isCollapsedTab[i] = false;
+    this.isCollapsedTab[tab-1] = true;
+  
   }
 
   buyClass(pay_method) {

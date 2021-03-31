@@ -1,94 +1,83 @@
-#class-title {
-  margin-top: 30px;
-  font-weight: 600;
-  font-size: 30px;
-  color: black;
-}
+#container {display: block; width: auto; max-width: 1200px; padding-right: -15px; padding-left: -15px; margin-right: auto; margin-left: auto;}
 
-#class-curriculum, #class-curriculum ul {
-  list-style: none;
-  margin: 0px;
-  padding: 0px;
-  width: 800px;
-}
+#class-content {display: flex; align-items: left; flex-direction: column; width: 75%; position: relative; min-height: 1px; padding-right: 15px; padding-left: 15px;}
 
-#class-curriculum li > span:nth-child(1) {
-  width: 90%;
-  float: left;
-}
+#side-bar { width: 25%; float: right; position: relative; box-sizing: border-box; min-height: 1px; padding-right: 15px; padding-left: 15px;}
 
-#class-curriculum > li > span {
-  background-color: gray;
-}
+#wishlist {padding: 100px 0 0px; margin: 0 0 30px; letter-spacing: -0.3px; cursor: pointer; color: #41495b; line-height: 29px;}
 
-#class-curriculum {
-  margin-top: 50px;
-}
+#wishlist img {display: inline-block; vertical-align: top; width: 30px; height: 30px; margin: 0 5px 0 0;
+  border: 1px solid #41495b;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 30px;
+  color: #ff1f59;
+  font-size: 16px;
+  opacity: 1;
+  transition: .3s ease;}
 
-#class-curriculum span {
-  display: block;
-  height: 40px;
-  line-height: 40px;
-}
+#price {position: relative; max-width: 300px; margin-left: auto; box-sizing: border-box;}
 
-#class-curriculum ul li {
-  padding: 5px 0px 5px 5px;
-  margin-bottom: 5px;
-  font-size: 12px;
-}
+#price div {transition: background-position 1s; display: block; min-height: 60px; margin-bottom: 8px; padding: 20px 16px 19px; width: 100%; align-items: center; color: #fff; background-color: #2fbe5b!important; border-radius: 10px; text-align: center; cursor: pointer;}
 
-#class-content {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
+#price div span {position: relative; display: inline-block; top: 1px; margin-right: 15px; font-size: 17px; font-weight: 700; white-space: nowrap;text-transform: uppercase; letter-spacing: 1px; text-align: center;}
 
-#class-content > div {
-    width: 800px;
-}
+#class-info {margin: 15px 0 0;}
 
+#class-info .info {display: flex; padding: 25px 10px 24px 12px; flex-wrap: nowrap; align-items: center; border-bottom: 1px solid #e1e2e4; color: #212121;}
 
+#class-info span {font-size: 15px; font-weight: 700; display: inline-block; margin-left: 5px;}
 
-.position-list {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 800px;
-    display: block;
-    background: white;
-    transform: scale(0.3);
-    transform-origin: top right;
-  }
+#header {position: relative; padding: 50px 0 30px;}
+
+#class-title { font-weight: 600; font-size: 40px; color: black; margin: 0 0 40px; line-height: 42px; letter-spacing: -0.3px; font-weight: 700;}
+
+#class-detail {box-sizing: border-box; max-width: 80%; margin-bottom: 47px;}
+
+#teacher {margin-right: 55px; float: left!important;}
+
+#category {font-size: 13px; float: left!important;}
+
+.meta-values .title {font-size: 13px;  color: #aaa;}
+
+.meta-values .content {margin: -1px 0 0; font-size: 15px; color: #555; line-height: 12px; font-weight: 400; text-transform: none;}
+
+#teacher img{border-radius: 50%; height: auto;max-width: 40px; float: left; margin: 2px 8px 0 0;}
+
+#category img{ height: auto;max-width: 40px; float: left; margin: 2px 8px 0 0;}
+
+.meta-values {float: left;}
+
+#nav-tabs {float: left; flex-wrap: wrap; margin: 48px 0 50px; border-bottom: 0; list-style: none; padding-inline-start: 0px;}
+
+#nav-tabs li {flex: 1 0; float: left; margin-bottom: -1px; position: relative; display: block; box-sizing: border-box; list-style: none;}
+
+#nav-tabs li a {padding: 16px 50px 20px; margin: 0; border: 0!important; border-top: 3px solid #f0f4fa!important; border-radius: 0; font-size: 15px; font-weight: 600; background-color: #f0f4fa; text-align: center; color: #273044; }
+
+#nav-tabs li a[aria-expanded="true"]  {background-color: #fff;padding: 16px 50px 20px; margin: 0; border: 0!important; border-top: 3px solid rgba(255,193,7,1)!important; border-radius: 0; font-size: 15px; font-weight: 600;text-align: center; cursor:default;}
+
+#class-curriculum, #class-curriculum ul {list-style: none; margin: 0px; padding: 0px; width: 800px;}
+
+#class-curriculum li > span:nth-child(1) {width: 90%; float: left;}
+
+#class-curriculum > li > span {background-color: gray;}
+
+#class-curriculum {margin-top: 50px;}
+
+#class-curriculum span {display: block; height: 40px; line-height: 40px;}
+
+#class-curriculum ul li {padding: 5px 0px 5px 5px; margin-bottom: 5px; font-size: 12px;}
+
+.position-list {position: fixed; top: 20px; right: 20px; width: 800px; display: block; background: white; transform: scale(0.3); transform-origin: top right;}
   
-  .position-item {
-    width: 800px;
-    height: 100px;
-    color: rgba(0, 0, 0, 0.87);
-    cursor: move;
-    background: white;
-    overflow: hidden;
-  }
+  .position-item {width: 800px; height: 100px; color: rgba(0, 0, 0, 0.87); cursor: move; background: white; overflow: hidden;}
   
-  .cdk-drag-preview {
-    box-sizing: border-box;
-    border-radius: 4px;
-    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-                0 8px 10px 1px rgba(0, 0, 0, 0.14),
-                0 3px 14px 2px rgba(0, 0, 0, 0.12);
-  }
+  .cdk-drag-preview {box-sizing: border-box; border-radius: 4px; box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);}
   
-  .cdk-drag-placeholder {
-    opacity: 0;
-  }
+  .cdk-drag-placeholder {opacity: 0;}
   
-  .cdk-drag-animating {
-    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-  }
+  .cdk-drag-animating {transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);}
   
-  .example-box:last-child {
-    border: none;
-  }
+  .example-box:last-child {border: none;}
   
-  .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
-    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-  }
+  .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);}

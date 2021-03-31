@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ClassService } from '../core/services/class.service';
+import { CodeService } from '../core/services/code.service';
+import { TeacherService } from '../core/services/teacher.service';
 import { DataTable } from '../core/models/datatable';
 import { Class } from '../core/models/class'
+import { Code } from '../core/models/code';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 
@@ -22,6 +25,10 @@ export class PageClassComponent implements OnInit {
   isClassUpdate = false;
   
   classLoading = true;
+  date = null;
+  classCode: Array<Code> = [];
+
+  listOfTeacher: Array<{ value: number; text: string }> = [];
 
   sortValue: string | null = null;
   sortKey: string | null = null;
@@ -39,12 +46,16 @@ export class PageClassComponent implements OnInit {
   }
 
   constructor(private userService: ClassService,
+              private codeService: CodeService,
+              private teacherService: TeacherService,
               private modal: NzModalService,
               private message: NzMessageService) {
                 this.classes.pageNumber = 1;
                 this.classes.size = 10;
 
                 this.getClassesFilter();
+                this.getCodes();
+                this.searchTeacher('ALL');
   }
 
   ngOnInit(): void {
@@ -73,16 +84,40 @@ export class PageClassComponent implements OnInit {
     });
   }
 
+  getCodes() {
+    this.codeService.getCodes('class_status').subscribe(data => {
+      this.classCode = data;
+    })
+  }
+
   selectClass(param) {
     this.selectedClass = param;
+  }
+
+  selectTeacher(value: string): void {
+    this.searchTeacher(value);
+  }
+
+  searchTeacher(value: string) {
+    this.teacherService.searchTeacher(value).subscribe(data => {
+      this.listOfTeacher = [];
+      data.forEach(item => {
+        this.listOfTeacher.push({
+          value: item.teacher_seq,
+          text: item.name
+        });
+      });
+    });
   }
   
   classAdd() {
     this.popupClass = new Class();
     this.isClassAdd= true;
+    this.date = null;
   }
   
   classAddOk() : void {
+    console.log(this.popupClass)
     this.userService.addClass(this.popupClass).subscribe(data => {
       this.getClass();
       this.isClassAdd = false;
@@ -96,14 +131,20 @@ export class PageClassComponent implements OnInit {
     this.popupClass.class_nm = this.selectedClass.class_nm;
     this.popupClass.category = this.selectedClass.category;
     this.popupClass.teacher = this.selectedClass.teacher;
-    this.popupClass.duration = this.selectedClass.duration;
+    this.popupClass.start_date = this.selectedClass.start_date;
+    this.popupClass.end_date = this.selectedClass.end_date;
     this.popupClass.duration_nm = this.selectedClass.duration_nm;
     this.popupClass.thumbnail = this.selectedClass.thumbnail;
     this.popupClass.online_yn = this.selectedClass.online_yn;
     this.popupClass.price = this.selectedClass.price;
     this.popupClass.real_price = this.selectedClass.real_price;
     this.popupClass.template = this.selectedClass.template;
+    this.popupClass.zoom_link = this.selectedClass.zoom_link;
+    this.popupClass.zoom_pw = this.selectedClass.zoom_pw;
+    this.popupClass.view_yn = this.selectedClass.view_yn;
+    this.popupClass.status = this.selectedClass.status;
     this.isClassUpdate = true;
+    this.date = [new Date(this.popupClass.start_date), new Date(this.popupClass.end_date)]
   }
   
   classUpdateOk() : void {
@@ -133,5 +174,25 @@ export class PageClassComponent implements OnInit {
   popupCancel() : void {
     this.isClassAdd = false;
     this.isClassUpdate = false;
+  }
+
+  onDateChange(event) {
+    this.popupClass.start_date = event[0]
+    this.popupClass.end_date = event[1]
+  }
+
+  getFullDate(target: string) {
+    const date = new Date(target);
+    let year: string | number = date.getFullYear();
+    let month: string | number = date.getMonth() + 1;
+    let day: string | number = date.getDate();
+
+    if (month < 10)
+      month = '0' + month.toString();
+    if (day < 10)
+      day = '0' + day.toString();
+
+    const result = [year, month, day].join('-');
+    return result;
   }
 }

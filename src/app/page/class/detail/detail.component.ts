@@ -6,6 +6,7 @@ import { DataTable } from '../../core/models/datatable';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { NzModalService, NzModalRef } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
+declare const IMP: any;
 
 @Component({
   selector: 'app-detail',
@@ -281,6 +282,7 @@ testTemplage2 = `
       if (data.template !== null && data.template !== '') {
         this.templates = JSON.parse(data.template);
       }
+      console.log(this.class_data);
     });
 
     const tempClass: DataTable = new DataTable();
@@ -288,11 +290,9 @@ testTemplage2 = `
     tempClass.size = 20;
 
     this.classService.getClasses(tempClass).subscribe(data => {
-      console.log(data);
       this.all_class = data;
     });
-
-    // this.templates.push(this.testTemplage);
+    IMP.init('imp24709734');
   }
 
   ngOnInit() {
@@ -390,4 +390,34 @@ testTemplage2 = `
   
   }
 
+  buyClass(pay_method) {
+    IMP.request_pay({
+      pg : 'html5_inicis',
+      pay_method,
+      merchant_uid : 'class_' + new Date().getTime(),
+      name : this.class_data.class_nm,
+      amount : this.class_data.real_price,
+      // buyer_email : 'buyer@test.com',
+      // buyer_name : '구매자이름',
+      // buyer_tel : '010-1234-5678',
+      // buyer_addr : '서울특별시 강남구 삼성동',
+      // buyer_postcode : '123-456',
+      company: 'fininsight',
+      m_redirect_url : `/detail/${this.class_data.class_seq}`
+    }, res => {
+      let msg: string = '';
+
+      if (res.success) {
+        msg = '결제가 완료되었습니다.';
+        msg += '고유ID : ' + res.imp_uid;
+        msg += '상점 거래ID : ' + res.merchant_uid;
+        msg += '결제 금액 : ' + res.paid_amount;
+        msg += '카드 승인번호 : ' + res.apply_num;
+      } else {
+        msg = '결제에 실패하였습니다.';
+        msg += '에러내용 : ' + res.error_msg;
+      }
+      alert(msg);
+    })
+  }
 }

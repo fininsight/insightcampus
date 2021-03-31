@@ -3,6 +3,48 @@
     <div id="wishlist">
       <img src="../../../../assets/images/wishlist_img.png">
       Add to Wishlist
+<!--
+ <div id="class-content">
+  <div id="class-title">
+    {{ class_data.class_nm }}
+  </div>
+  <div>
+    <button (click)="changeTab(1)">강의소개</button>
+    <button (click)="changeTab(2)">교육과정</button>
+    <button (click)="changeTab(3)">강의후기</button>
+    <button (click)="changeTab(4)">질문답변</button>
+    <button (click)="changeTab(5)">공지사항</button>
+    <button (click)="buyClass('card')">강의구매(카드)</button>
+    <button (click)="buyClass('trans')">강의구매(실시간계좌이체)</button>
+    <button (click)="buyClass('phone')">강의구매(휴대폰)</button>
+    <button (click)="buyClass('samsung')">강의구매(삼성페이)</button>
+    <button (click)="buyClass('cultureland')">강의구매(문화상품권)</button>
+  </div>
+  <ng-container *ngIf="tab === 1">
+    <div id="admin-menu">
+      <button (click)="testAdd()" *ngIf="admin === true">추가(강의소개)</button>
+      <button (click)="testAdd2()" *ngIf="admin === true">추가2(타이틀)</button>
+      <button (click)="introduceAdd()" *ngIf="admin === true">추가3(소개)</button>
+      <button (click)="class2Add()" *ngIf="admin === true">추가4(포인트)</button>
+      <button (click)="tagAdd()" *ngIf="admin === true">추가5(태그)</button>
+      <button (click)="curriculumAdd()" *ngIf="admin === true">추가6(커리큘럼)</button>
+      <button (click)="infoAdd()" *ngIf="admin === true">추가7(수강방법)</button>
+      <button (click)="goalAdd()" *ngIf="admin === true">추가8(학습목표)</button>
+      <button (click)="professorAdd()" *ngIf="admin === true">추가9(강사소개)</button>
+      <button (click)="foryouAdd()" *ngIf="admin === true">추가10(추천)</button>
+      <button (click)="thumbnail.click()" *ngIf="admin === true">
+        썸네일 업로드<input #thumbnail type="file" style="display: none;" accept="image/*" (change)="thumbnailUpload($event.target.files)" />
+      </button>
+      <button (click)="testAdmin()" *ngIf="admin !== true">관리자권한</button>
+      <button (click)="testAdminDisable()" *ngIf="admin === true">
+        관리자권한제거
+      </button>
+      <button (click)="testSave()" *ngIf="admin === true">저장</button>
+      <select class="form-control" [(ngModel)]="selectLoadClass" *ngIf="admin === true">
+        <option *ngFor="let class of all_class.data; index as i" [value]="i">{{class.class_nm}}</option>
+      </select>
+      <button (click)="loadSave()" *ngIf="admin === true">불러오기</button>
+-->
     </div>
     <div id="price">
       <div>

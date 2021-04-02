@@ -16,6 +16,7 @@ import { PageFaqComponent } from './page-faq/page-faq.component';
 import { PageEmailLogComponent } from './page-email-log/page-email-log.component';
 import { PageWpboardNoticeComponent } from './page-wpboard-notice/page-wpboard-notice.component';
 import { PageFinWorkComponent } from './page-fin-work/page-fin-work.component';
+import { PageOrderManageComponent } from './page-order-manage/page-order-manage.component';
 
 const routes: Routes = [{
   path: '',
@@ -65,6 +66,9 @@ const routes: Routes = [{
   },
   {
       path: 'fin-work', component: PageFinWorkComponent
+  },
+  {
+      path: 'order-manage', component: PageOrderManageComponent
   },
 ]}];
 

@@ -6,15 +6,7 @@
 
 #wishlist {padding: 100px 0 0px; margin: 0 0 30px; letter-spacing: -0.3px; cursor: pointer; color: #41495b; line-height: 29px;}
 
-#wishlist img {display: inline-block; vertical-align: top; width: 30px; height: 30px; margin: 0 5px 0 0;
-  border: 1px solid #41495b;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 30px;
-  color: #ff1f59;
-  font-size: 16px;
-  opacity: 1;
-  transition: .3s ease;}
+#wishlist img {display: inline-block; vertical-align: top; width: 30px; height: 30px; margin: 0 5px 0 0; border: 1px solid #41495b; border-radius: 50%; text-align: center; line-height: 30px; color: #ff1f59; font-size: 16px; opacity: 1; transition: .3s ease;}
 
 #price {position: relative; max-width: 300px; margin-left: auto; box-sizing: border-box;}
 

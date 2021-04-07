@@ -98,7 +98,7 @@
         <a role="tab" (click)="changeTab(1)" [attr.aria-expanded]="isCollapsedTab[0]" aria-controls="collapseExample">강의소개</a>
       </li>
       <li role="presentation" class="active">
-        <a role="tab" (click)="changeTab(2)" [attr.aria-expanded]="isCollapsedTab[1]" aria-controls="collapseExample">교욱과정</a>
+        <a role="tab" (click)="changeTab(2)" [attr.aria-expanded]="isCollapsedTab[1]" aria-controls="collapseExample">커리큘럼</a>
       </li>
       <li role="presentation" class="active">
         <a role="tab" (click)="changeTab(3)" [attr.aria-expanded]="isCollapsedTab[2]" aria-controls="collapseExample">강의후기</a>
@@ -146,36 +146,38 @@
       </ng-container>
     </ng-container>
     <ng-container *ngIf="tab === 2">
-      <ul id="class-curriculum">
-        <li class="on">
-          <span>테스트</span>
-          <span>25:00</span>
-          <ul>
-            <li>
-              <span>강의1</span>
-              <span>10:00</span>
-            </li>
-            <li>
-              <span>강의2</span>
-              <span>15:00</span>
-            </li>
-          </ul>
-        </li>
-        <li class="off">
-          <span>테스트2</span>
-          <span>47:00</span>
-          <ul>
-            <li>
-              <span>강의1</span>
-              <span>23:00</span>
-            </li>
-            <li>
-              <span>강의2</span>
-              <span>24:00</span>
-            </li>
-          </ul>
-        </li>
-      </ul>
+      <div id="class-curriculum">
+        <div class="curriculum-section">
+          <h3>Part 1 | 일단 시작해보자</h3>
+        </div>
+        <div class="curriculum-item">
+          <div class="curriculum-num">
+            1
+          </div>
+          <div class="curriculum-title">
+            1강 | "Hello World!" 일단 시작해보자!
+          </div>
+        </div>
+        <div class="curriculum-item">
+          <div class="curriculum-num">
+            2
+          </div>
+          <div class="curriculum-title">
+            2강 | 컴퓨터에게 뭔가 기억시키도 계산을 시켜보자!
+          </div>
+        </div>
+        <div class="curriculum-section">
+          <h3>Part 2 | 업무자동화</h3>
+        </div>
+        <div class="curriculum-item">
+          <div class="curriculum-num">
+            1
+          </div>
+          <div class="curriculum-title">
+            3강 | 업무자동화의 시작 : 적절한 판단력을 심어주자!
+          </div>
+        </div>
+      </div>
     </ng-container>
     <ng-container *ngIf="tab === 3">강의후기</ng-container>
     <ng-container *ngIf="tab === 4">

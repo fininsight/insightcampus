@@ -22,6 +22,8 @@
 
 #header {position: relative; padding: 50px 0 30px;}
 
+#admin-menu {margin-top: 50px;}
+
 #class-title { font-weight: 600; font-size: 40px; color: black; margin: 0 0 40px; line-height: 42px; letter-spacing: -0.3px; font-weight: 700;}
 
 #class-detail {box-sizing: border-box; max-width: 80%; margin-bottom: 47px;}
@@ -40,7 +42,7 @@
 
 .meta-values {float: left;}
 
-#nav-tabs {float: left; flex-wrap: wrap; margin: 48px 0 50px; border-bottom: 0; list-style: none; padding-inline-start: 0px;}
+#nav-tabs {float: left; flex-wrap: wrap; margin: 48px 0 0px; border-bottom: 0; list-style: none; padding-inline-start: 0px;}
 
 #nav-tabs li {flex: 1 0; float: left; margin-bottom: -1px; position: relative; display: block; box-sizing: border-box; list-style: none;}
 
@@ -48,17 +50,17 @@
 
 #nav-tabs li a[aria-expanded="true"]  {background-color: #fff;padding: 16px 50px 20px; margin: 0; border: 0!important; border-top: 3px solid rgba(255,193,7,1)!important; border-radius: 0; font-size: 15px; font-weight: 600;text-align: center; cursor:default;}
 
-#class-curriculum, #class-curriculum ul {list-style: none; margin: 0px; padding: 0px; width: 800px;}
+.curriculum-section {display: block; box-sizing: border-box;}
 
-#class-curriculum li > span:nth-child(1) {width: 90%; float: left;}
+.curriculum-num {font-size: 14px; color: #aaa; margin-right: 15px;}
 
-#class-curriculum > li > span {background-color: gray;}
+.curriculum-title {position: relative; top: -1px; font-size: 15px; font-weight: 600; margin-right:15px;}
 
-#class-curriculum {margin-top: 50px;}
+.curriculum-item {cursor: pointer; display: flex; padding: 13px; margin: 0 0 2px; background-color: #f0f4fa; transition: .3s ease; flex-wrap: wrap; border-top: 2px solid transparent;}
 
-#class-curriculum span {display: block; height: 40px; line-height: 40px;}
+.curriculum-item:hover {color: rgba(255,193,7,1);} 
 
-#class-curriculum ul li {padding: 5px 0px 5px 5px; margin-bottom: 5px; font-size: 12px;}
+#class-curriculum h3 {margin: 45px 0 21px; font-weight: 400; line-height: 34px; font-size: 24px;}
 
 .position-list {position: fixed; top: 20px; right: 20px; width: 800px; display: block; background: white; transform: scale(0.3); transform-origin: top right;}
   

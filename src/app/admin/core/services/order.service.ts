@@ -67,21 +67,21 @@ export class OrderService extends Common {
 
   }
 
-  addClass(orders: Order) {
+  addOrder(orders: Order) {
     return this.http.post(this.baseUrl + 'order', orders, this.jwt()).pipe(
       retry(1),
       catchError(this.errorHandl)
     );
   }
 
-  updateClass(orders: Order, order_id: Number) {
+  updateOrder(orders: Order, order_id: Number) {
     return this.http.put(this.baseUrl + 'order/' + order_id, orders, this.jwt()).pipe(
       retry(1),
       catchError(this.errorHandl)
     );
   }
 
-  deleteClass(order_id: Number) {
+  deleteOrder(order_id: Number) {
     return this.http.delete(this.baseUrl + 'order/' + order_id, this.jwt()).pipe(
       retry(1),
       catchError(this.errorHandl)

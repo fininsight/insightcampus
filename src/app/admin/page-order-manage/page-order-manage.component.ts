@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataTable } from '../core/models/datatable';
 import { CodeService } from '../core/services/code.service';
+import { OrderService } from '../core/services/order.service';
 import { Order } from '../core/models/order';
 import { Code } from '../core/models/code';
 
@@ -17,7 +18,7 @@ export class PageOrderManageComponent implements OnInit {
   
   popupOrder: Order = new Order();
   
-  orderLoading = false;
+  orderLoading = true;
 
   isOrderAdd = false;
   isOrderUpdate = false;
@@ -28,7 +29,7 @@ export class PageOrderManageComponent implements OnInit {
   sortKey: string | null = null;
 
   filter = {
-    order_date:'',
+    order_type:'',
     address: '',
   };
 
@@ -37,21 +38,37 @@ export class PageOrderManageComponent implements OnInit {
     this.sortValue = sort.value;
   }
 
-  constructor(private codeService: CodeService) {
+  constructor(private codeService: CodeService,
+              private orderService: OrderService) {
                 this.getCodes();
+                this.getOrderFilter();
   }
 
   ngOnInit() {
   }
 
   getOrderFilter() {
+    this.orderService.getOrdersFilter(this.orders, this.filter).subscribe(data => {
+      console.log(data);
+      data.data = data.data.map(v => {
+        v.check = false;
+        return v;
+      });
 
+      this.orders = data;
+      this.orderLoading = false;
+      this.selectedOrder = new Order();
+    });
   }
 
   getCodes() {
     this.codeService.getCodes('order_type').subscribe(data => {
       this.orderCode = data;
     })
+  }
+
+  selectOrder(params) {
+    this.selectedOrder = params;
   }
 
   orderAdd() {

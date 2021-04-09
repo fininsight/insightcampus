@@ -7,7 +7,7 @@
 <div id="content">
   <div id="main-table">
     <div class="table-filter">
-      <input nz-input placeholder="주문일" [(ngModel)]="filter.order_date" (change)="getOrderFilter()"/>
+      <input nz-input placeholder="결제방법" [(ngModel)]="filter.order_type" (change)="getOrderFilter()"/>
       <input nz-input placeholder="주소" [(ngModel)]="filter.address" (change)="getOrderFilter()"/>
     </div>
 
@@ -50,10 +50,10 @@
             }"
             style="cursor: pointer;"
           >
-            <td [nzAlign]="'center'">{{ 1 }}</td>
-            <td [nzAlign]="'center'">{{ 1 }}</td>
-            <td [nzAlign]="'center'">{{ 1 }}</td>
-            <td [nzAlign]="'center'">{{ 1 }}</td>
+            <td [nzAlign]="'center'">{{ data.order_date }}</td>
+            <td [nzAlign]="'center'">{{ data.order_price }}</td>
+            <td [nzAlign]="'center'">{{ data.order_type }}</td>
+            <td [nzAlign]="'center'">{{ data.address }}</td>
           </tr>
         </tbody>
       </nz-table>

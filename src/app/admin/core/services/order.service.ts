@@ -4,8 +4,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { DataTable } from '../models/datatable';
 import { map, retry, catchError } from 'rxjs/operators';
-import { Order } from '../models/order';
+import { OrderData } from '../models/order-data';
 import { Common } from './common';
+import { OrderItem } from '../models/order-item';
 
 @Injectable({
   providedIn: 'root'
@@ -67,14 +68,22 @@ export class OrderService extends Common {
 
   }
 
-  addOrder(orders: Order) {
+  getOrderItems(order_id: Number) {
+    return this.http.get<Array<OrderItem>>(this.baseUrl + 'orderitem/' + order_id, this.jwt())
+    .pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
+
+  addOrder(orders: OrderData) {
     return this.http.post(this.baseUrl + 'order', orders, this.jwt()).pipe(
       retry(1),
       catchError(this.errorHandl)
     );
   }
 
-  updateOrder(orders: Order, order_id: Number) {
+  updateOrder(orders: OrderData, order_id: Number) {
     return this.http.put(this.baseUrl + 'order/' + order_id, orders, this.jwt()).pipe(
       retry(1),
       catchError(this.errorHandl)

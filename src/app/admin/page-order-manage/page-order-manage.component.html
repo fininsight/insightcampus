@@ -86,6 +86,38 @@
       <nz-form-label nzRequired>주소</nz-form-label>
       <input nz-input type="text" placeholder="주소" [(ngModel)]="popupOrder.address"/>
     </div>
+    <nz-divider nzText="주문 상세" nzOrientation="left"></nz-divider>
+    <div>
+      <nz-form-label nzRequired>주문 상세</nz-form-label>
+      <nz-select [(ngModel)]="popupOrderItem.class_seq">
+        <nz-option *ngFor="let data of classes.data" [nzValue]="data.class_seq" [nzLabel]="data.class_nm"></nz-option>
+      </nz-select>
+    </div>
+    <div>
+      <nz-form-label nzRequired>금액</nz-form-label>
+      <input nz-input type="text" placeholder="금액" [(ngModel)]="popupOrderItem.price"/>
+      <button nz-button nzType="primary" id="order-item-add-button" (click)="orderItemAdd()">추가</button>
+    </div>
+    <div>
+      <nz-table #orderItemTable [nzData]="popupOrderItemList" [nzFrontPagination]="false" [nzSize]="'small'">
+        <thead>
+          <tr>
+            <th nzWidth="50%">수업명</th>
+            <th nzWidth="30%">금액</th>
+            <th nzWidth="20%"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of popupOrderItemList">
+            <td>{{ getClassName(data.class_seq) }}</td>
+            <td>{{ data.price }}</td>
+            <td>
+              <a (click)="orderItemDelete(data.class_seq)">삭제</a>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
   </div>
   
   <div *nzModalFooter>
@@ -117,6 +149,38 @@
     <div>
       <nz-form-label nzRequired>주소</nz-form-label>
       <input nz-input type="text" placeholder="주소" [(ngModel)]="popupOrder.address"/>
+    </div>
+    <nz-divider nzText="주문 상세" nzOrientation="left"></nz-divider>
+    <div>
+      <nz-form-label nzRequired>주문 상세</nz-form-label>
+      <nz-select [(ngModel)]="popupOrderItem.class_seq">
+        <nz-option *ngFor="let data of classes.data" [nzValue]="data.class_seq" [nzLabel]="data.class_nm"></nz-option>
+      </nz-select>
+    </div>
+    <div>
+      <nz-form-label nzRequired>금액</nz-form-label>
+      <input nz-input type="text" placeholder="금액" [(ngModel)]="popupOrderItem.price"/>
+      <button nz-button nzType="primary" id="order-item-add-button" (click)="orderItemAdd()">추가</button>
+    </div>
+    <div>
+      <nz-table #orderItemTable [nzData]="popupOrderItemList" [nzFrontPagination]="false" [nzSize]="'small'">
+        <thead>
+          <tr>
+            <th nzWidth="50%">수업명</th>
+            <th nzWidth="30%">금액</th>
+            <th nzWidth="20%"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of popupOrderItemList">
+            <td>{{ getClassName(data.class_seq) }}</td>
+            <td>{{ data.price }}</td>
+            <td>
+              <a (click)="orderItemDelete(data.class_seq)">삭제</a>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
     </div>
   </div>
   

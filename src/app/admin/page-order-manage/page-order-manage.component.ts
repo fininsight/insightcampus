@@ -2,10 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { DataTable } from '../core/models/datatable';
 import { CodeService } from '../core/services/code.service';
 import { OrderService } from '../core/services/order.service';
+import { ClassService } from '../core/services/class.service';
 import { Order } from '../core/models/order';
+import { OrderItem } from '../core/models/order-item';
 import { Code } from '../core/models/code';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { OrderData } from '../core/models/order-data';
 
 @Component({
   selector: 'app-page-order-manage',
@@ -15,10 +18,15 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 export class PageOrderManageComponent implements OnInit {
   
   orders = new DataTable();
+  classes = new DataTable();
   
   selectedOrder: Order = new Order();
   
   popupOrder: Order = new Order();
+  popupOrderItem : OrderItem = new OrderItem();
+  popupOrderItemList: Array<OrderItem> = [];
+
+  orderData = new OrderData();
   
   orderLoading = true;
 
@@ -42,8 +50,12 @@ export class PageOrderManageComponent implements OnInit {
 
   constructor(private codeService: CodeService,
               private orderService: OrderService,
+              private classService: ClassService,
               private modal: NzModalService,
               private message: NzMessageService) {
+                this.classes.pageNumber = 1;
+                this.classes.size = 100;
+                this.getClasses();
                 this.getCodes();
                 this.getOrderFilter();
   }
@@ -73,9 +85,21 @@ export class PageOrderManageComponent implements OnInit {
     });
   }
 
+  getOrderItems(order_id) {
+    this.orderService.getOrderItems(order_id).subscribe(data => {
+      this.popupOrderItemList = data.slice();
+    });
+  }
+
   getCodes() {
     this.codeService.getCodes('order_type').subscribe(data => {
       this.orderCode = data;
+    })
+  }
+
+  getClasses() {
+    this.classService.getClasses(this.classes).subscribe(data => {
+      this.classes = data;
     })
   }
 
@@ -86,10 +110,14 @@ export class PageOrderManageComponent implements OnInit {
   orderAdd() {
     this.popupOrder = new Order();
     this.isOrderAdd = true;
+    this.popupOrderItem = new OrderItem();
+    this.popupOrderItemList = [];
   }
 
   orderAddOk() {
-    this.orderService.addOrder(this.popupOrder).subscribe(data => {
+    this.orderData.order = this.popupOrder;
+    this.orderData.orderItem = this.popupOrderItemList;
+    this.orderService.addOrder(this.orderData).subscribe(data => {
       this.getOrder();
       this.isOrderAdd = false;
       this.message.create('success', '사용자 추가가 완료되었습니다.');
@@ -97,7 +125,10 @@ export class PageOrderManageComponent implements OnInit {
   }
 
   orderUpdate() {
+    this.getOrderItems(this.selectedOrder.order_id);
+
     this.popupOrder = new Order();
+    this.popupOrderItem = new OrderItem();
     this.popupOrder.order_id = this.selectedOrder.order_id;
     this.popupOrder.order_date = this.selectedOrder.order_date;
     this.popupOrder.order_price = this.selectedOrder.order_price;
@@ -107,7 +138,9 @@ export class PageOrderManageComponent implements OnInit {
   }
 
   orderUpdateOk() {
-    this.orderService.updateOrder(this.popupOrder, this.popupOrder.order_id).subscribe(data => {
+    this.orderData.order = this.popupOrder;
+    this.orderData.orderItem = this.popupOrderItemList;
+    this.orderService.updateOrder(this.orderData, this.popupOrder.order_id).subscribe(data => {
       this.getOrder();
       this.isOrderUpdate = false;
       this.message.create('success', '사용자 수정이 완료되었습니다.');
@@ -130,9 +163,29 @@ export class PageOrderManageComponent implements OnInit {
     });
   }
 
+  orderItemAdd() {
+    const pushData: OrderItem = new OrderItem();
+    pushData.class_seq = this.popupOrderItem.class_seq;
+    pushData.price = this.popupOrderItem.price;
+    
+    const tempList = this.popupOrderItemList.slice();
+    this.popupOrderItemList = [...tempList, pushData];
+    this.popupOrderItem = new OrderItem();
+  }
+
+  orderItemDelete(seq) {
+    const tempList = this.popupOrderItemList.filter(data => data.class_seq !== seq);
+    this.popupOrderItemList = tempList;
+  }
+
   popupCancel(): void {
     this.isOrderAdd = false;
     this.isOrderUpdate = false;
+  }
+
+  getClassName(seq): string {
+    const class_nm = this.classes.data.find(data => data.class_seq === seq).class_nm;
+    return class_nm;
   }
 
   getFullDate(target: string) {

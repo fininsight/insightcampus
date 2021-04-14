@@ -64,6 +64,10 @@ tr.on td {
   background-color: #e3f8ff;
 }
 
+#order-item-add-button {
+  margin-left: 10px;
+}
+
 .popup-content input, .popup-content nz-date-picker {
   width: 300px;
   margin-bottom: 5px;
@@ -75,4 +79,8 @@ tr.on td {
 
 nz-select {
   width: 300px;
+}
+
+nz-table {
+  margin-top: 15px;
 }

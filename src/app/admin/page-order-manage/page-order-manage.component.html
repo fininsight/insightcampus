@@ -83,6 +83,12 @@
       </nz-select>
     </div>
     <div>
+      <nz-form-label nzRequired>등록자</nz-form-label>
+      <nz-select nzShowSearch nzServerSearch [(ngModel)]="popupOrder.order_user_seq" (nzOnSearch)="selectTeacher($event)">
+        <nz-option *ngFor="let o of listOfTeacher" [nzLabel]="o.text" [nzValue]="o.value"> </nz-option>
+      </nz-select>
+    </div>
+    <div>
       <nz-form-label nzRequired>주소</nz-form-label>
       <input nz-input type="text" placeholder="주소" [(ngModel)]="popupOrder.address"/>
     </div>
@@ -144,6 +150,12 @@
       <nz-form-label nzRequired>결제 방법</nz-form-label>
       <nz-select [(ngModel)]="popupOrder.order_type">
         <nz-option *ngFor="let data of orderCode" [nzValue]="data.code_id" [nzLabel]="data.code_nm"></nz-option>
+      </nz-select>
+    </div>
+    <div>
+      <nz-form-label nzRequired>등록자</nz-form-label>
+      <nz-select nzShowSearch nzServerSearch [(ngModel)]="popupOrder.order_user_seq" (nzOnSearch)="selectTeacher($event)">
+        <nz-option *ngFor="let o of listOfTeacher" [nzLabel]="o.text" [nzValue]="o.value"> </nz-option>
       </nz-select>
     </div>
     <div>

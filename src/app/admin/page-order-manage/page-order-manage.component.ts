@@ -3,6 +3,7 @@ import { DataTable } from '../core/models/datatable';
 import { CodeService } from '../core/services/code.service';
 import { OrderService } from '../core/services/order.service';
 import { ClassService } from '../core/services/class.service';
+import { TeacherService } from '../core/services/teacher.service';
 import { Order } from '../core/models/order';
 import { OrderItem } from '../core/models/order-item';
 import { Code } from '../core/models/code';
@@ -19,6 +20,8 @@ export class PageOrderManageComponent implements OnInit {
   
   orders = new DataTable();
   classes = new DataTable();
+
+  listOfTeacher: Array<{ value: number; text: string }> = [];
   
   selectedOrder: Order = new Order();
   
@@ -51,6 +54,7 @@ export class PageOrderManageComponent implements OnInit {
   constructor(private codeService: CodeService,
               private orderService: OrderService,
               private classService: ClassService,
+              private teacherService: TeacherService,
               private modal: NzModalService,
               private message: NzMessageService) {
                 this.classes.pageNumber = 1;
@@ -58,6 +62,7 @@ export class PageOrderManageComponent implements OnInit {
                 this.getClasses();
                 this.getCodes();
                 this.getOrderFilter();
+                this.searchTeachers('ALL');
   }
 
   ngOnInit() {
@@ -103,6 +108,22 @@ export class PageOrderManageComponent implements OnInit {
     })
   }
 
+  searchTeachers(value: string) {
+    this.teacherService.searchTeacher(value).subscribe(data => {
+      this.listOfTeacher = [];
+      data.forEach(item => {
+        this.listOfTeacher.push({
+          value: item.teacher_seq,
+          text: item.name
+        });
+      });
+    });
+  }
+
+  selectTeacher(value: string): void {
+    this.searchTeachers(value);
+  }
+
   selectOrder(params) {
     this.selectedOrder = params;
   }
@@ -133,6 +154,7 @@ export class PageOrderManageComponent implements OnInit {
     this.popupOrder.order_date = this.selectedOrder.order_date;
     this.popupOrder.order_price = this.selectedOrder.order_price;
     this.popupOrder.order_type = this.selectedOrder.order_type;
+    this.popupOrder.order_user_seq = this.selectedOrder.order_user_seq;
     this.popupOrder.address = this.selectedOrder.address;
     this.isOrderUpdate = true;
   }

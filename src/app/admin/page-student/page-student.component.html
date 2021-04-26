@@ -1,1 +1,85 @@
-<p>page-student works!</p>
+<div id="header">
+  <div id="title">
+    <i nz-icon nzType="user" nzTheme="outline"></i>
+    수강생 관리
+  </div>
+</div>
+
+<div id="content">
+  <div id="left-table">
+    <nz-table
+      #classTable
+      nzShowSizeChanger
+      nzNoResult="조회된 결과가 없습니다"
+      [nzFrontPagination]="false"
+      [nzData]="classes.data"
+      [nzLoading]="classLoading"
+      [nzTotal]="classes.totalPages * classes.size"
+      [(nzPageIndex)]="classes.pageNumber"
+      [(nzPageSize)]="classes.size"
+      (nzPageIndexChange)="getClass()"
+      nzShowSizeChanger="false"
+      nzSize="small">
+      <thead>
+        <tr>
+          <th nzWidth="40%">수업 이름</th>
+          <th nzWidth="60%">기간</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let data of classTable.data"
+          (click)="selectClass(data)"
+          [ngClass]="{
+            on: this.selectedClass.class_seq === data.class_seq
+          }"
+          style="cursor: pointer">
+          <td>{{ data.class_nm }}</td>
+          <td>{{ getFullDate(data.start_date) + " ~ " + getFullDate(data.end_date)  }}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+
+  <div id="right-table">
+    <!-- <nz-table
+      #codeTable
+      nzShowSizeChanger
+      nzNoResult="조회된 결과가 없습니다"
+      [nzFrontPagination]="false"
+      [nzData]="codes.data"
+      [nzLoading]="codeLoading"
+      [nzTotal]="codes.totalPages * codes.size"
+      [(nzPageIndex)]="codes.pageNumber"
+      [(nzPageSize)]="codes.size"
+      (nzPageIndexChange)="getCode()"
+      nzShowSizeChanger="false"
+      nzSize="small">
+      <thead>
+        <tr>
+          <th nzWidth="14%">코드ID</th>
+          <th nzWidth="13%">코드명</th>
+          <th nzWidth="13%">값1</th>
+          <th nzWidth="13%">값2</th>
+          <th nzWidth="13%">값3</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let data of codeTable.data"
+          (click)="selectCode(data)"
+          (dblclick)="codeUpdate()"
+          [ngClass]="{
+            on: this.selectedCode.code_id === data.code_id
+          }"
+          style="cursor: pointer">
+          <td>{{ data.code_id }}</td>
+          <td>{{ data.code_nm }}</td>
+          <td>{{ data.value1 }}</td>
+          <td>{{ data.value2 }}</td>
+          <td>{{ data.value3 }}</td>
+        </tr>
+      </tbody>
+    </nz-table> -->
+  </div>
+</div>

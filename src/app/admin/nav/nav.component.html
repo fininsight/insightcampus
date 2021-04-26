@@ -33,6 +33,11 @@
           <li routerLink="/admin/curriculum" nz-menu-item>커리큘럼</li>
         </ul>
       </li>
+      <li nz-submenu nzTitle="수강생관리" nzIcon="team" *ngIf="authService.roleCheck(['admin'])">
+        <ul class="subment">
+          <li routerLink="/admin/student" nz-menu-item>수강생관리</li>
+        </ul>
+      </li>
       <li nz-submenu nzTitle="쿠폰관리" nzIcon="tags" *ngIf="authService.roleCheck(['admin'])">
         <ul class="subment">
           <li routerLink="/admin/coupon" nz-menu-item>쿠폰관리</li>

@@ -1,44 +1,24 @@
-#header {
-    margin: 20px 0 10px 0;
-}
+#header { margin: 20px 0 10px 0; }
 
-#content {
-    display: flex;
-    justify-content: center;
-}
+#content { display: flex; justify-content: center;}
 
+#content #left-table { margin-top: 50px; width: 200px; margin-right: 10px;}
 
-#content #left-table {
-    margin-top: 50px;
-    width: 200px;
-    margin-right: 10px;
-}
+#content #middle-table { width: 300px; margin-right: 10px; align-items: center; text-align: center;}
 
-#content #right-table {
-    width: 800px;
-}
+#content #right-table { width: 500px;}
 
-.table-menu {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    height: 50px;
-}
+.table-menu { display: flex; justify-content: flex-end; align-items: center; height: 50px;}
 
-.table-menu button {
-    margin-left: 5px;
-}
+.table-menu button { margin-left: 5px;}
 
-tr.on td {
-    background-color: #e3f8ff;
-}
+tr.on td { background-color: #e3f8ff;}
 
-.popup-content input{
-    width: 300px;
-    margin-bottom: 5px;
-}
+.popup-content input{ width: 300px; margin-bottom: 5px;}
 
-.popup-content input-number{
-    width: 300px;
-    margin-bottom: 5px;
-}
+.popup-content input-number{ width: 300px; margin-bottom: 5px;}
+
+nz-select { width: 300px;}
+
+nz-form-label {width: 110px;}
+  

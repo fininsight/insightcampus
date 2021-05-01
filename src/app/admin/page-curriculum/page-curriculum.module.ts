@@ -5,6 +5,7 @@ import { CurriculumService } from '../core/services/curriculum.service';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { FormsModule } from '@angular/forms';
 import { ClassService } from '../core/services/class.service';
+import { CurriculumgroupService } from '../core/services/curriculumgroup.service';
  
 
 @NgModule({
@@ -15,6 +16,7 @@ import { ClassService } from '../core/services/class.service';
   ],
   providers: [
     ClassService,
+    CurriculumgroupService,
     CurriculumService,
   ],
   

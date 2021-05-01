@@ -126,8 +126,6 @@ export class IncamAddfareService extends Common{
       });
     }
 
-    console.log(param_filter);
-
     return this.http.get<DataTable>(this.baseUrl + 'incamaddfare/' +
                                     + dataTable.size + '/' + dataTable.pageNumber + '?f=' + JSON.stringify(param_filter), this.jwt())
     .pipe(

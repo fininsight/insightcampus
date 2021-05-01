@@ -30,7 +30,7 @@ export class PageIncamAddfareComponent implements OnInit {
 
   incamAddfareLoading = true;
   allCheck = false;
-  checks = [];
+  checks: any;
 
   mailSendLoading = false;
   mailSendLoadingText = '메일전송중';
@@ -107,7 +107,7 @@ export class PageIncamAddfareComponent implements OnInit {
 
   addMonths(date, months) {
     const d = date.getDate();
-    date.setMonth(date.getMonth() + +months);
+    date.setMonth(date.getMonth() + months);
     if (date.getDate() != d) {
       date.setDate(0);
     }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Class } from '../core/models/class';
 import { DataTable } from '../core/models/datatable';
 import { ClassService } from '../core/services/class.service';
+import { StudentService } from '../core/services/student.service';
 
 @Component({
   selector: 'app-page-student',
@@ -11,15 +12,20 @@ import { ClassService } from '../core/services/class.service';
 export class PageStudentComponent implements OnInit {
 
   classes = new DataTable();
+  students = new DataTable();
 
   selectedClass: Class = new Class();
 
   classLoading = true;
+  studentLoading = false;
 
-  constructor(private userService: ClassService
+  constructor(private userService: ClassService,
+              private studentService: StudentService, 
               ) {
                 this.classes.pageNumber = 1;
                 this.classes.size = 10;
+                this.students.pageNumber = 1;
+                this.students.size = 10;
                 this.getClass();
   }
 
@@ -35,8 +41,17 @@ export class PageStudentComponent implements OnInit {
     });
   }
 
+  getStudent() {
+    this.studentLoading = true;
+    this.studentService.getStudent(this.selectedClass.class_seq, this.students).subscribe(data => {
+      this.students = data
+      this.studentLoading = false;
+    });
+  }
+
   selectClass(param) {
     this.selectedClass = param;
+    this.getStudent();
   }
 
   getFullDate(target: string) {

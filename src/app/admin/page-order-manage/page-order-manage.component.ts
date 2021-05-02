@@ -29,6 +29,7 @@ export class PageOrderManageComponent implements OnInit {
   orderData = new OrderData();
   
   orderLoading = true;
+  orderItemLoading = true;
 
   isOrderAdd = false;
   isOrderUpdate = false;
@@ -88,6 +89,7 @@ export class PageOrderManageComponent implements OnInit {
   getOrderItems(order_id) {
     this.orderService.getOrderItems(order_id).subscribe(data => {
       this.popupOrderItemList = data.slice();
+      this.orderItemLoading = false;
     });
   }
 
@@ -125,6 +127,8 @@ export class PageOrderManageComponent implements OnInit {
   }
 
   orderUpdate() {
+    this.popupOrderItemList = [];
+    this.orderItemLoading = true;
     this.getOrderItems(this.selectedOrder.order_id);
 
     this.popupOrder = new Order();
@@ -140,6 +144,8 @@ export class PageOrderManageComponent implements OnInit {
   orderUpdateOk() {
     this.orderData.order = this.popupOrder;
     this.orderData.orderItem = this.popupOrderItemList;
+    console.log(this.orderData);
+    console.log(this.popupOrder.order_id);
     this.orderService.updateOrder(this.orderData, this.popupOrder.order_id).subscribe(data => {
       this.getOrder();
       this.isOrderUpdate = false;
@@ -171,6 +177,7 @@ export class PageOrderManageComponent implements OnInit {
     const tempList = this.popupOrderItemList.slice();
     this.popupOrderItemList = [...tempList, pushData];
     this.popupOrderItem = new OrderItem();
+    console.log(this.popupOrderItemList)
   }
 
   orderItemDelete(seq) {

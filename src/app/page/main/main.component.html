@@ -163,16 +163,16 @@
             <div class="class-list">
                 <div class="class-info">
                     <ul>
-                    <li>
+                    <li *ngFor="let data of classes.data" style="cursor: pointer;">
                         <div class="class-detail">
                             <div class="class-img">
                                 <img src="../../../assets/images/test.jpeg" height="270" width="283">
                             </div>
                             <div class="class-body">
                                 <div class="class-title">
-                                    [온라인] 의료 데이터 분석 - 딥러닝 Clssification 3기
+                                    [{{ data.category_name }}]{{ data.class_nm }}
                                 </div>
-                                <div class="class-teacher">이정훈 강의교수님</div>
+                                <div class="class-teacher">{{ data.teacher_name }}</div>
                             </div>
                             <div class="class-footer">
                                 <div class="class-comment">
@@ -184,70 +184,6 @@
                             </div>
                         </div>
                     </li> 
-                    <li>
-                        <div class="class-detail">
-                            <div class="class-img">
-                                <img src="../../../assets/images/test.jpeg" height="270" width="283">
-                            </div>
-                            <div class="class-body">
-                                <div class="class-title">
-                                    [온라인] 의료 데이터 분석 - 딥러닝 Clssification 3기
-                                </div>
-                                <div class="class-teacher">이정훈 강의교수님</div>
-                            </div>
-                            <div class="class-footer">
-                                <div class="class-comment">
-                                    0
-                                </div>
-                                <div class="class-user">
-                                    0
-                                </div>
-                            </div>
-                        </div>
-                    </li> 
-                    <li>
-                        <div class="class-detail">
-                            <div class="class-img">
-                                <img src="../../../assets/images/test.jpeg" height="270" width="283">
-                            </div>
-                            <div class="class-body">
-                                <div class="class-title">
-                                    [온라인] 의료 데이터 분석 - 딥러닝 Clssification 3기
-                                </div>
-                                <div class="class-teacher">이정훈 강의교수님</div>
-                            </div>
-                            <div class="class-footer">
-                                <div class="class-comment">
-                                    0
-                                </div>
-                                <div class="class-user">
-                                    0
-                                </div>
-                            </div>
-                        </div>
-                    </li> 
-                    <li>
-                        <div class="class-detail">
-                            <div class="class-img">
-                                <img src="../../../assets/images/test.jpeg" height="270" width="283">
-                            </div>
-                            <div class="class-body">
-                                <div class="class-title">
-                                    [온라인] 의료 데이터 분석 - 딥러닝 Clssification 3기
-                                </div>
-                                <div class="class-teacher">이정훈 강의교수님</div>
-                            </div>
-                            <div class="class-footer">
-                                <div class="class-comment">
-                                    0
-                                </div>
-                                <div class="class-user">
-                                    0
-                                </div>
-                            </div>
-                        </div>
-                    </li> 
-                  
                     </ul>
                 </div>
             </div>

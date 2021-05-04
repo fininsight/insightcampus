@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DataTable } from 'src/app/admin/core/models/datatable';
+import { ClassService } from 'src/app/admin/core/services/class.service';
 
 @Component({
   selector: 'app-main',
@@ -6,12 +8,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
+  classes = new DataTable();
 
-  constructor() { }
+  constructor(private classService: ClassService) {
+    this.classes.pageNumber = 1;
+    this.classes.size = 4;
+  }
 
   ngOnInit() {
+    this.getClass();
     this.slide();
     setInterval(this.slide, 7000);
+  }
+
+  getClass() {
+    this.classService.getClasses(this.classes).subscribe(data => {
+      this.classes = data;
+    });
   }
 
 
@@ -33,7 +46,8 @@ export class MainComponent implements OnInit {
         currentDot = dots[0];
         nextDot = dots[1];
       }
-      if(slides[1] == currentSlide) {
+      if(slides
+        [1] == currentSlide) {
         currentDot = dots[1];
         nextDot = dots[2];
       }

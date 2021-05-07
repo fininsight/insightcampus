@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Class } from '../core/models/class';
 import { DataTable } from '../core/models/datatable';
+import { Student } from '../core/models/student';
 import { ClassService } from '../core/services/class.service';
 import { StudentService } from '../core/services/student.service';
 
@@ -15,6 +16,7 @@ export class PageStudentComponent implements OnInit {
   students = new DataTable();
 
   selectedClass: Class = new Class();
+  selectedStudent: Student = new Student();
 
   classLoading = true;
   studentLoading = false;
@@ -30,6 +32,10 @@ export class PageStudentComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  test() {
+
   }
 
   getClass() {
@@ -51,7 +57,12 @@ export class PageStudentComponent implements OnInit {
 
   selectClass(param) {
     this.selectedClass = param;
+    this.selectedStudent = new Student();
     this.getStudent();
+  }
+
+  selectStudent(param) {
+    this.selectedStudent = param;
   }
 
   getFullDate(target: string) {

@@ -42,6 +42,10 @@
   </div>
 
   <div id="right-table">
+    <div class="table-menu">
+      <button nz-button nzType="default" nzShape="circle" (click)="test()" [disabled]="selectedStudent.order_id == undefined"><i nz-icon nzType="printer"></i></button>
+      <button nz-button nzType="default" nzShape="circle" (click)="test()" [disabled]="selectedStudent.order_id == undefined"><i nz-icon nzType="mail"></i></button>
+    </div>
     <nz-table
       #codeTable
       nzShowSizeChanger
@@ -66,7 +70,13 @@
       </thead>
       <tbody>
         <tr
-          *ngFor="let data of codeTable.data">
+          *ngFor="let data of codeTable.data"
+          (click)="selectStudent(data)"
+          [ngClass]="{
+            'on':this.selectedStudent.order_id === data.order_id
+          }"
+          style="cursor: pointer;"
+          >
           <td>{{ data.order_user_seq }}</td>
           <td>{{ getFullDate(data.order_date) }}</td>
           <td>{{ data.order_type }}</td>

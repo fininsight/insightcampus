@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { Class } from '../core/models/class';
 import { DataTable } from '../core/models/datatable';
 import { Student } from '../core/models/student';
+import { environment } from 'src/environments/environment';
 import { ClassService } from '../core/services/class.service';
 import { StudentService } from '../core/services/student.service';
 
@@ -12,6 +14,8 @@ import { StudentService } from '../core/services/student.service';
 })
 export class PageStudentComponent implements OnInit {
 
+  baseUrl = environment.apiUrl;
+
   classes = new DataTable();
   students = new DataTable();
 
@@ -21,8 +25,11 @@ export class PageStudentComponent implements OnInit {
   classLoading = true;
   studentLoading = false;
 
+  confirmModal?: NzModalRef;
+
   constructor(private userService: ClassService,
               private studentService: StudentService, 
+              private modal: NzModalService,
               ) {
                 this.classes.pageNumber = 1;
                 this.classes.size = 10;
@@ -63,6 +70,20 @@ export class PageStudentComponent implements OnInit {
 
   selectStudent(param) {
     this.selectedStudent = param;
+  }
+
+  studentPdf() {
+    const pdfLink = this.baseUrl + 'pdf/certification/';
+    this.confirmModal = this.modal.confirm({
+      nzTitle: '수료증 PDF 다운로드',
+      nzContent: '선택하신 내용을 PDF로 다운로드하시겠습니까?',
+      nzOnOk: () => {
+        location.assign(pdfLink + this.selectedClass.class_seq + '/' + this.selectedStudent.order_user_seq);
+      },
+      nzOnCancel: () => {
+        this.confirmModal.destroy();
+      }
+    });
   }
 
   getFullDate(target: string) {

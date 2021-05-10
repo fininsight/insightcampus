@@ -43,7 +43,7 @@
 
   <div id="right-table">
     <div class="table-menu">
-      <button nz-button nzType="default" nzShape="circle" (click)="test()" [disabled]="selectedStudent.order_id == undefined"><i nz-icon nzType="printer"></i></button>
+      <button nz-button nzType="default" nzShape="circle" (click)="studentPdf()" [disabled]="selectedStudent.order_id == undefined"><i nz-icon nzType="file-pdf"></i></button>
       <button nz-button nzType="default" nzShape="circle" (click)="test()" [disabled]="selectedStudent.order_id == undefined"><i nz-icon nzType="mail"></i></button>
     </div>
     <nz-table

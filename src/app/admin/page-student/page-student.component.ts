@@ -41,10 +41,6 @@ export class PageStudentComponent implements OnInit {
   ngOnInit() {
   }
 
-  test() {
-
-  }
-
   getClass() {
     this.classLoading = true;
     this.userService.getClasses(this.classes).subscribe(data => {
@@ -79,6 +75,21 @@ export class PageStudentComponent implements OnInit {
       nzContent: '선택하신 내용을 PDF로 다운로드하시겠습니까?',
       nzOnOk: () => {
         location.assign(pdfLink + this.selectedClass.class_seq + '/' + this.selectedStudent.order_user_seq);
+      },
+      nzOnCancel: () => {
+        this.confirmModal.destroy();
+      }
+    });
+  }
+
+  studentEmail() {
+    this.confirmModal = this.modal.confirm({
+      nzTitle: '수료증 PDF 메일 전송',
+      nzContent: '선택하신 내용의 PDF를 전송하시겠습니까?',
+      nzOnOk: () => {
+        this.studentService.sendCertification(this.selectedClass.class_seq, this.selectedStudent.order_user_seq).subscribe(data => {
+          console.log(data);
+        })
       },
       nzOnCancel: () => {
         this.confirmModal.destroy();

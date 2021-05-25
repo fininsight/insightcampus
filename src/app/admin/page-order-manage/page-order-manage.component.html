@@ -175,7 +175,12 @@
       <button nz-button nzType="primary" id="order-item-add-button" (click)="orderItemAdd()">추가</button>
     </div>
     <div>
-      <nz-table #orderItemTable [nzData]="popupOrderItemList" [nzFrontPagination]="false" [nzSize]="'small'">
+      <nz-table
+        #orderItemTable
+        [nzData]="popupOrderItemList"
+        [nzFrontPagination]="false"
+        [nzSize]="'small'"
+        [nzLoading]="orderItemLoading">
         <thead>
           <tr>
             <th nzWidth="50%">수업명</th>

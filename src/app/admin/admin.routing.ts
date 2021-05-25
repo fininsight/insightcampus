@@ -17,6 +17,7 @@ import { PageEmailLogComponent } from './page-email-log/page-email-log.component
 import { PageWpboardNoticeComponent } from './page-wpboard-notice/page-wpboard-notice.component';
 import { PageFinWorkComponent } from './page-fin-work/page-fin-work.component';
 import { PageOrderManageComponent } from './page-order-manage/page-order-manage.component';
+import { PageStudentComponent } from './page-student/page-student.component'
 
 const routes: Routes = [{
   path: '',
@@ -69,6 +70,9 @@ const routes: Routes = [{
   },
   {
       path: 'order-manage', component: PageOrderManageComponent
+  },
+  {
+      path: 'student', component: PageStudentComponent
   },
 ]}];
 

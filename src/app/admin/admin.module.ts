@@ -23,6 +23,7 @@ import { PageEmailLogModule } from './page-email-log/page-email-log.module';
 import { PageWpboardNoticeModule } from './page-wpboard-notice/page-wpboard-notice.module';
 import { PageFinWorkModule } from './page-fin-work/page-fin-work.module';
 import { PageOrderManageModule } from './page-order-manage/page-order-manage.module';
+import { PageStudentModule } from './page-student/page-student.module'
 
 @NgModule({
   imports: [
@@ -46,6 +47,7 @@ import { PageOrderManageModule } from './page-order-manage/page-order-manage.mod
     PageWpboardNoticeModule, // Wpboard Notice Module 포함
     PageFinWorkModule, // Fin Work Module 포함
     PageOrderManageModule,
+    PageStudentModule,
   ],
   providers: [
     AuthService

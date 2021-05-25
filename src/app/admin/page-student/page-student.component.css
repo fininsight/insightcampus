@@ -1,0 +1,27 @@
+#title {
+  margin-top: 50px;
+  font-weight: 600;
+  color: black;
+}
+
+#header {
+  margin: 20px 0 10px 0;
+}
+
+#content {
+  display: flex;
+  justify-content: center;
+}
+
+#content #left-table {
+  width: 400px;
+  margin-right: 10px;
+}
+
+#content #right-table {
+  width: 600px;
+}
+
+tr.on td {
+  background-color: #e3f8ff;
+}

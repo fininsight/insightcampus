@@ -1,0 +1,79 @@
+<div id="header">
+  <div id="title">
+    <i nz-icon nzType="user" nzTheme="outline"></i>
+    수강생 관리
+  </div>
+</div>
+
+<div id="content">
+  <div id="left-table">
+    <nz-table
+      #classTable
+      nzShowSizeChanger
+      nzNoResult="조회된 결과가 없습니다"
+      [nzFrontPagination]="false"
+      [nzData]="classes.data"
+      [nzLoading]="classLoading"
+      [nzTotal]="classes.totalPages * classes.size"
+      [(nzPageIndex)]="classes.pageNumber"
+      [(nzPageSize)]="classes.size"
+      (nzPageIndexChange)="getClass()"
+      nzShowSizeChanger="false"
+      nzSize="small">
+      <thead>
+        <tr>
+          <th nzWidth="40%">수업 이름</th>
+          <th nzWidth="60%">기간</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let data of classTable.data"
+          (click)="selectClass(data)"
+          [ngClass]="{
+            on: this.selectedClass.class_seq === data.class_seq
+          }"
+          style="cursor: pointer">
+          <td>{{ data.class_nm }}</td>
+          <td>{{ getFullDate(data.start_date) + " ~ " + getFullDate(data.end_date)  }}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+
+  <div id="right-table">
+    <nz-table
+      #codeTable
+      nzShowSizeChanger
+      nzNoResult="조회된 결과가 없습니다"
+      [nzFrontPagination]="false"
+      [nzData]="students.data"
+      [nzLoading]="studentLoading"
+      [nzTotal]="students.totalPages * students.size"
+      [(nzPageIndex)]="students.pageNumber"
+      [(nzPageSize)]="students.size"
+      (nzPageIndexChange)="getStudent()"
+      nzShowSizeChanger="false"
+      nzSize="small">
+      <thead>
+        <tr>
+          <th nzWidth="15%">주문자명</th>
+          <th nzWidth="25%">주문일</th>
+          <th nzWidth="15%">결제방법</th>
+          <th nzWidth="20%">결제금액</th>
+          <th nzWidth="25%">주소</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let data of codeTable.data">
+          <td>{{ data.order_user_seq }}</td>
+          <td>{{ getFullDate(data.order_date) }}</td>
+          <td>{{ data.order_type }}</td>
+          <td>{{ data.order_price }}</td>
+          <td>{{ data.address }}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>

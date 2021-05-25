@@ -22,6 +22,17 @@
   width: 600px;
 }
 
+.table-menu {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 50px;
+}
+
+.table-menu button {
+  margin-left: 5px;
+}
+
 tr.on td {
   background-color: #e3f8ff;
 }

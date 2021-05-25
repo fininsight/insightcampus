@@ -4,7 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { DataTable } from '../models/datatable';
 import { map, retry, catchError } from 'rxjs/operators';
-import { Student } from '../models/student';
 import { Common } from './common';
 
 @Injectable({
@@ -30,6 +29,14 @@ export class StudentService extends Common {
     return this.http.get<DataTable>(this.baseUrl + 'classstudent/' + classSeq + '/'
                                     + dataTable.size + '/' + dataTable.pageNumber + '/' + searchText,
                                     this.jwt())
+    .pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
+
+  sendCertification(classSeq: Number, orderUserSeq: Number) {
+    return this.http.post(this.baseUrl + 'classstudent/sendcertification/' + classSeq + '/' + orderUserSeq, this.jwt())
     .pipe(
       retry(1),
       catchError(this.errorHandl)

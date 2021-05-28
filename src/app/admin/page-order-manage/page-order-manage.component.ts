@@ -69,6 +69,17 @@ export class PageOrderManageComponent implements OnInit {
   ngOnInit() {
   }
 
+  currencyFormatter = (value: string) => {
+    if (value === null) {
+      return null;
+    } else if (value === undefined) {
+      return undefined;
+    } else {
+      value = value + '';
+      return value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+  }
+
   getOrderFilter() {
     this.orderService.getOrdersFilter(this.orders, this.filter).subscribe(data => {
       console.log(data);

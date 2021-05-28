@@ -24,6 +24,12 @@
           <li routerLink="/admin/class" nz-menu-item>강의관리</li>
         </ul>
         <ul class="subment">
+          <li routerLink="/admin/student" nz-menu-item>수강생관리</li>
+        </ul>
+        <ul class="subment">
+          <li routerLink="/admin/order-manage" nz-menu-item>주문관리</li>
+        </ul>
+        <ul class="subment">
           <li routerLink="/admin/class-notice" nz-menu-item>강의공지</li>
         </ul>
         <ul class="subment">
@@ -31,11 +37,6 @@
         </ul>
         <ul class="subment">
           <li routerLink="/admin/curriculum" nz-menu-item>커리큘럼</li>
-        </ul>
-      </li>
-      <li nz-submenu nzTitle="수강생관리" nzIcon="team" *ngIf="authService.roleCheck(['admin'])">
-        <ul class="subment">
-          <li routerLink="/admin/student" nz-menu-item>수강생관리</li>
         </ul>
       </li>
       <li nz-submenu nzTitle="쿠폰관리" nzIcon="tags" *ngIf="authService.roleCheck(['admin'])">
@@ -72,11 +73,6 @@
       <li nz-submenu nzTitle="워드 프레스" nzIcon="dashboard" *ngIf="authService.roleCheck(['admin'])">
         <ul class="subment">
           <li routerLink="/admin/wpboard-notice" nz-menu-item>최신글 연동</li>
-        </ul>
-      </li>
-      <li nz-submenu nzTitle="주문관리" nzIcon="credit-card" *ngIf="authService.roleCheck(['admin'])">
-        <ul class="subment">
-          <li routerLink="/admin/order-manage" nz-menu-item>주문관리</li>
         </ul>
       </li>
       <li nz-menu-item nzIcon="setting" (click)="logout()">로그아웃</li>

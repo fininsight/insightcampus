@@ -77,9 +77,9 @@
           }"
           style="cursor: pointer;"
           >
-          <td>{{ data.order_user_seq }}</td>
+          <td>{{ data.name }}</td>
           <td>{{ getFullDate(data.order_date) }}</td>
-          <td>{{ data.order_type }}</td>
+          <td>{{ getCodeName(data.order_type) }}</td>
           <td>{{ data.order_price | number }}</td>
           <td>{{ data.address }}</td>
         </tr>

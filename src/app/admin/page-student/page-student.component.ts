@@ -3,9 +3,11 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { Class } from '../core/models/class';
 import { DataTable } from '../core/models/datatable';
 import { Student } from '../core/models/student';
+import { Code } from '../core/models/code';
 import { environment } from 'src/environments/environment';
 import { ClassService } from '../core/services/class.service';
 import { StudentService } from '../core/services/student.service';
+import { CodeService } from '../core/services/code.service';
 
 @Component({
   selector: 'app-page-student',
@@ -22,6 +24,8 @@ export class PageStudentComponent implements OnInit {
   selectedClass: Class = new Class();
   selectedStudent: Student = new Student();
 
+  orderCode: Array<Code> = [];
+
   classLoading = true;
   studentLoading = false;
 
@@ -29,6 +33,7 @@ export class PageStudentComponent implements OnInit {
 
   constructor(private userService: ClassService,
               private studentService: StudentService, 
+              private codeService: CodeService,
               private modal: NzModalService,
               ) {
                 this.classes.pageNumber = 1;
@@ -36,6 +41,7 @@ export class PageStudentComponent implements OnInit {
                 this.students.pageNumber = 1;
                 this.students.size = 10;
                 this.getClass();
+                this.getCodes();
   }
 
   ngOnInit() {
@@ -56,6 +62,12 @@ export class PageStudentComponent implements OnInit {
       this.students = data
       this.studentLoading = false;
     });
+  }
+
+  getCodes() {
+    this.codeService.getCodes('order_type').subscribe(data => {
+      this.orderCode = data;
+    })
   }
 
   selectClass(param) {
@@ -110,6 +122,11 @@ export class PageStudentComponent implements OnInit {
 
     const result = [year, month, day].join('-');
     return result;
+  }
+
+  getCodeName(codeId: string) {
+    const findCode = this.orderCode.find(code => code.code_id === codeId);
+    return findCode.code_nm;
   }
 
 }

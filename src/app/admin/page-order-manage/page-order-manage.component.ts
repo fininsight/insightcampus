@@ -243,4 +243,9 @@ export class PageOrderManageComponent implements OnInit {
     return result;
   }
 
+  getCodeName(codeId: string) {
+    const findCode = this.orderCode.find(code => code.code_id === codeId);
+    return findCode.code_nm;
+  }
+
 }

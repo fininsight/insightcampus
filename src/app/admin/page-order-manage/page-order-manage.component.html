@@ -52,7 +52,7 @@
           >
             <td [nzAlign]="'center'">{{ getFullDate(data.order_date) }}</td>
             <td [nzAlign]="'center'">{{ data.order_price | number }}</td>
-            <td [nzAlign]="'center'">{{ data.order_type }}</td>
+            <td [nzAlign]="'center'">{{ getCodeName(data.order_type) }}</td>
             <td [nzAlign]="'center'">{{ data.address }}</td>
           </tr>
         </tbody>

@@ -5,11 +5,12 @@ import { Observable, throwError } from 'rxjs';
 import { DataTable } from '../models/datatable';
 import { map, retry, catchError } from 'rxjs/operators';
 import { Class } from '../models/class';
+import { Common } from 'src/app/admin/core/services/common';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ClassService {
+export class ClassService extends Common{
 
   baseUrl = environment.apiUrl;
 
@@ -21,6 +22,7 @@ export class ClassService {
 
 
   constructor(private http: HttpClient) {
+    super();
   }
 
   getClasses(dataTable: DataTable): Observable<DataTable> {

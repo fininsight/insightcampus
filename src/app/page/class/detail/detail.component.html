@@ -80,14 +80,14 @@
       <div id="teacher">
           <img src="../../../../assets/images/person_img.png" height="215" width="215">
         <div class="meta-values">
-          <div class="title">Teacher</div>
+          <div class="detail-title">Teacher</div>
           <div calss="content">{{ class_data.teacher }}</div>
         </div>
       </div>
       <div id="category">
         <img src="../../../../assets/images/category_img.png" height="215" width="215">
         <div class="meta-values">
-          <div class="title">Category</div>
+          <div class="detail-title">Category</div>
           <div calss="content">category list</div>
         </div>
       </div>
@@ -122,6 +122,7 @@
         <button (click)="goalAdd()" *ngIf="admin === true">추가8(학습목표)</button>
         <button (click)="professorAdd()" *ngIf="admin === true">추가9(강사소개)</button>
         <button (click)="foryouAdd()" *ngIf="admin === true">추가10(추천)</button>
+        <button (click)="deleteTemplte()" *ngIf="admin === true">삭제(템플릿 삭제)</button>
         <button (click)="thumbnail.click()" *ngIf="admin === true">
           썸네일 업로드<input #thumbnail type="file" style="display: none;" accept="image/*" (change)="thumbnailUpload($event.target.files)" />
         </button>

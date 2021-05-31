@@ -37,7 +37,7 @@ export class DetailComponent implements OnInit {
         <div class="title-line"></div>
       </div>
     </div>
-    <div style="font-size:14px; color:black;">
+    <div class="title-content" style="font-size:14px; color:black;">
       내용을 입력해 주세요
     </div>
   </div>
@@ -338,6 +338,10 @@ testTemplage2 = `
     this.templates.push(this.foryouTemplate);
   }
 
+  deleteTemplte() {
+    this.templates.pop();
+  }
+
   thumbnailUpload(files) {
     this.thumbnail = files.item(0);
     alert("파일 업로드가 되었습니다\n꼭 저장하여 썸네일을 등록해주세요");
@@ -358,7 +362,7 @@ testTemplage2 = `
       class_seq: this.class_seq,
       template: JSON.stringify(this.templates)
     };
-    console.log(saveClass);
+    console.log("!!!" + saveClass);
 
     this.classService.updateTemplate(saveClass).subscribe(data => {
       console.log(data);

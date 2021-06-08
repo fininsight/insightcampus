@@ -148,36 +148,21 @@
     </ng-container>
     <ng-container *ngIf="tab === 2">
       <div id="class-curriculum">
-        <div class="curriculum-section">
-          <h3>Part 1 | 일단 시작해보자</h3>
-        </div>
-        <div class="curriculum-item">
-          <div class="curriculum-num">
-            1
+        <ng-container *ngFor="let curriculumgroup of curriculum_list | keyvalue">
+          <div class="curriculum-section">
+            <h3>{{ curriculumgroup.key }}</h3>
           </div>
-          <div class="curriculum-title">
-            1강 | "Hello World!" 일단 시작해보자!
-          </div>
-        </div>
-        <div class="curriculum-item">
-          <div class="curriculum-num">
-            2
-          </div>
-          <div class="curriculum-title">
-            2강 | 컴퓨터에게 뭔가 기억시키도 계산을 시켜보자!
-          </div>
-        </div>
-        <div class="curriculum-section">
-          <h3>Part 2 | 업무자동화</h3>
-        </div>
-        <div class="curriculum-item">
-          <div class="curriculum-num">
-            1
-          </div>
-          <div class="curriculum-title">
-            3강 | 업무자동화의 시작 : 적절한 판단력을 심어주자!
-          </div>
-        </div>
+          <ng-container *ngFor="let curriculum of curriculumgroup.value">
+            <div class="curriculum-item">
+              <!-- <div class="curriculum-num">
+                1
+              </div> -->
+              <div class="curriculum-title">
+                {{curriculum}}
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
       </div>
     </ng-container>
     <ng-container *ngIf="tab === 3">강의후기</ng-container>

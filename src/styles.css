@@ -28,16 +28,25 @@ div.ant-modal-body {
 /* testTemplage1 */
 .template-class-info {
     margin-top: 30px;
+    position: relative;
+    margin-bottom: 50px;
 }
 
 .template-class-info .title {
-    display: flex;
+    /* display: flex; */
     align-items: center;
-    flex-direction: column;
+    position: absolute;
+    flex-direction: row;
     /* font-size: 30px; */
     font-weight: 700;
     color: black;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
+}
+
+.title-content {
+    display: flex;
+    position: relative;
+    margin-top: 65px;
 }
 
 .template-class-info .title .title-line {

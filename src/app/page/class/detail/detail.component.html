@@ -80,14 +80,14 @@
       <div id="teacher">
           <img src="../../../../assets/images/person_img.png" height="215" width="215">
         <div class="meta-values">
-          <div class="title">Teacher</div>
+          <div class="detail-title">Teacher</div>
           <div calss="content">{{ class_data.teacher }}</div>
         </div>
       </div>
       <div id="category">
         <img src="../../../../assets/images/category_img.png" height="215" width="215">
         <div class="meta-values">
-          <div class="title">Category</div>
+          <div class="detail-title">Category</div>
           <div calss="content">category list</div>
         </div>
       </div>
@@ -122,6 +122,7 @@
         <button (click)="goalAdd()" *ngIf="admin === true">추가8(학습목표)</button>
         <button (click)="professorAdd()" *ngIf="admin === true">추가9(강사소개)</button>
         <button (click)="foryouAdd()" *ngIf="admin === true">추가10(추천)</button>
+        <button (click)="deleteTemplte()" *ngIf="admin === true">삭제(템플릿 삭제)</button>
         <button (click)="thumbnail.click()" *ngIf="admin === true">
           썸네일 업로드<input #thumbnail type="file" style="display: none;" accept="image/*" (change)="thumbnailUpload($event.target.files)" />
         </button>
@@ -147,36 +148,21 @@
     </ng-container>
     <ng-container *ngIf="tab === 2">
       <div id="class-curriculum">
-        <div class="curriculum-section">
-          <h3>Part 1 | 일단 시작해보자</h3>
-        </div>
-        <div class="curriculum-item">
-          <div class="curriculum-num">
-            1
+        <ng-container *ngFor="let curriculumgroup of curriculum_list | keyvalue">
+          <div class="curriculum-section">
+            <h3>{{ curriculumgroup.key }}</h3>
           </div>
-          <div class="curriculum-title">
-            1강 | "Hello World!" 일단 시작해보자!
-          </div>
-        </div>
-        <div class="curriculum-item">
-          <div class="curriculum-num">
-            2
-          </div>
-          <div class="curriculum-title">
-            2강 | 컴퓨터에게 뭔가 기억시키도 계산을 시켜보자!
-          </div>
-        </div>
-        <div class="curriculum-section">
-          <h3>Part 2 | 업무자동화</h3>
-        </div>
-        <div class="curriculum-item">
-          <div class="curriculum-num">
-            1
-          </div>
-          <div class="curriculum-title">
-            3강 | 업무자동화의 시작 : 적절한 판단력을 심어주자!
-          </div>
-        </div>
+          <ng-container *ngFor="let curriculum of curriculumgroup.value">
+            <div class="curriculum-item">
+              <!-- <div class="curriculum-num">
+                1
+              </div> -->
+              <div class="curriculum-title">
+                {{curriculum}}
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
       </div>
     </ng-container>
     <ng-container *ngIf="tab === 3">강의후기</ng-container>

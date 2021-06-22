@@ -9,6 +9,7 @@ import { ClassService } from 'src/app/admin/core/services/class.service';
 })
 export class MainComponent implements OnInit {
   classes = new DataTable();
+  defaultThumbnailUrl: string = 'https://insightcampus.s3.ap-northeast-2.amazonaws.com/thumbnail_class/none.png';
 
   constructor(private classService: ClassService) {
     this.classes.pageNumber = 1;
@@ -24,6 +25,7 @@ export class MainComponent implements OnInit {
   getClass() {
     this.classService.getClasses(this.classes).subscribe(data => {
       this.classes = data;
+
     });
   }
 

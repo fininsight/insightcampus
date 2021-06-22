@@ -6,6 +6,8 @@ import { DataTable } from '../../core/models/datatable';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { NzModalService, NzModalRef } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { CurriculumgroupService } from 'src/app/admin/core/services/curriculumgroup.service';
+import { CurriculumService } from 'src/app/admin/core/services/curriculum.service';
 declare const IMP: any;
 
 @Component({
@@ -22,6 +24,9 @@ export class DetailComponent implements OnInit {
   public templates = [];
   public tab = 1;
   public all_class = new DataTable();
+  public curriculum = new DataTable();
+  public curriculumgroup = new DataTable();
+  public curriculum_list = {};
   public selectLoadClass;
   public thumbnail: File = null;
   public tabSize = 10;
@@ -37,7 +42,7 @@ export class DetailComponent implements OnInit {
         <div class="title-line"></div>
       </div>
     </div>
-    <div style="font-size:14px; color:black;">
+    <div class="title-content" style="font-size:14px; color:black;">
       내용을 입력해 주세요
     </div>
   </div>
@@ -271,6 +276,8 @@ testTemplage2 = `
               private router: Router,
               private modal: NzModalService,
               private classService: ClassService,
+              private curriculumService: CurriculumService,
+              private curriculumgroupService: CurriculumgroupService,
               private message: NzMessageService) {
 
     route.params.subscribe(val => {
@@ -293,6 +300,12 @@ testTemplage2 = `
       this.all_class = data;
     });
     IMP.init('imp24709734');
+
+    this.curriculum.pageNumber = 1;
+    this.curriculum.size = 10;
+    this.curriculumgroup.pageNumber = 1;
+    this.curriculumgroup.size = 10;
+    this.getCurriculums();
   }
 
   ngOnInit() {
@@ -338,6 +351,10 @@ testTemplage2 = `
     this.templates.push(this.foryouTemplate);
   }
 
+  deleteTemplte() {
+    this.templates.pop();
+  }
+
   thumbnailUpload(files) {
     this.thumbnail = files.item(0);
     alert("파일 업로드가 되었습니다\n꼭 저장하여 썸네일을 등록해주세요");
@@ -358,7 +375,7 @@ testTemplage2 = `
       class_seq: this.class_seq,
       template: JSON.stringify(this.templates)
     };
-    console.log(saveClass);
+    console.log("!!!" + saveClass);
 
     this.classService.updateTemplate(saveClass).subscribe(data => {
       console.log(data);
@@ -389,6 +406,26 @@ testTemplage2 = `
     this.isCollapsedTab[tab-1] = true;
   
   }
+
+  getCurriculums() {
+    this.curriculumgroupService.getCurriculumgroup(this.curriculumgroup, this.class_seq).subscribe(data => {
+      this.curriculumgroup = data;
+      for(let i=0; i<this.curriculumgroup.data.length; i++) {
+        this.curriculumService.getCurriculum(this.curriculum, this.curriculumgroup.data[i].curriculumgroup_seq).subscribe(curriculum_data => {
+          this.curriculum = curriculum_data;
+          console.log(this.curriculum.data);
+          let curriculum_nmList = [];
+          for(let j=0; j<this.curriculum.data.length; j++) {
+            curriculum_nmList.push(this.curriculum.data[j].curriculum_nm);
+          }
+          this.curriculum_list[this.curriculumgroup.data[i].curriculumgroup_nm] = curriculum_nmList;
+        }); 
+      }
+      console.log("!!" + this.curriculum_list);
+    });
+
+    
+   }
 
   buyClass(pay_method) {
     IMP.request_pay({

@@ -1,6 +1,3 @@
-<!-- <div id="carousel">
-</div> -->
-
 <div id="wrapper">
     <div id="main-contents">
         <section>
@@ -166,7 +163,7 @@
                     <li *ngFor="let data of classes.data" style="cursor: pointer;">
                         <div class="class-detail">
                             <div class="class-img">
-                                <img src="../../../assets/images/test.jpeg" height="270" width="283">
+                                <img [src]="data.thumbnail || defaultThumbnailUrl">
                             </div>
                             <div class="class-body">
                                 <div class="class-title">

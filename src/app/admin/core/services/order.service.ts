@@ -32,14 +32,14 @@ export class OrderService extends Common {
     if (filter.order_type !== '') {
       param_filter.push({
         k: 'order_type',
-        v: filter.class_nm
+        v: filter.order_type
       });
     }
 
     if (filter.address !== '') {
       param_filter.push({
         k: 'address',
-        v: filter.teacher
+        v: filter.address
       });
     }
 

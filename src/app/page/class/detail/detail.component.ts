@@ -127,6 +127,20 @@ testTemplage2 = `
   </div>
   `;
 
+  curriculumContentTemplate = 
+  `
+  <div class="template-class-curriculum">
+    <div class="class-part">
+      <h2>제 1장 | 타이틀</h2>
+      <ul>
+        <li>입력하세요</li>
+        <li>입력하세요</li>
+        <li>입력하세요</li>
+      </ul>
+    </div>
+  </div>
+  `;
+
   infoTemplate = `
   <div class="template-class-info">
     <div class="icon-box">
@@ -213,6 +227,9 @@ testTemplage2 = `
     </div>
   </div>
   `;
+
+
+
 
   public option =  {
     toolbarInline: true,
@@ -333,6 +350,10 @@ testTemplage2 = `
 
   curriculumAdd() {
     this.templates.push(this.curriculumTemplate);
+  }
+
+  curriculumContentAdd() {
+    this.templates.push(this.curriculumContentTemplate);
   }
 
   infoAdd() {

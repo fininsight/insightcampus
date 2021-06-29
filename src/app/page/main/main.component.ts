@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { first } from 'rxjs/operators';
 import { DataTable } from 'src/app/admin/core/models/datatable';
 import { ClassService } from 'src/app/admin/core/services/class.service';
 
@@ -9,6 +10,7 @@ import { ClassService } from 'src/app/admin/core/services/class.service';
 })
 export class MainComponent implements OnInit {
   classes = new DataTable();
+  slider: any;
   defaultThumbnailUrl: string = 'https://insightcampus.s3.ap-northeast-2.amazonaws.com/thumbnail_class/none.png';
 
   constructor(private classService: ClassService) {
@@ -19,13 +21,12 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.getClass();
     this.slide();
-    setInterval(this.slide, 7000);
+    // this.slider = setInterval(this.slide, 7000);
   }
 
   getClass() {
     this.classService.getClasses(this.classes).subscribe(data => {
       this.classes = data;
-
     });
   }
 
@@ -39,7 +40,6 @@ export class MainComponent implements OnInit {
     const dots = document.querySelectorAll(".dot");
     const slides = document.querySelectorAll(".main-content");
     const firstSlide = document.querySelectorAll(".main-content")[0];
-    const firstContent = firstSlide.firstElementChild;
     const currentSlide = document.querySelector('.showing');
 
     if(currentSlide) {
@@ -75,16 +75,16 @@ export class MainComponent implements OnInit {
         nextContent.classList.add(animatedClass);
       } else {
         firstSlide.classList.add(showingClass);
-        firstContent.classList.add(fadeInUpClass);
-        firstContent.classList.add(animatedClass);
+        firstSlide.firstElementChild.classList.add(fadeInUpClass);
+        firstSlide.firstElementChild.classList.add(animatedClass);
       }
 
       
     }
     else {
       firstSlide.classList.add(showingClass);
-      firstContent.classList.add(fadeInUpClass);
-      firstContent.classList.add(animatedClass);
+      firstSlide.firstElementChild.classList.add(fadeInUpClass);
+      firstSlide.firstElementChild.classList.add(animatedClass);
       dots[0].classList.add(dotActiveClass);
     }
 

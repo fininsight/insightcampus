@@ -5,7 +5,7 @@ import { Observable, throwError } from 'rxjs';
 import { DataTable } from '../models/datatable';
 import { map, retry, catchError } from 'rxjs/operators';
 import { Class } from '../models/class';
-import { Common } from 'src/app/admin/core/services/common';
+import { Common } from './common';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +14,11 @@ export class ClassService extends Common{
 
   baseUrl = environment.apiUrl;
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  };
+  // httpOptions = {
+  //   headers: new HttpHeaders({
+  //     'Content-Type': 'application/json'
+  //   })
+  // };
 
 
   constructor(private http: HttpClient) {
@@ -42,7 +42,6 @@ export class ClassService extends Common{
   }
 
   getClass(class_seq: number): Observable<Class> {
-
     return this.http.get<Class>(this.baseUrl + 'class/' + class_seq)
     .pipe(
       retry(1),
@@ -52,7 +51,7 @@ export class ClassService extends Common{
   }
 
   updateTemplate(_class: Class) {
-    return this.http.put(this.baseUrl + 'class/template', _class).pipe(
+    return this.http.put(this.baseUrl + 'class/template', _class, this.jwt()).pipe(
       retry(1),
       catchError(this.errorHandl)
     );
@@ -61,7 +60,7 @@ export class ClassService extends Common{
   updateThumbnail(class_seq: number, _file: File) {
     const formData = new FormData();
     formData.append('file', _file);
-    return this.http.put(this.baseUrl + 'class/thumbnail/' + class_seq, formData).pipe(
+    return this.http.put(this.baseUrl + 'class/thumbnail/' + class_seq, formData, this.jwt()).pipe(
       retry(1),
       catchError(this.errorHandl)
     );

@@ -118,10 +118,11 @@
         <button (click)="class2Add()" *ngIf="admin === true">추가4(포인트)</button>
         <button (click)="tagAdd()" *ngIf="admin === true">추가5(태그)</button>
         <button (click)="curriculumAdd()" *ngIf="admin === true">추가6(커리큘럼)</button>
-        <button (click)="infoAdd()" *ngIf="admin === true">추가7(수강방법)</button>
-        <button (click)="goalAdd()" *ngIf="admin === true">추가8(학습목표)</button>
-        <button (click)="professorAdd()" *ngIf="admin === true">추가9(강사소개)</button>
-        <button (click)="foryouAdd()" *ngIf="admin === true">추가10(추천)</button>
+        <button (click)="curriculumContentAdd()" *ngIf="admin === true">추가7(커리큘럼컨텐츠)</button>
+        <button (click)="infoAdd()" *ngIf="admin === true">추가8(수강방법)</button>
+        <button (click)="goalAdd()" *ngIf="admin === true">추가9(학습목표)</button>
+        <button (click)="professorAdd()" *ngIf="admin === true">추가10(강사소개)</button>
+        <button (click)="foryouAdd()" *ngIf="admin === true">추가11(추천)</button>
         <button (click)="deleteTemplte()" *ngIf="admin === true">삭제(템플릿 삭제)</button>
         <button (click)="thumbnail.click()" *ngIf="admin === true">
           썸네일 업로드<input #thumbnail type="file" style="display: none;" accept="image/*" (change)="thumbnailUpload($event.target.files)" />

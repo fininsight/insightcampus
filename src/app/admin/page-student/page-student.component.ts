@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { Class } from '../core/models/class';
 import { DataTable } from '../core/models/datatable';
 import { Student } from '../core/models/student';
+import { Code } from '../core/models/code';
 import { environment } from 'src/environments/environment';
 import { ClassService } from '../core/services/class.service';
 import { StudentService } from '../core/services/student.service';
+import { CodeService } from '../core/services/code.service';
 
 @Component({
   selector: 'app-page-student',
@@ -22,13 +25,24 @@ export class PageStudentComponent implements OnInit {
   selectedClass: Class = new Class();
   selectedStudent: Student = new Student();
 
+  orderCode: Array<Code> = [];
+
+  isSendMail = false;
+
   classLoading = true;
   studentLoading = false;
+  mailSendLoading = false;
+
+  mailSendLoadingText = '메일전송중';
+
+  checks: any;
 
   confirmModal?: NzModalRef;
 
   constructor(private userService: ClassService,
               private studentService: StudentService, 
+              private codeService: CodeService,
+              private message: NzMessageService,
               private modal: NzModalService,
               ) {
                 this.classes.pageNumber = 1;
@@ -36,6 +50,7 @@ export class PageStudentComponent implements OnInit {
                 this.students.pageNumber = 1;
                 this.students.size = 10;
                 this.getClass();
+                this.getCodes();
   }
 
   ngOnInit() {
@@ -56,6 +71,12 @@ export class PageStudentComponent implements OnInit {
       this.students = data
       this.studentLoading = false;
     });
+  }
+
+  getCodes() {
+    this.codeService.getCodes('order_type').subscribe(data => {
+      this.orderCode = data;
+    })
   }
 
   selectClass(param) {
@@ -86,11 +107,12 @@ export class PageStudentComponent implements OnInit {
     this.confirmModal = this.modal.confirm({
       nzTitle: '수료증 PDF 메일 전송',
       nzContent: '선택하신 내용의 PDF를 전송하시겠습니까?',
-      nzOnOk: () => {
+      nzOnOk: () => new Promise((resolve, reject) => {
         this.studentService.sendCertification(this.selectedClass.class_seq, this.selectedStudent.order_user_seq).subscribe(data => {
-          console.log(data);
+          resolve(data);
+          this.message.create('success', '전송이 완료되었습니다.');
         })
-      },
+      }).catch(() => { this.message.create('error', '전송에 실패했습니다.'); }),
       nzOnCancel: () => {
         this.confirmModal.destroy();
       }
@@ -110,6 +132,11 @@ export class PageStudentComponent implements OnInit {
 
     const result = [year, month, day].join('-');
     return result;
+  }
+
+  getCodeName(codeId: string) {
+    const findCode = this.orderCode.find(code => code.code_id === codeId);
+    return findCode.code_nm;
   }
 
 }

@@ -68,7 +68,7 @@ tr.on td {
   margin-left: 10px;
 }
 
-.popup-content input, .popup-content nz-date-picker {
+.popup-content input, .popup-content nz-input-number, .popup-content nz-date-picker {
   width: 300px;
   margin-bottom: 5px;
 }

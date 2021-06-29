@@ -51,8 +51,8 @@
             style="cursor: pointer;"
           >
             <td [nzAlign]="'center'">{{ getFullDate(data.order_date) }}</td>
-            <td [nzAlign]="'center'">{{ data.order_price }}</td>
-            <td [nzAlign]="'center'">{{ data.order_type }}</td>
+            <td [nzAlign]="'center'">{{ data.order_price | number }}</td>
+            <td [nzAlign]="'center'">{{ getCodeName(data.order_type) }}</td>
             <td [nzAlign]="'center'">{{ data.address }}</td>
           </tr>
         </tbody>
@@ -74,7 +74,7 @@
     </div>
     <div>
       <nz-form-label nzRequired>결제 가격</nz-form-label>
-      <input nz-input type="text" placeholder="결제가격" [(ngModel)]="popupOrder.order_price"/>
+      <nz-input-number [nzPlaceHolder]="'결제가격'" [nzStep]="100" [nzFormatter]="currencyFormatter" [(ngModel)]="popupOrder.order_price"></nz-input-number>
     </div>
     <div>
       <nz-form-label nzRequired>결제 방법</nz-form-label>
@@ -101,7 +101,7 @@
     </div>
     <div>
       <nz-form-label nzRequired>금액</nz-form-label>
-      <input nz-input type="text" placeholder="금액" [(ngModel)]="popupOrderItem.price"/>
+      <nz-input-number [nzPlaceHolder]="'금액'" [nzStep]="100" [nzFormatter]="currencyFormatter" [(ngModel)]="popupOrderItem.price"></nz-input-number>
       <button nz-button nzType="primary" id="order-item-add-button" (click)="orderItemAdd()">추가</button>
     </div>
     <div>
@@ -144,7 +144,7 @@
     </div>
     <div>
       <nz-form-label nzRequired>결제 가격</nz-form-label>
-      <input nz-input type="text" placeholder="결제가격" [(ngModel)]="popupOrder.order_price"/>
+      <nz-input-number [nzPlaceHolder]="'결제가격'" [nzStep]="100" [nzFormatter]="currencyFormatter" [(ngModel)]="popupOrder.order_price"></nz-input-number>
     </div>
     <div>
       <nz-form-label nzRequired>결제 방법</nz-form-label>
@@ -171,7 +171,7 @@
     </div>
     <div>
       <nz-form-label nzRequired>금액</nz-form-label>
-      <input nz-input type="text" placeholder="금액" [(ngModel)]="popupOrderItem.price"/>
+      <nz-input-number [nzPlaceHolder]="'금액'" [nzStep]="100" [nzFormatter]="currencyFormatter" [(ngModel)]="popupOrderItem.price"></nz-input-number>
       <button nz-button nzType="primary" id="order-item-add-button" (click)="orderItemAdd()">추가</button>
     </div>
     <div>
@@ -191,7 +191,7 @@
         <tbody>
           <tr *ngFor="let data of popupOrderItemList">
             <td>{{ getClassName(data.class_seq) }}</td>
-            <td>{{ data.price }}</td>
+            <td>{{ data.price | number }}</td>
             <td>
               <a (click)="orderItemDelete(data.class_seq)">삭제</a>
             </td>

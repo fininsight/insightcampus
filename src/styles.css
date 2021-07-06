@@ -28,24 +28,25 @@ div.ant-modal-body {
 /* testTemplage1 */
 .template-class-info {
     margin-top: 30px;
-    position: relative;
+    display: flex;
+    /* position: relative; */
     margin-bottom: 50px;
 }
 
 .template-class-info .title {
     /* display: flex; */
     align-items: center;
-    position: absolute;
-    flex-direction: row;
+    /* position: absolute; */
+    /* flex-direction: row; */
     /* font-size: 30px; */
     font-weight: 700;
     color: black;
     margin-bottom: 50px;
 }
 
-.title-content {
+.template-content {
     display: flex;
-    position: relative;
+    /* position: relative; */
     margin-top: 65px;
 }
 
@@ -107,8 +108,8 @@ div.ant-modal-body {
 }
 
 .template-class-introduce .title h1 {
-    padding: 15px 20px;
-    border-bottom: 2px solid #f6981f;
+    padding-top: 15px ;
+    border-bottom: 5px solid #f6981f;
     font-weight: 700;
     font-size: 26px;
 }
@@ -130,6 +131,25 @@ div.ant-modal-body {
     margin: 0;
     line-height: 1.5;
     font-size: 24px;
+}
+
+.template-class-content {
+    margin: 10px 0px;
+    border-top: 0.2px solid #000;
+    width: 80%;
+    text-align: left;
+    font-size: 26px;
+}
+
+.template-professor-introduce {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.template-professor-introduce .icon-box {
+    justify-content: center;
+    align-items: center;
 }
 
 /* class2 */
@@ -168,8 +188,8 @@ div.ant-modal-body {
 
 .template-class-class2 .title h1 {
     margin: 0;
-    padding: 15px 20px;
-    border-bottom: 2px solid #f6981f;
+    padding-top: 15px;
+    border-bottom: 5px solid #f6981f;
     font-weight: 700;
     font-size: 26px;
 }
@@ -186,6 +206,54 @@ div.ant-modal-body {
 .template-class-class2 .intro-list ol li {
     font-size: 18px;
 }
+
+/* professor interview*/
+.template-professor-interview {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.template-professor-interview .icon-box{
+    width: 100%;
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.template-professor-interview .icon-box .icon {
+    padding: 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: rgba(244, 130, 30, 0.8);
+    font-size: 42px;
+    color: #fff;
+}
+
+.template-professor-interview .title {
+    text-align: center;
+}
+
+.template-professor-interview .title h1 {
+    border-bottom: 5px solid #f6981f;
+    font-weight: 700;
+    font-size: 26px;
+}
+
+.template-professor-interview .title p {
+    font-size: 22px;
+}
+
+.template-professor-interview .content {
+    text-align: left;
+    
+}
+
+
 
 /* tag */
 .template-class-tag .tag-box {
@@ -462,9 +530,8 @@ div.ant-modal-body {
 }
 
 .template-class-foryou .title h1 {
-    margin: 0;
-    padding: 15px 20px;
-    border-bottom: 2px solid #f6981f;
+    padding-top: 15px;
+    border-bottom: 5px solid #f6981f;
     font-weight: 700;
     font-size: 26px;
 }
@@ -510,4 +577,84 @@ div.ant-modal-body {
     line-height: 1.5;
     font-weight: 0.9rem;
     color: #606060;
+}
+
+.template-target-students {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f2f2;
+}
+
+.template-target-students .title h1{
+    padding-top: 15px ;
+    border-bottom: 5px solid #f6981f;
+    font-weight: 700;
+    font-size: 26px;
+}
+
+.template-target-students .target-box-wrapper {
+    width: 100%;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.template-target-students .target-box-wrapper .target-box {
+    width: 30%;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.template-target-students .target-box-wrapper .target-box h3 {
+    font-weight: 700;
+}
+
+.template-class-review {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.template-class-review .title h1 {
+    padding-top: 15px ;
+    border-bottom: 5px solid #f6981f;
+    font-weight: 700;
+    font-size: 26px;
+}
+
+.template-class-review .review-box-wrapper {
+    background-color: #fff;
+    width: 100%;
+    border: 1px solid #e1e8ed;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.template-class-review .review-box-wrapper p {
+    width: 100%;
+    margin: 0.5%;
+}
+
+.template-class-review .review-box-wrapper .star-rating{
+    border-bottom: 1px solid #e1e8ed;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.template-class-review .review-box-wrapper .star-rating p{
+    margin-left: 2%;
 }

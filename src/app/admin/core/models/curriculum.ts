@@ -5,4 +5,6 @@ export class Curriculum {
     order: number;
     type: string;
     option: string;
+    url: string;
+    duration: string;
 }

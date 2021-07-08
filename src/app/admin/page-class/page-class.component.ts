@@ -21,6 +21,9 @@ export class PageClassComponent implements OnInit {
 
   popupClass: Class = new Class();
 
+  thumbnailFile: File = null;
+  thumbnailLoading: boolean = false;
+
   isClassAdd = false;
   isClassUpdate = false;
   
@@ -117,11 +120,10 @@ export class PageClassComponent implements OnInit {
   }
   
   classAddOk() : void {
-    console.log(this.popupClass)
     this.userService.addClass(this.popupClass).subscribe(data => {
       this.getClass();
       this.isClassAdd = false;
-      this.message.create('success', '사용자 추가가 완료되었습니다.');
+      this.message.create('success', '강의 추가가 완료되었습니다.');
     })
   }
   
@@ -151,13 +153,14 @@ export class PageClassComponent implements OnInit {
     this.userService.updateClass(this.popupClass, this.popupClass.class_seq).subscribe(data => {
       this.getClass();
       this.isClassUpdate = false;
-      this.message.create('success', '사용자 수정이 완료되었습니다.');
+      this.message.create('success', '강의 수정이 완료되었습니다.');
     })
+
   }
   
   classDelete() {
     this.modal.confirm({
-      nzTitle: '사용자를 삭제하시겠습니까?',
+      nzTitle: '강의를 삭제하시겠습니까?',
       nzContent: '',
       nzOkText: '예',
       nzOkType: 'danger',
@@ -165,7 +168,7 @@ export class PageClassComponent implements OnInit {
       nzOnOk: () => {
         this.userService.deleteClass(this.selectedClass.class_seq).subscribe(data => {
           this.getClass();
-          this.message.create('success', '사용자 삭제가 완료되었습니다.');
+          this.message.create('success', '강의 삭제가 완료되었습니다.');
         })
       }
     });
@@ -194,5 +197,14 @@ export class PageClassComponent implements OnInit {
 
     const result = [year, month, day].join('-');
     return result;
+  }
+  
+  thumbnailUpload(files) {
+    this.thumbnailLoading = true;
+    this.thumbnailFile = files.item(0);
+    this.userService.updateThumbnail(this.thumbnailFile).subscribe(data => {
+      this.popupClass.thumbnail = data.toString();
+      this.thumbnailLoading = false;
+    })
   }
 }

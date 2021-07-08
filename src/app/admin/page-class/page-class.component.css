@@ -73,6 +73,27 @@ tr.on td {
   overflow:auto; 
 }
 
+.upload-box {
+  width: 128px;
+  height: 128px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px dashed #d9d9d9;
+  border-radius: 2px;
+  box-sizing: border-box;
+  background-color: #fafafa;
+  line-height: 1.5715;
+  font-size: 14px;
+  color: rgba(0,0,0,.85);
+  cursor: pointer;
+  transition: border-color .3s;
+}
+
+.upload-box:hover {
+  border-color: #1890ff;
+}
+
 nz-select {
   width: 300px;
 }

@@ -6,7 +6,7 @@ export class Class {
     start_date: Date;
     end_date: Date;
     duration_nm: string;
-    thumbnail: Date;
+    thumbnail: string;
     online_yn: number;
     price: number;
     real_price: number;

@@ -510,7 +510,6 @@ professorInterviewTemplate = `
       class_seq: this.class_seq,
       template: JSON.stringify(this.templates)
     };
-    console.log("!!!" + saveClass);
 
     this.classService.updateTemplate(saveClass).subscribe(data => {
       console.log(data);

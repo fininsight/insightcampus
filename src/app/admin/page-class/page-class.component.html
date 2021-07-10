@@ -137,6 +137,17 @@
         <nz-option [nzValue]="0" nzLabel="비공개"></nz-option>
       </nz-select>
     </div>
+    <div>
+      <nz-form-label nzRequired>썸네일</nz-form-label>
+      <div class="upload-box" (click)="thumbnail.click()">
+        <input #thumbnail type="file" style="display: none;" accept="image/*" (change)="thumbnailUpload($event.target.files)" />
+        <ng-container *ngIf="!popupClass.thumbnail">
+          <i class="upload-icon" nz-icon [nzType]="thumbnailLoading ? 'loading' : 'plus'"></i>
+          <div class="ant-upload-text">Upload</div>
+        </ng-container>
+        <img *ngIf="popupClass.thumbnail" class="preview-img" [src]="popupClass.thumbnail" style="width: 100%" />
+      </div>
+    </div>
   </div>
   
   <div *nzModalFooter>
@@ -211,6 +222,17 @@
         <nz-option [nzValue]="1" nzLabel="공개"></nz-option>
         <nz-option [nzValue]="0" nzLabel="비공개"></nz-option>
       </nz-select>
+    </div>
+    <div>
+      <nz-form-label nzRequired>썸네일</nz-form-label>
+      <div class="upload-box" (click)="thumbnail.click()">
+        <input #thumbnail type="file" style="display: none;" accept="image/*" (change)="thumbnailUpload($event.target.files)" />
+        <ng-container *ngIf="!popupClass.thumbnail">
+          <i class="upload-icon" nz-icon [nzType]="thumbnailLoading ? 'loading' : 'plus'"></i>
+          <div class="ant-upload-text">Upload</div>
+        </ng-container>
+        <img *ngIf="popupClass.thumbnail" class="preview-img" [src]="popupClass.thumbnail" style="width: 100%" />
+      </div>
     </div>
   </div>
   

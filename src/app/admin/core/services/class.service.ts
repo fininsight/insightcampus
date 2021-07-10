@@ -91,6 +91,15 @@ export class ClassService extends Common {
     );
   }
 
+  updateThumbnail(_file: File) {
+    const formData = new FormData();
+    formData.append('file', _file);
+    return this.http.post(this.baseUrl + 'class/thumbnail', formData).pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
+
   deleteClass(class_seq: Number) {
     return this.http.delete(this.baseUrl + 'class/' + class_seq, this.jwt()).pipe(
       retry(1),

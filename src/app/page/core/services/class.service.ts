@@ -14,11 +14,11 @@ export class ClassService extends Common{
 
   baseUrl = environment.apiUrl;
 
-  // httpOptions = {
-  //   headers: new HttpHeaders({
-  //     'Content-Type': 'application/json'
-  //   })
-  // };
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
 
 
   constructor(private http: HttpClient) {
@@ -60,7 +60,7 @@ export class ClassService extends Common{
   updateThumbnail(class_seq: number, _file: File) {
     const formData = new FormData();
     formData.append('file', _file);
-    return this.http.put(this.baseUrl + 'class/thumbnail/' + class_seq, formData, this.jwt()).pipe(
+    return this.http.put(this.baseUrl + 'class/thumbnail/' + class_seq, formData).pipe(
       retry(1),
       catchError(this.errorHandl)
     );

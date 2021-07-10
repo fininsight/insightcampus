@@ -98,10 +98,12 @@
       nzSize="small">
       <thead>
         <tr>
-          <th nzWidth="25%">커리큘럼nm</th>
-          <th nzWidth="25%">순서</th>
-          <th nzWidth="25%">타입</th>
-          <th nzWidth="25%">옵션</th>
+          <th nzWidth="16%">커리큘럼nm</th>
+          <th nzWidth="16%">순서</th>
+          <th nzWidth="16%">타입</th>
+          <th nzWidth="16%">옵션</th>
+          <th nzWidth="16%">URL</th>
+          <th nzWidth="16%">영상길이</th>
         </tr>
       </thead>
       <tbody>
@@ -116,6 +118,8 @@
             <td>{{ data.order }}</td>
             <td>{{ data.type }}</td>
             <td>{{ data.option }}</td>
+            <td>{{ data.url }}</td>
+            <td>{{ data.duration }}</td>
         </tr>
       </tbody>
     </nz-table>
@@ -138,8 +142,16 @@
     <div>
       <nz-form-label nzRequired>타입</nz-form-label>
       <nz-select [(ngModel)]="popupCurriculum.type">
-        <nz-option *ngFor="let data of curriculumType" [nzValue]="data.code_id" [nzLabel]="data.code_nm"></nz-option>
+        <nz-option *ngFor="let data of curriculumType" [nzValue]="data.code_nm" [nzLabel]="data.code_nm"></nz-option>
       </nz-select>
+    </div>
+    <div *ngIf="popupCurriculum.type == '비메오'">
+      <nz-form-label>URL</nz-form-label>
+      <input nz-input type="text" placeholder="URL" [(ngModel)]="popupCurriculum.url"/>
+    </div>
+    <div *ngIf="popupCurriculum.type == '비메오'">
+      <nz-form-label>영상길이</nz-form-label>
+      <input nz-input type="text" placeholder="영상길이" [(ngModel)]="popupCurriculum.duration"/>
     </div>
     <div>
       <nz-form-label nzRequired>옵션</nz-form-label>
@@ -169,8 +181,16 @@
     <div>
       <nz-form-label nzRequired>타입</nz-form-label>
       <nz-select [(ngModel)]="popupCurriculum.type">
-        <nz-option *ngFor="let data of curriculumType" [nzValue]="data.code_id" [nzLabel]="data.code_nm"></nz-option>
+        <nz-option *ngFor="let data of curriculumType" [nzValue]="data.code_nm" [nzLabel]="data.code_nm"></nz-option>
       </nz-select>
+    </div>
+    <div *ngIf="popupCurriculum.type == '비메오'">
+      <nz-form-label>URL</nz-form-label>
+      <input nz-input type="text" placeholder="URL" [(ngModel)]="popupCurriculum.url"/>
+    </div>
+    <div *ngIf="popupCurriculum.type == '비메오'">
+      <nz-form-label>영상길이</nz-form-label>
+      <input nz-input type="text" placeholder="영상길이" [(ngModel)]="popupCurriculum.duration"/>
     </div>
     <div>
       <nz-form-label nzRequired>옵션</nz-form-label>

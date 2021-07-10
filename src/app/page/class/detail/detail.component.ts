@@ -35,15 +35,12 @@ export class DetailComponent implements OnInit {
   @ViewChildren('class') classes: QueryList<ElementRef>;
 
   testTemplage = `
-  <div class="template-class-info">
+  <div class="template-class-introduce">
     <div class="title">
-      <div class="title-text">
-        <div style="font-size:30px">제목을 입력해 주세요</div>
-        <div class="title-line"></div>
-      </div>
+      <h1>제목을 입력하세요</h1>
     </div>
-    <div class="title-content" style="font-size:14px; color:black;">
-      내용을 입력해 주세요
+    <div class="content">
+      <p>글자를 입력하세요</p>
     </div>
   </div>
 `;
@@ -59,23 +56,56 @@ testTemplage2 = `
   </div>
 `;
 
-  introduceTemplate = `
-    <div class="template-class-introduce">
-      <div class="icon-box">
-        <div class="icon">
-          <img src="../../../../assets/icons/folder-regular.svg" />
-        </div>
-      </div>
-      <div class="title">
-        <h1>Introduction</h1>
-      </div>
-      <div class="content">
-        <img src="../../../../assets/icons/quote-left-solid.svg" />
-        <p>글자를 입력하세요</p>
-        <img src="../../../../assets/icons/quote-right-solid.svg" />
+introduceTemplate = `
+  <div class="template-class-introduce">
+    <div class="icon-box">
+      <div class="icon">
+        <img src="../../../../assets/icons/folder-regular.svg" />
       </div>
     </div>
-  `;
+    <div class="title">
+      <h1>Introduction</h1>
+    </div>
+    <div class="content">
+      <img src="../../../../assets/icons/quote-left-solid.svg" />
+      <p>글자를 입력하세요</p>
+      <img src="../../../../assets/icons/quote-right-solid.svg" />
+    </div>
+    <div class="template-class-content">
+      <div style="font-size:14px; color:black; margin-top:10px;">
+        내용을 입력해 주세요
+      </div>
+    </div>
+    <div class="template-professor-introduce">
+      <div class="icon-box">
+        <img src="../../../../assets/icons/chalkboard-teacher-solid-color.svg" width=50 />
+      </div>
+    </div>
+    <p>글자를 입력하세요</p>
+    <div class="template-class-content">
+      <div style="font-size:14px; color:black; margin-top:10px;">
+        내용을 입력해 주세요
+      </div>
+    </div>
+  </div>
+`;
+
+professorInterviewTemplate = `
+  <div class="template-professor-interview">
+    <div class="icon-box">
+      <div class="icon">
+        <img src="../../../../assets/icons/chalkboard-teacher-solid.svg" width=50/>
+      </div>
+    </div>
+    <div class="title">
+      <h1>Professor's Interview</h1>
+      <p>내용을 입력해 주세요</p>
+    </div>
+    <div class="content">
+      내용을 입력해 주세요
+    </div>
+  </div>
+`;
 
   class2Template = `
   <div class="template-class-class2">
@@ -155,6 +185,41 @@ testTemplage2 = `
       <p>입력해주세요</p>
     </div>
   </div>
+  <div class="template-class-info">
+    <div class="icon-box">
+      <img src="../../../../assets/icons/clock-solid.svg" width=50 />
+    </div>
+    <div class="info-box">
+      <div class="title">
+        <h2>일정</h2>
+      </div>
+      <p>입력해주세요</p>
+    </div>
+  </div>
+  <div class="template-class-info">
+    <div class="icon-box">
+      <img src="../../../../assets/icons/user-solid.svg" width=50 />
+    </div>
+    <div class="info-box">
+      <div class="title">
+        <h2>수강 인원</h2>
+      </div>
+      <p>입력해주세요</p>
+    </div>
+  </div> 
+  <div class="template-class-info">
+    <div class="icon-box">
+      <img src="../../../../assets/icons/clipboard-check-solid.svg" width=50 />
+    </div>
+    <div class="info-box">
+      <div class="title">
+        <h2>유의사항</h2>
+      </div>
+      <p>입력해주세요</p>
+    </div>
+  </div>  
+   
+   
   `;
 
   goalTemplate = `
@@ -228,6 +293,43 @@ testTemplage2 = `
   </div>
   `;
 
+  targetStudentsTemplate = `
+  <div class="template-target-students">
+    <div class="title">
+      <h1>수강 대상</h1>
+    </div>
+    <div class="target-box-wrapper">
+      <div class="target-box">
+        <h3>대상을 입력하세요</h3>
+        <p>내용을 입력하세요</p>
+      </div>
+      <div class="target-box">
+        <h3>대상을 입력하세요</h3>
+        <p>내용을 입력하세요</p>
+      </div>
+      <div class="target-box">
+        <h3>대상을 입력하세요</h3>
+        <p>내용을 입력하세요</p>
+      </div>
+    </div>
+  </div>
+  `
+
+  classReviewTemplate = `
+  <div class="template-class-review">
+    <div class="title">
+      <h1>수강 후기</h1>
+    </div>
+    <div class="review-box-wrapper">
+      <p>이름</p>
+      <div class="star-rating">
+        <p>별점을 입력하세요</p>
+        <p>수강생</p>
+      </div>
+      <p>수강 후기를 입력하세요</p>
+    </div>
+  </div>
+  `
 
 
 
@@ -340,6 +442,10 @@ testTemplage2 = `
     this.templates.push(this.introduceTemplate);
   }
 
+  professorInterviewAdd() {
+    this.templates.push(this.professorInterviewTemplate);
+  }
+
   class2Add() {
     this.templates.push(this.class2Template);
   }
@@ -370,6 +476,14 @@ testTemplage2 = `
 
   foryouAdd() {
     this.templates.push(this.foryouTemplate);
+  }
+
+  targetStudentsAdd() {
+    this.templates.push(this.targetStudentsTemplate);
+  }
+
+  classReviewAdd() {
+    this.templates.push(this.classReviewTemplate);
   }
 
   deleteTemplte() {

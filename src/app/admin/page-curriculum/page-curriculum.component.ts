@@ -213,6 +213,10 @@ export class PageCurriculumComponent implements OnInit {
     });
   }
 
+  onChange(value) {
+    console.log("Test" + value);
+  }
+
   popupCancel(): void{
     this.isCurriculumAdd = false;
     this.isCurriculumUpdate = false;

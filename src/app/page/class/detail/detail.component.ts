@@ -591,4 +591,8 @@ professorInterviewTemplate = `
       alert(msg);
     })
   }
+
+  startLecture() {
+    this.router.navigate([`/lecture/${this.class_seq}`]);
+  }
 }

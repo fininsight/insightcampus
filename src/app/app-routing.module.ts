@@ -7,7 +7,8 @@ const routes: Routes = [{
   component: AppComponent,
   children: [
       { path : '', loadChildren: './page/page.module#PageModule' },
-      { path : 'admin', loadChildren: './admin/admin.module#AdminModule' }
+      { path : 'admin', loadChildren: './admin/admin.module#AdminModule' },
+      { path : 'lecture', loadChildren: './lecture/lecture.module#LectureModule' }
   ]}];
 
 @NgModule({

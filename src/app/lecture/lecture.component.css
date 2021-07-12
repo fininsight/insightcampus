@@ -1,0 +1,61 @@
+#video-section {
+  width: calc(100% - 480px);
+  height: 100%;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.video-header {
+  width: 100%;
+  height: 60px;
+  padding: 1rem;
+  background-color: #171717;
+  box-sizing: border-box;
+}
+
+.video-header h1 {
+  margin-left: 1rem;
+  font-size: 18px;
+  color: #fff;
+}
+
+.video-body {
+  width: 100%;
+  height: calc(100% - 120px);
+  overflow-y: auto;
+  background-color: #171717;
+}
+
+.video-body .vimeo-wrapper {
+  position: relative;
+  padding-bottom: calc(100vh - 150px); /* 16/9 ratio */
+  padding-top: 30px; /* IE6 workaround */
+  height: 0;
+  overflow: hidden;
+  margin: 0;
+}
+
+.video-body .vimeo-wrapper iframe,
+.video-body .vimeo-wrapper object,
+.video-body .vimeo-wrapper embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.video-footer {
+  width: 100%;
+  height: 60px;
+  padding: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: hsla(0,0%,9%,.69);
+}
+
+#lecture-list-section {
+  width: 480px;
+  display: inline-block;
+}

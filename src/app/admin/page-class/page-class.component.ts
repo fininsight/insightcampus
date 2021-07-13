@@ -39,7 +39,7 @@ export class PageClassComponent implements OnInit {
   filter = {
     class_nm: '',
     teacher: '',
-    duration_nm: ''
+    online_yn: ''
   };
 
   sort(sort: { key: string; value: string }): void {
@@ -65,8 +65,11 @@ export class PageClassComponent implements OnInit {
   }
 
   getClassesFilter() {
+    if(this.filter.online_yn == null) {
+      this.filter.online_yn  = "";
+    }
     this.userService.getClassesFilter(this.classes, this.filter).subscribe(data => {
-      console.log(data);
+      console.log("data = " + data.data);
       data.data = data.data.map(v => {
         v.check = false;
         return v;

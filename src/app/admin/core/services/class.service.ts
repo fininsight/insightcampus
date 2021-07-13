@@ -43,17 +43,17 @@ export class ClassService extends Common {
       });
     }
 
-    if (filter.duration_nm !== '') {
+    if (filter.online_yn !== '') {
       param_filter.push({
-        k: 'duration_nm',
-        v: filter.duration_nm
+        k: 'online_yn',
+        v: filter.online_yn
       });
     }
 
     console.log(param_filter);
 
     return this.http.get<DataTable>(this.baseUrl + 'class/'
-                                    + dataTable.size + '/' + dataTable.pageNumber + '?f=' + JSON.stringify(param_filter), this.jwt())
+                                    + dataTable.size + '/' + dataTable.pageNumber + '?f=' + JSON.stringify(param_filter))
     .pipe(
       retry(1),
       catchError(this.errorHandl)

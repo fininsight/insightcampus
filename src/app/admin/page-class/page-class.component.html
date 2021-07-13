@@ -9,7 +9,10 @@
     <div class="table-filter">
       <input nz-input placeholder="수업명" [(ngModel)]="filter.class_nm" (change)="getClassesFilter()"/>
       <input nz-input placeholder="강사" [(ngModel)]="filter.teacher" (change)="getClassesFilter()"/>
-      <input nz-input placeholder="기간이름" [(ngModel)]="filter.duration_nm" (change)="getClassesFilter()"/>
+      <nz-select nzShowSearch nzAllowClear nzPlaceHolder="구분" [(ngModel)]="filter.online_yn" (ngModelChange)="getClassesFilter()">
+        <nz-option [nzValue]="1" nzLabel="온라인"></nz-option>
+        <nz-option [nzValue]="0" nzLabel="오프라인"></nz-option>
+      </nz-select>
     </div>
     <div class="table-menu">
       <button nz-button nzType="default" nzShape="circle" (click)="classAdd()"><i title="추가" nz-icon nzType="plus"></i></button>
@@ -34,14 +37,10 @@
     nzSize="small">
     <thead (nzSortChange)="sort($event)" nzSingleSort>
       <tr>
-        <th nzWidth="10%" [nzAlign]="'center'">수업</th>
-        <th nzWidth="10%" [nzAlign]="'center'">강사</th>
-        <th nzWidth="10%" [nzAlign]="'center'">카테고리</th>
-        <th nzWidth="20%" [nzAlign]="'center'">기간</th>
-        <th nzWidth="10%" [nzAlign]="'center'">구분</th>
-        <th nzWidth="20%" [nzAlign]="'center'">기간이름</th>
-        <th nzWidth="10%" [nzAlign]="'center'">정가</th>
-        <th nzWidth="10%" [nzAlign]="'center'">결제가</th>
+        <th nzWidth="40%" [nzAlign]="'center'">수업</th>
+        <th nzWidth="20%" [nzAlign]="'center'">구분</th>
+        <th nzWidth="20%" [nzAlign]="'center'">강사</th>
+        <th nzWidth="20%" [nzAlign]="'center'">카테고리</th>
       </tr>
     </thead>
     <tbody>
@@ -55,13 +54,9 @@
         style="cursor: pointer;"
       >
         <td [nzAlign]="'center'">{{ data.class_nm }}</td>
+        <td [nzAlign]="'center'">{{ data.online_yn ? '온라인' : '오프라인'}}</td>
         <td [nzAlign]="'center'">{{ data.teacher_name }}</td>
         <td [nzAlign]="'center'">{{ data.category_name }}</td>
-        <td [nzAlign]="'center'">{{ getFullDate(data.start_date) + " ~ " + getFullDate(data.end_date) }}</td>
-        <td [nzAlign]="'center'">{{ data.online_yn ? '온라인' : '오프라인'}}</td>
-        <td [nzAlign]="'center'">{{ data.duration_nm }}</td>
-        <td [nzAlign]="'center'">{{ data.price }}</td>
-        <td [nzAlign]="'center'">{{ data.real_price }}</td>
       </tr>
     </tbody>
   </nz-table>

@@ -12,4 +12,12 @@ export class LectureComponent implements OnInit {
   ngOnInit() {
   }
 
+  movePrevLecture() {
+    alert('이전강의 이동');
+  }
+
+  moveNextLecture() {
+    alert('다음강의 이동');
+  }  
+
 }

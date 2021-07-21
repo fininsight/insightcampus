@@ -4,6 +4,7 @@ export class ClassQna {
   parent_seq: Number;
   title: String;
   content: String;
+  reply: String;
   reg_user: Number;
   reg_dt: Date;
   upd_user: Number;

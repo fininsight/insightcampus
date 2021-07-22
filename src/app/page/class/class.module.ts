@@ -13,6 +13,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
 @Pipe({ name: 'safeHtml'})
 export class SafeHtmlPipe implements PipeTransform  {
@@ -50,7 +51,8 @@ import { AboutusComponent } from './aboutus/aboutus.component';
     NzButtonModule,
     NzIconModule,
     NzModalModule,
-    NzMessageModule
+    NzMessageModule,
+    NzPaginationModule
   ],
   declarations: [
     ClassComponent,

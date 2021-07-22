@@ -1,64 +1,71 @@
 <div id="qna">
   <div class="question-write">
-    <button nz-button nzType="primary" (click)="createQuestionWrite(header ,body, footer)">
-      질문 작성
-    </button>
-  </div>
-  <form class="search-box">
-    <input type="text" name="search" placeholder="질문을 검색해 보세요." />
-    <button>검색</button>
-  </form>
-  <div class="question-box" *ngFor="let data of qnaes.data">
-    <div class="icon-image">
-      <img src="#" alt="그림없음" />
+    <div class="question-write-btn">
+      <button  nz-button nzType="primary" *ngIf="questionType == 0" (click)="createQuestionWrite()">질문하기</button>
+      <button  nz-button nzType="primary" (click)="writeCancel()" *ngIf="questionType == 1"> 나가기 </button>
+      <button  nz-button nzType="primary" *ngIf="questionType == 1" (click)="writeOK()" style="background-color:#f09b23;">질문하기</button>
     </div>
+    <div *ngIf="questionType == 1" class="question-content" >
+      <label>제목</label>
+      <input nz-input type="text" placeholder="제목" [(ngModel)]="qna.title"/>
+      <label>내용</label>
+      <div
+        #class
+        [froalaEditor]="option"
+        [(froalaModel)]="qna.content"
+      ></div>
+    </div>
+    
+  </div>
+  <div class="question-box" *ngFor="let data of qnaes.data">
+    <div class="question-box-header">
+      <button nz-button nzType="primary" (click)="editAble(data.class_qna_seq)" *ngIf="edit[data.class_qna_seq] === 0 && reply[data.class_qna_seq] === 0"> 수정 </button>
+      <button nz-button nzType="primary" (click)="complete(data.class_qna_seq)" *ngIf="edit[data.class_qna_seq] === 1" style="background-color:#f09b23;" > 수정 </button>
+      <button nz-button nzType="primary" (click)="deleteClassQna(data.class_qna_seq)" *ngIf="edit[data.class_qna_seq] === 0 && reply[data.class_qna_seq] === 0"> 삭제 </button>
+      <button nz-button nzType="primary" (click)="replyAble(data.class_qna_seq)" *ngIf="edit[data.class_qna_seq] === 0 && reply[data.class_qna_seq] === 0 && !data.reply"> 답변하기 </button>
+      <button nz-button nzType="primary" (click)="complete(data.class_qna_seq)" *ngIf="edit[data.class_qna_seq] === 0 && reply[data.class_qna_seq] === 1" style="background-color:#f09b23;" > 답변하기 </button>
+      <button nz-button nzType="primary" (click)="cancle(data.class_qna_seq)" *ngIf="edit[data.class_qna_seq] === 1 || reply[data.class_qna_seq] === 1"> 나가기 </button>
+    </div>
+    
     <div class="content">
-      <h1>{{ data.title }}<span>7일전</span></h1>
-      <p>
-        {{ data.content }}
-      </p>
-      <div class="reactions">
-        <span
-          ><i
-            nz-icon
-            nzType="heart"
-            nzTheme="outline"
-            style="color: indianred; font-size: 20px;"
-          ></i>
-          1</span
-        >
-        <span
-          ><i
-            nz-icon
-            nzType="message"
-            nzTheme="fill"
-            style="color: lightslategray; font-size: 20px;"
-          ></i>
-          10</span
-        >
+      <h1 *ngIf="edit[data.class_qna_seq] === 0">{{ data.title }}</h1>
+      <p [innerHTML]="data.content | safeHtml" *ngIf="edit[data.class_qna_seq] === 0"></p>
+      <input nz-input type="text" placeholder="제목" [(ngModel)]="qnaTitle[data.class_qna_seq]" *ngIf="edit[data.class_qna_seq] === 1"/>
+      <div
+        #class
+        [froalaEditor]="option"
+        [innerHTML]="data.content | safeHtml"
+        [(froalaModel)]="qnaContent[data.class_qna_seq]"
+        *ngIf="edit[data.class_qna_seq] === 1"
+      ></div>
+      <div>
+        <div
+            #class
+            [froalaEditor]="option"
+            [innerHTML]="data.reply | safeHtml"
+            [(froalaModel)]="qnaReply[data.class_qna_seq]"
+            *ngIf="reply[data.class_qna_seq] === 1"
+          ></div>
+      </div>
+      <div class="reply-box"  *ngIf="data.reply">
+        <div class="reply-header">
+          <button nz-button nzType="primary" (click)="replyEditAble(data.class_qna_seq)" *ngIf="replyEdit[data.class_qna_seq] === 0"> 수정 </button>
+          <button nz-button nzType="primary" (click)="replyDelte(data.class_qna_seq)" *ngIf="replyEdit[data.class_qna_seq] === 0"> 삭제 </button>
+          <button nz-button nzType="primary" (click)="complete(data.class_qna_seq)" *ngIf="replyEdit[data.class_qna_seq] === 1" style="background-color:#f09b23;"> 수정 </button> 
+          <button nz-button nzType="primary" (click)="cancle(data.class_qna_seq)" *ngIf="replyEdit[data.class_qna_seq] === 1"> 나가기 </button>
+        </div>
+        <div class="reply-content">
+          <p [innerHTML]="data.reply | safeHtml" *ngIf="replyEdit[data.class_qna_seq] === 0"></p>
+          <div
+            #class
+            [froalaEditor]="option"
+            [innerHTML]="data.reply | safeHtml"
+            [(froalaModel)]="qnaReply[data.class_qna_seq]"
+            *ngIf="replyEdit[data.class_qna_seq] === 1"
+          ></div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="more-button-wrap">
-    <button nz-button nzType="primary" class="more-button" (click)="getMoreQnaes()" [nzLoading]="buttonLoading">더 보기</button>
-  </div>
+  <nz-pagination [(nzPageIndex)]="qnaes.pageNumber" [nzTotal]="qnaes.totalElements" (nzPageIndexChange)="getClassQnaes()"></nz-pagination>
 </div>
-
-<ng-template #header>
-  <div id="modal-header">
-    <form class="search-box">
-      <input type="text" name="search" placeholder="제목을 입력해 주세요." [(ngModel)]="popupQna.title">
-    </form>
-  </div>
-</ng-template>
-
-<ng-template #body>
-  <div id="modal-body">
-    <textarea name="qna-write-text" [(ngModel)]="popupQna.content"></textarea>
-  </div>
-</ng-template>
-
-<ng-template #footer>
-  <button nz-button nzType="primary" (click)="writeOK()">글쓰기</button>
-  <button nz-button nzType="default" (click)="writeCancel()">나가기</button>
-</ng-template> 

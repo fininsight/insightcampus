@@ -47,4 +47,18 @@ export class ClassQnaService extends Common {
       catchError(this.errorHandl)
     );
   }
+
+  updateQna(qna: ClassQna, class_qna_seq: Number) {
+    return this.http.put(this.baseUrl + 'classqna/' + class_qna_seq, qna).pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
+
+  deleteQna(seq: Number) {
+    return this.http.delete(this.baseUrl + 'classqna/' + seq).pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
 }

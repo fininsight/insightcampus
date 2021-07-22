@@ -131,6 +131,7 @@
           썸네일 업로드<input #thumbnail type="file" style="display: none;" accept="image/*" (change)="thumbnailUpload($event.target.files)" />
         </button>
         <button (click)="testAdmin()" *ngIf="admin !== true">관리자권한</button>
+        <button (click)="startLecture()" *ngIf="admin !== true">강의듣기</button>
         <button (click)="testAdminDisable()" *ngIf="admin === true">
           관리자권한제거
         </button>

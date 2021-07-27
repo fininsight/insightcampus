@@ -11,9 +11,10 @@
       <label>내용</label>
       <div
         #class
+        class="froala-editor"
         [froalaEditor]="option"
-        [(froalaModel)]="qna.content"
-      ></div>
+        [(froalaModel)]="froalaValue"
+      ><div>test</div></div>
     </div>
     
   </div>
@@ -33,17 +34,19 @@
       <input nz-input type="text" placeholder="제목" [(ngModel)]="qnaTitle[data.class_qna_seq]" *ngIf="edit[data.class_qna_seq] === 1"/>
       <div
         #class
+        class="froala-editor"
         [froalaEditor]="option"
         [innerHTML]="data.content | safeHtml"
-        [(froalaModel)]="qnaContent[data.class_qna_seq]"
+        [(froalaModel)]="froalaValue"
         *ngIf="edit[data.class_qna_seq] === 1"
       ></div>
       <div>
         <div
             #class
+            class="froala-editor"
             [froalaEditor]="option"
             [innerHTML]="data.reply | safeHtml"
-            [(froalaModel)]="qnaReply[data.class_qna_seq]"
+            [(froalaModel)]="froalaReplyValue"
             *ngIf="reply[data.class_qna_seq] === 1"
           ></div>
       </div>
@@ -60,7 +63,7 @@
             #class
             [froalaEditor]="option"
             [innerHTML]="data.reply | safeHtml"
-            [(froalaModel)]="qnaReply[data.class_qna_seq]"
+            [(froalaModel)]="froalaReplyValue"
             *ngIf="replyEdit[data.class_qna_seq] === 1"
           ></div>
         </div>

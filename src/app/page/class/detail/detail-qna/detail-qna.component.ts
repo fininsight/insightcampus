@@ -17,6 +17,10 @@ export class DetailQnaComponent implements OnInit {
 
   public class_seq: any;
   questionType = 0;
+  froalaValue: string = "";
+  froalaReplyValue: string = "";
+  contentTemplates = "";
+  replyTemplates = "";
   edit = {};
   reply = {};
   replyEdit = {};
@@ -37,20 +41,23 @@ export class DetailQnaComponent implements OnInit {
       contentChanged: () => {
         try {
           for (let i = 0; i < this.classes['_results'].length; i++) {
-            if(this.questionType == 1)
-              this.qna.content = this.classes['_results'][i].nativeElement.children[2].children[0].innerHTML;
+            if(this.questionType == 1) {
+              this.contentTemplates = this.classes['_results'][i].nativeElement.children[2].children[0].innerHTML;
+            }
 
             for(let i=0; i<this.qnaes.data.length; i++) {
               if(this.edit[this.qnaes.data[i].class_qna_seq] == 1) {
-                this.qnaContent[this.qnaes.data[i].class_qna_seq] = this.classes['_results'][i].nativeElement.children[2].children[0].innerHTML;
+                this.contentTemplates = this.classes['_results'][i].nativeElement.children[2].children[0].innerHTML;
                 break;
-              }   
-            }
-            for(let i=0; i<this.qnaes.data.length; i++) {
+              }
+              if(this.reply[this.qnaes.data[i].class_qna_seq] == 1) {
+                this.replyTemplates = this.classes['_results'][i].nativeElement.children[2].children[0].innerHTML;
+                break;
+              }
               if(this.replyEdit[this.qnaes.data[i].class_qna_seq] == 1) {
-                this.qnaReply[this.qnaes.data[i].class_qna_seq] = this.classes['_results'][i].nativeElement.children[2].children[0].innerHTML;
+                this.replyTemplates = this.classes['_results'][i].nativeElement.children[2].children[0].innerHTML;
                 break;
-              }   
+              }
             }
           }
         } catch {
@@ -80,7 +87,7 @@ export class DetailQnaComponent implements OnInit {
   }
 
   getClassQnaes() {
-    this.classQnaService.getClassQnaes(this.qnaes, this.class_seq).subscribe(data => {
+    this.classQnaService.getClassQnaes(this.qnaes, this.class_seq).subscribe(data => {  
       this.qnaes = data;
       for(let i=0; i<data.data.length; i++) {
         this.edit[data.data[i].class_qna_seq] = 0;
@@ -89,12 +96,11 @@ export class DetailQnaComponent implements OnInit {
         this.qnaTitle[data.data[i].class_qna_seq] = data.data[i].title;
         this.qnaContent[data.data[i].class_qna_seq] = data.data[i].content;
         this.qnaReply[data.data[i].class_qna_seq] = data.data[i].reply;
-        console.log(data.data[i].content);
       }
     });
   }
 
-  deleteClassQna(class_qna_seq) {
+  deleteClassQna(class_qna_seq: number) {
     console.log(class_qna_seq);
     if (confirm("이 글을 정말 지우시겠습니까?") === true) {
       this.classQnaService.deleteQna(class_qna_seq).subscribe(data => {
@@ -104,26 +110,18 @@ export class DetailQnaComponent implements OnInit {
     }
   }
 
-  isEndOfPage() {
-    if (this.qnaes.pageNumber === this.qnaes.totalPages)
-      return true;
-    else if (!this.qnaes.data.length)
-      return true;
-    else
-      return false;
-  }
-
   createQuestionWrite() {
     this.questionType = 1;
   }
 
   writeOK() {
     this.qna.class_seq = this.class_seq;
-    console.log(this.qna);
+    this.qna.content = this.froalaValue;
     this.classQnaService.addQna(this.qna).subscribe(data => {
       this.getClassQnaes();
       this.message.success('글쓰기가 완료되었습니다.');
       this.questionType = 0;
+      this.froalaValue = "";
     });
   }
 
@@ -131,37 +129,57 @@ export class DetailQnaComponent implements OnInit {
     this.questionType = 0;
   }
 
-  editAble(class_qna_seq) {
+  editAble(class_qna_seq: number) {
     this.edit[class_qna_seq] = 1;
   }
 
-  complete(class_qna_seq) {
+  complete(class_qna_seq: number) {
     for(let i=0; i<this.qnaes.data.length; i++) {
       if(class_qna_seq == this.qnaes.data[i].class_qna_seq) {
         this.qnaes.data[i].title = this.qnaTitle[class_qna_seq];
-        this.qnaes.data[i].content = this.qnaContent[class_qna_seq];
-        this.qnaes.data[i].reply = this.qnaReply[class_qna_seq];
+        this.qnaes.data[i].content = this.contentTemplates;
+        this.qnaes.data[i].reply = this.replyTemplates;
+        console.log(this.froalaValue);
+        console.log(this.froalaReplyValue);
         this.classQnaService.updateQna(this.qnaes.data[i], class_qna_seq).subscribe(data => {
           this.getClassQnaes();
+          // this.froalaValue = "";
+          // this.froalaReplyValue = "";
+          this.cancle(class_qna_seq);
         });
-        this.cancle(class_qna_seq);
+        
         break;
       }
     }
   }
 
-  cancle(class_qna_seq) {
+  cancle(class_qna_seq: number) {
     this.edit[class_qna_seq] = 0;
     this.reply[class_qna_seq] = 0;
     this.replyEdit[class_qna_seq] = 0;
   }
 
-  replyAble(class_qna_seq) {
+  replyAble(class_qna_seq: number) {
     this.reply[class_qna_seq] = 1;
   }
 
-  replyEditAble(class_qna_seq) {
+  replyEditAble(class_qna_seq: number) {
     this.replyEdit[class_qna_seq] = 1;
+  }
+
+  replyDelte(class_qna_seq: number) {
+    if (confirm("이 글을 정말 지우시겠습니까?") === true) {
+      for(let i=0; i<this.qnaes.data.length; i++) {
+        if(class_qna_seq == this.qnaes.data[i].class_qna_seq) {
+          this.qnaes.data[i].reply = "";
+          this.classQnaService.updateQna(this.qnaes.data[i], class_qna_seq).subscribe(data => {
+            this.getClassQnaes();
+            // this.froalaValue = "";
+            // this.froalaReplyValue = "";
+          });
+        }
+      }
+    }
   }
 
 }

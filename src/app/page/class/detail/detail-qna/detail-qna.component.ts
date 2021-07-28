@@ -143,11 +143,8 @@ export class DetailQnaComponent implements OnInit {
         console.log(this.froalaReplyValue);
         this.classQnaService.updateQna(this.qnaes.data[i], class_qna_seq).subscribe(data => {
           this.getClassQnaes();
-          // this.froalaValue = "";
-          // this.froalaReplyValue = "";
-          this.cancle(class_qna_seq);
         });
-        
+        this.cancle(class_qna_seq);
         break;
       }
     }

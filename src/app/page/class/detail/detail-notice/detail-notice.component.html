@@ -1,5 +1,49 @@
 <div id="notice">
-  <form class="search-box">
+  <div class="notice-write">
+    <div class="notice-write-btn">
+      <button  nz-button nzType="primary" *ngIf="noticeType == 0" (click)="write()">공지사항 작성</button>
+      <button  nz-button nzType="primary" (click)="writeCancel()" *ngIf="noticeType == 1"> 나가기 </button>
+      <button  nz-button nzType="primary" *ngIf="noticeType == 1" (click)="writeOK()" style="background-color:#f09b23;">공지사항 작성</button>
+    </div>
+    <div *ngIf="noticeType == 1" class="notice-content" >
+      <label>제목</label>
+      <input nz-input type="text" placeholder="제목" [(ngModel)]="notice.title"/>
+      <label>내용</label>
+      <div
+        #class
+        class="froala-editor"
+        [froalaEditor]="option"
+        [(froalaModel)]="froalaValue"
+      ><div>test</div></div>
+    </div>
+    
+  </div>
+
+  <div class="notice-box" *ngFor="let data of notices.data">
+    <div class="notice-box-header">
+      <button nz-button nzType="primary" (click)="editAble(data.class_notice_seq)" *ngIf="edit[data.class_notice_seq] === 0"> 수정 </button>
+      <button nz-button nzType="primary" (click)="editClassNotice(data.class_notice_seq)" *ngIf="edit[data.class_notice_seq] === 1" style="background-color:#f09b23;" > 수정 </button>
+      <button nz-button nzType="primary" (click)="deleteClassNotice(data.class_notice_seq)" *ngIf="edit[data.class_notice_seq] === 0"> 삭제 </button>
+      <button nz-button nzType="primary" (click)="cancle(data.class_notice_seq)" *ngIf="edit[data.class_notice_seq] === 1"> 나가기 </button>
+    </div>
+    
+    <div class="content">
+      <h1 *ngIf="edit[data.class_notice_seq] === 0">{{ data.title }}</h1>
+      <p [innerHTML]="data.content | safeHtml" *ngIf="edit[data.class_notice_seq] === 0"></p>
+      <input nz-input type="text" placeholder="제목" [(ngModel)]="noticeTitle[data.class_notice_seq]" *ngIf="edit[data.class_notice_seq] === 1"/>
+      <div
+        #class
+        class="froala-editor"
+        [froalaEditor]="option"
+        [innerHTML]="data.content | safeHtml"
+        [(froalaModel)]="froalaValue"
+        *ngIf="edit[data.class_notice_seq] === 1"
+      ></div>
+    </div>
+  </div>
+  <nz-pagination [(nzPageIndex)]="notices.pageNumber" [nzTotal]="notices.totalElements" (nzPageIndexChange)="getClassQnaes()"></nz-pagination>
+
+  <!-- <form class="search-box">
     <input type="text" name="search" placeholder="공지를 검색하세요." />
     <button>검색</button>
   </form>
@@ -54,5 +98,5 @@
   </div>
   <div class="more-button-wrap">
     <button nz-button nzType="primary" class="more-button" (click)="getMoreNotices()" [nzLoading]="buttonLoading">더 보기</button>
-  </div>
+  </div> -->
 </div>

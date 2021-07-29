@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChildren, QueryList, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ClassNoticeService } from 'src/app/admin/core/services/class-notice.service';
 import { ClassNotice } from 'src/app/admin/core/models/class-notice';
@@ -11,14 +11,45 @@ import { NzModalService, NzModalRef } from 'ng-zorro-antd/modal';
   styleUrls: ['./detail-notice.component.css']
 })
 export class DetailNoticeComponent implements OnInit {
+  @ViewChildren('class') classes: QueryList<ElementRef>;
 
   public class_seq: any;
+  noticeType = 0;
+  froalaValue: string = "";
+  templates = "";
+
+  edit = {};
+  noticeTitle = {};
 
   notices: DataTable = new DataTable();
-  popupNotice: ClassNotice = new ClassNotice();
-  buttonLoading = false;
+  notice: ClassNotice = new ClassNotice();
 
-  tplmodal?: NzModalRef;
+
+  public option = {
+    imageUploadURL: 'http://localhost:5000/api/froala/upload/notice',
+    imageUploadMethod: 'POST',
+    imageMaxSize: 5 * 1024 * 1024,
+    imageAllowedTypes: ['jpeg', 'jpg', 'png'],
+
+    events: {
+      contentChanged: () => {
+        try {
+          for (let i = 0; i < this.classes['_results'].length; i++) {
+            if(this.noticeType == 1) 
+              this.templates = this.classes['_results'][i].nativeElement.children[2].children[0].innerHTML;
+            for(let i=0; i<this.notices.data.length; i++) {
+              if(this.edit[this.notices.data[i].class_notice_seq] == 1) {
+                this.templates = this.classes['_results'][i].nativeElement.children[2].children[0].innerHTML;
+                break;
+              }
+            }
+          }
+        } catch {
+
+        }
+      }
+    }
+  }
 
   constructor(private classNoticeService: ClassNoticeService,
               private route: ActivatedRoute,
@@ -38,56 +69,66 @@ export class DetailNoticeComponent implements OnInit {
   }
 
   getClassNotices(){
-    this.buttonLoading = true;
     this.classNoticeService.getClassNotices(this.notices, this.class_seq).subscribe(data => {
       this.notices = data;
-      console.log(this.notices)
-      if (this.isEndOfPage()) this.updateFinishBtn();
-      this.buttonLoading = false;
+      console.log(this.notices);
+      for(let i=0; i<data.data.length; i++) {
+        this.edit[data.data[i].class_notice_seq] = 0;
+        this.noticeTitle[data.data[i].class_notice_seq] = data.data[i].title;
+      }
     })
   }
 
-  getMoreNotices() {
-    this.buttonLoading = true;
-    if (this.notices.pageNumber < this.notices.totalPages) {
-      this.notices.pageNumber += 1;
-      this.classNoticeService.getClassNotices(this.notices, this.class_seq).subscribe(data => {
-        this.notices.data = this.notices.data.concat(data.data);
-        if (this.isEndOfPage()) this.updateFinishBtn();
-        this.buttonLoading = false;
-      })
-    } else {
-      throw new Error('Invalid page number!');
-    }
+  write() {
+    this.noticeType = 1;
   }
 
-  isEndOfPage() {
-    if (this.notices.pageNumber === this.notices.totalPages)
-      return true;
-    else if (!this.notices.data.length)
-      return true;
-    else
-      return false;
+  writeCancel() {
+    this.noticeType = 0;
   }
 
-  updateFinishBtn() {
-    const btn = document.querySelector('.more-button');
-    btn.setAttribute('disabled', '');
-    btn.querySelector('span').innerText = '끝';
-  }
-
-  popupNoticeOpen(header: TemplateRef<{}>, body: TemplateRef<{}>, footer: TemplateRef<{}>){
-    this.popupNotice = new ClassNotice();
-    this.tplmodal = this.modal.create({
-      nzWidth: 600,
-      nzTitle: header,
-      nzContent: body,
-      nzFooter: footer,
-      nzClosable: false,
+  writeOK() {
+    this.notice.class_seq = this.class_seq;
+    this.notice.parent_seq = 1;
+    this.notice.content = this.templates;
+    this.classNoticeService.addClassNotice(this.notice).subscribe(data => {
+      this.getClassNotices();
+      this.noticeType = 0;
+      this.froalaValue = "";
+      this.notice = new ClassNotice();
     });
   }
 
-  popupNoticeClose() {
-    this.tplmodal.destroy();
+  editAble(class_notice_seq: number) {
+    this.edit[class_notice_seq] = 1;
   }
+
+  cancle(class_notice_seq: number) {
+    this.edit[class_notice_seq] = 0;
+  }
+
+  deleteClassNotice(class_notice_seq: number) {
+    if (confirm("이 글을 정말 지우시겠습니까?") === true) {
+      this.classNoticeService.deleteClassNotice(class_notice_seq).subscribe(data => {
+        this.getClassNotices();
+      });
+    }
+  }
+
+  editClassNotice(class_notice_seq: number) {
+    for(let i=0; i<this.notices.data.length; i++) {
+      if(class_notice_seq == this.notices.data[i].class_notice_seq) {
+        this.notices.data[i].title = this.noticeTitle[class_notice_seq];
+        this.notices.data[i].content = this.templates;
+
+        this.classNoticeService.updateClassNotice(this.notices.data[i], class_notice_seq).subscribe(data => {
+          this.getClassNotices();
+        });
+        this.cancle(class_notice_seq);
+      }
+    }
+  }
+
+
+
 }

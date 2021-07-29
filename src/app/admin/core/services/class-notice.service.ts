@@ -56,5 +56,28 @@ export class ClassNoticeService extends Common {
     );
 
   }
+
+  addClassNotice(notice: ClassNotice) {
+    return this.http.post(this.baseUrl + 'classnotice', notice).pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
+
+  updateClassNotice(notice: ClassNotice, class_notice_seq: Number) {
+    return this.http.put(this.baseUrl + 'classnotice/' + class_notice_seq, notice).pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
+
+  deleteClassNotice(class_notice_seq: Number) {
+    return this.http.delete(this.baseUrl + 'classnotice/' + class_notice_seq).pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
+
+
 }
 

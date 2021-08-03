@@ -1,0 +1,45 @@
+<div id="review">
+    <div class="review-write">
+      <div class="review-write-btn">
+        <button  nz-button nzType="primary" *ngIf="reviewType == 0" (click)="write()">강의후기 작성</button>
+        <button  nz-button nzType="primary" (click)="writeCancel()" *ngIf="reviewType == 1"> 나가기 </button>
+        <button  nz-button nzType="primary" *ngIf="reviewType == 1" (click)="writeOK()" style="background-color:#f09b23;">강의후기 작성</button>
+      </div>
+      <div *ngIf="reviewType == 1" class="review-content" >
+        <label>제목</label>
+        <input nz-input type="text" placeholder="제목" [(ngModel)]="review.title"/>
+        <label>내용</label>
+        <div
+          #class
+          class="froala-editor"
+          [froalaEditor]="option"
+          [(froalaModel)]="froalaValue"
+        ><div>test</div></div>
+      </div>
+      
+    </div>
+  
+    <div class="review-box" *ngFor="let data of reviews.data">
+      <div class="review-box-header">
+        <button nz-button nzType="primary" (click)="editAble(data.class_review_seq)" *ngIf="edit[data.class_review_seq] === 0"> 수정 </button>
+        <button nz-button nzType="primary" (click)="editClassReview(data.class_review_seq)" *ngIf="edit[data.class_review_seq] === 1" style="background-color:#f09b23;" > 수정 </button>
+        <button nz-button nzType="primary" (click)="deleteClassReview(data.class_review_seq)" *ngIf="edit[data.class_review_seq] === 0"> 삭제 </button>
+        <button nz-button nzType="primary" (click)="cancle(data.class_review_seq)" *ngIf="edit[data.class_review_seq] === 1"> 나가기 </button>
+      </div>
+      
+      <div class="content">
+        <h1 *ngIf="edit[data.class_review_seq] === 0">{{ data.title }}</h1>
+        <p [innerHTML]="data.content | safeHtml" *ngIf="edit[data.class_review_seq] === 0"></p>
+        <input nz-input type="text" placeholder="제목" [(ngModel)]="reviewTitle[data.class_review_seq]" *ngIf="edit[data.class_review_seq] === 1"/>
+        <div
+          #class
+          class="froala-editor"
+          [froalaEditor]="option"
+          [innerHTML]="data.content | safeHtml"
+          [(froalaModel)]="froalaValue"
+          *ngIf="edit[data.class_review_seq] === 1"
+        ></div>
+      </div>
+    </div>
+    <nz-pagination [(nzPageIndex)]="reviews.pageNumber" [nzTotal]="reviews.totalElements" (nzPageIndexChange)="getClassQnaes()"></nz-pagination>
+  </div>

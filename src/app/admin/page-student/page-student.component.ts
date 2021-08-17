@@ -23,19 +23,22 @@ export class PageStudentComponent implements OnInit {
   students = new DataTable();
 
   selectedClass: Class = new Class();
+  popupClass: Class = new Class();
   selectedStudent: Student = new Student();
 
   orderCode: Array<Code> = [];
 
   isSendMail = false;
+  isClassUpdate = false;
 
   classLoading = true;
   studentLoading = false;
-  mailSendLoading = false;
 
-  mailSendLoadingText = '메일전송중';
-
+  allCheck = false;
   checks: any;
+
+  mailSendLoading = false;
+  mailSendLoadingText = '메일전송중';
 
   confirmModal?: NzModalRef;
 
@@ -62,6 +65,7 @@ export class PageStudentComponent implements OnInit {
       this.classes = data;
       this.classLoading = false;
       this.selectedClass = new Class();
+      console.log(data);
     });
   }
 
@@ -70,6 +74,20 @@ export class PageStudentComponent implements OnInit {
     this.studentService.getStudent(this.selectedClass.class_seq, this.students).subscribe(data => {
       this.students = data
       this.studentLoading = false;
+    });
+  }
+
+  surveyUrlUpdate() {
+    this.popupClass = new Class();
+    this.popupClass = JSON.parse(JSON.stringify(this.selectedClass));
+    this.isClassUpdate = true;
+  }
+
+  surveyUrlUpdateOk() {
+    this.userService.updateClass(this.popupClass, this.popupClass.class_seq).subscribe(data => {
+      this.getClass();
+      this.isClassUpdate = false;
+      this.message.create('sucess', '설문조사 url 수정이 완료되었습니다.');
     });
   }
 
@@ -103,20 +121,58 @@ export class PageStudentComponent implements OnInit {
     });
   }
 
-  studentEmail() {
-    this.confirmModal = this.modal.confirm({
-      nzTitle: '수료증 PDF 메일 전송',
-      nzContent: '선택하신 내용의 PDF를 전송하시겠습니까?',
-      nzOnOk: () => new Promise((resolve, reject) => {
-        this.studentService.sendCertification(this.selectedClass.class_seq, this.selectedStudent.order_user_seq).subscribe(data => {
-          resolve(data);
-          this.message.create('success', '전송이 완료되었습니다.');
-        })
-      }).catch(() => { this.message.create('error', '전송에 실패했습니다.'); }),
-      nzOnCancel: () => {
-        this.confirmModal.destroy();
-      }
+  // studentEmail() {
+  //   this.confirmModal = this.modal.confirm({
+  //     nzTitle: '수료증 PDF 메일 전송',
+  //     nzContent: '선택하신 내용의 PDF를 전송하시겠습니까?',
+  //     nzOnOk: () => new Promise((resolve, reject) => {
+  //       this.studentService.sendCertification(this.selectedClass.class_seq, this.selectedStudent.order_user_seq).subscribe(data => {
+  //         resolve(data);
+  //         this.message.create('success', '전송이 완료되었습니다.');
+  //       })
+  //     }).catch(() => { this.message.create('error', '전송에 실패했습니다.'); }),
+  //     nzOnCancel: () => {
+  //       this.confirmModal.destroy();
+  //     }
+  //   });
+  // }
+
+  allCheckChange() {
+    this.students.data = this.students.data.map(v => {
+      v.check = this.allCheck;
+      return v;
     });
+  }
+
+  sendStudentEmail() {
+    this.checks = this.students.data.filter(v => (v.check));
+    this.isSendMail = true;
+  }
+
+  async isSendMailOk() {
+    this.mailSendLoading = true;
+    const checksCopy = JSON.parse(JSON.stringify(this.checks));
+    const all = checksCopy.length;
+    this.mailSendLoadingText = `메일전송중 (총 : ${all} / 전송완료 : 0)`;
+
+    while (checksCopy.length > 0) {
+
+      const basket = [];
+      basket.push(checksCopy.pop());
+      console.log(basket[0].order_user_seq);
+      await this.studentService.sendCertification(this.selectedClass.class_seq, basket[0].order_user_seq);
+      this.mailSendLoadingText = `메일전송중 (총 : ${all} / 전송완료 : ${all - checksCopy.length})`;
+
+    }
+
+    this.message.create('success', '전송이 완료되었습니다.');
+    this.mailSendLoading = false;
+    this.isSendMail = false;
+  }
+
+  popupCancel() {
+    this.isSendMail = false;
+    this.isClassUpdate = false;
   }
 
   getFullDate(target: string) {

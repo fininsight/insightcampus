@@ -35,12 +35,8 @@ export class StudentService extends Common {
     );
   }
 
-  sendCertification(classSeq: Number, orderUserSeq: Number) {
-    return this.http.post(this.baseUrl + 'classstudent/sendcertification/' + classSeq + '/' + orderUserSeq, this.jwt())
-    .pipe(
-      retry(1),
-      catchError(this.errorHandl)
-    );
+  async sendCertification(classSeq: Number, orderUserSeq: Number) {
+    return await this.http.post(this.baseUrl + 'classstudent/sendcertification/' + classSeq + '/' + orderUserSeq, this.jwt()).toPromise();
   }
 
 }

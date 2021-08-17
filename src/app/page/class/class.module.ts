@@ -39,6 +39,7 @@ import 'froala-editor/js/third_party/spell_checker.min';
 import 'froala-editor/js/third_party/embedly.min';
 import { importType } from '@angular/compiler/src/output/output_ast';
 import { AboutusComponent } from './aboutus/aboutus.component';
+import { DetailReviewComponent } from './detail/detail-review/detail-review.component';
 
 @NgModule({
   imports: [
@@ -61,6 +62,7 @@ import { AboutusComponent } from './aboutus/aboutus.component';
     DetailNoticeComponent,
     SafeHtmlPipe,
     AboutusComponent,
+    DetailReviewComponent,
   ],
   providers: [
   ]

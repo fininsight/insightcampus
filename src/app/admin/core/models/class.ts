@@ -15,4 +15,5 @@ export class Class {
     zoom_pw: string;
     view_yn: number;
     status: string;
+    survey_url: string;
 }

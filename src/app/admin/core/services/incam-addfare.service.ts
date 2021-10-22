@@ -126,6 +126,13 @@ export class IncamAddfareService extends Common{
       });
     }
 
+    if (filter.evidenceType !== '') {
+      param_filter.push({
+        k: 'evidenceType',
+        v: filter.evidenceType
+      });
+    }
+
     return this.http.get<DataTable>(this.baseUrl + 'incamaddfare/' +
                                     + dataTable.size + '/' + dataTable.pageNumber + '?f=' + JSON.stringify(param_filter), this.jwt())
     .pipe(
@@ -169,6 +176,13 @@ export class IncamAddfareService extends Common{
 
   updateDeposit(incamaddfares) {
     return this.http.put(this.baseUrl + 'incamaddfare/deposit', incamaddfares, this.jwt()).pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
+
+  updateEvidenceType(incamaddfares) {
+    return this.http.put(this.baseUrl + 'incamaddfare/evidenceType', incamaddfares, this.jwt()).pipe(
       retry(1),
       catchError(this.errorHandl)
     );

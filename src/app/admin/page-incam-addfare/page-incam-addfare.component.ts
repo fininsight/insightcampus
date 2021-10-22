@@ -27,6 +27,7 @@ export class PageIncamAddfareComponent implements OnInit {
   isIncamAddfareUpdate = false;
   isSendMail = false;
   isDepositCheck = false;
+  isEvidenceTypeCheck = false;
 
   incamAddfareLoading = true;
   allCheck = false;
@@ -40,7 +41,10 @@ export class PageIncamAddfareComponent implements OnInit {
   listOfContract: Array<{ value: number; text: string; hour_price: number, hour_incen: number, contract_price: number }> = [];
   listOfIncom: Array<{ value: string; text: string, rate: number }> = [];
   listOfDeposit: Array< { value: number; text: string;}> = [{value: 2, text: "전체"},{value: 1, text: "완료"},{value: 0, text: "미완료"}];
+  listEvidenceTypeForFilter = null;
+  listEvidenceType = null;
 
+  evidenceType = null;
   teachers = new DataTable();
   confirmModal?: NzModalRef;
 
@@ -54,7 +58,8 @@ export class PageIncamAddfareComponent implements OnInit {
       this.addMonths(new Date(), -1),
       new Date()
     ],
-    deposit: 2
+    deposit: 2,
+    evidenceType : '',
   };
 
   calculation = {
@@ -207,6 +212,34 @@ export class PageIncamAddfareComponent implements OnInit {
       this.selectedIncamAddfare = new IncamAddfare();
 
     });
+
+    if(this.listEvidenceType == null){
+      this.incamAddfares.pageNumber = 1;
+      this.incamAddfares.size = 20;
+      this.codeService.getCode(this.incamAddfares, 'evidence_type').subscribe(data => {
+        this.listEvidenceType = data.data;
+        this.listEvidenceType.unshift({
+          code_id : '00',
+          code_nm : '선택하세요'
+        });
+      });
+    }
+    if(this.listEvidenceTypeForFilter == null){
+      this.incamAddfares.pageNumber = 1;
+      this.incamAddfares.size = 20;
+      this.codeService.getCode(this.incamAddfares, 'evidence_type').subscribe(data => {
+        this.listEvidenceTypeForFilter = data.data;
+        this.listEvidenceTypeForFilter.unshift({
+          code_id : '',
+          code_nm : '전체'
+        });
+        this.listEvidenceTypeForFilter.push({
+          code_id : '00',
+          code_nm : '미완료'
+        });
+      });
+    }
+
   }
 
   getIncamAddfare() {
@@ -271,6 +304,7 @@ export class PageIncamAddfareComponent implements OnInit {
     this.isIncamAddfareUpdate = false;
     this.isSendMail = false;
     this.isDepositCheck = false;
+    this.isEvidenceTypeCheck = false;
   }
 
   incamAddfareDelete() {
@@ -308,6 +342,12 @@ export class PageIncamAddfareComponent implements OnInit {
     this.isDepositCheck = true;
   }
 
+  incamAddfareEvidenceType() {
+    this.evidenceType = '00'; 
+    this.checks = this.incamAddfares.data.filter(v => (v.check));
+    this.isEvidenceTypeCheck = true;
+  }
+
   isDepositCheckOK() {
 
     this.confirmModal = this.modal.confirm({
@@ -332,6 +372,38 @@ export class PageIncamAddfareComponent implements OnInit {
       nzOnCancel: () => {
         this.confirmModal.destroy();
         this.isDepositCheck = false;
+      }
+    });
+  }
+
+  isEvidenceTypeCheckOK() {
+    if(this.evidenceType === '00'){
+      alert("증빙하실 항목을 반드시 선택하여야 합니다.");
+      return;
+    }
+
+    this.confirmModal = this.modal.confirm({
+      nzTitle: '증빙처리 확인',
+      nzContent: '해당 항목으로 증빙 처리 하시겠습니까?',
+      nzOnOk: () => {
+
+        let checksCopy = JSON.parse(JSON.stringify(this.checks));
+
+        // 입금으로 변경
+        checksCopy = checksCopy.map(v => {
+          v.evidence_type = this.evidenceType;
+          return v;
+        });
+
+        this.incamAddfareService.updateEvidenceType(checksCopy).subscribe(data => {
+          this.getIncamAddfares();
+        });
+
+        this.isEvidenceTypeCheck = false;
+      },
+      nzOnCancel: () => {
+        this.confirmModal.destroy();
+        this.isEvidenceTypeCheck = false;
       }
     });
   }

@@ -12,4 +12,6 @@ export class IncamAddfare {
     hour_price: number;
     contract_price: number;
     check_yn: number;
+    evidence_type: string;
+    evidence_type_nm: string;
 }

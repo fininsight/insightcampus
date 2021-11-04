@@ -217,29 +217,31 @@ export class PageIncamAddfareComponent implements OnInit {
       this.incamAddfares.pageNumber = 1;
       this.incamAddfares.size = 20;
       this.codeService.getCode(this.incamAddfares, 'evidence_type').subscribe(data => {
-        this.listEvidenceType = data.data;
+        this.listEvidenceTypeForFilter = new Array();
+        this.listEvidenceType = new Array();
+
+        for(let i of data.data){
+          this.listEvidenceType.push(i);
+          this.listEvidenceTypeForFilter.push(i);
+        }
+
         this.listEvidenceType.unshift({
           code_id : '00',
           code_nm : '선택하세요'
         });
-      });
-    }
-    if(this.listEvidenceTypeForFilter == null){
-      this.incamAddfares.pageNumber = 1;
-      this.incamAddfares.size = 20;
-      this.codeService.getCode(this.incamAddfares, 'evidence_type').subscribe(data => {
-        this.listEvidenceTypeForFilter = data.data;
+
         this.listEvidenceTypeForFilter.unshift({
           code_id : '',
           code_nm : '전체'
         });
+
         this.listEvidenceTypeForFilter.push({
           code_id : '00',
           code_nm : '미완료'
         });
+
       });
     }
-
   }
 
   getIncamAddfare() {

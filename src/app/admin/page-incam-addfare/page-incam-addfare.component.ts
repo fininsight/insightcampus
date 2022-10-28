@@ -41,6 +41,8 @@ export class PageIncamAddfareComponent implements OnInit {
   listOfContract: Array<{ value: number; text: string; hour_price: number, hour_incen: number, contract_price: number }> = [];
   listOfIncom: Array<{ value: string; text: string, rate: number }> = [];
   listOfDeposit: Array< { value: number; text: string;}> = [{value: 2, text: "전체"},{value: 1, text: "완료"},{value: 0, text: "미완료"}];
+  listOfAddfareGubun: Array<{ value: string; text: string }> = [];
+  listOfGoCheck: Array<{ value: string; text: string }> = [];
   listEvidenceTypeForFilter = null;
   listEvidenceType = null;
 
@@ -105,6 +107,22 @@ export class PageIncamAddfareComponent implements OnInit {
           value: item.code_id,
           text: item.code_nm,
           rate: parseFloat(item.value1)
+        });
+      });
+    });
+    this.codeService.getCodes('addfare_gubun').subscribe(data => {
+      data.forEach(item => {
+        this.listOfAddfareGubun.push({
+          value: item.code_id,
+          text: item.code_nm
+        });
+      });
+    });
+    this.codeService.getCodes('go_check').subscribe(data => {
+      data.forEach(item => {
+        this.listOfGoCheck.push({
+          value: item.code_id,
+          text: item.code_nm
         });
       });
     });

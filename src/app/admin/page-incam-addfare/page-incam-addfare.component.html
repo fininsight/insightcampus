@@ -49,18 +49,20 @@
       nzSize="small">
       <thead>
         <tr>
-          <th nzWidth="3%" [nzAlign]="'center'"><label nz-checkbox [(ngModel)]="allCheck" (ngModelChange)="allCheckChange()"></label></th>
-          <th nzWidth="9%" [nzAlign]="'center'">정산서 No.</th>
-          <th nzWidth="8%" [nzAlign]="'center'">정산일자</th>
-          <th nzWidth="11%" [nzAlign]="'center'">원청사</th>
-          <th nzWidth="11%" [nzAlign]="'center'">강의명</th>
-          <th nzWidth="7%" [nzAlign]="'center'">이름</th>
-          <th nzWidth="9%" [nzAlign]="'center'">정산시수</th>
-          <th nzWidth="7%" [nzAlign]="'center'">소득구분</th>
-          <th nzWidth="9%" [nzAlign]="'center'">실지급액</th>
-          <th nzWidth="9%" [nzAlign]="'center'">송금요청액</th>
+          <th nzWidth="1%" [nzAlign]="'center'"><label nz-checkbox [(ngModel)]="allCheck" (ngModelChange)="allCheckChange()"></label></th>
+          <th nzWidth="7%" [nzAlign]="'center'">정산서 No.</th>
+          <th nzWidth="7%" [nzAlign]="'center'">정산일자</th>
+          <th nzWidth="14%" [nzAlign]="'center'">원청사</th>
+          <th nzWidth="14%" [nzAlign]="'center'">강의명</th>
+          <th nzWidth="5%" [nzAlign]="'center'">이름</th>
+          <th nzWidth="6%" [nzAlign]="'center'">정산시수</th>
+          <th nzWidth="6%" [nzAlign]="'center'">소득구분</th>
+          <th nzWidth="7%" [nzAlign]="'center'">실지급액</th>
+          <th nzWidth="7%" [nzAlign]="'center'">송금요청액</th>
           <th nzWidth="6%" [nzAlign]="'center'">입금확인</th>
-          <th nzWidth="10%" [nzAlign]="'center'">증빙항목</th>
+          <th nzWidth="6%" [nzAlign]="'center'">증빙항목</th>
+          <th nzWidth="7%" [nzAlign]="'center'">정산구분</th>
+          <th nzWidth="7%" [nzAlign]="'center'">GO팀점검</th>
         </tr>
       </thead>
       <tbody>
@@ -81,8 +83,10 @@
           <td [nzAlign]="'center'">{{ data.income_type_nm }}</td>
           <td [nzAlign]="'right'">{{ calculate(data)[0] | number }}</td>
           <td [nzAlign]="'right'">{{ calculate(data)[1] | number }}</td>
-          <td [nzAlign]="'right'">{{ data.check_yn === 0 ? '미입금' : '입금'}}</td>
+          <td [nzAlign]="'center'">{{ data.check_yn === 0 ? '미입금' : '입금'}}</td>
           <td [nzAlign]="'center'">{{ data.evidence_type_nm === null ? '미완료' : data.evidence_type_nm }}</td>
+          <td [nzAlign]="'center'">{{ data.addfare_gubun_nm }}</td>
+          <td [nzAlign]="'center'">{{ data.go_check_nm }}</td>
         </tr>
       </tbody>
     </nz-table>
@@ -117,6 +121,12 @@
               <nz-select [nzPlaceHolder]="'소득타입'"  [(ngModel)]="popupIncamAddfare.income_type" (ngModelChange)="changeIncome($event)">
                 <nz-option *ngFor="let o of listOfIncom" [nzLabel]="o.text" [nzValue]="o.value"> </nz-option>
               </nz-select>
+          </div>
+          <div>
+            <nz-form-label nzRequired>정산구분</nz-form-label>
+            <nz-select [nzPlaceHolder]="'정산구분'" [(ngModel)]="popupIncamAddfare.addfare_gubun">
+              <nz-option *ngFor="let o of listOfAddfareGubun" [nzLabel]="o.text" [nzValue]="o.value"></nz-option>
+            </nz-select>
           </div>
       </div>
       <div class="right">
@@ -182,6 +192,18 @@
           <nz-select [nzPlaceHolder]="'소득타입'"  [(ngModel)]="popupIncamAddfare.income_type" (ngModelChange)="changeIncome($event)">
             <nz-option *ngFor="let o of listOfIncom" [nzLabel]="o.text" [nzValue]="o.value"> </nz-option>
           </nz-select>
+      </div>
+      <div>
+        <nz-form-label nzRequired>정산구분</nz-form-label>
+        <nz-select [nzPlaceHolder]="'정산구분'" [(ngModel)]="popupIncamAddfare.addfare_gubun">
+          <nz-option *ngFor="let o of listOfAddfareGubun" [nzLabel]="o.text" [nzValue]="o.value"></nz-option>
+        </nz-select>
+      </div>
+      <div>
+        <nz-form-label nzRequired>GO팀점검</nz-form-label>
+        <nz-select [nzPlaceHolder]="'GO팀점검'" [(ngModel)]="popupIncamAddfare.go_check">
+          <nz-option *ngFor="let o of listOfGoCheck" [nzLabel]="o.text" [nzValue]="o.value"></nz-option>
+        </nz-select>
       </div>
     </div>
     <div class="right">

@@ -14,4 +14,6 @@ export class IncamAddfare {
     check_yn: number;
     evidence_type: string;
     evidence_type_nm: string;
+    addfare_gubun: string;
+    go_check: string;
 }

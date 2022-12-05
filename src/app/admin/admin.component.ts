@@ -28,6 +28,7 @@ export class AdminComponent implements OnInit {
     this.password = this.route.snapshot.queryParamMap.get('password');
 
     if (this.seq !== null) {
+      console.log('여기');
       this.user.user_id = this.seq;
       this.user.user_pw = this.password;
       this.familyLogin();

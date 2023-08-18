@@ -6,7 +6,7 @@ const routes: Routes = [{
   component: LectureComponent,
   children: [
     {
-      path: ':id', component: LectureComponent
+      path: ':class_seq', component: LectureComponent
     },
 ]}];
 

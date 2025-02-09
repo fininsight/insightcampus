@@ -72,6 +72,10 @@ nz-form-label {
     margin-left: 5px;
 }
 
+tr.check td {
+    background-color: #fde52e58;
+}
+
 tr.on td {
     background-color: #e3f8ff;
 }

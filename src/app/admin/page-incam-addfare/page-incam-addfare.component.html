@@ -70,7 +70,8 @@
           (click)="selectIncamAddfare(data)"
           (dblclick)="incamAddfareUpdate()"
           [ngClass]="{
-            'on':this.selectedIncamAddfare.addfare_seq === data.addfare_seq
+            'on':this.selectedIncamAddfare.addfare_seq === data.addfare_seq,
+            'check':data.check_yn === 1
           }"
           style="cursor: pointer;">
           <td [nzAlign]="'center'"><label nz-checkbox [(ngModel)]="data.check"></label></td>

@@ -13,7 +13,9 @@ nz-form-label.none-label > label::after {
 
 #content div.ant-table {
     font-size: 12px;
+    color: black;
 }
+
 
 div.ant-modal-title {
     font-size: 14px;

@@ -166,6 +166,8 @@ export class PageIncamAddfareComponent implements OnInit {
 
   calculate(data) {
       const contractIndex = this.listOfContract.findIndex(item => item.value === data.contract_seq);
+      console.log(data.contract_seq);
+      console.log(contractIndex);
 
       const all = this.listOfContract[contractIndex].hour_price * data.hour;
       const all_tax =  Math.floor(all * data.income / 10) * 10;

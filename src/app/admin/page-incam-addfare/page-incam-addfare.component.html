@@ -206,6 +206,10 @@
           <nz-option *ngFor="let o of listOfGoCheck" [nzLabel]="o.text" [nzValue]="o.value"></nz-option>
         </nz-select>
       </div>
+      <div>
+        <nz-form-label>누적인센</nz-form-label>
+        <nz-input-number [nzPlaceHolder]="'누적인센'" [nzStep]="1" [nzMin]="0" [(ngModel)]="popupIncamAddfare.cumulative_incentive"></nz-input-number>
+      </div>
     </div>
     <div class="right">
       <div>
